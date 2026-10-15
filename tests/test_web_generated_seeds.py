@@ -19,6 +19,7 @@ from autosteer.services.generated_seed_service import (
 )
 from autosteer.services import generated_seed_validation
 app_module = importlib.import_module("autosteer.web.app")
+common_module = importlib.import_module("autosteer.web.common")   # what the routes share; patched here
 
 
 class GeneratedSeedWebTests(unittest.TestCase):
@@ -100,8 +101,8 @@ class GeneratedSeedWebTests(unittest.TestCase):
         self.assertIn("Seed candidates", response.text)
         self.assertIn('id="generate-button"', response.text)
 
-        with patch.object(app_module, "_developer_status", return_value=fake_status), patch.object(
-            app_module,
+        with patch.object(common_module, "_developer_status", return_value=fake_status), patch.object(
+            common_module,
             "generate_generated_seed",
             side_effect=fake_generate_generated_seed,
         ):
@@ -292,8 +293,8 @@ class GeneratedSeedWebTests(unittest.TestCase):
         fake_status = {"mode": "developer", "ai_configured": True, "provider": "OpenAI", "openai_configured": True,
                        "azure_configured": False, "azure_missing_endpoint": False, "browser_key_allowed": False,
                        "default_model": "gpt-5.4-mini", "models": ["gpt-5.4-mini"]}
-        with patch.object(app_module, "_developer_status", return_value=fake_status), patch.object(
-                app_module, "generate_generated_seed", side_effect=fake_generate_generated_seed):
+        with patch.object(common_module, "_developer_status", return_value=fake_status), patch.object(
+                common_module, "generate_generated_seed", side_effect=fake_generate_generated_seed):
             response = self.client.post("/developer/e/toy_ai_element/candidates/generate", follow_redirects=False, data={
                 "element_name": "toy_ai_element", "domains": ["finance", "medical", "sports"],
                 "ai_model": "gpt-5.4-mini", "background": "1"})

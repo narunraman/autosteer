@@ -18,6 +18,7 @@ from autosteer.services.template_generation_service import (
 )
 
 app_module = importlib.import_module("autosteer.web.app")
+common_module = importlib.import_module("autosteer.web.common")   # what the routes share; patched here
 
 
 class TemplateGenerationWebTests(unittest.TestCase):
@@ -100,7 +101,7 @@ class TemplateGenerationWebTests(unittest.TestCase):
         self.assertIn("Templates", response.text)
         self.assertIn('id="tgen-button"', response.text)
 
-        with patch.object(app_module, "_developer_status", return_value=fake_status), patch(
+        with patch.object(common_module, "_developer_status", return_value=fake_status), patch(
             "autosteer.services.template_generation_service.LanguageModelClient",
             FakeClient,
         ):

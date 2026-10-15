@@ -15,6 +15,7 @@ from autosteer.services.dataset_store import DatasetStore, get_dataset_store
 from autosteer.web import devmode, review, site
 
 app_module = importlib.import_module("autosteer.web.app")
+common_module = importlib.import_module("autosteer.web.common")   # what the routes share; patched here
 CODE_ELEMENT = "pure_nash"  # on the site, templates written in code
 
 
@@ -95,11 +96,11 @@ class DevmodeWebTests(unittest.TestCase):
             self.assertNotIn(secret, response.text)
             self.assertIn("ANTHROPIC_API_KEY is set until the server stops.", response.text)
             self.assertIn("set for this session", response.text)
-            self.assertTrue(app_module._developer_status()["ai_configured"])
+            self.assertTrue(common_module._developer_status()["ai_configured"])
             self.assertEqual(self.client.post("/developer/setup/key", data={"name": "PATH", "value": "x"}).status_code, 400)
             response = self.client.post("/developer/setup/forget")
             self.assertNotIn("ANTHROPIC_API_KEY", os.environ)
-            self.assertFalse(app_module._developer_status()["ai_configured"])
+            self.assertFalse(common_module._developer_status()["ai_configured"])
         new = self.get("/developer/new").text
         self.assertIn('<a href="/developer">Dashboard</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">New element</span>', new)
         self.assertIn('<a href="/developer/new" aria-current="page">New element</a>', new)
@@ -376,7 +377,7 @@ class DevmodeWebTests(unittest.TestCase):
         settings = json.loads((Path(self.tempdir.name) / "devmode" / "settings.json").read_text())
         self.assertEqual(settings["generation"], {"provider": "anthropic", "model": "claude-sonnet-5-5"})
         with patch.dict(os.environ, {"ANTHROPIC_API_KEY": "x"}):
-            status = app_module._developer_status()
+            status = common_module._developer_status()
             choices = devmode.model_choices(status, self.store, "generation")
         self.assertEqual(choices["default"], "anthropic:claude-sonnet-5-5")
 

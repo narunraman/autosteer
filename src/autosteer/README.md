@@ -7,7 +7,7 @@ Where things are, for working on the code. How to run autoSTEER is in the [repos
 | `cli.py` | The `autosteer` command: `autosteer dev`, `autosteer data verify`, ... |
 | `sampler/` | Turning templates into questions: `generator.py` (`ElementSampler`), `manifest.py` (a summary of every element's templates), template fixes and difficulty levels. |
 | `filler_tools/` | The fill functions, one `*_tools.py` per family of elements: they pick the values for a template and compute the answer. Its [README](filler_tools/README.md) explains how to write one. |
-| `web/` | The site and developer mode: `app.py` (the app and the API), `site.py` (guide and benchmark pages), `public.py` (the public site's switches), `devmode.py` and `review.py` (developer mode), `content/` (the site's text), `templates/` and `static/`. |
+| `web/` | The site and developer mode: `app.py` (puts the app together), `routes/` (the API, and developer mode's seeds, candidates and template generation), `common.py` (what those routes share), `site.py` (guide and benchmark pages), `public.py` (the public site's switches), `devmode.py` and `review.py` (developer mode's pages and review), `content/` (the site's text), `templates/` and `static/`. |
 | `release/` | The fixed datasets: rows, schema, consistency checks and the exporter. |
 | `services/`, `schemas/` | Developer mode's back end: generating seed candidates and templates with a model, and storing the records. |
 | `llm_client.py` | The model providers: OpenAI, Azure OpenAI, Anthropic, Gemini and OpenAI-compatible endpoints. |
