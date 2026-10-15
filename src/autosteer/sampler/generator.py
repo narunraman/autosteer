@@ -1,5 +1,6 @@
 import functools
 import hashlib
+import logging
 import random
 import re
 import string
@@ -168,6 +169,9 @@ RNG_LOCK = threading.RLock()
 # Loaded templates, shared by every sampler in the process (the API's, the element pages', developer mode's):
 # (element, manifest build) -> Dataset. Loading the large elements takes seconds (welfare_theorem_1: ~10 s).
 _SHARED_TEMPLATES: dict = {}
+# Templates dropped at load as unfillable, per element and pool: {reason: [question_id, ...]} (see _drop_unfillable).
+DROPPED: dict = {}
+log = logging.getLogger(__name__)
 
 
 def _locked(fn):
@@ -492,6 +496,7 @@ class ElementSampler:
         saved = (random.getstate(), np.random.get_state(), filler_utils.rng.bit_generator.state)
         keys_cache: dict[tuple, set] = {}
         errors: dict[tuple, str] = {}
+        reasons: dict = {}
         try:
             # Probe from a fixed state, so which templates are kept never depends on what was sampled before.
             seed_everything(derive_seed('drop_unfillable', element_name))
@@ -518,9 +523,13 @@ class ElementSampler:
                         need = extract_fstring_keys(row['question_text'])
                     except ValueError:
                         bad.add(row['question_id'])
+                        reasons[row['question_id']] = 'template text is not a valid format string'
                         continue
-                    if need - keys_cache[md]:
+                    missing = need - keys_cache[md]
+                    if missing:
                         bad.add(row['question_id'])
+                        reasons[row['question_id']] = (f'filler error for {md}: {errors[md]}' if md in errors
+                                                       else f'filler never returns {sorted(missing)} for {md}')
                 if bad and len(bad) >= q['question_id'].nunique():
                     # Dropping everything means the filler is broken (e.g. an
                     # environment change), not that some templates are unfillable.
@@ -530,6 +539,12 @@ class ElementSampler:
                         + (f"; filler error for {example[0]}: {example[1]}" if example else '')
                     )
                 if bad:
+                    # what was dropped and why, so it is visible (DROPPED[element][pool]; logged once per load)
+                    report = DROPPED.setdefault(element_name, {})[q_attr] = {}
+                    for qid in sorted(bad):
+                        report.setdefault(reasons.get(qid, 'unknown'), []).append(int(qid))
+                    log.info('%s: %d %s templates dropped as unfillable: %s', element_name, len(bad), q_attr,
+                             {r: len(v) for r, v in report.items()})
                     setattr(dataset, q_attr, q[~q['question_id'].isin(bad)].reset_index(drop=True))
                     o = getattr(dataset, o_attr)
                     if o is not None and len(o):
