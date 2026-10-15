@@ -57,7 +57,8 @@ of expected files (`src/autosteer/data_files.json`). Set `AUTOSTEER_DATA_DIR` to
 ## Tests
 
 ```bash
-uv run pytest
+uv run pytest          # the default tier (a few minutes)
+uv run pytest -m ""    # everything, including the slow sweeps over every element (about half an hour)
 ```
 
 ## License

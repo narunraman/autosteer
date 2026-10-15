@@ -15,6 +15,8 @@ from autosteer.sampler import ElementSampler
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 from quality_audit import check  # noqa: E402
 
+pytestmark = pytest.mark.slow
+
 N = 60
 BANNED = {'placeholder', 'neg_zero', 'zero_decimal', 'bad_value', 'long_decimal', 'sci_notation', 'repr',
           'dup_options', 'equal_numeric_options', 'double_space', 'missing_space', 'repeated_name_possessive'}

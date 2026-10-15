@@ -23,6 +23,8 @@ import pytest
 
 from helpers import sample
 
+pytestmark = pytest.mark.slow
+
 N = 400
 PAY = re.compile(r'If both (.+?), each ([a-z ]+?) \$([\d,]+) per (\w+); if both (.+?), each \2 \$([\d,]+) per \4; '
                  r'if one (.+?) while the other (.+?), the one that (.+?) \2 \$([\d,]+) and the other \2 \$([\d,]+) '

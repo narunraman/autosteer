@@ -26,8 +26,9 @@ def code_fingerprint() -> str:
     """Hash of the code that decides what the manifest says: the registered filler names and the sources of the
     sampler and filler packages (template fixes, hooks and code-written templates). A stored manifest with another
     fingerprint is rebuilt. Computed once per process (and set of fillers): the code a process runs does not change
-    while it runs, and hashing every source took most of each load_manifest() call."""
-    names = tuple(sorted(function_registry.keys()))
+    while it runs, and hashing every source took most of each load_manifest() call. Fillers registered by hand (tests'
+    toy fillers) are not the package's code and do not count."""
+    names = tuple(sorted(n for n, f in function_registry.functions.items() if getattr(f, '_is_registered', False)))
     if names not in _FINGERPRINT:
         _FINGERPRINT.clear()
         _FINGERPRINT[names] = _fingerprint(names)

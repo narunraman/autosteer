@@ -18,6 +18,8 @@ import pytest
 from helpers import CONSISTENCY_GRADED, STRATEGIC, get_sampler, sample
 from autosteer.taxonomy import is_non_strategic_element
 
+pytestmark = pytest.mark.slow
+
 # Large enough that rare bad draws show up; override with STEER_TEST_N.
 N = int(os.environ.get('STEER_TEST_N', 1000))
 

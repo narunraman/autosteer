@@ -13,6 +13,7 @@ p min(L/a, K/b)^0.5 - w L - r K is maximised numerically over both L and K (a gr
 bounded scalar search over L), dL*/dw is taken by central differences, and every option "dL*/dw = c/(x w + y)^k" is
 evaluated at the same wages: exactly the keyed option matches at every wage. Sampling is reproducible from the seed.
 """
+import pytest
 import re
 
 import numpy as np
@@ -112,6 +113,7 @@ def best_labor(a, b, p, w, r):
     return res.x
 
 
+@pytest.mark.slow
 def test_leontief_key_by_optimisation():
     for smp in sample(E, 150, seed=77, type='leontief'):
         m = re.search(r'Q = \(min\(L/(\d+), K/(\d+)\)\)\^0\.5', smp.question)

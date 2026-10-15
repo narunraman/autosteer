@@ -238,6 +238,7 @@ def test_iterated_removal_part2_states_removal(sampler):
 
 
 # ----------------------------------------------------------------------------- social choice
+@pytest.mark.slow
 def test_sc_monotonicity_options_not_structural(sampler):
     n = 0
     for q in draws(sampler, 'sc_monotonicity_rules', 120):

@@ -1,0 +1,760 @@
+{
+ "routes": [
+  {
+   "class": "Route",
+   "path": "/openapi.json",
+   "methods": [
+    "GET",
+    "HEAD"
+   ],
+   "name": "openapi",
+   "include_in_schema": false
+  },
+  {
+   "class": "Route",
+   "path": "/docs",
+   "methods": [
+    "GET",
+    "HEAD"
+   ],
+   "name": "swagger_ui_html",
+   "include_in_schema": false
+  },
+  {
+   "class": "Route",
+   "path": "/docs/oauth2-redirect",
+   "methods": [
+    "GET",
+    "HEAD"
+   ],
+   "name": "swagger_ui_redirect",
+   "include_in_schema": false
+  },
+  {
+   "class": "Route",
+   "path": "/redoc",
+   "methods": [
+    "GET",
+    "HEAD"
+   ],
+   "name": "redoc_html",
+   "include_in_schema": false
+  },
+  {
+   "class": "Mount",
+   "path": "/static",
+   "methods": [],
+   "name": "static",
+   "include_in_schema": null
+  },
+  {
+   "class": "APIRoute",
+   "path": "/health",
+   "methods": [
+    "GET"
+   ],
+   "name": "health",
+   "include_in_schema": true
+  },
+  {
+   "class": "APIRoute",
+   "path": "/api/elements",
+   "methods": [
+    "GET"
+   ],
+   "name": "api_elements",
+   "include_in_schema": true
+  },
+  {
+   "class": "APIRoute",
+   "path": "/api/elements/{element_name}",
+   "methods": [
+    "GET"
+   ],
+   "name": "api_element",
+   "include_in_schema": true
+  },
+  {
+   "class": "APIRoute",
+   "path": "/api/datasets/{kind}/{element_name}/records",
+   "methods": [
+    "GET"
+   ],
+   "name": "api_records",
+   "include_in_schema": true
+  },
+  {
+   "class": "APIRoute",
+   "path": "/api/sample",
+   "methods": [
+    "GET"
+   ],
+   "name": "api_sample_get",
+   "include_in_schema": true
+  },
+  {
+   "class": "APIRoute",
+   "path": "/api/sample",
+   "methods": [
+    "POST"
+   ],
+   "name": "api_sample_post",
+   "include_in_schema": true
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/e/{element}/candidates/generate",
+   "methods": [
+    "POST"
+   ],
+   "name": "generate_generated_seeds",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/generated-seeds/generate",
+   "methods": [
+    "POST"
+   ],
+   "name": "generate_generated_seeds",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/e/{element}/candidates/progress",
+   "methods": [
+    "GET"
+   ],
+   "name": "generation_progress",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/e/{element}/candidates/check",
+   "methods": [
+    "POST"
+   ],
+   "name": "validate_generated_seeds",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/generated-seeds/validate",
+   "methods": [
+    "POST"
+   ],
+   "name": "validate_generated_seeds",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/e/{element}/candidates/check-one",
+   "methods": [
+    "POST"
+   ],
+   "name": "check_one_generated_seed",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/generated-seeds/check-one",
+   "methods": [
+    "POST"
+   ],
+   "name": "check_one_generated_seed",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/e/{element}/candidates/review",
+   "methods": [
+    "POST"
+   ],
+   "name": "review_generated_seed",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/generated-seeds/review",
+   "methods": [
+    "POST"
+   ],
+   "name": "review_generated_seed",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/e/{element}/candidates/edit",
+   "methods": [
+    "POST"
+   ],
+   "name": "edit_generated_seed",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/generated-seeds/edit",
+   "methods": [
+    "POST"
+   ],
+   "name": "edit_generated_seed",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/e/{element}/candidates/bulk",
+   "methods": [
+    "POST"
+   ],
+   "name": "bulk_generated_seeds",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/e/{element}/candidates/delete",
+   "methods": [
+    "POST"
+   ],
+   "name": "delete_generated_seed_route",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/generated-seeds/delete",
+   "methods": [
+    "POST"
+   ],
+   "name": "delete_generated_seed_route",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/e/{element}/templates/generate",
+   "methods": [
+    "POST"
+   ],
+   "name": "generate_templates_page",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/templates/generate",
+   "methods": [
+    "POST"
+   ],
+   "name": "generate_templates_page",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/api/seeds/compose",
+   "methods": [
+    "POST"
+   ],
+   "name": "seed_compose",
+   "include_in_schema": true
+  },
+  {
+   "class": "APIRoute",
+   "path": "/api/seeds/instructions",
+   "methods": [
+    "POST"
+   ],
+   "name": "seed_instructions",
+   "include_in_schema": true
+  },
+  {
+   "class": "APIRoute",
+   "path": "/api/seeds/verify",
+   "methods": [
+    "POST"
+   ],
+   "name": "seed_verify",
+   "include_in_schema": true
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/e/{element}/seeds",
+   "methods": [
+    "POST"
+   ],
+   "name": "create_seed",
+   "include_in_schema": true
+  },
+  {
+   "class": "APIRoute",
+   "path": "/seeds",
+   "methods": [
+    "POST"
+   ],
+   "name": "create_seed",
+   "include_in_schema": true
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/e/{element}/seeds/delete",
+   "methods": [
+    "POST"
+   ],
+   "name": "delete_seed",
+   "include_in_schema": true
+  },
+  {
+   "class": "APIRoute",
+   "path": "/seeds/delete",
+   "methods": [
+    "POST"
+   ],
+   "name": "delete_seed",
+   "include_in_schema": true
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/e/{element}/seeds/delete-many",
+   "methods": [
+    "POST"
+   ],
+   "name": "delete_seeds",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/e/{element}/fill",
+   "methods": [
+    "GET"
+   ],
+   "name": "review_fill",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/review/{element}/fill",
+   "methods": [
+    "GET"
+   ],
+   "name": "review_fill",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/e/{element}/review",
+   "methods": [
+    "POST"
+   ],
+   "name": "review_save",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/review/{element}",
+   "methods": [
+    "POST"
+   ],
+   "name": "review_save",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/e/{element}/review/mark",
+   "methods": [
+    "POST"
+   ],
+   "name": "review_mark",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer",
+   "methods": [
+    "GET"
+   ],
+   "name": "dashboard",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/how",
+   "methods": [
+    "GET"
+   ],
+   "name": "how_page",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/submission",
+   "methods": [
+    "GET"
+   ],
+   "name": "submission_page",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/status",
+   "methods": [
+    "GET"
+   ],
+   "name": "status_page",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/elements",
+   "methods": [
+    "GET"
+   ],
+   "name": "elements_page",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/new",
+   "methods": [
+    "GET"
+   ],
+   "name": "new_page",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/new",
+   "methods": [
+    "POST"
+   ],
+   "name": "create_element",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/e/{element}/discard",
+   "methods": [
+    "POST"
+   ],
+   "name": "discard_draft",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/setup",
+   "methods": [
+    "GET"
+   ],
+   "name": "setup_page",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/setup/key",
+   "methods": [
+    "POST"
+   ],
+   "name": "set_session_key",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/setup/forget",
+   "methods": [
+    "POST"
+   ],
+   "name": "forget_session_keys",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/setup",
+   "methods": [
+    "POST"
+   ],
+   "name": "save_setup",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/e/{element}",
+   "methods": [
+    "GET"
+   ],
+   "name": "overview",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/e/{element}/template-rows",
+   "methods": [
+    "GET"
+   ],
+   "name": "template_rows",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/e/{element}/{step}",
+   "methods": [
+    "GET"
+   ],
+   "name": "step_page",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/seeds/new",
+   "methods": [
+    "GET"
+   ],
+   "name": "old_new_seed",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/generated-seeds",
+   "methods": [
+    "GET"
+   ],
+   "name": "old_generated",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/templates/generate",
+   "methods": [
+    "GET"
+   ],
+   "name": "old_templates",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/elements/{element_name}/{kind}",
+   "methods": [
+    "GET"
+   ],
+   "name": "old_dataset",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/review",
+   "methods": [
+    "GET"
+   ],
+   "name": "old_review_index",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/developer/review/{element}",
+   "methods": [
+    "GET"
+   ],
+   "name": "old_review",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/robots.txt",
+   "methods": [
+    "GET"
+   ],
+   "name": "robots",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/sitemap.xml",
+   "methods": [
+    "GET"
+   ],
+   "name": "sitemap",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/favicon.ico",
+   "methods": [
+    "GET"
+   ],
+   "name": "favicon",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/",
+   "methods": [
+    "GET"
+   ],
+   "name": "home",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/evals/{path:path}",
+   "methods": [
+    "GET"
+   ],
+   "name": "evals_page",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/evals",
+   "methods": [
+    "GET"
+   ],
+   "name": "evals_page",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/tutorial",
+   "methods": [
+    "GET"
+   ],
+   "name": "handler",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/questions",
+   "methods": [
+    "GET"
+   ],
+   "name": "handler",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/benchmarks",
+   "methods": [
+    "GET"
+   ],
+   "name": "handler",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/steer",
+   "methods": [
+    "GET"
+   ],
+   "name": "handler",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/steer-me",
+   "methods": [
+    "GET"
+   ],
+   "name": "handler",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/scoring",
+   "methods": [
+    "GET"
+   ],
+   "name": "handler",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/formats",
+   "methods": [
+    "GET"
+   ],
+   "name": "handler",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/metrics",
+   "methods": [
+    "GET"
+   ],
+   "name": "handler",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/diagnostics",
+   "methods": [
+    "GET"
+   ],
+   "name": "handler",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/datasets",
+   "methods": [
+    "GET"
+   ],
+   "name": "handler",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/autosteer",
+   "methods": [
+    "GET"
+   ],
+   "name": "handler",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/reference",
+   "methods": [
+    "GET"
+   ],
+   "name": "handler",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/{vslug}/setting/{number}",
+   "methods": [
+    "GET"
+   ],
+   "name": "setting_page",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/{vslug}/module/{number}",
+   "methods": [
+    "GET"
+   ],
+   "name": "module_page",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/elements/{element_name}",
+   "methods": [
+    "GET"
+   ],
+   "name": "element_page",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/by/{kind}/{value}",
+   "methods": [
+    "GET"
+   ],
+   "name": "facet_page",
+   "include_in_schema": false
+  }
+ ],
+ "openapi": "908004cf1ec081f9",
+ "middleware": 1,
+ "exception_handlers": [
+  "<class 'fastapi.exceptions.RequestValidationError'>",
+  "<class 'fastapi.exceptions.WebSocketRequestValidationError'>",
+  "<class 'starlette.exceptions.HTTPException'>"
+ ]
+}

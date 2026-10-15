@@ -22,6 +22,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'sol
 import solvers  # noqa: E402
 from solvers.common import SOLVERS  # noqa: E402
 
+pytestmark = pytest.mark.slow
+
 for m in pkgutil.iter_modules(solvers.__path__):
     if m.name.startswith('el_'):
         importlib.import_module(f'solvers.{m.name}')

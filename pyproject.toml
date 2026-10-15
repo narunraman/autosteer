@@ -41,3 +41,13 @@ include = ["autosteer*"]
 dev = [
     "pytest>=9.1.1",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# The default run skips the slow tests (sweeps over every element, solver checks, subprocess reproducibility):
+# `uv run pytest -m ""` runs everything.
+addopts = "-m 'not slow'"
+markers = [
+  "slow: long sweeps over every element (opt-in: uv run pytest -m slow, or -m \"\" for everything)",
+  "golden: compares every output with tests/reference/golden_digests.json (about a minute)",
+]

@@ -16,6 +16,7 @@ definition on social rankings).
 Also: the change only moves the raised option up; both types, 3 and 4 options; every non-monotonic rule is a key;
 seeded reproducibility.
 """
+import pytest
 import collections
 import re
 
@@ -189,6 +190,7 @@ def parse(text):
     return prof, changed, raised
 
 
+@pytest.mark.slow
 def test_keys_recomputed():
     s = ElementSampler()
     seen = collections.Counter()

@@ -277,6 +277,7 @@ def test_dominated_strategies_both_kinds():
     assert 0.4 * N < kinds[True] < 0.6 * N, kinds
 
 
+@pytest.mark.slow
 @pytest.mark.parametrize('element', ELEMENTS)
 def test_brute_force_key(element):
     for parts, md in items(element):

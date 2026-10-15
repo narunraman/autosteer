@@ -18,6 +18,8 @@ from helpers import sample, num
 sys.path.insert(0, str(Path(__file__).resolve().parent / "solvers" / "steer"))
 from multi_agent_oracle import oracle  # noqa: E402
 
+pytestmark = pytest.mark.slow
+
 ELEMENTS = ["trigger", "enforceability", "feasibility", "backward_induction"]
 N = 1000
 GRADES = {"trigger": {7}, "enforceability": {7}, "feasibility": {7, 8}, "backward_induction": {5, 6}}

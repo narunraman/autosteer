@@ -16,6 +16,8 @@ import pytest
 from _digest_dump import digests
 from autosteer.sampler import ElementSampler, SamplerConfig
 
+pytestmark = pytest.mark.slow
+
 REF = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'reference', 'source_digests.json')))
 ELEMENTS = sorted({k.rsplit('/', 1)[0] for k in REF['digests']})
 

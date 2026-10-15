@@ -15,6 +15,8 @@ from autosteer.release.rows import build_rows
 from autosteer.sampler import ElementSampler, SamplerConfig
 from autosteer.sampler.generator import SEED_MAX, derive_seed
 
+pytestmark = pytest.mark.slow
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 N = 5
 SAMPLER = ElementSampler()

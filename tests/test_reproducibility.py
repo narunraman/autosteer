@@ -5,6 +5,7 @@ with different PYTHONHASHSEED values, both with ElementSampler(seed=...) and
 with an unseeded sampler after seed_everything() (how the release exporter
 seeds). Digests of the full outputs must match.
 """
+import pytest
 import json
 import os
 import subprocess
@@ -12,6 +13,8 @@ import sys
 
 from helpers import CONSISTENCY_GRADED, STRATEGIC, get_sampler  # noqa: F401
 from autosteer.taxonomy import is_non_strategic_element
+
+pytestmark = pytest.mark.slow
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HERE = os.path.dirname(os.path.abspath(__file__))
