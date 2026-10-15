@@ -1,0 +1,453 @@
+{
+ "rows": [
+  {
+   "question_id": 0,
+   "sub_id": 0,
+   "question_text": "A {good} costs {p}. What is the demand at {p2}?",
+   "domain": "food",
+   "type": "point",
+   "difficulty_level": 1,
+   "tags": "first_person",
+   "options": [
+    {
+     "option_id": 0,
+     "option_text": "10",
+     "correct_answer": false
+    },
+    {
+     "option_id": 1,
+     "option_text": "12",
+     "correct_answer": true
+    },
+    {
+     "option_id": 2,
+     "option_text": "14",
+     "correct_answer": false
+    }
+   ],
+   "instructions": "Ask for the quantity."
+  },
+  {
+   "question_id": 1,
+   "sub_id": 0,
+   "question_text": "Part one about {x}?",
+   "domain": "children's toys",
+   "type": "two_part",
+   "difficulty_level": 2,
+   "tags": "third_person",
+   "options": [
+    {
+     "option_id": 0,
+     "option_text": "a",
+     "correct_answer": false
+    },
+    {
+     "option_id": 1,
+     "option_text": "b",
+     "correct_answer": true
+    }
+   ]
+  },
+  {
+   "question_id": 1,
+   "sub_id": 1,
+   "question_text": "Part two, it's {y}?",
+   "domain": "children's toys",
+   "type": "two_part",
+   "difficulty_level": 2,
+   "tags": "third_person",
+   "options": [
+    {
+     "option_id": 0,
+     "option_text": "c",
+     "correct_answer": true
+    },
+    {
+     "option_id": 1,
+     "option_text": "d",
+     "correct_answer": false
+    },
+    {
+     "option_id": 2,
+     "option_text": "e",
+     "correct_answer": false
+    }
+   ]
+  }
+ ],
+ "example_questions": {
+  "columns": [
+   "question_id",
+   "sub_id",
+   "question_text",
+   "explanation",
+   "domain",
+   "type",
+   "difficulty_level",
+   "tags"
+  ],
+  "index": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "data": [
+   [
+    0,
+    0,
+    "A {good} costs {p}. What is the demand at {p2}?",
+    null,
+    "food",
+    "point",
+    1,
+    "first_person"
+   ],
+   [
+    1,
+    0,
+    "Part one about {x}?",
+    null,
+    "children's toys",
+    "two_part",
+    2,
+    "third_person"
+   ],
+   [
+    1,
+    1,
+    "Part two, it's {y}?",
+    null,
+    "children's toys",
+    "two_part",
+    2,
+    "third_person"
+   ],
+   [
+    2,
+    0,
+    "A {good} costs {p}. What is the demand at {p2}?",
+    null,
+    "food",
+    "point",
+    1,
+    "first_person"
+   ]
+  ]
+ },
+ "example_options": {
+  "columns": [
+   "question_id",
+   "sub_id",
+   "option_id",
+   "option_text",
+   "correct_answer"
+  ],
+  "index": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ],
+  "data": [
+   [
+    0,
+    0,
+    0,
+    "10",
+    false
+   ],
+   [
+    0,
+    0,
+    1,
+    "12",
+    true
+   ],
+   [
+    0,
+    0,
+    2,
+    "14",
+    false
+   ],
+   [
+    1,
+    0,
+    0,
+    "a",
+    false
+   ],
+   [
+    1,
+    0,
+    1,
+    "b",
+    true
+   ],
+   [
+    1,
+    1,
+    0,
+    "c",
+    true
+   ],
+   [
+    1,
+    1,
+    1,
+    "d",
+    false
+   ],
+   [
+    1,
+    1,
+    2,
+    "e",
+    false
+   ]
+  ]
+ },
+ "instruction_set": {
+  "columns": [
+   "domain",
+   "type",
+   "difficulty_level",
+   "tags",
+   "instructions"
+  ],
+  "index": [
+   0
+  ],
+  "data": [
+   [
+    "food",
+    "point",
+    1,
+    "first_person",
+    "Ask for the quantity."
+   ]
+  ]
+ },
+ "query_q": {
+  "columns": [
+   "question_id",
+   "sub_id",
+   "question_text",
+   "explanation",
+   "domain",
+   "type",
+   "difficulty_level",
+   "tags"
+  ],
+  "index": [
+   0,
+   1
+  ],
+  "data": [
+   [
+    1,
+    0,
+    "Part one about {x}?",
+    null,
+    "children's toys",
+    "two_part",
+    2,
+    "third_person"
+   ],
+   [
+    1,
+    1,
+    "Part two, it's {y}?",
+    null,
+    "children's toys",
+    "two_part",
+    2,
+    "third_person"
+   ]
+  ]
+ },
+ "query_o": {
+  "columns": [
+   "question_id",
+   "sub_id",
+   "option_id",
+   "option_text",
+   "correct_answer"
+  ],
+  "index": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "data": [
+   [
+    1,
+    0,
+    0,
+    "a",
+    false
+   ],
+   [
+    1,
+    0,
+    1,
+    "b",
+    true
+   ],
+   [
+    1,
+    1,
+    0,
+    "c",
+    true
+   ],
+   [
+    1,
+    1,
+    1,
+    "d",
+    false
+   ],
+   [
+    1,
+    1,
+    2,
+    "e",
+    false
+   ]
+  ]
+ },
+ "query_dataset_display": [
+  {
+   "question_1": "A {good} costs {p}. What is the demand at {p2}?",
+   "options_1": [
+    "10",
+    "12",
+    "14"
+   ],
+   "answer_1": "12",
+   "metadata": {
+    "domain": "food",
+    "type": "point",
+    "difficulty_level": 1,
+    "tags": "first_person"
+   }
+  }
+ ],
+ "display": [
+  {
+   "question_1": "A {good} costs {p}. What is the demand at {p2}?",
+   "options_1": [
+    "10",
+    "12",
+    "14"
+   ],
+   "answer_1": "12",
+   "metadata": {
+    "domain": "food",
+    "type": "point",
+    "difficulty_level": 1,
+    "tags": "first_person"
+   }
+  },
+  {
+   "question_1": "Part one about {x}?",
+   "options_1": [
+    "a",
+    "b"
+   ],
+   "answer_1": "b",
+   "question_2": "Part two, it's {y}?",
+   "options_2": [
+    "c",
+    "d",
+    "e"
+   ],
+   "answer_2": "c",
+   "metadata": {
+    "domain": "children's toys",
+    "type": "two_part",
+    "difficulty_level": 2,
+    "tags": "third_person"
+   }
+  },
+  {
+   "question_1": "A {good} costs {p}. What is the demand at {p2}?",
+   "options_1": [
+    "No options found"
+   ],
+   "answer_1": "No answer found",
+   "metadata": {
+    "domain": "food",
+    "type": "point",
+    "difficulty_level": 1,
+    "tags": "first_person"
+   }
+  }
+ ],
+ "metadata": {
+  "columns": [
+   "domain",
+   "type",
+   "difficulty_level",
+   "tags"
+  ],
+  "index": [
+   0,
+   1
+  ],
+  "data": [
+   [
+    "food",
+    "point",
+    1,
+    "first_person"
+   ],
+   [
+    "children's toys",
+    "two_part",
+    2,
+    "third_person"
+   ]
+  ]
+ },
+ "metadata_df": {
+  "columns": [
+   "domain",
+   "type",
+   "difficulty_level",
+   "tags"
+  ],
+  "index": [
+   0,
+   1
+  ],
+  "data": [
+   [
+    "food",
+    "point",
+    1,
+    "first_person"
+   ],
+   [
+    "children's toys",
+    "two_part",
+    2,
+    "third_person"
+   ]
+  ]
+ },
+ "reindexed_ids": [
+  0,
+  1,
+  1,
+  2
+ ]
+}
