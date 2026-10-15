@@ -70,7 +70,10 @@ def load_raw_templates(element_name: str) -> Dataset:
 
 def _build_entry(element_name: str) -> dict:
     """Build a manifest entry from the template dataset (source of truth for sampling)."""
-    dataset = apply_template_fixes(element_name, load_raw_templates(element_name))
+    if code_templates.has_code_templates(element_name) or code_templates.is_composite(element_name):
+        dataset = apply_template_fixes(element_name, load_raw_templates(element_name))
+    else:
+        dataset = load_raw_templates(element_name)   # stored corrected (scripts/migrations/fold_template_fixes.py)
 
     q = dataset.questions
     return {

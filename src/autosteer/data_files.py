@@ -18,6 +18,7 @@ from pathlib import Path
 
 LIST_PATH = Path(__file__).with_name("data_files.json")
 DERIVED = {"manifest.json"}
+PINNED_DIRS = ("templates", "example_seeds", "generated_seeds")
 
 
 def load_list() -> dict:
@@ -59,7 +60,8 @@ def verify(data_dir: Path) -> dict:
 
 def write_list(data_dir: Path, source: dict) -> dict:
     """Write data_files.json from the files now in data_dir (used when the template data is re-pinned)."""
-    files = scan(data_dir)
+    # the template data only: review records and the licence change on their own and are not pinned
+    files = {p: f for p, f in scan(data_dir).items() if p.split("/")[0] in PINNED_DIRS or p == "README.md"}
     doc = {
         "about": "Files expected in the autosteer data directory (AUTOSTEER_DATA_DIR); see autosteer/data_files.py.",
         "source": source,

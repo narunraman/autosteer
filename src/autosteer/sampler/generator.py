@@ -455,7 +455,8 @@ class ElementSampler:
                 # the corrections are deterministic and slow: outside the lock, so draws go on meanwhile (code
                 # templates are built by running code, so those are loaded under it)
                 pure = not (code_templates.has_code_templates(element_name) or code_templates.is_composite(element_name))
-                fixed = apply_template_fixes(element_name, load_raw_templates(element_name)) if pure else None
+                # data-directory templates are stored corrected (scripts/migrations/fold_template_fixes.py)
+                fixed = load_raw_templates(element_name) if pure else None
                 with RNG_LOCK:
                     dataset = _SHARED_TEMPLATES.get(key)
                     if dataset is None:
