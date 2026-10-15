@@ -36,7 +36,7 @@ question = sampler.sample_question("consumer_surplus", seed=1)
 The same questions are served by the <a href="https://steer-benchmark.cs.ubc.ca/reference"><img src="docs/steer_badge.svg" height="14" alt=""></a> <a href="https://steer-benchmark.cs.ubc.ca/reference">API</a>, and fixed samples are on
 Hugging Face as <a href="https://huggingface.co/datasets/narunraman/steer"><img src="docs/hf_logo.svg" height="14" alt=""></a> <a href="https://huggingface.co/datasets/narunraman/steer"><code>narunraman/steer</code></a> and
 <a href="https://huggingface.co/datasets/narunraman/steer_me"><img src="docs/hf_logo.svg" height="14" alt=""></a> <a href="https://huggingface.co/datasets/narunraman/steer_me"><code>narunraman/steer_me</code></a>. To evaluate a model, use
-<a href="https://github.com/narunraman/STEER"><img src="docs/steer_badge.svg" height="14" alt=""></a> <a href="https://github.com/narunraman/STEER">steer-bench</a>.
+<a href="https://github.com/narunraman/STEER#gh-light-mode-only"><img src="docs/github_logo_light.svg" height="14" alt=""></a><a href="https://github.com/narunraman/STEER#gh-dark-mode-only"><img src="docs/github_logo_dark.svg" height="14" alt=""></a> <a href="https://github.com/narunraman/STEER">steer-bench</a>.
 
 ## Write a new element
 
