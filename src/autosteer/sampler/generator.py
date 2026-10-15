@@ -458,6 +458,9 @@ class ElementSampler:
                         if fixed is None:
                             fixed = apply_template_fixes(element_name, load_raw_templates(element_name))
                         dataset = self._drop_unfillable(element_name, fixed)
+                        # templates loaded under an older manifest are not needed by new samplers: let them go
+                        for old in [k for k in _SHARED_TEMPLATES if k[1] != key[1]]:
+                            del _SHARED_TEMPLATES[old]
                         _SHARED_TEMPLATES[key] = dataset
             self._template_cache[element_name] = dataset
         return self._template_cache[element_name]
@@ -587,16 +590,30 @@ class ElementSampler:
             if len(values) > 1:
                 pick = rng.choices(values, weights=[(weights or {}).get(v, 1) for v in values])[0]
                 filtered = filtered[filtered[field].astype(str) == pick]
-        ids = sorted(int(x) for x in filtered['question_id'].unique().tolist())
-        groups = self._text_groups(q, element_name, config.pool)
-        by_text: dict = {}
-        for qid in ids:
-            by_text.setdefault(groups.get(qid, qid), []).append(qid)
-        if len(by_text) == len(ids):
-            return ids[rng.randrange(len(ids))]
-        texts = sorted(by_text.values())
-        members = texts[rng.randrange(len(texts))]
-        return members[rng.randrange(len(members))]
+        # (numpy over arrays computed once per element and pool; the draws are those of the list version: ids sorted,
+        # a text's members sorted, texts ordered by their smallest member, the same rng calls in the same order)
+        ids = np.unique(filtered['question_id'].to_numpy().astype(np.int64))
+        all_ids, group_of = self._text_group_arrays(q, element_name, config.pool)
+        pos = np.searchsorted(all_ids, ids)
+        if pos.size and (pos[-1] >= len(all_ids) or not np.array_equal(all_ids[pos], ids)):
+            raise RuntimeError(f"{element_name}: filtered templates that are not in the pool")
+        groups = group_of[pos]
+        distinct, first = np.unique(groups, return_index=True)
+        if len(distinct) == len(ids):
+            return int(ids[rng.randrange(len(ids))])
+        text = distinct[np.argsort(first, kind='stable')][rng.randrange(len(distinct))]
+        members = ids[groups == text]
+        return int(members[rng.randrange(len(members))])
+
+    def _text_group_arrays(self, q, element_name: str, pool) -> tuple:
+        """Every question_id of q, sorted, and the text group (see _text_groups) of each."""
+        cache = self.__dict__.setdefault('_text_group_arrays_cache', {})
+        key = (element_name, pool)
+        if key not in cache or cache[key][0] is not q:
+            groups = self._text_groups(q, element_name, pool)
+            all_ids = np.array(sorted(groups), dtype=np.int64)
+            cache[key] = (q, all_ids, np.array([groups[i] for i in all_ids.tolist()], dtype=np.int64))
+        return cache[key][1], cache[key][2]
 
     def _text_groups(self, q, element_name: str, pool) -> dict:
         """question_id -> the smallest question_id with the same text (every part, spaces collapsed) and level."""

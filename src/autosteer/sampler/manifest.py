@@ -19,11 +19,23 @@ def manifest_path() -> str:
 _PACKAGE = Path(__file__).resolve().parent.parent
 
 
+_FINGERPRINT: dict = {}
+
+
 def code_fingerprint() -> str:
     """Hash of the code that decides what the manifest says: the registered filler names and the sources of the
     sampler and filler packages (template fixes, hooks and code-written templates). A stored manifest with another
-    fingerprint is rebuilt."""
-    h = hashlib.sha256('\n'.join(sorted(function_registry.keys())).encode())
+    fingerprint is rebuilt. Computed once per process (and set of fillers): the code a process runs does not change
+    while it runs, and hashing every source took most of each load_manifest() call."""
+    names = tuple(sorted(function_registry.keys()))
+    if names not in _FINGERPRINT:
+        _FINGERPRINT.clear()
+        _FINGERPRINT[names] = _fingerprint(names)
+    return _FINGERPRINT[names]
+
+
+def _fingerprint(names) -> str:
+    h = hashlib.sha256('\n'.join(names).encode())
     for sub in ('sampler', 'filler_tools'):
         for f in sorted((_PACKAGE / sub).rglob('*')):
             if f.suffix in ('.py', '.json') and '__pycache__' not in f.parts:
