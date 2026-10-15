@@ -13,7 +13,7 @@ from autosteer.filler_tools import code_templates, function_registry
 from autosteer.filler_tools.utilities import filler_utils
 from autosteer.filler_tools.fill_registry import validate_filler_output
 from autosteer.formatting import format_fill_values, format_value, extract_fstring_keys
-from autosteer.steer_dataset import Dataset
+from autosteer.datasets import Dataset
 
 from .config import SamplerConfig
 from .manifest import load_manifest, get_sampleable_elements, load_raw_templates

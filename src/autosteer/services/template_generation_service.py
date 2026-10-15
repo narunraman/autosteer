@@ -5,7 +5,7 @@ import random
 
 import pandas as pd
 
-from autosteer import steer_dataset as sd
+from autosteer import datasets as sd
 from autosteer.constants import TAGS
 from autosteer.json_utils import parse_model_json
 from autosteer.llm_client import LanguageModelClient

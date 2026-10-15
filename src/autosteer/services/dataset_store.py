@@ -10,7 +10,7 @@ import pandas as pd
 
 from autosteer import dataset_io
 
-from autosteer import steer_dataset as sd
+from autosteer import datasets as sd
 from autosteer import paths
 from autosteer.schemas import DatasetKind, Metadata, OptionRecord, QuestionRecord
 
@@ -105,9 +105,8 @@ class DatasetStore:
         limit: int = 50,
     ) -> list[QuestionRecord]:
         dataset = self.load_dataset(kind, element_name)
-        questions_type, options_type = dataset._get_dataframe_types(dataframe_type)
-        questions = dataset[questions_type].head(limit)
-        options = dataset[options_type]
+        questions, options = dataset.frames(dataframe_type)
+        questions = questions.head(limit)
 
         records: list[QuestionRecord] = []
         for _, row in questions.iterrows():

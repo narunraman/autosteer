@@ -74,8 +74,8 @@ def spec_for(element: str, question_text: str) -> dict:
 
 
 def dataset(element: str):
-    """A steer_dataset.Dataset holding the element's code templates (test pool only; no few-shot examples)."""
-    from autosteer.steer_dataset import Dataset
+    """A Dataset holding the element's code templates (test pool only; no few-shot examples)."""
+    from autosteer.datasets import Dataset, empty_options
 
     rows = []
     for qid, t in enumerate(_REGISTRY[element]):
@@ -84,7 +84,7 @@ def dataset(element: str):
                          'type': t.type, 'difficulty_level': int(t.difficulty_level), 'tags': t.tags})
     d = Dataset(element)
     d.questions = pd.DataFrame(rows).astype({'question_id': int, 'sub_id': int, 'difficulty_level': int})
-    d.options = d._init_options_df()
+    d.options = empty_options()
     return d
 
 
@@ -115,7 +115,7 @@ def composite_parts(element: str) -> dict[str, str]:
 
 def composite_dataset(element: str, load):
     """The concatenated dataset; load(source) returns a source's corrected template Dataset."""
-    from autosteer.steer_dataset import Dataset
+    from autosteer.datasets import Dataset
 
     out = Dataset(element)
     frames = {'questions': [], 'options': [], 'example_questions': [], 'example_options': []}

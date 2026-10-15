@@ -460,7 +460,7 @@ def _eu_templates():
     """Template regexes for compute_expected_utility: the placeholders name the quantities in the text
     (win_amount, lose_chance, num_days, ...).  Only the template *text* is used, never the filler."""
     from autosteer.paths import templates_dir
-    from autosteer.steer_dataset import Dataset
+    from autosteer.datasets import Dataset
     try:
         df = Dataset.load(str(templates_dir() / "expected_value_counts_aug2024")).questions
     except Exception:  # noqa: BLE001

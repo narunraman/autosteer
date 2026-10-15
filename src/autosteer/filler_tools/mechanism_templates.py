@@ -13,7 +13,7 @@ import re
 import pandas as pd
 
 from autosteer.paths import templates_dir
-from autosteer.steer_dataset import Dataset
+from autosteer.datasets import Dataset
 from .mechanism_tools import GRADES
 
 TAGS = 'explicit'

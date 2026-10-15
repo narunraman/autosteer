@@ -127,7 +127,7 @@ def stated_prior_items(prior: Part, new_context: str, new_ask: str, new: Part, t
 def build_dataset(element: str, out_dir: str, scenarios: list[dict], example_scenarios: list[dict],
                   render: Render, seed: int, difficulty: int):
     """Build the test and few-shot pools and save them into out_dir."""
-    from autosteer.steer_dataset import Dataset
+    from autosteer.datasets import Dataset
 
     rng = random.Random(seed)
     q, o = build_frames(scenarios, render, rng, difficulty)

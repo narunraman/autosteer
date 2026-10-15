@@ -5,7 +5,7 @@ import threading
 from datetime import datetime, timezone
 from pathlib import Path
 
-from autosteer.steer_dataset import Dataset
+from autosteer.datasets import Dataset
 from autosteer.paths import data_dir, templates_dir
 from autosteer.filler_tools import function_registry
 from autosteer.filler_tools import code_templates

@@ -3,7 +3,7 @@ import unittest
 
 import pandas as pd
 
-from autosteer import steer_dataset as sd
+from autosteer import datasets as sd
 
 
 def instructions(*rows):

@@ -13,7 +13,7 @@ import pandas as pd
 import pytest
 
 from autosteer import paths
-from autosteer.steer_dataset import Dataset, display_to_dataset_json, get_metadata_df, reindex
+from autosteer.datasets import Dataset, display_to_dataset_json, get_metadata_df, reindex
 
 REFERENCE = Path(__file__).with_name("reference") / "dataset_ops.json"
 FRAMES = ("questions", "options", "example_questions", "example_options", "instruction_set", "validation_df")

@@ -13,5 +13,5 @@ Where things are, for working on the code. How to run autoSTEER is in the [repos
 | `llm_client.py` | The model providers: OpenAI, Azure OpenAI, Anthropic, Gemini and OpenAI-compatible endpoints. |
 | `instruction_parts.py`, `json_utils.py` | The instructions for the model, and parsing its replies. |
 | `formatting.py` | Formatting filled values: rounding, placeholders, duplicate options. |
-| `steer_dataset.py`, `dataset_io.py` | The `Dataset` class (question, option and instruction tables) and its Parquet format on disk. |
+| `datasets.py`, `dataset_io.py` | The `Dataset` (question, option and instruction tables, and the authoring operations on them) and its format on disk. |
 | `data_files.py` | The pinned list of data files (`autosteer data verify`). |

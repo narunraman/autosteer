@@ -8,7 +8,7 @@ from pathlib import Path
 import pandas as pd
 
 from autosteer import instruction_parts
-from autosteer import steer_dataset as sd
+from autosteer import datasets as sd
 from autosteer.constants import DOMAINS, TAGS
 from autosteer.schemas import Metadata
 from autosteer.services.dataset_store import DatasetStore
