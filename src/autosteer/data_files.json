@@ -4,10 +4,10 @@
   "repo": "STEER-generation",
   "branch": "recover-generators",
   "commit": "9d851d4fc3f24521170048bb35e04fbb3699cb4c",
-  "how": "converted from STEER-generation's pickles to Parquet, with duplicated example seeds, seed candidates and templates removed and the unvetted 'backward_induction copy' templates dropped (October 2026); the load-time template corrections folded into templates/ by scripts/migrations/fold_template_fixes.py (October 2026); templates whose text uses a placeholder their filler never returns removed by scripts/migrations/drop_unfillable_templates.py"
+  "how": "converted from STEER-generation's pickles to Parquet, with duplicated example seeds, seed candidates and templates removed and the unvetted 'backward_induction copy' templates dropped (October 2026); the load-time template corrections folded into templates/ by scripts/migrations/fold_template_fixes.py (October 2026); templates whose text uses a placeholder their filler never returns removed by scripts/migrations/drop_unfillable_templates.py; the templates/ folders of 15 elements now written in code and of 3 elements without a filler (monotone_sc, sc_axioms, sc_dictatorship) deleted"
  },
- "total_files": 1638,
- "total_bytes": 26787669,
+ "total_files": 1507,
+ "total_bytes": 21878736,
  "files": [
   {
    "path": "README.md",
@@ -5560,46 +5560,6 @@
    "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
   },
   {
-   "path": "templates/capital_market_distortions/dataset.json",
-   "size": 1806,
-   "sha256": "766a8c278938d5c2b0e340c74a7882f97929bb2a3c6c89ba5b15fac59d7fa7ed"
-  },
-  {
-   "path": "templates/capital_market_distortions/example_options.parquet",
-   "size": 3502,
-   "sha256": "87d35af42b053dbf8f84de117c90254960bc86c28240b126f6fdf6403a527d40"
-  },
-  {
-   "path": "templates/capital_market_distortions/example_questions.parquet",
-   "size": 10737,
-   "sha256": "88e5a0b8176a23331f374e47fc724946109ca9038dd318f431be4d68ba40f60a"
-  },
-  {
-   "path": "templates/capital_market_distortions/generated_seed_metadata.parquet",
-   "size": 36455,
-   "sha256": "b98da470e025ff18b00ff970376d97f55904ab57cae1f8fa4f1fdb3bf59a8a67"
-  },
-  {
-   "path": "templates/capital_market_distortions/instruction_set.parquet",
-   "size": 2742,
-   "sha256": "2ed22c07bff78f8c87b86dac9b2b6173788568765626e8269433acc773666ebc"
-  },
-  {
-   "path": "templates/capital_market_distortions/options.parquet",
-   "size": 7374,
-   "sha256": "4c4800ce261f3aa4cca6acd13b38ecb011cad260fe93a9058d2c509731d9879b"
-  },
-  {
-   "path": "templates/capital_market_distortions/questions.parquet",
-   "size": 366882,
-   "sha256": "1bc99fd2a026edb6559a7c806c4923e274c34883be6d592293f84b14cdac7632"
-  },
-  {
-   "path": "templates/capital_market_distortions/validation_df.parquet",
-   "size": 1584,
-   "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
-  },
-  {
    "path": "templates/certainty_effect/build_templates.py",
    "size": 16214,
    "sha256": "39a922d84967f143c845ebcf9b6dbd93374f3467344b1216d39b8b4653b3d679"
@@ -5750,76 +5710,6 @@
    "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
   },
   {
-   "path": "templates/completeness/dataset.json",
-   "size": 1690,
-   "sha256": "222212e5f0bede19c9ab279b323a285afba2ffc4d613fd819d26d7eb410fb0e0"
-  },
-  {
-   "path": "templates/completeness/example_options.parquet",
-   "size": 3621,
-   "sha256": "3a8476891390cd43b7a7b4e7ad55c98cdf0adfb3de7be227f15b20d85d97cea3"
-  },
-  {
-   "path": "templates/completeness/example_questions.parquet",
-   "size": 6245,
-   "sha256": "fcc34f0eeec1a696653515783044f2569823daef5ab0f577a431289a967f7e4a"
-  },
-  {
-   "path": "templates/completeness/instruction_set.parquet",
-   "size": 2742,
-   "sha256": "2ed22c07bff78f8c87b86dac9b2b6173788568765626e8269433acc773666ebc"
-  },
-  {
-   "path": "templates/completeness/options.parquet",
-   "size": 37066,
-   "sha256": "ba4bbc305a36198c16c88b1a929f6d90724c76c9ee8282be56b12b6df70bc3fd"
-  },
-  {
-   "path": "templates/completeness/questions.parquet",
-   "size": 86042,
-   "sha256": "03308fe762cf16ccd159dbd13184090a941f6a966c9e92366199067ff7378087"
-  },
-  {
-   "path": "templates/completeness/validation_df.parquet",
-   "size": 1584,
-   "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
-  },
-  {
-   "path": "templates/completeness_risk/dataset.json",
-   "size": 1695,
-   "sha256": "079489076ea258e787260ca98e109529905a9d43b2ba4cda69c38dc83862948c"
-  },
-  {
-   "path": "templates/completeness_risk/example_options.parquet",
-   "size": 3599,
-   "sha256": "da902fea74b1e56a587081f276770abd6c924af488b8cfa35b67ed4ee4cbf2bd"
-  },
-  {
-   "path": "templates/completeness_risk/example_questions.parquet",
-   "size": 6283,
-   "sha256": "88b99beee5d011aa694cc3332d4ef371d0309b44e98e1395710f26f1c76454f9"
-  },
-  {
-   "path": "templates/completeness_risk/instruction_set.parquet",
-   "size": 2742,
-   "sha256": "2ed22c07bff78f8c87b86dac9b2b6173788568765626e8269433acc773666ebc"
-  },
-  {
-   "path": "templates/completeness_risk/options.parquet",
-   "size": 35090,
-   "sha256": "0efaa38fcc0caeedb306d7f99ad7870629be0bf14950d2983ae743e9b96cd32c"
-  },
-  {
-   "path": "templates/completeness_risk/questions.parquet",
-   "size": 83620,
-   "sha256": "ea4b6e0bed316ad7e7847e36666cc052a6f88f95754bf11e5d7fb299e27823bb"
-  },
-  {
-   "path": "templates/completeness_risk/validation_df.parquet",
-   "size": 1584,
-   "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
-  },
-  {
    "path": "templates/compute_expectations/dataset.json",
    "size": 1647,
    "sha256": "6cca48ce295c022298ebca50232e5a8a2d39e3bb390d6827a00af40de565dc66"
@@ -5936,41 +5826,6 @@
   },
   {
    "path": "templates/condorcet_criterion/validation_df.parquet",
-   "size": 1584,
-   "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
-  },
-  {
-   "path": "templates/constrained_optimization/dataset.json",
-   "size": 1702,
-   "sha256": "37e3423db5db6f3f12884d5b935d5777b854620ec02dda248822743962d4a14f"
-  },
-  {
-   "path": "templates/constrained_optimization/example_options.parquet",
-   "size": 3502,
-   "sha256": "87d35af42b053dbf8f84de117c90254960bc86c28240b126f6fdf6403a527d40"
-  },
-  {
-   "path": "templates/constrained_optimization/example_questions.parquet",
-   "size": 7339,
-   "sha256": "a1cb4058c7405209554b3cdd48adffcd6e38d4377111064dec9fb72ac002e0c8"
-  },
-  {
-   "path": "templates/constrained_optimization/instruction_set.parquet",
-   "size": 2742,
-   "sha256": "2ed22c07bff78f8c87b86dac9b2b6173788568765626e8269433acc773666ebc"
-  },
-  {
-   "path": "templates/constrained_optimization/options.parquet",
-   "size": 10520,
-   "sha256": "54534f3ceb654724852b2f5f164a89e2f8ca8ed883dd7140468c56207968c6c3"
-  },
-  {
-   "path": "templates/constrained_optimization/questions.parquet",
-   "size": 114761,
-   "sha256": "3336d0739b7b299c314968d8898c2d64fe28f4cf49ff4e658ea1b885c602589a"
-  },
-  {
-   "path": "templates/constrained_optimization/validation_df.parquet",
    "size": 1584,
    "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
   },
@@ -6320,41 +6175,6 @@
    "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
   },
   {
-   "path": "templates/dominant_strategies/dataset.json",
-   "size": 1697,
-   "sha256": "36d09739384f4d4e5cb68c82c2890abc3086ad62fd5c10d14f69aa23812403ab"
-  },
-  {
-   "path": "templates/dominant_strategies/example_options.parquet",
-   "size": 4106,
-   "sha256": "e516d1d0dc2cd6b9540d6a402960e1e60e0e3e98fcced63f46b37a45b264eaa1"
-  },
-  {
-   "path": "templates/dominant_strategies/example_questions.parquet",
-   "size": 11773,
-   "sha256": "54000b4ec84c3b1c56effd3f06a4addcc35515e771707479f907c9d440dafd94"
-  },
-  {
-   "path": "templates/dominant_strategies/instruction_set.parquet",
-   "size": 2742,
-   "sha256": "2ed22c07bff78f8c87b86dac9b2b6173788568765626e8269433acc773666ebc"
-  },
-  {
-   "path": "templates/dominant_strategies/options.parquet",
-   "size": 60176,
-   "sha256": "1dff8c1215ad20e364fe97ceb0e05850c169335ae247c641b7a895f905168222"
-  },
-  {
-   "path": "templates/dominant_strategies/questions.parquet",
-   "size": 612672,
-   "sha256": "ae91b283838a3ad630be1111bfec9ea9ecdd93e202f030ab15a87b5b2d82df99"
-  },
-  {
-   "path": "templates/dominant_strategies/validation_df.parquet",
-   "size": 1584,
-   "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
-  },
-  {
    "path": "templates/dominated_strategies/dataset.json",
    "size": 1647,
    "sha256": "257f493fb102031e62ac2002078110b06a0763868a29f62fdf1cfc97211195f2"
@@ -6386,41 +6206,6 @@
   },
   {
    "path": "templates/dominated_strategies/validation_df.parquet",
-   "size": 1584,
-   "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
-  },
-  {
-   "path": "templates/dsic_mechanism/dataset.json",
-   "size": 1641,
-   "sha256": "5bcf5f454adc7f79267bb44beb2e8ebc5f432e7bb8a5fc629e03b4489b558f01"
-  },
-  {
-   "path": "templates/dsic_mechanism/example_options.parquet",
-   "size": 3769,
-   "sha256": "989ce20f5b43ec4244ffa486d852fe345b1441a580b07cf0611d46e5ae9983a5"
-  },
-  {
-   "path": "templates/dsic_mechanism/example_questions.parquet",
-   "size": 11781,
-   "sha256": "b0970977c557ae2f9f0a486a2c1955c840d344d8f2dc2af472bd500792b697a6"
-  },
-  {
-   "path": "templates/dsic_mechanism/instruction_set.parquet",
-   "size": 2742,
-   "sha256": "2ed22c07bff78f8c87b86dac9b2b6173788568765626e8269433acc773666ebc"
-  },
-  {
-   "path": "templates/dsic_mechanism/options.parquet",
-   "size": 16473,
-   "sha256": "dce75e24888bb9fce19c2c3cb3c907686c7be91b15857dcce9391252f0c93f4c"
-  },
-  {
-   "path": "templates/dsic_mechanism/questions.parquet",
-   "size": 114128,
-   "sha256": "f0cc5ec5ff043a81b0567b03d5656511d2fbf12fe1cffeb340e37297f37cb1d8"
-  },
-  {
-   "path": "templates/dsic_mechanism/validation_df.parquet",
    "size": 1584,
    "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
   },
@@ -6530,46 +6315,6 @@
    "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
   },
   {
-   "path": "templates/equiv_contrapositive/dataset.json",
-   "size": 1647,
-   "sha256": "2d91b5946e5ac95749985c64c944a48b92374761c8c39ce11b70428baa559035"
-  },
-  {
-   "path": "templates/equiv_contrapositive/example_options.parquet",
-   "size": 2765,
-   "sha256": "0c0b09bf330e1acc10de8e3607aae171b0d4c7c5b3a5c42844522b3dc6a699fb"
-  },
-  {
-   "path": "templates/equiv_contrapositive/example_questions.parquet",
-   "size": 4009,
-   "sha256": "823c1d968cda85f816dcdad566f33eda24cdfd506e15be805391c72c6652de9c"
-  },
-  {
-   "path": "templates/equiv_contrapositive/instruction_set.parquet",
-   "size": 2742,
-   "sha256": "2ed22c07bff78f8c87b86dac9b2b6173788568765626e8269433acc773666ebc"
-  },
-  {
-   "path": "templates/equiv_contrapositive/options.parquet",
-   "size": 2765,
-   "sha256": "0c0b09bf330e1acc10de8e3607aae171b0d4c7c5b3a5c42844522b3dc6a699fb"
-  },
-  {
-   "path": "templates/equiv_contrapositive/questions.parquet",
-   "size": 35864,
-   "sha256": "440b57ab90fa0fd01ba219795cccc99fac21a7ab18215f49529e8447e8909cf8"
-  },
-  {
-   "path": "templates/equiv_contrapositive/template_labels.csv",
-   "size": 380114,
-   "sha256": "13874fcbf2b38a6c4be89f8ac152466374185f840d49880c129f9ef2538b82f3"
-  },
-  {
-   "path": "templates/equiv_contrapositive/validation_df.parquet",
-   "size": 1584,
-   "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
-  },
-  {
    "path": "templates/expected_value_counts_aug2024/dataset.json",
    "size": 1741,
    "sha256": "d25e9ece445013d5c0eb20ce89caa091736048c4060ae7c61fe2e217f53c40a4"
@@ -6601,76 +6346,6 @@
   },
   {
    "path": "templates/expected_value_counts_aug2024/validation_df.parquet",
-   "size": 1584,
-   "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
-  },
-  {
-   "path": "templates/factor_demand/dataset.json",
-   "size": 1717,
-   "sha256": "1daa58a4aad40d6a4fdbadbd0e0ec3f0a663891780a3a6c55e6fce13f5a35965"
-  },
-  {
-   "path": "templates/factor_demand/example_options.parquet",
-   "size": 3406,
-   "sha256": "adb969fb38452bcda46e4e3667d99ba583d6512b72f475b9f4ffa3161714efe8"
-  },
-  {
-   "path": "templates/factor_demand/example_questions.parquet",
-   "size": 8672,
-   "sha256": "04822eb2b558074c2e9b9abaae5a592b90d0cba3c6c65b06bb6f2844b6a4c0ea"
-  },
-  {
-   "path": "templates/factor_demand/instruction_set.parquet",
-   "size": 7055,
-   "sha256": "ecbf2ef9e17244d4774c9c0c539029d8b553695f501b13797653aee99e26007e"
-  },
-  {
-   "path": "templates/factor_demand/options.parquet",
-   "size": 12017,
-   "sha256": "cce416f3ce41156827a94d0cd429edc56defb7be02251ff054876b39e7af3969"
-  },
-  {
-   "path": "templates/factor_demand/questions.parquet",
-   "size": 223967,
-   "sha256": "4603c569b02690527743af41601a1d1d619d145bb6c78dd799760fa787ae7c2c"
-  },
-  {
-   "path": "templates/factor_demand/validation_df.parquet",
-   "size": 2712,
-   "sha256": "2c5db09b4c22af26c0fddd778f46bb9b36f61ff81ff8d143894789fe662a0f34"
-  },
-  {
-   "path": "templates/feasibility/dataset.json",
-   "size": 1689,
-   "sha256": "b23a35a6fb4208546baabffabc270de60462328189895647f810d561a2d75793"
-  },
-  {
-   "path": "templates/feasibility/example_options.parquet",
-   "size": 3991,
-   "sha256": "d2e2db4fefc8ad63793ba225f0b04fa79c95f9a7a1faef42d032c13f3723fd79"
-  },
-  {
-   "path": "templates/feasibility/example_questions.parquet",
-   "size": 7920,
-   "sha256": "80ba715bf1f332df4ea8996815accfd9e94d4be47037ca22eaae286f00182ce0"
-  },
-  {
-   "path": "templates/feasibility/instruction_set.parquet",
-   "size": 2742,
-   "sha256": "2ed22c07bff78f8c87b86dac9b2b6173788568765626e8269433acc773666ebc"
-  },
-  {
-   "path": "templates/feasibility/options.parquet",
-   "size": 108756,
-   "sha256": "755d0e1eeb890a5f5368dea24878b0bf278b313f58b98f2460e0256c8f46b563"
-  },
-  {
-   "path": "templates/feasibility/questions.parquet",
-   "size": 258416,
-   "sha256": "7972afffa246ed7f047dd6690924a61bc755809a723b02cb567fdfdbe138190d"
-  },
-  {
-   "path": "templates/feasibility/validation_df.parquet",
    "size": 1584,
    "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
   },
@@ -6925,86 +6600,6 @@
    "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
   },
   {
-   "path": "templates/labor_supply_distortions/dataset.json",
-   "size": 1804,
-   "sha256": "289ca5511303b0d0a3712b27b79163f36de7e4283062bb7b5513109c92f774cd"
-  },
-  {
-   "path": "templates/labor_supply_distortions/example_options.parquet",
-   "size": 3506,
-   "sha256": "a20054b4097be5385e879308b06b81c54cb4a642f51b134aa6faf7660a9baa68"
-  },
-  {
-   "path": "templates/labor_supply_distortions/example_questions.parquet",
-   "size": 10538,
-   "sha256": "1912b5de6c6d904fb22984dd25114c40890b44c96cabb6837da23a3f04b4ef46"
-  },
-  {
-   "path": "templates/labor_supply_distortions/generated_seed_metadata.parquet",
-   "size": 36019,
-   "sha256": "a503e7879033c0f467790a1cb51928d6551afc11bbe8a52383d65dbb81c25404"
-  },
-  {
-   "path": "templates/labor_supply_distortions/instruction_set.parquet",
-   "size": 2742,
-   "sha256": "2ed22c07bff78f8c87b86dac9b2b6173788568765626e8269433acc773666ebc"
-  },
-  {
-   "path": "templates/labor_supply_distortions/options.parquet",
-   "size": 2765,
-   "sha256": "0c0b09bf330e1acc10de8e3607aae171b0d4c7c5b3a5c42844522b3dc6a699fb"
-  },
-  {
-   "path": "templates/labor_supply_distortions/questions.parquet",
-   "size": 313741,
-   "sha256": "130c559d7761156abcdd72488859cc0515b2955478424a826d03f2b9f312483c"
-  },
-  {
-   "path": "templates/labor_supply_distortions/validation_df.parquet",
-   "size": 1584,
-   "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
-  },
-  {
-   "path": "templates/labor_supply_elasticity/dataset.json",
-   "size": 1803,
-   "sha256": "c4c76bb72df8c5c368eb5c04c46667008c68d3e4dec7d8358416084afcd16be7"
-  },
-  {
-   "path": "templates/labor_supply_elasticity/example_options.parquet",
-   "size": 3443,
-   "sha256": "e85d009a6ca7b4430c0074e7dd23f728cf0f346c839207ded4a5203b18101e5c"
-  },
-  {
-   "path": "templates/labor_supply_elasticity/example_questions.parquet",
-   "size": 8363,
-   "sha256": "ad08dd7b980a53b10f082e6d1ac372d34fff3eb2888291ebda8fec9f38a7b16e"
-  },
-  {
-   "path": "templates/labor_supply_elasticity/generated_seed_metadata.parquet",
-   "size": 27427,
-   "sha256": "cc4d413c9991fee84e56c0a4091c5056c921bd14729a19b2bdeb18bd8f9e418d"
-  },
-  {
-   "path": "templates/labor_supply_elasticity/instruction_set.parquet",
-   "size": 6929,
-   "sha256": "943abca68d970c4f71636157340769d7a6135b9e009309f3edfc214d76d07a06"
-  },
-  {
-   "path": "templates/labor_supply_elasticity/options.parquet",
-   "size": 2765,
-   "sha256": "0c0b09bf330e1acc10de8e3607aae171b0d4c7c5b3a5c42844522b3dc6a699fb"
-  },
-  {
-   "path": "templates/labor_supply_elasticity/questions.parquet",
-   "size": 151711,
-   "sha256": "99bdcc19647fd75a554b5b55e93752ee4f8826d76b034baab4855719a310b927"
-  },
-  {
-   "path": "templates/labor_supply_elasticity/validation_df.parquet",
-   "size": 1584,
-   "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
-  },
-  {
    "path": "templates/law_of_demand/dataset.json",
    "size": 1717,
    "sha256": "4424c21f392247b8138d824660840ba9af32f9f171e9aa822e6ecb23feb76e92"
@@ -7150,41 +6745,6 @@
    "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
   },
   {
-   "path": "templates/maximize_expected_utility/dataset.json",
-   "size": 1703,
-   "sha256": "ce428a60c157fe0633f0da1e6ee9b3d2c289eb5d5ad89d953a7d8a98fad78740"
-  },
-  {
-   "path": "templates/maximize_expected_utility/example_options.parquet",
-   "size": 3706,
-   "sha256": "66aa9fd4618b7d8f314fbd3314c003d2345f4019866a51f9cdf48876bed133d6"
-  },
-  {
-   "path": "templates/maximize_expected_utility/example_questions.parquet",
-   "size": 8922,
-   "sha256": "aac23c2fb88b8656c043c0b7694b555c40d0774386a841c0de800c272a11b043"
-  },
-  {
-   "path": "templates/maximize_expected_utility/instruction_set.parquet",
-   "size": 2742,
-   "sha256": "2ed22c07bff78f8c87b86dac9b2b6173788568765626e8269433acc773666ebc"
-  },
-  {
-   "path": "templates/maximize_expected_utility/options.parquet",
-   "size": 16124,
-   "sha256": "96756c1c8232f9b72d6d30e7ab1fdaee188ff24318c7115d095591ccf5f87b34"
-  },
-  {
-   "path": "templates/maximize_expected_utility/questions.parquet",
-   "size": 124124,
-   "sha256": "85e25c80e0c6ec16266949f34ee67f8efff84069bb3b7525b090621c810e284d"
-  },
-  {
-   "path": "templates/maximize_expected_utility/validation_df.parquet",
-   "size": 1584,
-   "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
-  },
-  {
    "path": "templates/micro_utility/dataset.json",
    "size": 1691,
    "sha256": "ee1b26a9cb060a6138346b7c29f477fd9c7fdc5c64a3d06653657165393cbd07"
@@ -7216,41 +6776,6 @@
   },
   {
    "path": "templates/micro_utility/validation_df.parquet",
-   "size": 1584,
-   "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
-  },
-  {
-   "path": "templates/monotone_sc/dataset.json",
-   "size": 1689,
-   "sha256": "7a2475a18a0e7a6e169bb85136b9154811a54464fb1538844bfcfc07bb82016d"
-  },
-  {
-   "path": "templates/monotone_sc/example_options.parquet",
-   "size": 3542,
-   "sha256": "e97f468f803c120c38342d42053cf0bb3f00baf775ef12ec2daf03301b6ac5f0"
-  },
-  {
-   "path": "templates/monotone_sc/example_questions.parquet",
-   "size": 8520,
-   "sha256": "11aeba78a9f3d2c2ae6858d6b7e94672341c15910913c10109ff2f88b9cd1bca"
-  },
-  {
-   "path": "templates/monotone_sc/instruction_set.parquet",
-   "size": 2742,
-   "sha256": "2ed22c07bff78f8c87b86dac9b2b6173788568765626e8269433acc773666ebc"
-  },
-  {
-   "path": "templates/monotone_sc/options.parquet",
-   "size": 5968,
-   "sha256": "f465f30e12f27fed11bf0457492b4ea9887c2b23a143203684ddf7b629f1f9cf"
-  },
-  {
-   "path": "templates/monotone_sc/questions.parquet",
-   "size": 48952,
-   "sha256": "34f9f7228a2f6d8ded1f6a71ed00e6f8870df2d6f5e5e114d227d34f340a29f8"
-  },
-  {
-   "path": "templates/monotone_sc/validation_df.parquet",
    "size": 1584,
    "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
   },
@@ -7445,46 +6970,6 @@
    "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
   },
   {
-   "path": "templates/price_of_risk/dataset.json",
-   "size": 1793,
-   "sha256": "19991648617e2291b3eee9c07300e8494ced044e6f5a258c781ac0f5b3eafb73"
-  },
-  {
-   "path": "templates/price_of_risk/example_options.parquet",
-   "size": 3452,
-   "sha256": "1fce81d3362b2ebad00e9b86f8983851b017e82f1061e26c536476e1bead74e3"
-  },
-  {
-   "path": "templates/price_of_risk/example_questions.parquet",
-   "size": 8566,
-   "sha256": "b239bb20b0432c7f89bb60ea11f97188943b245cc0a8638613f3cdedfa6b9c09"
-  },
-  {
-   "path": "templates/price_of_risk/generated_seed_metadata.parquet",
-   "size": 29385,
-   "sha256": "371eb3e12df6e166e90328f1dc74c34cc83db4eb2345f120ad20fca5321111a5"
-  },
-  {
-   "path": "templates/price_of_risk/instruction_set.parquet",
-   "size": 2742,
-   "sha256": "2ed22c07bff78f8c87b86dac9b2b6173788568765626e8269433acc773666ebc"
-  },
-  {
-   "path": "templates/price_of_risk/options.parquet",
-   "size": 2765,
-   "sha256": "0c0b09bf330e1acc10de8e3607aae171b0d4c7c5b3a5c42844522b3dc6a699fb"
-  },
-  {
-   "path": "templates/price_of_risk/questions.parquet",
-   "size": 203735,
-   "sha256": "d2be255bd9f4b635f6ad3b073ce8aefae7d8eb400405fbca75f66c04b2ec9c88"
-  },
-  {
-   "path": "templates/price_of_risk/validation_df.parquet",
-   "size": 1584,
-   "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
-  },
-  {
    "path": "templates/producer_surplus/dataset.json",
    "size": 1720,
    "sha256": "087a09ed248ea4b5a5fe9913eafbae062194b5cd113da83dadcb746d191c71eb"
@@ -7553,41 +7038,6 @@
    "path": "templates/profit_maximization/validation_df.parquet",
    "size": 3888,
    "sha256": "9268ba7822dd251ac6d55de560e408774df275dbbf8c55aa667ba3ad407f13fb"
-  },
-  {
-   "path": "templates/pure_nash/dataset.json",
-   "size": 1687,
-   "sha256": "788db7962a9ee87ebd9fbeef8d4d07f2e0ac1cdc7989cb7dbab87627ee10ed19"
-  },
-  {
-   "path": "templates/pure_nash/example_options.parquet",
-   "size": 4068,
-   "sha256": "a23c152a9710eb5fc93b02b85059b0e1e0ad6a9c287a474431fb8ae744015737"
-  },
-  {
-   "path": "templates/pure_nash/example_questions.parquet",
-   "size": 11599,
-   "sha256": "44760faae9ebc962e84493872b128e92468bbe843dfde3898bebb45f39677a9c"
-  },
-  {
-   "path": "templates/pure_nash/instruction_set.parquet",
-   "size": 2742,
-   "sha256": "2ed22c07bff78f8c87b86dac9b2b6173788568765626e8269433acc773666ebc"
-  },
-  {
-   "path": "templates/pure_nash/options.parquet",
-   "size": 22184,
-   "sha256": "07973c282de4d48b0e5fc60e80da20d216aeffde0efe3c4d74f6d5c664cf3275"
-  },
-  {
-   "path": "templates/pure_nash/questions.parquet",
-   "size": 106339,
-   "sha256": "15e261f95dbb63600e31f544bf70e062fef5af52fe1f81ba11befc371ab31aee"
-  },
-  {
-   "path": "templates/pure_nash/validation_df.parquet",
-   "size": 1584,
-   "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
   },
   {
    "path": "templates/reflection_effect/build_templates.py",
@@ -7661,76 +7111,6 @@
   },
   {
    "path": "templates/returns_to_scale/validation_df.parquet",
-   "size": 1584,
-   "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
-  },
-  {
-   "path": "templates/sc_axioms/dataset.json",
-   "size": 1765,
-   "sha256": "6dc7d22110d6a75fec0031616d15952ee89b32a389a37ad0225b7fb3273ba16d"
-  },
-  {
-   "path": "templates/sc_axioms/example_options.parquet",
-   "size": 2817,
-   "sha256": "26d00eea1d2350cded97dd64a46721bba9ad6c7e9cdf7aa10617d28e29267c9f"
-  },
-  {
-   "path": "templates/sc_axioms/example_questions.parquet",
-   "size": 7313,
-   "sha256": "fcc7f525379d34db59eb4502e6a41350bdd799d7fd0f73e5be5059d0c1f515b0"
-  },
-  {
-   "path": "templates/sc_axioms/instruction_set.parquet",
-   "size": 2742,
-   "sha256": "2ed22c07bff78f8c87b86dac9b2b6173788568765626e8269433acc773666ebc"
-  },
-  {
-   "path": "templates/sc_axioms/options.parquet",
-   "size": 2817,
-   "sha256": "26d00eea1d2350cded97dd64a46721bba9ad6c7e9cdf7aa10617d28e29267c9f"
-  },
-  {
-   "path": "templates/sc_axioms/questions.parquet",
-   "size": 327190,
-   "sha256": "68e25adb248dabc43d548ca7a6a43e49c2832a32a7d323b82e5ccd4792beb9f1"
-  },
-  {
-   "path": "templates/sc_axioms/validation_df.parquet",
-   "size": 1584,
-   "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
-  },
-  {
-   "path": "templates/sc_dictatorship/dataset.json",
-   "size": 1771,
-   "sha256": "f063c6f39c0aa5da32e3b19464ada51260d5d4212b1516396ef24fc18fc84d85"
-  },
-  {
-   "path": "templates/sc_dictatorship/example_options.parquet",
-   "size": 2817,
-   "sha256": "26d00eea1d2350cded97dd64a46721bba9ad6c7e9cdf7aa10617d28e29267c9f"
-  },
-  {
-   "path": "templates/sc_dictatorship/example_questions.parquet",
-   "size": 7313,
-   "sha256": "fcc7f525379d34db59eb4502e6a41350bdd799d7fd0f73e5be5059d0c1f515b0"
-  },
-  {
-   "path": "templates/sc_dictatorship/instruction_set.parquet",
-   "size": 2742,
-   "sha256": "2ed22c07bff78f8c87b86dac9b2b6173788568765626e8269433acc773666ebc"
-  },
-  {
-   "path": "templates/sc_dictatorship/options.parquet",
-   "size": 2817,
-   "sha256": "26d00eea1d2350cded97dd64a46721bba9ad6c7e9cdf7aa10617d28e29267c9f"
-  },
-  {
-   "path": "templates/sc_dictatorship/questions.parquet",
-   "size": 327190,
-   "sha256": "68e25adb248dabc43d548ca7a6a43e49c2832a32a7d323b82e5ccd4792beb9f1"
-  },
-  {
-   "path": "templates/sc_dictatorship/validation_df.parquet",
    "size": 1584,
    "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
   },
@@ -8021,41 +7401,6 @@
   },
   {
    "path": "templates/time_inconsistency/validation_df.parquet",
-   "size": 1584,
-   "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
-  },
-  {
-   "path": "templates/top_trading/dataset.json",
-   "size": 1689,
-   "sha256": "c455ba7cbc4f8dd3c926186e8b0cb8de93cd728061c426cb737dfa0fe7c7e596"
-  },
-  {
-   "path": "templates/top_trading/example_options.parquet",
-   "size": 3757,
-   "sha256": "202a2ab7d4860e4a2a91e812a3f1c1f8493fc52e466cc98e1f4ee54d132e7188"
-  },
-  {
-   "path": "templates/top_trading/example_questions.parquet",
-   "size": 6803,
-   "sha256": "c8addc0fafec4b5de4cc941aaf26ab04bffa9057998120dfb7fac63d9d56236c"
-  },
-  {
-   "path": "templates/top_trading/instruction_set.parquet",
-   "size": 2742,
-   "sha256": "2ed22c07bff78f8c87b86dac9b2b6173788568765626e8269433acc773666ebc"
-  },
-  {
-   "path": "templates/top_trading/options.parquet",
-   "size": 81073,
-   "sha256": "a0954b85235fd128772a4b13e9ca2d0a37d53aa41b3f38f8fe72c3dcb757d489"
-  },
-  {
-   "path": "templates/top_trading/questions.parquet",
-   "size": 136135,
-   "sha256": "01275774ef751723b71f133b30fdd2d73d17db3c4d818f8fa345ed9a914faec8"
-  },
-  {
-   "path": "templates/top_trading/validation_df.parquet",
    "size": 1584,
    "sha256": "06110cebf2976b82c53d19be8788a4ade4ff00e870caf2f8df1afa437770a2a7"
   },
