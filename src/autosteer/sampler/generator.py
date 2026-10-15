@@ -185,7 +185,7 @@ def _locked(fn):
 # Elements whose questions are balanced over one field: when the request leaves the field open, its value is drawn
 # first (evenly, or with these weights), then a template that has it. The released data balanced these fields by
 # repeating templates (independence_risk held each of its 18 vacation templates 19 times, to match its 337 meal
-# templates); the repeats were deleted from the data (autosteer.data_cleanup) and the balance is kept here.
+# templates); the repeats were deleted from the data (October 2026) and the balance is kept here.
 SAMPLING_BALANCE: dict[str, tuple[str, dict | None]] = {
     'independence_risk': ('domain', None),
     'compute_expectations': ('domain', None),

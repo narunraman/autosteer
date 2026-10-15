@@ -2,10 +2,8 @@
 
 The templates (~25 MB of Parquet, see autosteer.dataset_io) live in data/ of the repository (or AUTOSTEER_DATA_DIR,
 else ~/.autosteer/data for an installed package). `data_files.json` next to this module lists every file the generator release expects
-there, with its size and sha256, and the STEER-generation commit the files come from. `autosteer data verify`
-checks a data directory against it; `autosteer data build` recreates one from a STEER-generation checkout (git
-archive of the pinned commit, whose datasets are pickles), converts it to Parquet, removes the duplicated example
-seeds and seed candidates (autosteer.data_cleanup), and then verifies it. The sha256s are those of the files as
+there, with its size and sha256, and where the data came from. `autosteer data verify` checks a data directory
+against it; write_list() re-pins it after a deliberate change to the data. The sha256s are those of the files as
 written by the pinned pandas and pyarrow; a rebuild with other versions can differ in bytes though not in content.
 
 `manifest.json` in the data directory is not listed: the sampler rebuilds it from the templates when the set of
@@ -14,11 +12,8 @@ element directories changes (sampler/manifest.py).
 from __future__ import annotations
 
 import hashlib
-import io
 import json
 import os
-import subprocess
-import tarfile
 from pathlib import Path
 
 LIST_PATH = Path(__file__).with_name("data_files.json")
@@ -76,24 +71,3 @@ def write_list(data_dir: Path, source: dict) -> dict:
     return doc
 
 
-def build(data_dir: Path, source_repo: Path, commit: str | None = None) -> dict:
-    """Extract `data/` of the pinned commit of a STEER-generation checkout into data_dir, then verify."""
-    commit = commit or load_list()["source"]["commit"]
-    tar = subprocess.run(["git", "-C", str(source_repo), "archive", "--format=tar", commit, "data"],
-                         check=True, capture_output=True).stdout
-    data_dir.mkdir(parents=True, exist_ok=True)
-    with tarfile.open(fileobj=io.BytesIO(tar)) as t:
-        for m in t.getmembers():
-            if not m.name.startswith("data/") or not m.isfile():
-                continue
-            m.name = m.name[len("data/"):]
-            t.extract(m, data_dir, filter="data")
-    # the commit holds pickles; the pinned files are their Parquet conversion, cleaned of duplicated seeds
-    from autosteer import data_cleanup, dataset_io
-    report = dataset_io.convert(data_dir)
-    if report["failed"]:
-        raise RuntimeError(f"could not convert: {sorted(report['failed'])}")
-    data_cleanup.fix_duplicate_seeds(data_dir)
-    data_cleanup.fix_duplicate_templates(data_dir)
-    data_cleanup.remove_non_elements(data_dir)
-    return verify(data_dir)

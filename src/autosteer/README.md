@@ -14,4 +14,4 @@ Where things are, for working on the code. How to run autoSTEER is in the [repos
 | `instruction_parts.py`, `json_utils.py` | The instructions for the model, and parsing its replies. |
 | `formatting.py` | Formatting filled values: rounding, placeholders, duplicate options. |
 | `steer_dataset.py`, `dataset_io.py` | The `Dataset` class (question, option and instruction tables) and its Parquet format on disk. |
-| `data_files.py`, `data_cleanup.py` | The pinned list of data files (`autosteer data verify`) and the clean-up of the data carried over from STEER-generation. |
+| `data_files.py` | The pinned list of data files (`autosteer data verify`). |

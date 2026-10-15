@@ -14,7 +14,8 @@ The rows' `difficulty` is the relative level within the element (1 = its easiest
 cells, seeds and the sampler use the raw level, which maps one to one onto it.
 
 Each question i of a cell is drawn with its own seed, derive_seed(export seed, element, type, domain,
-difficulty, i), so (element, template_id, seed) in a row reproduces it (ElementSampler.sample_question) and the
+difficulty, i), so (element, template_id, seed) in a row reproduces it with the generator version named in the row
+(ElementSampler.sample_question), and the
 export does not depend on element order or worker count. Draws that raise, that fail row_problems() or that
 repeat an earlier question of the element (same content hash, or the same texts containing numbers with other
 options) are skipped and counted; the next index is tried, up to --max-attempts-per-question times the cell's target.

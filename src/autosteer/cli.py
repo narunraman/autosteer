@@ -68,33 +68,11 @@ def _print_verify(report: dict) -> None:
     print("OK" if report["ok"] else "FAILED")
 
 
-def run_data_convert(args) -> int:
-    from autosteer import dataset_io
-    data_dir = Path(args.data_dir).expanduser() if args.data_dir else _data_dir()
-    report = dataset_io.convert(data_dir, remove=not args.keep)
-    print(f"converted {len(report['converted'])} datasets in {data_dir}; removed {len(report['removed'])} pickle files")
-    for name, problems in report["failed"].items():
-        print(f"NOT converted {name}: " + "; ".join(problems))
-    return 1 if report["failed"] else 0
-
-
 def run_data_verify(args: argparse.Namespace) -> None:
     from autosteer import data_files
 
     data_dir = Path(args.data_dir).expanduser() if args.data_dir else _data_dir()
     report = data_files.verify(data_dir)
-    _print_verify(report)
-    if not report["ok"]:
-        raise SystemExit(1)
-
-
-def run_data_build(args: argparse.Namespace) -> None:
-    from autosteer import data_files
-
-    data_dir = Path(args.data_dir).expanduser() if args.data_dir else _data_dir()
-    pinned = data_files.load_list()["source"]
-    print(f"extracting data/ of {pinned['repo']}@{args.commit or pinned['commit']} from {args.source} into {data_dir}")
-    report = data_files.build(data_dir, Path(args.source).expanduser(), args.commit or None)
     _print_verify(report)
     if not report["ok"]:
         raise SystemExit(1)
@@ -153,22 +131,7 @@ def build_parser() -> argparse.ArgumentParser:
     verify.add_argument("--data-dir", default="")
     verify.set_defaults(func=run_data_verify)
 
-    convert = data_subparsers.add_parser(
-        "convert",
-        help="Rewrite the data directory's pickled datasets as Parquet (checked table by table), then remove the pickles.",
-    )
-    convert.add_argument("--data-dir", default="")
-    convert.add_argument("--keep", action="store_true", help="keep the pickles next to the new files")
-    convert.set_defaults(func=run_data_convert)
 
-    build = data_subparsers.add_parser(
-        "build",
-        help="Recreate the template data from a STEER-generation checkout at the pinned commit, then verify.",
-    )
-    build.add_argument("--source", required=True, help="path to a STEER-generation git checkout")
-    build.add_argument("--commit", default="", help="override the pinned commit (the list must then be rewritten)")
-    build.add_argument("--data-dir", default="")
-    build.set_defaults(func=run_data_build)
 
     from autosteer.release.export import add_arguments as add_export_arguments
 

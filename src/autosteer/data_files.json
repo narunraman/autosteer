@@ -4,7 +4,7 @@
   "repo": "STEER-generation",
   "branch": "recover-generators",
   "commit": "9d851d4fc3f24521170048bb35e04fbb3699cb4c",
-  "how": "git archive <commit> data, converted to Parquet (autosteer data convert) and cleaned of duplicated example seeds and seed candidates (autosteer.data_cleanup); manifest.json is rebuilt by the sampler; duplicated templates deleted (autosteer.data_cleanup.fix_duplicate_templates); templates/backward_induction copy removed (an unvetted second wording of backward_induction: 58 of its 600 templates pass the multi-agent audit)"
+  "how": "converted from STEER-generation's pickles to Parquet, with duplicated example seeds, seed candidates and templates removed and the unvetted 'backward_induction copy' templates dropped (October 2026)"
  },
  "total_files": 1638,
  "total_bytes": 25104998,

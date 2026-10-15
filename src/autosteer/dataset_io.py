@@ -19,16 +19,12 @@ import pandas as pd
 
 FORMAT = "autosteer-dataset/1"
 JSON_NAME = "dataset.json"
-PICKLE_NAME = "dataset.pkl"
 
 
 def saved_file(folder: str | os.PathLike) -> Path | None:
-    """The file that marks a saved dataset in folder (dataset.json, else the older dataset.pkl), or None."""
-    folder = Path(folder)
-    for name in (JSON_NAME, PICKLE_NAME):
-        if (folder / name).exists():
-            return folder / name
-    return None
+    """The file that marks a saved dataset in folder (dataset.json), or None."""
+    path = Path(folder) / JSON_NAME
+    return path if path.exists() else None
 
 
 def _plain(v):
@@ -107,7 +103,7 @@ def save(attributes: dict, folder: str | os.PathLike) -> None:
 
 
 def load(folder: str | os.PathLike) -> dict:
-    """The attributes saved in folder, from dataset.json and the Parquet files, else from the older dataset.pkl."""
+    """The attributes saved in folder, from dataset.json and the Parquet files."""
     folder = Path(folder)
     if (folder / JSON_NAME).exists():
         doc = json.loads((folder / JSON_NAME).read_text(encoding="utf-8"))
@@ -117,63 +113,4 @@ def load(folder: str | os.PathLike) -> dict:
         for key, info in doc.get("tables", {}).items():
             attrs[key] = _decode(pd.read_parquet(folder / f"{key}.parquet"), info)
         return attrs
-    if (folder / PICKLE_NAME).exists():
-        return pd.read_pickle(folder / PICKLE_NAME)
-    raise FileNotFoundError(f"No saved dataset ({JSON_NAME} or {PICKLE_NAME}) in {folder}")
-
-
-# Files of the pickle era that nothing reads any more: the per-table pickles written next to dataset.pkl, the
-# template_metadata / generations_metadata side files, dill dumps, and the data directory's taxonomy.pkl.
-LEGACY_NAMES = {"questions.pkl", "questions_metadata.pkl", "options.pkl", "answers.pkl", "instruction_set.pkl",
-                "template_metadata.pkl", "generations_metadata.pkl"}
-KINDS = ("templates", "example_seeds", "generated_seeds")
-
-
-def _differences(before: dict, after: dict) -> list[str]:
-    problems = []
-    for key in sorted(set(before) | set(after)):
-        a, b = before.get(key), after.get(key)
-        if isinstance(a, pd.DataFrame) or isinstance(b, pd.DataFrame):
-            try:
-                pd.testing.assert_frame_equal(a, b, check_dtype=True, check_index_type=True)
-            except (AssertionError, TypeError) as exc:
-                problems.append(f"{key}: {str(exc).splitlines()[0] if str(exc) else type(exc).__name__}")
-        elif _plain(a) != b:
-            problems.append(f"{key}: {a!r} != {b!r}")
-    return problems
-
-
-def convert(data_dir: str | os.PathLike, remove: bool = True) -> dict:
-    """Rewrite every dataset.pkl under data_dir's templates/, example_seeds/ and generated_seeds/ in the Parquet
-    format, check that each table reads back equal (values, dtypes, index), and then (remove=True) delete the pickle
-    and the pickle-era files next to it. A folder whose check fails keeps its pickle and gets no new files."""
-    data_dir = Path(data_dir)
-    report: dict = {"converted": [], "failed": {}, "removed": []}
-    for kind in KINDS:
-        root = data_dir / kind
-        for folder in sorted(p for p in root.iterdir() if p.is_dir()) if root.is_dir() else []:
-            pkl = folder / PICKLE_NAME
-            if not pkl.exists():
-                continue
-            name = f"{kind}/{folder.name}"
-            before = pd.read_pickle(pkl)
-            try:
-                save(before, folder)
-                problems = _differences(before, load(folder))
-            except Exception as exc:  # noqa: BLE001 - reported per folder
-                problems = [f"{type(exc).__name__}: {exc}"]
-            if problems:
-                report["failed"][name] = problems
-                for p in [folder / JSON_NAME, *folder.glob("*.parquet")]:
-                    p.unlink(missing_ok=True)
-                continue
-            report["converted"].append(name)
-            if remove:
-                for p in [pkl, *(folder / n for n in LEGACY_NAMES), *folder.glob("*.dill")]:
-                    if p.exists():
-                        p.unlink()
-                        report["removed"].append(str(p.relative_to(data_dir)))
-    if remove and (data_dir / "taxonomy.pkl").exists():
-        (data_dir / "taxonomy.pkl").unlink()
-        report["removed"].append("taxonomy.pkl")
-    return report
+    raise FileNotFoundError(f"No saved dataset ({JSON_NAME}) in {folder}")

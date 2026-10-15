@@ -1041,7 +1041,7 @@ TEMPLATE_HOOKS: dict[str, Callable] = {
 
 def exact_copies(q, o) -> set:
     """question_ids of the templates that repeat an earlier one exactly: every part's text, the template's options and
-    its metadata. The data has none (autosteer.data_cleanup deletes them), but the corrections can make some:
+    its metadata. The data has none (they were deleted from it), but the corrections can make some:
     welfare_theorem_1 and _2 give every template of a type one fixed question, so templates that differed only in
     their question are the same in that type (and still differ in the others, so they stay in the data)."""
     if q is None or len(q) == 0:

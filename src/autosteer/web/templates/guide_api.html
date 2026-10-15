@@ -55,7 +55,7 @@
   <tr><th><code>options</code>, <code>correct_index</code></th><td>The options in the order to show them, and the position of the correct one</td></tr>
   <tr><th><code>grading</code></th><td><code>answer</code> for one correct option, or <code>consistency</code>, in which case the parts sharing a <code>consistency_group</code> are scored together by <code>consistency_rule</code></td></tr>
   <tr><th><code>difficulty</code></th><td>The difficulty level within the element, from 1 (its easiest); not comparable across elements</td></tr>
-  <tr><th><code>generator</code>, <code>seed</code>, <code>template_id</code></th><td>Together these reproduce the row exactly</td></tr>
+  <tr><th><code>generator</code>, <code>seed</code>, <code>template_id</code></th><td>The generator version that made the row, and the seed and template it used. The same seed and template give the same row with the same generator version; the generator changes between versions, so a later version can give a different question</td></tr>
 </table>
 <p>Called with no <code>n</code> or <code>seed</code>, the endpoint returns a single question in a shorter form, which this site uses for its "Generate a question" buttons.</p>
 {% endblock %}

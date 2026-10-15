@@ -1,7 +1,7 @@
 """Repeated templates: none in the data or after the load-time corrections, and the balance they used to give.
 
 The released data repeated templates to balance a field (independence_risk held its 18 vacation templates 19 times
-each, to match its 337 meal templates). The repeats are deleted from the data (autosteer.data_cleanup); the sampler
+each, to match its 337 meal templates). The repeats were deleted from the data; the sampler
 draws the field's value first instead (SAMPLING_BALANCE). A template text with several fill settings (mult_div's
 signs) is drawn as one template, then one of its settings.
 """
