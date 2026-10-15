@@ -17,6 +17,9 @@ from autosteer.services.generated_seed_service import (
     load_review_state,
 )
 
+# previews are unseeded; their own generator keeps them from moving the global one seeded draws use
+_UNSEEDED = random.Random()
+
 
 def _review_key(question_id: int, sub_id: int = 0) -> str:
     return f"{int(question_id)}:{int(sub_id)}"
@@ -139,14 +142,11 @@ def seed_templates_for_template_target(
     if dataset.example_questions.empty:
         raise ValueError(f"No accepted generated seeds found for {element_name}.")
 
-    command = sd.build_command(
-        {
-            "domain": target_metadata["domain"],
-            "type": target_metadata["type"],
-            "difficulty_level": int(target_metadata["difficulty_level"]),
-        }
+    selected = dataset.query(
+        {"domain": target_metadata["domain"], "type": target_metadata["type"],
+         "difficulty_level": int(target_metadata["difficulty_level"])},
+        dataframe_type="example_questions", return_type="dataset",
     )
-    selected = dataset.query(command, dataframe_type="example_questions", return_type="dataset")
     seed_templates = selected.to_display_json()
     if not seed_templates:
         raise ValueError(f"No accepted generated seed matches target metadata: {target_metadata}.")
@@ -247,7 +247,7 @@ def generate_template_batch(
         "targets": len(targets),
         "templates_per_target": templates_per_target,
         "errors": errors,
-        "preview": random.choice(generated) if generated else None,
+        "preview": _UNSEEDED.choice(generated) if generated else None,
     }
 
 
@@ -272,7 +272,7 @@ def random_template_preview(store: DatasetStore, element_name: str) -> dict | No
     records = store.records("templates", element_name, dataframe_type="questions", limit=500)
     if not records:
         return None
-    return random.choice(records).model_dump()
+    return _UNSEEDED.choice(records).model_dump()
 
 
 def template_generation_summary(store: DatasetStore, element_name: str) -> dict:

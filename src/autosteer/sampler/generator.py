@@ -264,6 +264,7 @@ class ElementSampler:
             config = SamplerConfig()
         return self._sample_one(config)
 
+    @_locked
     def sample_batch(self, n: int, config: Optional[SamplerConfig] = None) -> list[dict]:
         """
         Sample n elements, each independently. Config fields are re-sampled

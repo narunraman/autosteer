@@ -236,8 +236,6 @@ class Dataset:
         if not ignore_options:
             self[options_type] = pd.concat([self[options_type], options_df], ignore_index=True)
 
-        if 'instructions' in rows:
-            self.add_instructions({k: v for k, v in rows.items() if k in ['instructions'] + metadata_keys}, check_metadata_exists = False)
 
 
     def update(self, new_rows, dataframe_type='questions'):
@@ -341,8 +339,7 @@ class Dataset:
                     raise ValueError(f"a row has no key {key}. Every row needs to have a {key} key.")
             if check_metadata_exists:
                 metadata = {key: instructions[key] for key in self.metadata_keys}
-                command = build_command(metadata)
-                questions, options = self.query(command, dataframe_type='example_questions')
+                questions, options = self.query(metadata, dataframe_type='example_questions')
                 if questions.empty:
                     raise ValueError("Metadata of the instructions does not exist in the example questions dataset.")
             self.instruction_set = pd.concat([self.instruction_set, pd.DataFrame.from_records([instructions])])
@@ -353,7 +350,7 @@ class Dataset:
         """
         Query the merged DataFrame.
         Parameters:
-        - command: A string representing the query command.
+        - command: metadata to match (a dict, or a list of dicts for any of them; see metadata_mask), or a pandas query string.
         - dataframe_type: The type of DataFrame to query. Can be either 'questions' or 'example_questions'.
         - return_type: The type of the returned DataFrames. Can be either 'tuple' or 'dataset'.
         Returns:
@@ -365,7 +362,7 @@ class Dataset:
             raise ValueError("return_type must be either 'tuple' or 'dataset'")
         
         df = combine(*self._get_dataframes(dataframe_type))
-        df = df.query(command)
+        df = df.query(command) if isinstance(command, str) else df[metadata_mask(df, command)]
         
         questions, options = split(combined_df = df, dataframe_type=dataframe_type)
         if return_type == 'tuple':
@@ -500,7 +497,7 @@ class Dataset:
         """
         questions_type, options_type = self._get_dataframe_types(dataframe_type)
 
-        self[options_type] = self[options_type].sort_values(['question_id', 'sub_id', 'option_id'])
+        options = self[options_type].sort_values(['question_id', 'sub_id', 'option_id'])   # a sorted copy; self is not changed
 
         groups = self[questions_type].groupby('question_id')
         json_list = []
@@ -508,10 +505,7 @@ class Dataset:
             json_object = {}
             for sub_id, sub_group in group.groupby('sub_id'):
                 json_object[f'question_{sub_id + 1}'] = sub_group['question_text'].values[0]
-                opts = self[options_type][
-                    (self[options_type]['question_id'] == question_id) &
-                    (self[options_type]['sub_id'] == sub_id)
-                ]
+                opts = options[(options['question_id'] == question_id) & (options['sub_id'] == sub_id)]
                 if opts.empty:
                     json_object[f'options_{sub_id + 1}'] = ['No options found']
                     json_object[f'answer_{sub_id + 1}'] = 'No answer found'
@@ -539,47 +533,6 @@ class Dataset:
     def is_empty(self):
         return self.questions.empty and self.example_questions.empty and self.options.empty and self.example_options.empty and self.instruction_set.empty
 
-    def contains(self, json_object, dataframe_type = 'questions', object_format = 'dataset_json'):
-        """
-        Check if the dataset contains a JSON object.
-        Parameters:
-        - json_object: The JSON object to check.
-        - dataframe_type: The type of DataFrame to check. Can be either 'questions' or 'example_questions'.
-        - object_format: The format of the JSON object. Can be either 'dataset_json' or 'mcq'.
-        Returns:
-        - True if the dataset contains the JSON object. False otherwise.
-        """
-        if dataframe_type not in ['questions', 'example_questions']:
-            raise ValueError("dataframe_type must be either 'questions' or 'example_questions'")
-        if object_format not in ['dataset_json', 'display_json']:
-            raise ValueError("object_format must be either 'dataset_json' or 'display_json'")
-        
-        if object_format == 'dataset_json':
-            metadata_command = build_command({k: v for k, v in json_object.items() if k in self.metadata_keys})
-            formatted_question_text = json_object['question_text'].replace("'", "''")
-            question_command = f"question_text == '{formatted_question_text}'"
-
-
-            formatted_option_texts = [option['option_text'].replace("'", "''") for option in json_object['options']]
-            commands = [f"option_text == '{option}' " for option in formatted_option_texts]
-
-            commands = [f"{metadata_command} and {question_command} and {command}" for command in commands]
-
-            command = "(" + ") and (".join(commands) + ")"
-
-            # command += f" and question_text == '{json_object['question_text']}'"
-            # option texts
-            # command += " and " + " and ".join([f"option_text == '{option['option_text']}' " for option in json_object['options']])
-            
-            questions, _ = self.query(command, dataframe_type = dataframe_type, return_type = 'tuple')
-            return not questions.empty
-            
-        elif object_format == 'display_json':
-            raise NotImplementedError("object_format 'display_json' is not implemented yet.")
-            command = build_command({k: v for k, v in json_object['metadata'].items()})
-            command += f" and question_text == '{json_object['question_1']}'"
-            questions, _ = self.query(command, dataframe_type = dataframe_type, return_type = 'tuple')
-            return not questions.empty
     
     def size(self, dataframe_type = 'questions'):
         return len(self[dataframe_type])
@@ -808,27 +761,32 @@ def split(combined_df: pd.DataFrame = None, dataframe_type: str = 'questions') -
 
 
 
-def build_command(query_json: list[dict] | dict) -> str:
-    """
-    Build a query command from a JSON object.
-    ## Args:
-    **query_json**: A JSON object representing the query command.
-    ## Returns:
-    A string representing the query command.
-    """
-    if isinstance(query_json, list):
-        return "(" + ") or (".join([build_command(query) for query in query_json]) + ")"
-    elif isinstance(query_json, dict):
-        # if key is difficulty_level do not wrap the value in quotes
-        command = []
-        for key, value in query_json.items():
-            if key == 'difficulty_level':
-                command.append(f"{key} == {value}")
-            else:
-                command.append(f"{key} == '{value}'")
-        return " and ".join(command)
-    else:
-        raise ValueError("query_json must be either a list or a dictionary")
+def _literal(value):
+    """A difficulty_level as a number, as a query string would have read it ("3" and 3 are both 3)."""
+    if isinstance(value, str):
+        try:
+            return int(value)
+        except ValueError:
+            return float(value)
+    return value
+
+
+def metadata_mask(df: pd.DataFrame, metadata: list[dict] | dict) -> pd.Series:
+    """Rows of df whose metadata equals `metadata` (key: value; difficulty_level compared as a number, every other
+    key as text); a list of dicts selects the rows matching any of them. Values are compared, never parsed, so text
+    with quotes in it is fine."""
+    if isinstance(metadata, list):
+        mask = pd.Series(False, index=df.index)
+        for one in metadata:
+            mask |= metadata_mask(df, one)
+        return mask
+    if not isinstance(metadata, dict):
+        raise ValueError("metadata must be either a list of dictionaries or a dictionary")
+    mask = pd.Series(True, index=df.index)
+    for key, value in metadata.items():
+        mask &= df[key] == (_literal(value) if key == 'difficulty_level' else str(value))
+    return mask
+
 
 
 def display_to_dataset_json(display_json, ignore_options = False):
@@ -930,54 +888,24 @@ def display_to_dataset_json(display_json, ignore_options = False):
 
     
 
-def get_instructions(instruction_set: pd.DataFrame, metadata: dict, get_closest_match: bool = True) -> str:
+def get_instructions(instruction_set: pd.DataFrame, metadata: dict, get_closest_match: bool = True) -> pd.DataFrame:
     """
-    Get the instructions for a given metadata. If closest_match is True, the function will find the closest match.
-    ## Args:
-    **instruction_set** (pd.DataFrame): The instruction set DataFrame.
-    **metadata** (dict): The metadata.
-    **closest_match** (bool): If True, the function will find the closest match. 
-    
-    ## Returns:
-    The instructions.
-
+    The instruction rows (with instructions) for `metadata`. With get_closest_match, when none match exactly, the closest:
+    leaving out one key, then two, and so on, the least important key first (tags, then domain, then
+    difficulty_level, then type); the first combination that matches wins.
     """
-    def closest_match(metadata: dict, n: int) -> Optional[list[dict]]:
-        """
-        Find the closest match by excluding n key-value pairs from the metadata.
+    def matching(md):
+        rows = instruction_set[metadata_mask(instruction_set, md)]
+        return rows[rows['instructions'].notna()]
 
-        Args:
-            metadata (Dict[str, Any]): The metadata dictionary.
-            n (int): The number of key-value pairs to exclude.
-
-        Returns:
-            Optional[List[Dict[str, Any]]]: The list of closest matching instructions, or None if no match is found.
-        """
-        instructions = []
-        # The priority order
-        priority_order = ['type', 'difficulty_level', 'domain', 'tags']
-        # Sort keys based on priority order
-        keys = sorted(metadata.keys(), key=lambda k: priority_order.index(k) if k in priority_order else len(priority_order))
-        for keys_to_exclude in combinations(keys, n):
-            partial_metadata = {k: v for k, v in metadata.items() if k not in keys_to_exclude}
-            command = build_command(partial_metadata)
-            matched_instructions = instruction_set.query(command)
-            if not matched_instructions.empty:
-                instructions.append(matched_instructions)
-        # if instructions list is empty, return None
-        if not instructions:
-            return None
-        return pd.concat(instructions)
-    
-    command = build_command(metadata)
-    instructions = instruction_set.query(command)
-    if instructions.empty and get_closest_match:
-        # find the closest match
-        n = len(metadata) - 1
-        while instructions is None or instructions.empty or instructions['instructions'].isna().all():
-            if n == 0:
-                break
-            instructions = closest_match(metadata, n)
-            n -= 1
-        
-    return instructions
+    rows = matching(metadata)
+    if not rows.empty or not get_closest_match:
+        return rows
+    priority = ['type', 'difficulty_level', 'domain', 'tags']   # most important first
+    least_first = sorted(metadata, key=lambda k: -(priority.index(k) if k in priority else len(priority)))
+    for n in range(1, len(metadata)):
+        for left_out in combinations(least_first, n):
+            closer = matching({k: v for k, v in metadata.items() if k not in left_out})
+            if not closer.empty:
+                return closer
+    return rows

@@ -487,13 +487,17 @@ def _api_raw_difficulty(element: str, level, manifest: dict):
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
+# Unseeded choices (which element a legacy /api/sample draws) use their own generator: a draw from the global one,
+# which seeded draws reseed before running the filler, could land between the two and change a seeded question.
+_UNSEEDED = random.Random()
+
 def _sample(config: SamplerConfig) -> dict:
     """Legacy response (no n, seed or template_id): {question, options: [{text, correct}], answer, metadata}.
     difficulty_level, in the filter and the metadata, is the relative level within the element."""
     manifest = load_manifest()
     names = _api_element_names(manifest)
     _api_element(config.element_name, names)
-    element = config.element_name or random.choice(_api_difficulty_names(config.difficulty_level, names, manifest))
+    element = config.element_name or _UNSEEDED.choice(_api_difficulty_names(config.difficulty_level, names, manifest))
     config = SamplerConfig(
         element_name=element,
         domain=config.domain,

@@ -121,8 +121,7 @@ class DatasetStore:
             instructions = None
             metadata_dict = {key: row[key] for key in sd.metadata_keys}
             if dataframe_type == "example_questions" and not dataset.instruction_set.empty:
-                command = sd.build_command(metadata_dict)
-                matches = dataset.instruction_set.query(command)
+                matches = dataset.instruction_set[sd.metadata_mask(dataset.instruction_set, metadata_dict)]
                 if not matches.empty:
                     instructions = matches["instructions"].iloc[0]
 
@@ -273,8 +272,7 @@ class DatasetStore:
         instructions = ""
         if not dataset.instruction_set.empty:
             metadata_dict = {key: question[key] for key in sd.metadata_keys}
-            command = sd.build_command(metadata_dict)
-            matches = dataset.instruction_set.query(command)
+            matches = dataset.instruction_set[sd.metadata_mask(dataset.instruction_set, metadata_dict)]
             if not matches.empty:
                 instructions = str(matches["instructions"].iloc[0])
 

@@ -289,13 +289,10 @@ def _ordered_display_json(display_json: dict) -> dict:
 
 def get_seed_templates_for_target(store: DatasetStore, element_name: str, target_metadata: dict) -> list[dict]:
     dataset = store.load_dataset("example_seeds", element_name)
-    command = sd.build_command(
-        {
-            "type": target_metadata["type"],
-            "difficulty_level": int(target_metadata["difficulty_level"]),
-        }
+    selected_dataset = dataset.query(
+        {"type": target_metadata["type"], "difficulty_level": int(target_metadata["difficulty_level"])},
+        dataframe_type="example_questions", return_type="dataset",
     )
-    selected_dataset = dataset.query(command, dataframe_type="example_questions", return_type="dataset")
     seed_templates = selected_dataset.to_display_json()
     if not seed_templates:
         raise ValueError(
