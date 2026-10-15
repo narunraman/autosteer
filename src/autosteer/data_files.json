@@ -4,10 +4,10 @@
   "repo": "STEER-generation",
   "branch": "recover-generators",
   "commit": "9d851d4fc3f24521170048bb35e04fbb3699cb4c",
-  "how": "converted from STEER-generation's pickles to Parquet, with duplicated example seeds, seed candidates and templates removed and the unvetted 'backward_induction copy' templates dropped (October 2026); the load-time template corrections folded into templates/ by scripts/migrations/fold_template_fixes.py (October 2026)"
+  "how": "converted from STEER-generation's pickles to Parquet, with duplicated example seeds, seed candidates and templates removed and the unvetted 'backward_induction copy' templates dropped (October 2026); the load-time template corrections folded into templates/ by scripts/migrations/fold_template_fixes.py (October 2026); templates whose text uses a placeholder their filler never returns removed by scripts/migrations/drop_unfillable_templates.py"
  },
  "total_files": 1638,
- "total_bytes": 26809353,
+ "total_bytes": 26787669,
  "files": [
   {
    "path": "README.md",
@@ -6471,8 +6471,8 @@
   },
   {
    "path": "templates/efficient_surplus/example_questions.parquet",
-   "size": 8156,
-   "sha256": "728cf29d7980353b5e743164ae07c3a85e30c9c270a4500df261ed718578a8ad"
+   "size": 8160,
+   "sha256": "8d1a6e94739b1afd61b8c567872558526552bdbbd4c64b8911d3abe9886e2d36"
   },
   {
    "path": "templates/efficient_surplus/instruction_set.parquet",
@@ -6481,13 +6481,13 @@
   },
   {
    "path": "templates/efficient_surplus/options.parquet",
-   "size": 68165,
-   "sha256": "3d41315c826bce8baa890c71705dbb787b293b40f020a1fee71ab5a2dc122c29"
+   "size": 67950,
+   "sha256": "d628bc2a199a37d4c846dc4c73c07779934cbbe860ce243aac302131c9cf6476"
   },
   {
    "path": "templates/efficient_surplus/questions.parquet",
-   "size": 260992,
-   "sha256": "ab6b91fada641b26ddef37147346ed8418031e8a833972d5a6183f5eced19bcf"
+   "size": 260413,
+   "sha256": "13c68a6d7dc2728a0a14fa800297141543357d51f13e3914576c91d8744dad0f"
   },
   {
    "path": "templates/efficient_surplus/validation_df.parquet",
@@ -6596,8 +6596,8 @@
   },
   {
    "path": "templates/expected_value_counts_aug2024/questions.parquet",
-   "size": 110105,
-   "sha256": "56350dd7074d5b8d2456c8859ff948ed2e5e4f533b14c9cfe672fc6a3bd77093"
+   "size": 90195,
+   "sha256": "ac4eb334a8d8e0a06b7898a106567488ee94b8f46820fb4e8b18d4d239e7e3cd"
   },
   {
    "path": "templates/expected_value_counts_aug2024/validation_df.parquet",
@@ -7196,8 +7196,8 @@
   },
   {
    "path": "templates/micro_utility/example_questions.parquet",
-   "size": 6720,
-   "sha256": "69ad43cbbb9d61d5c744ad7a4d7d789a63c96092aa782b6f455d3c72991cbdb8"
+   "size": 6724,
+   "sha256": "5192f256089fbd0dfcc766a79cc12ec28c425b1e93f9fe8aaa5c04c9e241669e"
   },
   {
    "path": "templates/micro_utility/instruction_set.parquet",
@@ -7206,13 +7206,13 @@
   },
   {
    "path": "templates/micro_utility/options.parquet",
-   "size": 8488,
-   "sha256": "2815e7e6a193457ec30b44ee0413b1c2a05473d0be58ce151a6fdd32879342b5"
+   "size": 8428,
+   "sha256": "f8fb65a24cdee5977c0072e7f09439e74607593cc14f51d399b6ac029f17d32f"
   },
   {
    "path": "templates/micro_utility/questions.parquet",
-   "size": 99555,
-   "sha256": "81d6eff4e7d4545e49ab60619cc701082e4cdf1f557f085884581de2d6aae8f2"
+   "size": 98627,
+   "sha256": "9fe4c13d5d5e8d009d4803002019c04e45b49890631388bb59f7ec35ea834994"
   },
   {
    "path": "templates/micro_utility/validation_df.parquet",

@@ -20,7 +20,6 @@ from .manifest import load_manifest, get_sampleable_elements, load_raw_templates
 from .difficulty import public_difficulty
 
 
-
 def seed_everything(seed: int) -> None:
     """
     Seed every random source the filler functions use: the stdlib `random`
@@ -169,8 +168,6 @@ RNG_LOCK = threading.RLock()
 # Loaded templates, shared by every sampler in the process (the API's, the element pages', developer mode's):
 # (element, manifest build) -> Dataset. Loading the large elements takes seconds (welfare_theorem_1: ~10 s).
 _SHARED_TEMPLATES: dict = {}
-# Templates dropped at load as unfillable, per element and pool: {reason: [question_id, ...]} (see _drop_unfillable).
-DROPPED: dict = {}
 log = logging.getLogger(__name__)
 
 
@@ -462,7 +459,7 @@ class ElementSampler:
                     if dataset is None:
                         if fixed is None:
                             fixed = load_raw_templates(element_name)
-                        dataset = self._drop_unfillable(element_name, fixed)
+                        dataset = fixed
                         # templates loaded under an older manifest are not needed by new samplers: let them go
                         for old in [k for k in _SHARED_TEMPLATES if k[1] != key[1]]:
                             del _SHARED_TEMPLATES[old]
@@ -483,80 +480,6 @@ class ElementSampler:
                 pass
         return big
 
-    def _drop_unfillable(self, element_name: str, dataset: Dataset, tries: int = 5) -> Dataset:
-        """
-        Drop templates that use a {placeholder} the filler never returns for
-        that template's metadata (checked by calling the filler `tries` times
-        per metadata combination). RNG states are saved and restored so that
-        loading a template does not change what is sampled afterwards.
-        """
-        if code_templates.has_code_templates(element_name):
-            # written with their filler; the filler needs the template text, which the probe does not pass
-            return dataset
-        fn = function_registry.get(element_name)
-        saved = (random.getstate(), np.random.get_state(), filler_utils.rng.bit_generator.state)
-        keys_cache: dict[tuple, set] = {}
-        errors: dict[tuple, str] = {}
-        reasons: dict = {}
-        try:
-            # Probe from a fixed state, so which templates are kept never depends on what was sampled before.
-            seed_everything(derive_seed('drop_unfillable', element_name))
-            for q_attr, o_attr in (('questions', 'options'), ('example_questions', 'example_options')):
-                q = getattr(dataset, q_attr)
-                if q is None or len(q) == 0:
-                    continue
-                if 'question_id' not in q.columns:
-                    q = q.reset_index()
-                bad = set()
-                for _, row in q.iterrows():
-                    md = (row['domain'], row['type'], row['difficulty_level'], row['tags'])
-                    if md not in keys_cache:
-                        keys = set()
-                        meta = dict(zip(('domain', 'type', 'difficulty_level', 'tags'), md))
-                        meta['difficulty_level'] = int(meta['difficulty_level'])
-                        for _ in range(tries):
-                            try:
-                                keys |= set(fn(dict(meta)) or {})
-                            except Exception as err:  # noqa: BLE001
-                                errors[md] = f'{type(err).__name__}: {err}'
-                        keys_cache[md] = keys
-                    try:
-                        need = extract_fstring_keys(row['question_text'])
-                    except ValueError:
-                        bad.add(row['question_id'])
-                        reasons[row['question_id']] = 'template text is not a valid format string'
-                        continue
-                    missing = need - keys_cache[md]
-                    if missing:
-                        bad.add(row['question_id'])
-                        reasons[row['question_id']] = (f'filler error for {md}: {errors[md]}' if md in errors
-                                                       else f'filler never returns {sorted(missing)} for {md}')
-                if bad and len(bad) >= q['question_id'].nunique():
-                    # Dropping everything means the filler is broken (e.g. an
-                    # environment change), not that some templates are unfillable.
-                    example = next(iter(errors.items()), None)
-                    raise RuntimeError(
-                        f"every {q_attr} template of {element_name!r} is unfillable"
-                        + (f"; filler error for {example[0]}: {example[1]}" if example else '')
-                    )
-                if bad:
-                    # what was dropped and why, so it is visible (DROPPED[element][pool]; logged once per load)
-                    report = DROPPED.setdefault(element_name, {})[q_attr] = {}
-                    for qid in sorted(bad):
-                        report.setdefault(reasons.get(qid, 'unknown'), []).append(int(qid))
-                    log.info('%s: %d %s templates dropped as unfillable: %s', element_name, len(bad), q_attr,
-                             {r: len(v) for r, v in report.items()})
-                    setattr(dataset, q_attr, q[~q['question_id'].isin(bad)].reset_index(drop=True))
-                    o = getattr(dataset, o_attr)
-                    if o is not None and len(o):
-                        if 'question_id' not in o.columns:
-                            o = o.reset_index()
-                        setattr(dataset, o_attr, o[~o['question_id'].isin(bad)].reset_index(drop=True))
-        finally:
-            random.setstate(saved[0])
-            np.random.set_state(saved[1])
-            filler_utils.rng.bit_generator.state = saved[2]
-        return dataset
 
     def _pick_template_question(
         self, template: Dataset, config: SamplerConfig, element_name: str
