@@ -28,6 +28,8 @@ def gen_consumer_surplus(metadata):
             continue  # a (rounded) zero slope has no well-defined surplus
         #generate a random price
         price = round(float(rng.random()*demand_curve[1]), 2)
+        if price < 0.05:
+            continue  # a price that rounds to 0 reads as a placeholder ("is 0.0?")
         demand_curve_string = f"{demand_curve[0]}Q + {demand_curve[1]}"
         consumer_surplus = surplus(demand_curve, price)
         if consumer_surplus < 0.05:

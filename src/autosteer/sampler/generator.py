@@ -20,17 +20,6 @@ from .manifest import load_manifest, get_sampleable_elements, load_raw_templates
 from .difficulty import public_difficulty
 
 
-def seed_everything(seed: int) -> None:
-    """
-    Seed every random source the filler functions use: the stdlib `random`
-    module, numpy's global RNG, and the shared `filler_utils.rng` generator
-    (reseeded in place, because filler modules import it by name).
-    """
-    random.seed(seed)
-    np.random.seed(seed % (2 ** 32))
-    fill_rng.SHARED_NP.bit_generator.state = np.random.default_rng(seed).bit_generator.state
-
-
 SEED_MAX = 2 ** 63 - 1
 # Options that refer to other options by position are never shuffled.
 POSITIONAL_RE = re.compile(
@@ -162,8 +151,9 @@ def _build_result(
     return {'sub_questions': sub_questions, 'metadata': result_metadata}
 
 
-# Seeding and the fillers use process-wide RNGs, so everything that seeds or calls a filler holds this lock: the API,
-# the element pages' examples, developer mode and the template loader would otherwise change each other's draws.
+# A sampler's sequential draws change its own generators (its template choice and filler stream), and templates
+# are loaded once per process: those hold this lock. sample_question does not need it: it draws from generators of
+# its own, derived from (element, seed) (autosteer.filler_tools.rng).
 RNG_LOCK = threading.RLock()
 # Loaded templates, shared by every sampler in the process (the API's, the element pages', developer mode's):
 # (element, manifest build) -> Dataset. Loading the large elements takes seconds (welfare_theorem_1: ~10 s).
@@ -238,16 +228,14 @@ class ElementSampler:
         self.seed(seed)
 
     def seed(self, seed: Optional[int]) -> None:
-        """Reseed the sampler (template/option choice) and all filler RNGs."""
+        """Reseed the sampler: its template and option choices, and the generators its fillers draw from (a stream
+        of their own, derived from the seed; unseeded, both are seeded from the OS)."""
         if seed is not None:
             self._rng = random.Random(seed)
-            seed_everything(seed)
+            self._fill = fill_rng.FillRng.from_seed(derive_seed('fill-seq', seed))
         else:
-            # Unseeded sampler: draw template and option order from the global
-            # `random` module, so callers that seed the global RNGs (e.g. the
-            # release exporter's seed_everything) get reproducible output. A
-            # private random.Random(None) was seeded from the OS every run.
-            self._rng = random
+            self._rng = random.Random()
+            self._fill = fill_rng.FillRng.from_entropy()
 
     # ------------------------------------------------------------------
     # Public API
@@ -263,7 +251,8 @@ class ElementSampler:
         """
         if config is None:
             config = SamplerConfig()
-        return self._sample_one(config)
+        with fill_rng.bound(self._fill):
+            return self._sample_one(config)
 
     @_locked
     def sample_batch(self, n: int, config: Optional[SamplerConfig] = None) -> list[dict]:
@@ -282,7 +271,6 @@ class ElementSampler:
         mask = self._filter_mask(q, element_name, SamplerConfig(element_name=element_name, pool=pool, **filters))
         return sorted(int(x) for x in q[mask]['question_id'].unique().tolist())
 
-    @_locked
     def sample_question(
         self,
         element_name: str,
@@ -296,8 +284,8 @@ class ElementSampler:
 
         Without template_id, the template is drawn from the pool (after the optional filters
         domain, type, difficulty_level, tags; a template text with several fill settings counts once, and the fields
-        of SAMPLING_BALANCE are balanced) with an RNG derived from the seed. The filler then runs after
-        seed_everything(seed), and each part's options are shuffled with an RNG derived from (seed, part),
+        of SAMPLING_BALANCE are balanced) with an RNG derived from the seed. The filler then draws from generators
+        derived from the seed (autosteer.filler_tools.rng), and each part's options are shuffled with an RNG derived from (seed, part),
         except parts whose options refer to each other by position. So sample_question(e, seed) and
         sample_question(e, seed, template_id=<the template it chose>) return the same question.
 
@@ -328,8 +316,10 @@ class ElementSampler:
         metadata = {'domain': row['domain'], 'type': row['type'],
                     'difficulty_level': row['difficulty_level'], 'tags': row['tags']}
 
-        seed_everything(seed)
-        question_texts, options_list, correct_answer = self._fill_template(element_name, q_df, opts_df, metadata)
+        # the filler draws from generators of this question's own, derived from the seed (not the element, so a
+        # composite element asks what its source element asks for the same seed)
+        with fill_rng.bound(fill_rng.FillRng.from_seed(derive_seed('fill', seed))):
+            question_texts, options_list, correct_answer = self._fill_template(element_name, q_df, opts_df, metadata)
         parts = []
         for part, (text, opts, mask) in enumerate(zip(question_texts, options_list, correct_answer)):
             texts = [str(format_value(o)) for o in opts]

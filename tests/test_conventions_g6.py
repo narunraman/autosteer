@@ -125,7 +125,7 @@ def test_find_eq_price_quantity_options_below_choke():
     # every quantity option is one at which the demand price is still positive
     for typ in ('linear_quantity', 'quadratic_quantity'):
         for s in sample('find_eq_price', 60, seed=4, type=typ):
-            d = _floats(s.params['d_func'])
+            d = _floats(re.sub(r'\^\d+', '', s.params['d_func']))   # the coefficients, not the exponent of Q^2
             vals = [float(o) for o in s.options]
             assert all(v > 0 and np.polyval(d, v) > 0 for v in vals), (s.params, vals)
             assert len(set(vals)) == 4

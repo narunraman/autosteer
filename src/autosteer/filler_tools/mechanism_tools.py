@@ -7,7 +7,7 @@ auctions_risk  -- revenue ranking under risk attitudes; expected revenue and equ
 
 Design: audit/DECISIONS.md, "Behalf-of-others redesign". Templates: data/templates/<element>/, built by
 src/autosteer/filler_tools/mechanism_templates.py. All fillers are Mode A (they return options_list/correct_answer)
-and draw only from filler_utils.rng, so seed_everything() makes them reproducible. Every amount shown is
+and draw only from filler_utils.rng (the question's own generator), so they are reproducible. Every amount shown is
 a whole number of dollars; option order is shuffled by the sampler.
 """
 from math import lcm
@@ -42,7 +42,7 @@ GRADES = {
 
 # ------------------------------------------------------------------ helpers
 def _rng():
-    return filler_utils.rng  # reseeded in place by seed_everything; look it up at call time
+    return filler_utils.rng  # the generator bound for the question being filled
 
 
 def _randint(a: int, b: int) -> int:
@@ -312,7 +312,7 @@ def _bb_direct(n: int, names: list, outcome: int):
         if last < max(20, base // 2) or last > 2 * base or last % 5:
             continue
         pays.append(last)
-        if len(set(pays)) < 2:
+        if len(set(pays)) < 2 or min(pays) < 5:   # every payer pays something (rebates are the ones paid out)
             continue
         delta = sum(pays) - sum(rebates) - cost
         slips = [sum(pays) - cost, sum(pays) + sum(rebates) - cost, delta - pays[0]]

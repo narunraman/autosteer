@@ -361,6 +361,8 @@ def _adjusted_winner(r, dom):
         lead, split, keep = got
         if not (F(5, 100) < keep < F(95, 100)) or abs(keep - F(1, 2)) < F(2, 100):
             continue
+        if (1000 * keep).denominator == 2:
+            continue   # exactly on a rounding tie at one decimal (13.75%): the printed shares would depend on the rule
         break
     a, b = _names(r, 2)
     holder, other = (a, b) if lead == 'A' else (b, a)

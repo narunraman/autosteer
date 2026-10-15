@@ -12,7 +12,8 @@ import pytest
 from autosteer.filler_tools import code_templates, function_registry
 from autosteer.formatting import extract_fstring_keys
 from autosteer.sampler import ElementSampler
-from autosteer.sampler.generator import derive_seed, seed_everything
+from autosteer.filler_tools.rng import FillRng, bound
+from autosteer.sampler.generator import derive_seed
 
 TRIES = 5
 
@@ -32,7 +33,6 @@ def elements():
 @pytest.mark.parametrize("element", elements())
 def test_every_placeholder_is_filled(sampler, element):
     fn = function_registry.get(element)
-    seed_everything(derive_seed("drop_unfillable", element))
     t = sampler._load_template(element)
     keys: dict[tuple, set] = {}
     missing = []
@@ -44,11 +44,12 @@ def test_every_placeholder_is_filled(sampler, element):
             if md not in keys:
                 meta = {"domain": md[0], "type": md[1], "difficulty_level": int(md[2]), "tags": md[3]}
                 got = set()
-                for _ in range(TRIES):
-                    try:
-                        got |= set(fn(dict(meta)) or {})
-                    except Exception:  # noqa: BLE001 - a draw that fails is retried, as at fill time
-                        pass
+                with bound(FillRng.from_seed(derive_seed("placeholders", element, *map(str, md)))):
+                    for _ in range(TRIES):
+                        try:
+                            got |= set(fn(dict(meta)) or {})
+                        except Exception:  # noqa: BLE001 - a draw that fails is retried, as at fill time
+                            pass
                 keys[md] = got
             need = extract_fstring_keys(row.question_text) - keys[md]
             if need:

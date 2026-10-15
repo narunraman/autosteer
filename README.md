@@ -33,6 +33,10 @@ sampler = ElementSampler()
 question = sampler.sample_question("consumer_surplus", seed=1)
 ```
 
+A question depends only on the element, the seed and the autoSTEER version: the same call returns the same
+question in any process, whatever was drawn before or alongside it. (From 0.2.0; earlier versions drew from
+process-wide generators, so their questions for a seed differ.)
+
 The same questions are served by the <a href="https://steer-benchmark.cs.ubc.ca/reference"><img src="docs/steer_badge.svg" height="14" alt=""></a> <a href="https://steer-benchmark.cs.ubc.ca/reference">API</a>, and fixed samples are on
 Hugging Face as <a href="https://huggingface.co/datasets/narunraman/steer"><img src="docs/hf_logo.svg" height="14" alt=""></a> <a href="https://huggingface.co/datasets/narunraman/steer"><code>narunraman/steer</code></a> and
 <a href="https://huggingface.co/datasets/narunraman/steer_me"><img src="docs/hf_logo.svg" height="14" alt=""></a> <a href="https://huggingface.co/datasets/narunraman/steer_me"><code>narunraman/steer_me</code></a>. To evaluate a model, use

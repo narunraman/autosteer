@@ -276,7 +276,7 @@ def stored_template_count(store: DatasetStore, element: str) -> int | None:
 
 _TEST_FILES: dict = {}
 GENERIC_TESTS = {"test_all_elements.py", "test_sampler.py", "test_api_sample.py", "test_export.py", "test_export_solvers.py",
-                 "test_release_schema.py", "test_reproducibility.py", "test_question_seeds.py", "test_source_digests.py"}
+                 "test_release_schema.py", "test_reproducibility.py", "test_question_seeds.py"}
 
 
 def solver_tests(element: str) -> list[str]:

@@ -1,9 +1,9 @@
 """Same seed -> identical samples, across processes with different hash seeds.
 
-Each element is sampled (test and few-shot pools) in two fresh interpreters
-with different PYTHONHASHSEED values, both with ElementSampler(seed=...) and
-with an unseeded sampler after seed_everything() (how the release exporter
-seeds). Digests of the full outputs must match.
+Each element is sampled in two fresh interpreters with different PYTHONHASHSEED
+values: sequentially (test and few-shot pools) with ElementSampler(seed=...), and
+question by question with sample_question(element, seed) (how the release
+exporter and the API draw). Digests of the full outputs must match.
 """
 import pytest
 import json

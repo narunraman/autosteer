@@ -121,8 +121,13 @@ def _allocation(r, borrow):
             continue
         clip = (lambda z: z) if borrow else (lambda z: min(1.0, max(0.0, z)))
         key = 100 * clip(w)
-        cands = [100 * clip(z) for z in (w / 2, 2 * w, (mu - rf) / 100 / (A * sd / 100), mu / 100 / (A * (sd / 100) ** 2))]
+        # mistakes: half / twice the share, sigma not squared, the risk-free rate ignored or added instead of
+        # subtracted, the other reading of the borrowing rule, the risk-free share
+        cands = [100 * clip(z) for z in (w / 2, 2 * w, (mu - rf) / 100 / (A * sd / 100), mu / 100 / (A * (sd / 100) ** 2),
+                                         (mu + rf) / 100 / (A * (sd / 100) ** 2))]
         cands.append(100 * (min(1.0, w) if borrow else w))   # the other reading of the borrowing rule
+        if w < 1:
+            cands.append(100 * (1 - w))   # the share left in the risk-free asset
         dist = pick_ranked(r, key, cands, rel=0.1, abs_gap=1.0, shown=num)
         if dist is None or _half_and_double(key, dist):
             continue
