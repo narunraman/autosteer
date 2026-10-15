@@ -283,14 +283,15 @@ class ElementSampler:
         One question determined by (element, template, seed) alone, independent of anything sampled before.
 
         Without template_id, the template is drawn from the pool (after the optional filters
-        domain, type, difficulty_level, tags; a template text with several fill settings counts once, and the fields
+        domain, type, difficulty_level, tags; a text is drawn first, then one of its settings, and the fields
         of SAMPLING_BALANCE are balanced) with an RNG derived from the seed. The filler then draws from generators
         derived from the seed (autosteer.filler_tools.rng), and each part's options are shuffled with an RNG derived from (seed, part),
         except parts whose options refer to each other by position. So sample_question(e, seed) and
         sample_question(e, seed, template_id=<the template it chose>) return the same question.
 
-        Returns {element, pool, template_id, seed, metadata, parts}; each part has question, options (texts in
-        presented order), correct (bools), order (template index of each presented option) and shuffled.
+        template_id names the variant (a text in one setting; the ids of the published datasets), text_id the text.
+        Returns {element, pool, template_id, text_id, seed, metadata, parts}; each part has question, options (texts
+        in presented order), correct (bools), order (template index of each presented option) and shuffled.
         """
         if isinstance(seed, bool) or not isinstance(seed, (int, np.integer)) or not 0 <= int(seed) <= SEED_MAX:
             raise ValueError(f"seed must be an integer in [0, 2**63), got {seed!r}")
@@ -339,6 +340,7 @@ class ElementSampler:
             'element': element_name,
             'pool': pool,
             'template_id': f'{element_name}/{pool}/{chosen}',
+            'text_id': f'{element_name}/{pool}/{self._text_groups(q, element_name, pool).get(chosen, chosen)}',
             'seed': seed,
             'metadata': {
                 'domain': metadata['domain'],
@@ -508,10 +510,9 @@ class ElementSampler:
 
     def _choose_id(self, q, filtered, element_name: str, config: SamplerConfig, rng) -> int:
         """The question_id of the template to fill, among `filtered` (rows of q). A field of SAMPLING_BALANCE that the
-        request leaves open is drawn first. Templates that share their text and level differ only in what the filler
-        is told (mult_div's sign, the functional form of diminishing_marginal_product): one template with several
-        fill settings, so a text is drawn first, then one of its settings. Elements with neither draw uniformly over
-        the templates, as before."""
+        request leaves open is drawn first. Then a text is drawn, then one of its variants (its settings: add_sub's
+        number sizes, mult_div's signs and levels, the functional form of diminishing_marginal_product; see
+        autosteer.template_settings), so a text counts once however many settings it has."""
         balance = SAMPLING_BALANCE.get(element_name)
         if balance and getattr(config, balance[0], None) is None:
             field, weights = balance
@@ -545,9 +546,13 @@ class ElementSampler:
         return cache[key][1], cache[key][2]
 
     def _text_groups(self, q, element_name: str, pool) -> dict:
-        """question_id -> the smallest question_id with the same text (every part, spaces collapsed) and level."""
+        """question_id -> the id of its text: the text_id of a template folder (autosteer.template_settings), or for
+        tables without one, the smallest question_id with the same text (every part, spaces collapsed) and level."""
         cache = self.__dict__.setdefault('_text_group_cache', {})
         key = (element_name, pool)
+        if (key not in cache or cache[key][0] is not q) and 'text_id' in q.columns:
+            ids = q.drop_duplicates('question_id')
+            cache[key] = (q, dict(zip(ids['question_id'].astype(int).tolist(), ids['text_id'].astype(int).tolist())))
         if key not in cache or cache[key][0] is not q:
             qs = q.sort_values(['question_id', 'sub_id'], kind='stable')
             text = qs['question_text'].astype(str).str.split().str.join(' ')

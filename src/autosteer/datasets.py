@@ -11,6 +11,10 @@ The tables:
 - instruction_set: instructions per metadata combination (domain, type, difficulty_level, tags).
 - validation_df: a review status per question_id.
 
+A template folder stores each template text once, with its settings in a settings table; loading expands it into
+one row per variant (a text in one setting) with a text_id column, and saving collapses it again (see
+autosteer.template_settings).
+
 The sampler only reads the four question and option tables; developer mode (autosteer.services) also appends rows,
 adds instructions and selects by metadata.
 """
@@ -22,6 +26,8 @@ from itertools import combinations
 from typing import ClassVar
 
 import pandas as pd
+
+from autosteer import template_settings
 
 metadata_keys = ['domain', 'type', 'difficulty_level', 'tags']
 id_keys = ['question_id', 'sub_id']
@@ -117,6 +123,15 @@ class Dataset:
         for key in ('generated_seed_metadata', 'generated_template_metadata'):
             if isinstance(attrs[key], pd.DataFrame):
                 attrs[key] = _safe_frame(attrs[key])
+        columns = {}
+        for pool, (options_name, settings_name) in template_settings.TABLES.items():
+            q = attrs[pool]
+            if isinstance(q, pd.DataFrame) and 'text_id' in q.columns:
+                columns[pool] = [c for c in q.columns if c != 'text_id']
+                attrs[pool], attrs[options_name], attrs[settings_name] = template_settings.collapse(
+                    q, attrs[options_name], pool)
+        if columns:
+            attrs['question_columns'] = columns
         dataset_io.save(attrs, folder)
 
     @classmethod
@@ -127,6 +142,15 @@ class Dataset:
         known = {f for f in cls.__dataclass_fields__ if f != 'extra'}
         ds = cls(**{k: v for k, v in attrs.items() if k in known},
                  extra={k: v for k, v in attrs.items() if k not in known})
+        columns = ds.extra.pop('question_columns', None) or {}
+        for pool, (options_name, settings_name) in template_settings.TABLES.items():
+            settings = ds.extra.pop(settings_name, None)
+            if isinstance(settings, pd.DataFrame):
+                default = id_keys + (question_keys if pool == 'questions' else example_question_keys)
+                q, o = template_settings.expand(getattr(ds, pool), getattr(ds, options_name), settings,
+                                                columns.get(pool) or default, pool)
+                setattr(ds, pool, q)
+                setattr(ds, options_name, o)
         if not isinstance(ds.element_name, str) or not ds.element_name:
             ds.element_name = os.path.basename(os.path.normpath(folder))
         return ds
@@ -255,7 +279,11 @@ def reindex(dataset: Dataset, in_place: bool = False) -> Dataset | None:
         df = flatten_index(df)
         if df.empty:
             return df
-        df['question_id'] = _remove_gaps(df['question_id'].astype(int).to_list())
+        old = df['question_id'].astype(int).to_list()
+        df['question_id'] = _remove_gaps(old)
+        if 'text_id' in df.columns:   # a text's id is one of its variants' ids: renumber it the same way
+            new = dict(zip(old, df['question_id'].tolist()))
+            df['text_id'] = df['text_id'].astype(int).map(new)
         return df.reset_index(drop=True)
 
     instruction_set = dataset.instruction_set
@@ -329,6 +357,7 @@ def split(combined_df: pd.DataFrame, dataframe_type: str = 'questions') -> tuple
     if dataframe_type not in _POOLS:
         raise ValueError("dataframe_type must be either 'questions' or 'example_questions'")
     keys = question_keys if dataframe_type == 'questions' else example_question_keys
+    keys = keys + (['text_id'] if 'text_id' in combined_df.columns else [])
     questions = combined_df[id_keys + keys].drop_duplicates()
     try:
         options = combined_df[id_keys + options_keys]

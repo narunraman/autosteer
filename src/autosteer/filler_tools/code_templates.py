@@ -131,6 +131,8 @@ def composite_dataset(element: str, load):
             ids = sorted(int(i) for i in q['question_id'].unique())
             remap = {old: offsets[q_attr] + k for k, old in enumerate(ids)}
             q = q.copy()
+            # a text's id is one of its variants' ids (autosteer.template_settings): renumbered the same way
+            q['text_id'] = (q['text_id'] if 'text_id' in q.columns else q['question_id']).map(remap).astype(int)
             q['question_id'] = q['question_id'].map(remap).astype(int)
             q['type'] = qtype
             frames[q_attr].append(q)

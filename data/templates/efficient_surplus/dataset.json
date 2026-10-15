@@ -2,59 +2,37 @@
  "format": "autosteer-dataset/1",
  "attributes": {
   "element_name": "efficient_surplus",
-  "metadata_keys": [
-   "domain",
-   "type",
-   "difficulty_level",
-   "tags"
-  ],
-  "question_keys": [
-   "question_text",
-   "domain",
-   "type",
-   "difficulty_level",
-   "tags"
-  ],
-  "options_keys": [
-   "option_id",
-   "option_text",
-   "correct_answer"
-  ],
-  "id_keys": [
-   "question_id",
-   "sub_id"
-  ],
-  "example_question_keys": [
-   "question_text",
-   "explanation",
-   "domain",
-   "type",
-   "difficulty_level",
-   "tags"
-  ],
-  "example_options_keys": [
-   "option_id",
-   "option_text",
-   "correct_answer"
-  ],
-  "instruction_keys": [
-   "domain",
-   "type",
-   "difficulty_level",
-   "tags",
-   "instructions"
-  ],
   "generated_seed_metadata": null,
-  "generated_template_metadata": null
+  "generated_template_metadata": null,
+  "question_columns": {
+   "questions": [
+    "question_id",
+    "sub_id",
+    "question_text",
+    "explanation",
+    "domain",
+    "type",
+    "difficulty_level",
+    "tags"
+   ],
+   "example_questions": [
+    "question_id",
+    "sub_id",
+    "question_text",
+    "explanation",
+    "domain",
+    "type",
+    "difficulty_level",
+    "tags"
+   ]
+  }
  },
  "tables": {
   "questions": {
    "text": [
     "question_text",
     "explanation",
-    "domain",
-    "type",
-    "tags"
+    "domain"
    ],
    "json": [],
    "nulls": {
@@ -74,9 +52,7 @@
    "text": [
     "question_text",
     "explanation",
-    "domain",
-    "type",
-    "tags"
+    "domain"
    ],
    "json": [],
    "nulls": {
@@ -108,6 +84,24 @@
    "json": [],
    "nulls": {},
    "object_names": true
+  },
+  "settings": {
+   "text": [
+    "type",
+    "tags"
+   ],
+   "json": [],
+   "nulls": {},
+   "object_names": false
+  },
+  "example_settings": {
+   "text": [
+    "type",
+    "tags"
+   ],
+   "json": [],
+   "nulls": {},
+   "object_names": false
   }
  }
 }

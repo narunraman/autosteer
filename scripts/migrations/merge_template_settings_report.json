@@ -1,0 +1,1540 @@
+{
+ "add_sub": {
+  "questions": {
+   "variants": 1130,
+   "texts": 447,
+   "placeholder_options_replaced": 683,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "aggregation_of_capital_demand": {
+  "questions": {
+   "variants": 1499,
+   "texts": 1499,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 15,
+   "texts": 15,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "aggregation_of_consumer_demand": {
+  "questions": {
+   "variants": 760,
+   "texts": 760,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 8,
+   "texts": 8,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "aggregation_of_labor_demand": {
+  "questions": {
+   "variants": 900,
+   "texts": 900,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 9,
+   "texts": 9,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "aggregation_of_labor_supply": {
+  "questions": {
+   "variants": 824,
+   "texts": 824,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 17,
+   "texts": 17,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "aggregation_of_offer_curve": {
+  "questions": {
+   "variants": 500,
+   "texts": 500,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 5,
+   "texts": 5,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "arbitrage": {
+  "questions": {
+   "variants": 899,
+   "texts": 898,
+   "placeholder_options_replaced": 1,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 9,
+   "texts": 9,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "auctions_risk": {
+  "questions": {
+   "variants": 840,
+   "texts": 840,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 24,
+   "texts": 24,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "average_cost": {
+  "questions": {
+   "variants": 1351,
+   "texts": 1351,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 34,
+   "texts": 34,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "backward_induction": {
+  "questions": {
+   "variants": 676,
+   "texts": 338,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 12,
+   "texts": 6,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "bayes_nash": {
+  "questions": {
+   "variants": 8,
+   "texts": 8,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "bayes_rule": {
+  "questions": {
+   "variants": 30,
+   "texts": 30,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "best_response": {
+  "questions": {
+   "variants": 8,
+   "texts": 4,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "borda_count": {
+  "questions": {
+   "variants": 30,
+   "texts": 10,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "budget_balance": {
+  "questions": {
+   "variants": 840,
+   "texts": 280,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 24,
+   "texts": 8,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "certainty_effect": {
+  "questions": {
+   "variants": 690,
+   "texts": 690,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 120,
+   "texts": 120,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "comp_stat_cobb": {
+  "questions": {
+   "variants": 1497,
+   "texts": 1497,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 6,
+   "texts": 6,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "comp_stat_leonteif": {
+  "questions": {
+   "variants": 700,
+   "texts": 700,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 7,
+   "texts": 7,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "complement_rule": {
+  "questions": {
+   "variants": 115,
+   "texts": 115,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "compute_expectations": {
+  "questions": {
+   "variants": 24,
+   "texts": 24,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "compute_expected_utility": {
+  "questions": {
+   "variants": 35,
+   "texts": 35,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "condorcet_criterion": {
+  "questions": {
+   "variants": 1302,
+   "texts": 217,
+   "placeholder_options_replaced": 1085,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "consumer_surplus": {
+  "questions": {
+   "variants": 2032,
+   "texts": 2032,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 37,
+   "texts": 37,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "cost_minimization_problem": {
+  "questions": {
+   "variants": 1050,
+   "texts": 1050,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 21,
+   "texts": 21,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "deadweight_loss": {
+  "questions": {
+   "variants": 1871,
+   "texts": 1871,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 16,
+   "texts": 16,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "derivatives": {
+  "questions": {
+   "variants": 3,
+   "texts": 1,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 3,
+   "texts": 1,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "deriving_demand": {
+  "questions": {
+   "variants": 573,
+   "texts": 573,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 10,
+   "texts": 10,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "deriving_hicksian_demand": {
+  "questions": {
+   "variants": 2724,
+   "texts": 2724,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 28,
+   "texts": 28,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "deriving_labor_supply": {
+  "questions": {
+   "variants": 1487,
+   "texts": 1487,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 16,
+   "texts": 16,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "diminishing_marginal_product": {
+  "questions": {
+   "variants": 4200,
+   "texts": 1400,
+   "placeholder_options_replaced": 2800,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 42,
+   "texts": 14,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "diminishing_marginal_utility": {
+  "questions": {
+   "variants": 1335,
+   "texts": 445,
+   "placeholder_options_replaced": 890,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 36,
+   "texts": 12,
+   "placeholder_options_replaced": 24,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "dominated_strategies": {
+  "questions": {
+   "variants": 64,
+   "texts": 32,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "dynamic_profit_max": {
+  "questions": {
+   "variants": 2987,
+   "texts": 2987,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 14,
+   "texts": 14,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "efficient_surplus": {
+  "questions": {
+   "variants": 4377,
+   "texts": 4362,
+   "placeholder_options_replaced": 14,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": [
+    [
+     50,
+     2450
+    ],
+    [
+     55,
+     2451
+    ],
+    [
+     57,
+     2457
+    ],
+    [
+     59,
+     2455
+    ],
+    [
+     63,
+     2468
+    ],
+    [
+     71,
+     2513
+    ],
+    [
+     74,
+     2503
+    ],
+    [
+     103,
+     2524
+    ],
+    [
+     112,
+     2554
+    ],
+    [
+     113,
+     2543
+    ],
+    [
+     119,
+     2545
+    ],
+    [
+     125,
+     2559
+    ],
+    [
+     132,
+     2562
+    ],
+    [
+     140,
+     2574
+    ],
+    [
+     142,
+     2572
+    ],
+    [
+     145,
+     2569
+    ],
+    [
+     150,
+     2580
+    ]
+   ]
+  },
+  "example_questions": {
+   "variants": 47,
+   "texts": 47,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": [
+    [
+     0,
+     8,
+     54
+    ],
+    [
+     1,
+     40
+    ],
+    [
+     2,
+     42
+    ],
+    [
+     5,
+     48
+    ],
+    [
+     6,
+     50
+    ],
+    [
+     7,
+     52
+    ],
+    [
+     9,
+     56
+    ],
+    [
+     10,
+     11,
+     58
+    ],
+    [
+     12,
+     13,
+     60
+    ],
+    [
+     14,
+     15,
+     62
+    ],
+    [
+     16,
+     17,
+     64
+    ],
+    [
+     18,
+     19
+    ],
+    [
+     24,
+     25
+    ],
+    [
+     28,
+     29
+    ],
+    [
+     32,
+     33
+    ],
+    [
+     34,
+     35
+    ],
+    [
+     36,
+     37
+    ],
+    [
+     38,
+     39
+    ]
+   ]
+  }
+ },
+ "enforceability": {
+  "questions": {
+   "variants": 616,
+   "texts": 616,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 5,
+   "texts": 1,
+   "placeholder_options_replaced": 3,
+   "identical_variants_dropped": [
+    2,
+    3
+   ],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "expected_value_counts_aug2024": {
+  "questions": {
+   "variants": 756,
+   "texts": 756,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 8,
+   "texts": 8,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "find_eq_price": {
+  "questions": {
+   "variants": 6657,
+   "texts": 6628,
+   "placeholder_options_replaced": 1,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": [
+    [
+     164,
+     5869
+    ]
+   ]
+  },
+  "example_questions": {
+   "variants": 28,
+   "texts": 26,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "gamblers_fallacy": {
+  "questions": {
+   "variants": 98,
+   "texts": 98,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "independence_risk": {
+  "questions": {
+   "variants": 962,
+   "texts": 962,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "interpret_games": {
+  "questions": {
+   "variants": 16,
+   "texts": 8,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "intertemporal_consumption_smoothing": {
+  "questions": {
+   "variants": 1596,
+   "texts": 1596,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 16,
+   "texts": 8,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "ir_mechanism": {
+  "questions": {
+   "variants": 1120,
+   "texts": 560,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 32,
+   "texts": 16,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "iterated_removal": {
+  "questions": {
+   "variants": 12,
+   "texts": 12,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "law_of_demand": {
+  "questions": {
+   "variants": 1905,
+   "texts": 1905,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 7,
+   "texts": 7,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "marginal_cost": {
+  "questions": {
+   "variants": 1531,
+   "texts": 1531,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 37,
+   "texts": 37,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "marginal_production": {
+  "questions": {
+   "variants": 3557,
+   "texts": 3557,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 16,
+   "texts": 16,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "marginal_utility": {
+  "questions": {
+   "variants": 348,
+   "texts": 348,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 7,
+   "texts": 7,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "micro_utility": {
+  "questions": {
+   "variants": 920,
+   "texts": 920,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 44,
+   "texts": 15,
+   "placeholder_options_replaced": 18,
+   "identical_variants_dropped": [
+    720,
+    721,
+    730,
+    731,
+    732,
+    741,
+    742,
+    743,
+    752,
+    753,
+    754,
+    763,
+    764,
+    773,
+    774,
+    783,
+    784,
+    793
+   ],
+   "orphan_option_rows_dropped": 789,
+   "same_text_other_domain": [
+    [
+     0,
+     54
+    ],
+    [
+     1,
+     65
+    ],
+    [
+     2,
+     76
+    ],
+    [
+     3,
+     11,
+     87
+    ],
+    [
+     4,
+     22
+    ],
+    [
+     5,
+     33
+    ],
+    [
+     6,
+     44
+    ]
+   ]
+  }
+ },
+ "mrs_utility": {
+  "questions": {
+   "variants": 400,
+   "texts": 400,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 8,
+   "texts": 8,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "mult_div": {
+  "questions": {
+   "variants": 2520,
+   "texts": 535,
+   "placeholder_options_replaced": 1985,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "output_elasticity": {
+  "questions": {
+   "variants": 4467,
+   "texts": 4460,
+   "placeholder_options_replaced": 6,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 100,
+   "texts": 100,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "plurality_voting": {
+  "questions": {
+   "variants": 20,
+   "texts": 5,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 20,
+   "texts": 5,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "price_elasticity": {
+  "questions": {
+   "variants": 1412,
+   "texts": 1412,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 18,
+   "texts": 18,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "producer_surplus": {
+  "questions": {
+   "variants": 1400,
+   "texts": 1400,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": [
+    [
+     215,
+     745
+    ]
+   ]
+  },
+  "example_questions": {
+   "variants": 73,
+   "texts": 61,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": [
+    [
+     0,
+     115
+    ],
+    [
+     3,
+     130
+    ],
+    [
+     5,
+     140
+    ],
+    [
+     6,
+     145
+    ],
+    [
+     8,
+     155
+    ],
+    [
+     10,
+     11,
+     165
+    ],
+    [
+     15,
+     170
+    ],
+    [
+     20,
+     175
+    ],
+    [
+     25,
+     26,
+     180
+    ],
+    [
+     30,
+     185
+    ],
+    [
+     35,
+     36
+    ],
+    [
+     40,
+     41,
+     195
+    ],
+    [
+     45,
+     200
+    ],
+    [
+     50,
+     51,
+     205
+    ],
+    [
+     55,
+     210
+    ],
+    [
+     60,
+     61,
+     215
+    ],
+    [
+     65,
+     66
+    ],
+    [
+     70,
+     71
+    ],
+    [
+     75,
+     76
+    ],
+    [
+     80,
+     81
+    ],
+    [
+     90,
+     91
+    ],
+    [
+     95,
+     96
+    ],
+    [
+     100,
+     101
+    ],
+    [
+     105,
+     106
+    ],
+    [
+     110,
+     111
+    ]
+   ]
+  }
+ },
+ "profit_maximization": {
+  "questions": {
+   "variants": 3868,
+   "texts": 3868,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 80,
+   "texts": 80,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "reflection_effect": {
+  "questions": {
+   "variants": 390,
+   "texts": 390,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 120,
+   "texts": 120,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "returns_to_scale": {
+  "questions": {
+   "variants": 500,
+   "texts": 500,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 14,
+   "texts": 14,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 2,
+   "same_text_other_domain": []
+  }
+ },
+ "sc_monotonicity": {
+  "questions": {
+   "variants": 2397,
+   "texts": 2397,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 12,
+   "texts": 12,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "sc_pareto": {
+  "questions": {
+   "variants": 2397,
+   "texts": 2397,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 12,
+   "texts": 12,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "sc_transitivity": {
+  "questions": {
+   "variants": 2397,
+   "texts": 2397,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 12,
+   "texts": 12,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "state_based_consumption": {
+  "questions": {
+   "variants": 1699,
+   "texts": 1699,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 17,
+   "texts": 17,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "subgame_nash": {
+  "questions": {
+   "variants": 36,
+   "texts": 18,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "supply_elasticity": {
+  "questions": {
+   "variants": 3463,
+   "texts": 3463,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 9,
+   "texts": 9,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "tfp_shocks": {
+  "questions": {
+   "variants": 1294,
+   "texts": 1294,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 13,
+   "texts": 13,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "time_inconsistency": {
+  "questions": {
+   "variants": 8,
+   "texts": 8,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "transitivity_risk": {
+  "questions": {
+   "variants": 24,
+   "texts": 24,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "trigger": {
+  "questions": {
+   "variants": 291,
+   "texts": 291,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 4,
+   "texts": 4,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "welfare_theorem_1": {
+  "questions": {
+   "variants": 27273,
+   "texts": 27154,
+   "placeholder_options_replaced": 116,
+   "identical_variants_dropped": [
+    2275,
+    2458,
+    2495,
+    2505,
+    2553,
+    2586,
+    3048,
+    3411,
+    3448,
+    3522,
+    3736,
+    3826,
+    4057,
+    4149,
+    4458,
+    4654,
+    4680,
+    4938,
+    4959,
+    4981,
+    5112,
+    5323,
+    5333,
+    5631,
+    5680,
+    6327,
+    6442,
+    6897,
+    7065,
+    7083,
+    7214,
+    7685,
+    8276,
+    8406,
+    8744,
+    9171,
+    9953,
+    11017,
+    11447,
+    11507,
+    11790,
+    12310,
+    13035,
+    13152,
+    13423,
+    13867,
+    13910,
+    13993,
+    14366,
+    14731,
+    15268,
+    15305,
+    15349,
+    15966,
+    18182,
+    18273,
+    18313,
+    18373,
+    18456,
+    18493,
+    18503,
+    18551,
+    18584,
+    19046,
+    19409,
+    19446,
+    19520,
+    19734,
+    19824,
+    20055,
+    20147,
+    20456,
+    20652,
+    20678,
+    20936,
+    20957,
+    20979,
+    21110,
+    21321,
+    21331,
+    21629,
+    21678,
+    22325,
+    22440,
+    22895,
+    23003,
+    23063,
+    23212,
+    23683,
+    24274,
+    24404,
+    24742,
+    25169,
+    25951,
+    27015,
+    27253,
+    27445,
+    27505,
+    27788,
+    28308,
+    28408,
+    29033,
+    29150,
+    29421,
+    29865,
+    29908,
+    29991,
+    30364,
+    30729,
+    31266,
+    31303,
+    31347,
+    31964
+   ],
+   "orphan_option_rows_dropped": 34,
+   "same_text_other_domain": [
+    [
+     16109,
+     18144,
+     23264,
+     27214,
+     29886
+    ]
+   ]
+  },
+  "example_questions": {
+   "variants": 26,
+   "texts": 26,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ },
+ "welfare_theorem_2": {
+  "questions": {
+   "variants": 22383,
+   "texts": 22379,
+   "placeholder_options_replaced": 2,
+   "identical_variants_dropped": [
+    6743,
+    18781
+   ],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  },
+  "example_questions": {
+   "variants": 10,
+   "texts": 10,
+   "placeholder_options_replaced": 0,
+   "identical_variants_dropped": [],
+   "orphan_option_rows_dropped": 0,
+   "same_text_other_domain": []
+  }
+ }
+}

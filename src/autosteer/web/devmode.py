@@ -268,7 +268,8 @@ def stored_template_count(store: DatasetStore, element: str) -> int | None:
 
     def compute():
         try:
-            return int(store.load_dataset("templates", element).questions["question_id"].nunique())
+            q = store.load_dataset("templates", element).questions
+            return int(q["text_id" if "text_id" in q.columns else "question_id"].nunique())   # texts, not variants
         except Exception:
             return None
     return _cached(("tmpl", str(store.data_root), element), [pkl], compute)
