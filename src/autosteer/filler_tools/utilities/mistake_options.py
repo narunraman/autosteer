@@ -9,9 +9,9 @@ with the mistake and the draw, so the key's rank among the options carries no in
 from __future__ import annotations
 
 import math
-from random import shuffle
 
 from .filler_utils import rng
+from autosteer.filler_tools.rng import pyrng
 
 
 def _apart(x: float, y: float, rel: float, absolute: float) -> bool:
@@ -69,7 +69,7 @@ def options_from_values(key, distractors, fmt=None):
     fmt = fmt or (lambda v: str(round(float(v), 2)))
     texts = [fmt(key)] + [fmt(d) for d in distractors]
     correct = texts[0]
-    shuffle(texts)
+    pyrng.shuffle(texts)
     return [[1 if t == correct else 0 for t in texts]], [texts]
 
 

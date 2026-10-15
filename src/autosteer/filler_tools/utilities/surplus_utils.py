@@ -1,6 +1,7 @@
 
 import numpy as np
 from scipy.optimize import root_scalar
+from autosteer.filler_tools.rng import legacy_np
 
 
 
@@ -34,7 +35,7 @@ def find_equilibrium(demand_curve, supply_curve,funcs='linear'):
     # find the quantity where quantity demanded equals quantity supplied
     if funcs == 'linear':
         equilibrium_condition = lambda p: demand_curve[0]*(p)+demand_curve[1] - (supply_curve[0]*(p)+supply_curve[1])
-        result = root_scalar(equilibrium_condition, x0 = np.array([np.random.rand()]))
+        result = root_scalar(equilibrium_condition, x0 = np.array([legacy_np.rand()]))
         if result.converged:
             # a 1-element array (array x0); return the scalar so float() and
             # brentq brackets work under numpy 2.4
@@ -64,7 +65,7 @@ def find_monopoly_quant(demand_curve,supply_curve,eq_quant):
     # Define a function that calculates the difference between MC and MR
     MC_MR_diff = lambda q: MR(q) - MC(q)
     # Use a root finding algorithm to find the price where MC equals MR
-    result = root_scalar(MC_MR_diff, x0 = np.array([np.random.rand()]),bracket=[0,eq_quant])
+    result = root_scalar(MC_MR_diff, x0 = np.array([legacy_np.rand()]),bracket=[0,eq_quant])
     if result.converged:
         return np.asarray(result.root).item()
     else:

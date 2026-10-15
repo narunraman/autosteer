@@ -1,6 +1,5 @@
 import re
 # Built-in packages
-import random
 from fractions import Fraction
 from string import ascii_uppercase
 ALPHABET = list(ascii_uppercase)
@@ -8,6 +7,7 @@ ALPHABET = list(ascii_uppercase)
 import numpy as np
 # Local packages
 from .fill_registry import FillRegister
+from autosteer.filler_tools.rng import pyrng
 function_registry = FillRegister()
 # from .fill_registry import function_registry
 
@@ -25,13 +25,13 @@ class Gamble:
     def _generate_payoff(self):
         if self.payoff_type == int:
             assert all(isinstance(elm, int) for elm in self.payoff_range), "Non-integer payoff range provided for integer payoff type."
-            return random.randint(*self.payoff_range)
+            return pyrng.randint(*self.payoff_range)
         elif self.payoff_type == float:
-            return round(random.uniform(0, 1) * self.payoff_range[1] + self.payoff_range[0], 2)
+            return round(pyrng.uniform(0, 1) * self.payoff_range[1] + self.payoff_range[0], 2)
     
     # NOTE: may care about having more complex distributions that depend on the index
     def _generate_probability(self, outcome_index):
-        return random.uniform(0, 1)
+        return pyrng.uniform(0, 1)
     
     def _generate_probabilites(self):
         probabilities = [self._generate_probability(i) for i in range(self.num_outcomes)]
@@ -127,7 +127,7 @@ class Scenario:
         '''
         # Scenario 1
         gamble_a = Gamble(num_outcomes=1, payoff_type=self.payoff_type, payoff_range=self.payoff_range) 
-        random.randint(*self.payoff_range) if self.payoff_type == int else round(random.uniform(0, 1) * self.payoff_range[1] + self.payoff_range[0], 2)
+        pyrng.randint(*self.payoff_range) if self.payoff_type == int else round(pyrng.uniform(0, 1) * self.payoff_range[1] + self.payoff_range[0], 2)
         gamble_b = Gamble(payoff_type = self.payoff_type, payoff_range = self.payoff_range, risk_free_premium=0)
         # this is to ensure that there cannot exist a utility function that makes sense given this particular setup
         while gamble_b.compute_expectation() < gamble_a.compute_expectation() and gamble_b.probabilities[0] < (1-gamble_b.probabilities[0])/gamble_b.probabilities[0]:
@@ -151,14 +151,14 @@ def _eu_options(answer, spread, fmt, nonneg=True):
     """The answer plus three distractors at least 5% (relative) apart, all rendered with fmt."""
     vals = [answer]
     while len(vals) < 4:
-        cand = answer + random.choice([-1, 1]) * random.uniform(0.1, 1.0) * spread
+        cand = answer + pyrng.choice([-1, 1]) * pyrng.uniform(0.1, 1.0) * spread
         if nonneg and cand < 0:
             continue
         if all(abs(cand - v) > max(0.05 * abs(v), 0.02) for v in vals):
             vals.append(cand)
     texts = [fmt(v) for v in vals]
     correct = texts[0]
-    random.shuffle(texts)
+    pyrng.shuffle(texts)
     return [texts], [[t == correct for t in texts]]
 
 
@@ -208,10 +208,10 @@ def gen_compute_expected_utility(metadata):
         EV = p_win W - p_lose L (convention: net when a cost is stated),
         answer n EV for 'win' and the expected loss -n EV for 'lose'.
     """
-    pct = lambda: round(random.uniform(0.05, 0.95) * 100, 2)
+    pct = lambda: round(pyrng.uniform(0.05, 0.95) * 100, 2)
     tags = metadata['tags']
     if metadata['domain'] == 'medical':
-        num_patients = random.randint(10, 100)
+        num_patients = pyrng.randint(10, 100)
         save = pct()
         not_save = round(100 - save, 2)
         p = not_save if _eu_asks_bad(metadata) else save
@@ -227,9 +227,9 @@ def gen_compute_expected_utility(metadata):
     elif metadata['domain'] == 'gambling':
         win = pct()
         lose = round(100 - win, 2)
-        win_amount = random.randint(1, 100)
-        lose_amount = random.randint(1, 100)
-        num_games = random.randint(2, 100) if 'multiple' in tags else 1
+        win_amount = pyrng.randint(1, 100)
+        lose_amount = pyrng.randint(1, 100)
+        num_games = pyrng.randint(2, 100) if 'multiple' in tags else 1
         # the loss only counts if the template states it
         text_ = metadata.get('question_text')
         cost = lose_amount if (text_ is None or '{lose_amount}' in text_) else 0
@@ -252,7 +252,7 @@ def gen_compute_expected_utility(metadata):
     elif metadata['domain'] == 'vacation_planning':
         good = pct()
         bad = round(100 - good, 2)
-        num_days = random.randint(2, 10)
+        num_days = pyrng.randint(2, 10)
         p = bad if _eu_asks_bad(metadata) else good
         answer = num_days * p / 100
         options, mask = _eu_options(answer, max(answer, 1), lambda v: f"{v:.2f}")
@@ -303,14 +303,14 @@ def draw_common_ratio(kind: str = 'money', favor: str = None) -> dict:
     Numbers for one common-ratio pair. Returns ints X < Y, p_pct, k_pct and the exact k*p (Fraction, percent).
     `favor` is the side a risk-neutral agent prefers ('lottery': pY > X, 'sure': pY < X); drawn 50/50 if None.
     """
-    favor = favor or random.choice(['lottery', 'sure'])
+    favor = favor or pyrng.choice(['lottery', 'sure'])
     lo_r, hi_r = CE_EV_RATIO[favor]
     for _ in range(10000):
-        step, lo, hi = random.choice(CE_SCALES[kind])
-        X = step * random.randint(lo, hi)
-        p = random.randint(*CE_P_PCT)
-        k = random.choice(CE_K_PCT)
-        Y = step * round(random.uniform(lo_r, hi_r) * X * 100 / p / step)
+        step, lo, hi = pyrng.choice(CE_SCALES[kind])
+        X = step * pyrng.randint(lo, hi)
+        p = pyrng.randint(*CE_P_PCT)
+        k = pyrng.choice(CE_K_PCT)
+        Y = step * round(pyrng.uniform(lo_r, hi_r) * X * 100 / p / step)
         r = Fraction(p * Y, 100 * X)            # exact EV ratio pY / X on the displayed numbers
         if Y <= X or Y < X * Fraction(21, 20):  # Y clearly larger than X
             continue
@@ -355,9 +355,9 @@ RE_SCALES = {
 
 def draw_reflection(kind: str = 'money') -> dict:
     """Ints X < Y and p_pct with p*Y = X exactly (equal expected value)."""
-    step, lo, hi = random.choice(RE_SCALES[kind])
-    p = random.choice(RE_P_PCT)
-    Y = step * random.randint(lo, hi)
+    step, lo, hi = pyrng.choice(RE_SCALES[kind])
+    p = pyrng.choice(RE_P_PCT)
+    Y = step * pyrng.randint(lo, hi)
     X = Fraction(p * Y, 100)
     assert X.denominator == 1 and 0 < X < Y
     return {'X': int(X), 'Y': Y, 'p_pct': p}
@@ -381,7 +381,7 @@ def gen_risk_aversion(metadata):
             payoff_range = (0.01, 0.5)
         else:
             payoff_range = (5, 50)
-    offset = random.randint(1, 100)
+    offset = pyrng.randint(1, 100)
     scenarios = Scenario({'scenario_type': 'risk_aversion', 'offset': offset}, payoff_range=payoff_range)
     gamble_a, gamble_b = scenarios.scenarios[0]
     return {
@@ -404,7 +404,7 @@ def gen_risk_seeking(metadata):
             payoff_range = (0.01, 0.5)
         else:
             payoff_range = (5, 50)
-    offset = random.randint(1, 100)
+    offset = pyrng.randint(1, 100)
     scenarios = Scenario({'scenario_type': 'risk_seeking', 'offset': offset}, payoff_range=payoff_range)
     gamble_a, gamble_b = scenarios.scenarios[0]
     return {

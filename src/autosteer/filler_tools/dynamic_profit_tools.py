@@ -3,6 +3,7 @@ import numpy as np
 from .utilities.production_utils import sample_prod_function,_opt_K2
 from .fill_registry import FillRegister
 from .utilities.filler_utils import gen_answer_and_options, band_options
+from autosteer.filler_tools.rng import legacy_np
 function_registry = FillRegister()
  
 @function_registry.register('dynamic_profit_max')
@@ -10,15 +11,15 @@ def gen_two_stage_profit_maximization(metadata):
     family = 'dynamic'
     prod_fn = sample_prod_function(family,max_coeff=1)
     # capital and prices at least 0.5 (a draw rounding to 0 printed "initial capital K_1 = 0.0")
-    capital_1 = np.round(0.5 + np.random.rand()*9.5,2)
-    price_1 = np.round(0.5 + np.random.rand()*9.5,2)
+    capital_1 = np.round(0.5 + legacy_np.rand()*9.5,2)
+    price_1 = np.round(0.5 + legacy_np.rand()*9.5,2)
     if metadata['type'] == 'known_price':
-        price_2 =np.round(0.5 + np.random.rand()*9.5,2)
+        price_2 =np.round(0.5 + legacy_np.rand()*9.5,2)
     elif metadata['type'] == 'uncertain_price':
         # Generate three random prices between 1 and 10
-        prices =np.round(np.random.uniform(1, 10, 3),2)
+        prices =np.round(legacy_np.uniform(1, 10, 3),2)
         # Generate three random probabilities and normalize them so they sum to 1
-        probabilities = np.random.rand(3)
+        probabilities = legacy_np.rand(3)
         probabilities /= probabilities.sum()
         # round to the displayed 2 decimals (the last one absorbs the rest) so
         # the expected price is computed from what the question shows
@@ -30,15 +31,15 @@ def gen_two_stage_profit_maximization(metadata):
         prices_probabilities_string = ", ".join(f"price {price} with probability {probability}" for price, probability in zip(prices, probabilities))
     elif metadata['type'] == 'costly_inspection':
         prod_fn  = sample_prod_function('dynamic', max_coeff=1)
-        discount = np.random.rand()
+        discount = legacy_np.rand()
 
         # 3-point price distribution
-        prices   = np.round(np.random.uniform(1, 10, 3), 2)
-        probs    = np.random.rand(3); probs /= probs.sum()
+        prices   = np.round(legacy_np.uniform(1, 10, 3), 2)
+        probs    = legacy_np.rand(3); probs /= probs.sum()
         price_str= ", ".join(f"{p:.2f} (prob {q:.2f})" for p, q in zip(prices, probs))
 
         # inspection fee
-        c_i        = round(np.random.uniform(0.5, 3.0), 2)
+        c_i        = round(legacy_np.uniform(0.5, 3.0), 2)
 
         # --- optimise ----------------------------------------------------------
         def opt_K2(P):
@@ -116,7 +117,7 @@ def gen_two_stage_profit_maximization(metadata):
     # rounded to the displayed 2 decimals; bounded optimiser (K2 >= 0): the
     # unbounded minimize could fail and return None, crashing the filler
     # a discount factor of a plausible size (0.01 to 1 gave factors such as 0.1)
-    discount = round(float(np.random.uniform(0.5, 0.99)), 2)
+    discount = round(float(legacy_np.uniform(0.5, 0.99)), 2)
     opt_capital, _ = _opt_K2(capital_1, discount, prod_fn, price_1, price_2)
     answer = opt_capital-capital_1
     if abs(answer) < 0.05:   # the key would print as 0.0 or -0.0

@@ -1,5 +1,4 @@
 # Built-in packages
-import random
 from string import ascii_uppercase
 # External packages
 import numpy as np
@@ -9,6 +8,7 @@ from .utilities.filler_utils import rng
 from .utilities.rounding import near_tie
 from .fill_registry import FillRegister
 from .utilities.filler_utils import gen_answer_and_options
+from autosteer.filler_tools.rng import legacy_np, pyrng
 
 function_registry = FillRegister()
 ALPHABET = list(ascii_uppercase)
@@ -102,7 +102,7 @@ class HicksianDemandFunction:
             else:
                 max_consumption_for_good = remaining_utility / coeff[idx]
 
-                allocation_for_good = np.random.uniform(0, max_consumption_for_good)
+                allocation_for_good = legacy_np.uniform(0, max_consumption_for_good)
                 hicksian_demands[idx] = allocation_for_good
                 
                 remaining_utility -= coeff[idx] * allocation_for_good
@@ -223,7 +223,7 @@ def _scaled_distractors(answer, num_options=4):
     for _ in range(500):
         if len(vals) == num_options:
             return vals
-        c = answer * random.uniform(0.5, 2)
+        c = answer * pyrng.uniform(0.5, 2)
         if _apart(round(c, 2), [round(v, 2) for v in vals]):
             vals.append(c)
     # tiny answers cannot be separated at 2 decimals; the sampler redraws on duplicate options
@@ -343,9 +343,9 @@ def gen_deriving_hicksian_demand_values(metadata):
             index = 1
         
         utility_function = _hicksian_cd_utility(2)
-        utility_level = np.round(random.uniform(100, 1000),2)
+        utility_level = np.round(pyrng.uniform(100, 1000),2)
         hicksian_demand_function = HicksianDemandFunction.from_utility_fn(utility_function, utility_level)
-        prices = [round(random.uniform(1, 10), 2) for _ in range(2)]
+        prices = [round(pyrng.uniform(1, 10), 2) for _ in range(2)]
 
         answers = hicksian_demand_function.get_quantity_at(prices)
         answer = answers[index]
@@ -374,7 +374,7 @@ def gen_deriving_hicksian_demand_values(metadata):
 
         while True:
             utility_function = _hicksian_cd_utility(2)
-            utility_level = np.round(random.uniform(100, 1000),2)
+            utility_level = np.round(pyrng.uniform(100, 1000),2)
             got = hicksian_cd_function_options(list(utility_function.coefficients), utility_level, index)
             if got is not None:
                 break
@@ -397,7 +397,7 @@ def gen_deriving_hicksian_demand_values(metadata):
 
         while True:
             utility_function = _hicksian_cd_utility(3)
-            utility_level = np.round(random.uniform(100, 1000),2)
+            utility_level = np.round(pyrng.uniform(100, 1000),2)
             got = hicksian_cd_function_options(list(utility_function.coefficients), utility_level, index)
             if got is not None:
                 break
@@ -458,9 +458,9 @@ def gen_deriving_hicksian_demand_values(metadata):
             index = 2
         
         utility_function = UtilityFunction(num_inputs=3,family=family)
-        utility_level = np.round(random.uniform(100, 1000),2)
+        utility_level = np.round(pyrng.uniform(100, 1000),2)
         hicksian_demand_function = HicksianDemandFunction.from_utility_fn(utility_function, utility_level)
-        prices = [round(random.uniform(1, 10), 2) for _ in range(3)]
+        prices = [round(pyrng.uniform(1, 10), 2) for _ in range(3)]
 
         answers = hicksian_demand_function.get_quantity_at(prices)
         answer = answers[index]

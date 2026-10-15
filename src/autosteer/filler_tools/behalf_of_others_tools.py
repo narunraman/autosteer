@@ -3,6 +3,7 @@
 import pandas as pd
 # Local packages
 from .fill_registry import FillRegister
+from autosteer.filler_tools.rng import legacy_state
 function_registry = FillRegister()
 
 social_choice_functions = pd.DataFrame.from_records([
@@ -177,8 +178,8 @@ social_choice_functions = pd.DataFrame.from_records([
 @function_registry.register('sc_pareto')
 def gen_pareto_values(metadata):
     # sample_indices = rng.integers(low = 0, high = len(social_choice_functions), size = 3)
-    options = social_choice_functions.query('pareto == False').sample(3)['description'].tolist()
-    correct_answer = social_choice_functions.query('pareto == True').sample(1)['description'].tolist()[0]
+    options = social_choice_functions.query('pareto == False').sample(3, random_state=legacy_state())['description'].tolist()
+    correct_answer = social_choice_functions.query('pareto == True').sample(1, random_state=legacy_state())['description'].tolist()[0]
     options += correct_answer
 
     return {
@@ -188,8 +189,8 @@ def gen_pareto_values(metadata):
 
 @function_registry.register('sc_monotonicity')
 def gen_monotonicity_values(metadata):
-    options = social_choice_functions.query('monotonicity == False').sample(3)['description'].tolist()
-    correct_answer = social_choice_functions.query('monotonicity == True').sample(1)['description'].tolist()[0]
+    options = social_choice_functions.query('monotonicity == False').sample(3, random_state=legacy_state())['description'].tolist()
+    correct_answer = social_choice_functions.query('monotonicity == True').sample(1, random_state=legacy_state())['description'].tolist()[0]
     options += correct_answer
 
     return {
@@ -199,8 +200,8 @@ def gen_monotonicity_values(metadata):
 
 @function_registry.register('sc_transitivity')
 def gen_transitivity_values(metadata):
-    options = social_choice_functions.query('transitivity == False').sample(3)['description'].tolist()
-    correct_answer = social_choice_functions.query('transitivity == True').sample(1)['description'].tolist()[0]
+    options = social_choice_functions.query('transitivity == False').sample(3, random_state=legacy_state())['description'].tolist()
+    correct_answer = social_choice_functions.query('transitivity == True').sample(1, random_state=legacy_state())['description'].tolist()[0]
     options += correct_answer
 
     return {

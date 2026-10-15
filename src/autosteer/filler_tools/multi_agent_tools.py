@@ -1,5 +1,4 @@
 # Built-in packages
-import random
 import re
 from itertools import product
 from string import ascii_uppercase
@@ -8,6 +7,7 @@ import numpy as np
 import pandas as pd
 # Local packages
 from .fill_registry import FillRegister
+from autosteer.filler_tools.rng import legacy_np, pyrng
 function_registry = FillRegister()
 ALPHABET = list(ascii_uppercase)
 
@@ -25,12 +25,12 @@ class GameMatrix():
 
     def generate_payoff_matrix(self):
         if isinstance(self.payoff_type, int):
-            n_matrix = np.random.randint(*self.payoff_range, size=(self.n, self.m))
-            m_matrix = np.random.randint(*self.payoff_range, size=(self.n, self.m))
+            n_matrix = legacy_np.randint(*self.payoff_range, size=(self.n, self.m))
+            m_matrix = legacy_np.randint(*self.payoff_range, size=(self.n, self.m))
         #elif isinstance(self.payoff_type, float):
         else:
-            n_matrix = np.random.rand(self.n, self.m) * abs(self.payoff_range[0] - self.payoff_range[1]) + self.payoff_range[0]
-            m_matrix = np.random.rand(self.n, self.m) * abs(self.payoff_range[0] - self.payoff_range[1]) + self.payoff_range[0]
+            n_matrix = legacy_np.rand(self.n, self.m) * abs(self.payoff_range[0] - self.payoff_range[1]) + self.payoff_range[0]
+            m_matrix = legacy_np.rand(self.n, self.m) * abs(self.payoff_range[0] - self.payoff_range[1]) + self.payoff_range[0]
             n_matrix = n_matrix.round(self.decimals)
             m_matrix = m_matrix.round(self.decimals)
         
@@ -43,7 +43,7 @@ class GameMatrix():
             payoff_matrix = [[(m1[i][j], m2[i][j]) if i < j else (m2[i][j], m1[i][j]) for j in range(self.n)] for i in range(self.n)]
 
             for i in range(self.n):
-                diag = np.random.choice([payoff_matrix[i][i][0], payoff_matrix[i][i][1]])
+                diag = legacy_np.choice([payoff_matrix[i][i][0], payoff_matrix[i][i][1]])
                 payoff_matrix[i][i] = (diag, diag)
             return payoff_matrix
         return payoff_matrix
@@ -102,10 +102,10 @@ class PayoffNode():
     def __init__(self, payoff_type = int, payoff_range = (-10, 10), num_players=2):
         # payoff_type is the type itself (int or float); the old isinstance() checks never matched it.
         if payoff_type is int:
-            self.payoffs = np.random.randint(payoff_range[0], payoff_range[1], num_players)
+            self.payoffs = legacy_np.randint(payoff_range[0], payoff_range[1], num_players)
         elif payoff_type is float:
             # rounded to cents so the payoffs shown in the question are the ones solved
-            self.payoffs = np.round(np.random.uniform(payoff_range[0], payoff_range[1], num_players), 2)
+            self.payoffs = np.round(legacy_np.uniform(payoff_range[0], payoff_range[1], num_players), 2)
         else:
             raise ValueError("Invalid payoff type")
 
@@ -191,11 +191,11 @@ class GameTree():
 def generate_game_matrix(n, m, payoff_type, action_names, payoff_min = 0, payoff_max = 20):
     # Generate random payoff matrices for players
     if payoff_type == 'integer':
-        row_player_df = np.random.randint(payoff_min, payoff_max, size=(n, m))
-        col_player_df = np.random.randint(payoff_min, payoff_max, size=(n, m))
+        row_player_df = legacy_np.randint(payoff_min, payoff_max, size=(n, m))
+        col_player_df = legacy_np.randint(payoff_min, payoff_max, size=(n, m))
     else:
-        row_player_df = (np.random.rand(n, m) * (abs(payoff_min) + abs(payoff_max)) - payoff_min).round(2)
-        col_player_df = (np.random.rand(n, m) * (abs(payoff_min) + abs(payoff_max)) - payoff_min).round(2)
+        row_player_df = (legacy_np.rand(n, m) * (abs(payoff_min) + abs(payoff_max)) - payoff_min).round(2)
+        col_player_df = (legacy_np.rand(n, m) * (abs(payoff_min) + abs(payoff_max)) - payoff_min).round(2)
     
 
     # Create dataframes for display
@@ -286,7 +286,7 @@ def find_dom_strategies(row_player_df, col_player_df, player_type, dom_type):
 
 def gen_iterations(game_size, num_iterations, player_type):
     type2index = [{'row': 1, 'column': 0}, {'row': 0, 'column': 1}]
-    return flatten_list([np.eye(game_size[type2index[iteration%2][player_type]]-iteration//3, dtype=int)[np.random.choice(game_size[type2index[iteration%2][player_type]]-iteration//3, 1)].tolist() for iteration in range(1, num_iterations+1)])
+    return flatten_list([np.eye(game_size[type2index[iteration%2][player_type]]-iteration//3, dtype=int)[legacy_np.choice(game_size[type2index[iteration%2][player_type]]-iteration//3, 1)].tolist() for iteration in range(1, num_iterations+1)])
 
 def flatten_list(lst):
     return [item for elm in lst for item in elm]
@@ -337,7 +337,7 @@ def generate_game(game_size, solution, action_names = {'row': ['Action R', 'Acti
         row_player_df, col_player_df = generate_game_matrix(*game_size, solution.get('payoff_type'), action_names)
         dom_indices = find_dom_strategies(row_player_df, col_player_df, solution.get('player_type'), solution.get('dom_type'))
 
-        while [len(dom_indices[action_name]) for action_name in random.sample(list(dom_indices.keys()), len(dom_indices.keys()))] != solution.get('dom'):
+        while [len(dom_indices[action_name]) for action_name in pyrng.sample(list(dom_indices.keys()), len(dom_indices.keys()))] != solution.get('dom'):
             row_player_df, col_player_df = generate_game_matrix(*game_size, solution.get('payoff_type'), action_names)
             dom_indices = find_dom_strategies(row_player_df, col_player_df, solution.get('player_type'), solution.get('dom_type'))
 
@@ -472,25 +472,25 @@ def create_dominant_game(action_names, dominant_action):
 
 def generate_subgame_values():
     # Generate random payoffs for each outcome
-    X = random.randint(1, 10)  # Company A invests, Company B enters
-    Y = random.randint(1, 10)  # Payoff for B when both enter
-    Z = random.randint(1, 10)  # Company A invests, Company B does not enter
-    W = random.randint(1, 10)  # Payoff for B when A invests and B does not enter
-    P = random.randint(1, 10)  # Company A does not invest
+    X = pyrng.randint(1, 10)  # Company A invests, Company B enters
+    Y = pyrng.randint(1, 10)  # Payoff for B when both enter
+    Z = pyrng.randint(1, 10)  # Company A invests, Company B does not enter
+    W = pyrng.randint(1, 10)  # Payoff for B when A invests and B does not enter
+    P = pyrng.randint(1, 10)  # Company A does not invest
 
     # Adjust payoffs to ensure different equilibria
     # For Equilibrium 1: A invests, B does not enter
     if Z <= P:
-        Z = P + random.randint(1, 3)  # Ensure A prefers investing to not investing
+        Z = P + pyrng.randint(1, 3)  # Ensure A prefers investing to not investing
 
     # For Equilibrium 2: A invests, B enters
     if X <= P or Y <= W:
-        X = P + random.randint(1, 3)  # Ensure A prefers investing and B prefers entering
-        Y = W + random.randint(1, 3)
+        X = P + pyrng.randint(1, 3)  # Ensure A prefers investing and B prefers entering
+        Y = W + pyrng.randint(1, 3)
 
     # For Equilibrium 3: A does not invest
     if P <= Z or P <= X:
-        P = max(Z, X) + random.randint(1, 3)  # Ensure A prefers not investing
+        P = max(Z, X) + pyrng.randint(1, 3)  # Ensure A prefers not investing
 
     return X, Y, Z, W, P
 
@@ -695,9 +695,9 @@ def sample_pd(low, high, integer=False, rel_gap=0.02):
     gap = rel_gap * (high - low)
     while True:
         if integer:
-            S, P, R, T = sorted(random.sample(range(low, high + 1), 4))
+            S, P, R, T = sorted(pyrng.sample(range(low, high + 1), 4))
         else:
-            S, P, R, T = sorted(round(random.uniform(low, high), 2) for _ in range(4))
+            S, P, R, T = sorted(round(pyrng.uniform(low, high), 2) for _ in range(4))
         if min(P - S, R - P, T - R) >= gap and 2 * R - (T + S) >= gap:
             return {'R': R, 'S': S, 'T': T, 'P': P}
 
@@ -769,10 +769,10 @@ def generate_enforceability_values(metadata, margin=0.02):
       answer none: options CC, asym, alt, none; delta below both thresholds
     delta is kept at least `margin` away from both thresholds.
     """
-    target = random.choice(['DD', 'CC', 'alt', 'none'])
+    target = pyrng.choice(['DD', 'CC', 'alt', 'none'])
     while True:
         g = sample_pd(10000, 100000)
-        delta = round(random.uniform(0.1, 0.95), 2)
+        delta = round(pyrng.uniform(0.1, 0.95), 2)
         d_cc, d_alt = grim_trigger_threshold(g), alternation_threshold(g)
         if min(abs(delta - d_cc), abs(delta - d_alt)) < margin:
             continue
@@ -811,7 +811,7 @@ def trigger_distractors(g, correct, n=3):
     R, S, T, P = g['R'], g['S'], g['T'], g['P']
     cands = [(T - R) / (T - S), (R - P) / (T - P), (T - R) / (R - P), (T - R) / (R - S), (P - S) / (T - P),
              1 - correct, (T - R) / T]
-    random.shuffle(cands)
+    pyrng.shuffle(cands)
     out = []
 
     def ok(v):
@@ -821,7 +821,7 @@ def trigger_distractors(g, correct, n=3):
         if len(out) < n and ok(v):
             out.append(v)
     while len(out) < n:
-        v = round(correct + random.choice([-1, 1]) * random.uniform(0.03, 0.15), 2)
+        v = round(correct + pyrng.choice([-1, 1]) * pyrng.uniform(0.03, 0.15), 2)
         if ok(v):
             out.append(v)
     return out
@@ -848,7 +848,7 @@ def gen_trigger(metadata):
     if 'explicit' in str(metadata.get('tags', '')).split(';'):
         labels = ['Cooperate', 'Defect']
     else:
-        letters = random.sample(ALPHABET, 2)
+        letters = pyrng.sample(ALPHABET, 2)
         labels = ['Action ' + letters[0], 'Action ' + letters[1]]
     return {
         'payoff_matrix': payoff_matrix_text(g, labels),

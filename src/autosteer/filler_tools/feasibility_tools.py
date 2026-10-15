@@ -29,7 +29,6 @@ Perspective: anonymous (the two players are named A and B).
 """
 from __future__ import annotations
 
-import random
 from fractions import Fraction
 
 import numpy as np
@@ -37,6 +36,7 @@ import numpy as np
 from . import code_templates as ct
 from .fill_registry import FillRegister
 from .multi_agent_tools import sample_pd
+from autosteer.filler_tools.rng import pyrng
 
 function_registry = FillRegister()
 
@@ -140,8 +140,8 @@ def _folk(g, st):
 
     def draw(kind):
         for _ in range(3000):
-            x = round(random.uniform(lo, hi) / 0.25) * 0.25
-            y = x if random.random() < 0.25 else round(random.uniform(lo, hi) / 0.25) * 0.25
+            x = round(pyrng.uniform(lo, hi) / 0.25) * 0.25
+            y = x if pyrng.random() < 0.25 else round(pyrng.uniform(lo, hi) / 0.25) * 0.25
             h, ir = _scores(g, x, y)
             if kind == 'key' and h <= -m and ir <= -m:
                 return x, y
@@ -151,7 +151,7 @@ def _folk(g, st):
                 return x, y
         return None
 
-    kinds = ['infeasible', 'not_ir', random.choice(['infeasible', 'not_ir'])]
+    kinds = ['infeasible', 'not_ir', pyrng.choice(['infeasible', 'not_ir'])]
     chosen = [draw('key')]
     for kind in kinds:
         for _ in range(20):
@@ -243,7 +243,7 @@ KEYS = ('cc', 'alt', 'cc_dd', 'cc_cc_dd', 'cc_alt')
 
 
 def _discount(st):
-    key = random.choice(KEYS)
+    key = pyrng.choice(KEYS)
     while True:
         g = sample_pd(10, 99, integer=True)
         th = {n: threshold(g, p) for n, p in PATHS.items()}
@@ -251,11 +251,11 @@ def _discount(st):
         harder = [n for n in PATHS if n != key and th[n] >= lo + 0.03]
         if th[key] >= 0.9 or len(harder) < 3:
             continue
-        others = random.sample(harder, 3)
+        others = pyrng.sample(harder, 3)
         hi = min(0.95, min(th[o] for o in others) - 0.03)
         if hi < lo:
             continue
-        delta = Fraction(round(random.uniform(lo, hi) * 100), 100)
+        delta = Fraction(round(pyrng.uniform(lo, hi) * 100), 100)
         if robust_status(g, PATHS[key], delta) and all(robust_status(g, PATHS[o], delta) is False for o in others):
             texts = [path_text(n, st) for n in [key] + others]
             return g, delta, texts, [1, 0, 0, 0]

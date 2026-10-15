@@ -10,9 +10,9 @@ from typing import Optional
 import numpy as np
 
 from autosteer.filler_tools import code_templates, function_registry
-from autosteer.filler_tools.utilities import filler_utils
+from autosteer.filler_tools import rng as fill_rng
 from autosteer.filler_tools.fill_registry import validate_filler_output
-from autosteer.formatting import format_fill_values, format_value, extract_fstring_keys
+from autosteer.formatting import format_fill_values, format_value
 from autosteer.datasets import Dataset
 
 from .config import SamplerConfig
@@ -28,7 +28,7 @@ def seed_everything(seed: int) -> None:
     """
     random.seed(seed)
     np.random.seed(seed % (2 ** 32))
-    filler_utils.rng.bit_generator.state = np.random.default_rng(seed).bit_generator.state
+    fill_rng.SHARED_NP.bit_generator.state = np.random.default_rng(seed).bit_generator.state
 
 
 SEED_MAX = 2 ** 63 - 1

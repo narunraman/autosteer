@@ -1,20 +1,20 @@
 # Built-in packages
-from random import shuffle
 from copy import deepcopy
 # External packages
 import numpy as np
+from autosteer.filler_tools.rng import pyrng
 # Local packages
 
 
-# Random number generator
-rng = np.random.default_rng(seed=42)
+# The numpy Generator fillers draw from: the one bound for the question being filled (autosteer.filler_tools.rng)
+from autosteer.filler_tools.rng import rng  # noqa: E402
 
 
 def gen_answer_and_options(answer, num_options=4, options=None):
 
     # If options are provided, shuffle them and create the answer mask
     if options:
-        shuffle(options)
+        pyrng.shuffle(options)
         answer_mask = [1 if opt == answer else 0 for opt in options]
         return [answer_mask], [options]
 
@@ -52,7 +52,7 @@ def gen_answer_and_options(answer, num_options=4, options=None):
             # print(options)
 
     # Shuffle the options
-    shuffle(options)
+    pyrng.shuffle(options)
     # Convert all options to strings
     options = [str(opt) if isinstance(opt, float) or isinstance(opt, int) else ', '.join([str(o) for o in opt]) for opt in options]
     answers = str(answers) if isinstance(answers, float) or isinstance(answers, int) else ', '.join([str(a) for a in answers])
@@ -146,5 +146,5 @@ def band_options(answer, lo, hi, num_options=4, max_rel_width=0.25, fmt=None, sp
     fmt = fmt or (lambda v: str(v[0]) if len(v) == 1 else ', '.join(str(x) for x in v))
     texts = [fmt(o) for o in opts]
     correct = texts[0]
-    shuffle(texts)
+    pyrng.shuffle(texts)
     return [[1 if t == correct else 0 for t in texts]], [texts]

@@ -1,8 +1,8 @@
 import numpy as np
 from scipy.optimize import minimize
-from random import shuffle
 from .filler_utils import rng
 from .mistake_options import pick_mistakes, options_from_values
+from autosteer.filler_tools.rng import legacy_np, pyrng
 '''
 Samples a production function (a function of two variables L and K) 
 from a given family
@@ -20,20 +20,20 @@ class ProductionFunction:
         if max_coeff is None:
             max_coeff = default_max_coeffs[family]
         if family == 'linear':
-            self.L = round(np.random.rand()*10,2)
-            self.K = round(np.random.rand()*10,2)
+            self.L = round(legacy_np.rand()*10,2)
+            self.K = round(legacy_np.rand()*10,2)
             self.function_string = f"{self.L}L + {self.K}K"
         elif family == 'Cobb_Douglas':
-            self.L = round(np.random.rand()*max_coeff,2)
-            self.K = round(np.random.rand()*max_coeff+0.01,2)
+            self.L = round(legacy_np.rand()*max_coeff,2)
+            self.K = round(legacy_np.rand()*max_coeff+0.01,2)
             self.function_string = f"L^{self.L}K^{self.K}"
         elif family == 'dynamic':
-            self.K = round(np.random.rand()*max_coeff,2)
-            self.alpha = round(np.random.rand()*max_coeff*5,2)
+            self.K = round(legacy_np.rand()*max_coeff,2)
+            self.alpha = round(legacy_np.rand()*max_coeff*5,2)
             self.function_string = f"{self.alpha}K^{self.K}"
         elif family == 'Leonteif':
-            self.L = round(np.random.rand()*max_coeff+1,2)
-            self.K = round(np.random.rand()*max_coeff+1,2)
+            self.L = round(legacy_np.rand()*max_coeff+1,2)
+            self.K = round(legacy_np.rand()*max_coeff+1,2)
             self.v = 0.5
             self.function_string = f"min(L/{self.L},K/{self.K})^{self.v}"
         
@@ -51,7 +51,7 @@ class ProductionFunction:
     def find_profit_max(self,price,capital,lcost,kcost=None):
         # find the price where quantity demanded equals quantity supplied
         profit = lambda x: -self.profit(x,capital,price,lcost,kcost)
-        result = minimize(profit, x0 = np.array([np.random.rand()]))
+        result = minimize(profit, x0 = np.array([legacy_np.rand()]))
         if result.success:
             return result.x
         else:
@@ -89,7 +89,7 @@ class ProductionFunction:
 
         result = minimize(
             cost,
-            x0=np.array([np.random.rand(), np.random.rand()]),  # Initial guesses for L (Labour) and K (Capital)
+            x0=np.array([legacy_np.rand(), legacy_np.rand()]),  # Initial guesses for L (Labour) and K (Capital)
             constraints=[constraint],
             bounds=[(0, None), (0, None)]  # L, K >= 0 
         )
@@ -125,7 +125,7 @@ class ProductionFunction:
         
         TODO: properly document method
         """
-        self.A = round(np.random.rand()*10+0.01,2)
+        self.A = round(legacy_np.rand()*10+0.01,2)
         total_output = self.A * self.production_output(labor, capital)
         return [self.A, total_output]
 
@@ -141,31 +141,31 @@ def sample_prod_function(family='linear',max_coeff=2, concave=False):
     prod_func = {}
     if family.lower() == 'linear':
         # coefficients at least 0.5 (a draw rounding to 0 printed "0.0K")
-        prod_func['L'] = round(0.5 + np.random.rand()*9.5,2)
-        prod_func['K'] = round(0.5 + np.random.rand()*9.5,2)
+        prod_func['L'] = round(0.5 + legacy_np.rand()*9.5,2)
+        prod_func['K'] = round(0.5 + legacy_np.rand()*9.5,2)
         prod_func['function_string'] = f"{prod_func['L']}L + {prod_func['K']}K"
         prod_func['function'] = lambda L,K: prod_func['L']*L + prod_func['K']*K
     elif family.lower() == 'cobb_douglas':
         # exponents at least 0.1 (draws rounding to 0 or 0.01 printed "L^0.0" and gave zero coefficients)
-        prod_func['L'] = round(0.1 + np.random.rand()*(max_coeff - 0.1),2)
-        prod_func['K'] = round(0.1 + np.random.rand()*(max_coeff - 0.1),2)
+        prod_func['L'] = round(0.1 + legacy_np.rand()*(max_coeff - 0.1),2)
+        prod_func['K'] = round(0.1 + legacy_np.rand()*(max_coeff - 0.1),2)
         prod_func['function_string'] = f"L^{prod_func['L']}K^{prod_func['K']}"
         prod_func['function'] = lambda L,K: L**prod_func['L']*K**prod_func['K']
     elif family.lower() == 'dynamic':
-        prod_func['K'] = round(0.1 + np.random.rand()*(max_coeff - 0.1),2)
-        prod_func['alpha'] = round(0.5 + np.random.rand()*(max_coeff*5 - 0.5),2)
+        prod_func['K'] = round(0.1 + legacy_np.rand()*(max_coeff - 0.1),2)
+        prod_func['alpha'] = round(0.5 + legacy_np.rand()*(max_coeff*5 - 0.5),2)
         prod_func['function_string'] = f"{prod_func['alpha']}K^{prod_func['K']}"
     elif family.lower() == 'quadratic':
-        prod_func['a'] = round(np.random.rand()*max_coeff,2)
-        prod_func['b'] = round(np.random.rand()*max_coeff,2)
+        prod_func['a'] = round(legacy_np.rand()*max_coeff,2)
+        prod_func['b'] = round(legacy_np.rand()*max_coeff,2)
         if concave:
             # strictly negative squares; scaled down so MP stays positive over a useful range
-            prod_func['c'] = -round(np.random.rand()*max_coeff/10+0.01,2)
-            prod_func['d'] = -round(np.random.rand()*max_coeff/10+0.01,2)
+            prod_func['c'] = -round(legacy_np.rand()*max_coeff/10+0.01,2)
+            prod_func['d'] = -round(legacy_np.rand()*max_coeff/10+0.01,2)
         else:
-            prod_func['c'] = round(np.random.rand()*max_coeff,2)
-            prod_func['d'] = round(np.random.rand()*max_coeff,2)
-        prod_func['e'] = round(np.random.rand()*max_coeff,2)
+            prod_func['c'] = round(legacy_np.rand()*max_coeff,2)
+            prod_func['d'] = round(legacy_np.rand()*max_coeff,2)
+        prod_func['e'] = round(legacy_np.rand()*max_coeff,2)
         prod_func['L'] = [prod_func['a'],prod_func['c'],prod_func['e']]
         prod_func['K'] = [prod_func['b'],prod_func['d'], prod_func['e']]
         var_list = ['L', 'K', 'L^2', 'K^2', 'LK']
@@ -188,20 +188,20 @@ def sample_prod_function(family='linear',max_coeff=2, concave=False):
 def sample_cost_function(family='linear', max_coeff=2):
     cost_func = {}
     if family == 'linear':
-        cost_func['a'] = round(np.random.rand()*10,2)
-        cost_func['b'] = round(np.random.rand()*10,2)
+        cost_func['a'] = round(legacy_np.rand()*10,2)
+        cost_func['b'] = round(legacy_np.rand()*10,2)
         cost_func['function_string'] = f"{cost_func['a']}Q + {cost_func['b']}"
         cost_func['function'] = lambda x: cost_func['a']*x + cost_func['b']
         cost_func['marginal_function'] = lambda x: cost_func['a']
     elif family == 'polynomial':
         # the largest power is set by max_coeff
-        cost_func['coeffs'] = [round(np.random.rand()*max_coeff,2) for i in range(max_coeff)]
+        cost_func['coeffs'] = [round(legacy_np.rand()*max_coeff,2) for i in range(max_coeff)]
         cost_func['function_string'] = ''
         for i in range(1, max_coeff):
             if cost_func['coeffs'][i] == 0:
                 continue
             cost_func['function_string'] += f"{cost_func['coeffs'][i]}Q^{i+1} + "
-        constant = round(np.random.rand()*10,2)
+        constant = round(legacy_np.rand()*10,2)
         cost_func['function_string'] += f"{cost_func['coeffs'][-1]}Q + {constant}"
 
         # cost_func['function_string'] = ' + '.join([f"{cost_func['coeffs'][i]}Q^{i+1}" if cost_func['coeffs'][i] > 0 else '' for i in range(max_coeff)]) + f" + {round(np.random.rand()*10,2)}"
@@ -214,28 +214,28 @@ def sample_supply_function(family='linear',max_coeff=2):
     supply_func = {}
     if family == 'linear':
         # slope and intercept at least 0.5: a zero intercept ("Q = 7.2P + 0.0") makes the elasticity 1 trivially
-        supply_func['a'] = round(0.5 + np.random.rand()*9.5,2)
-        supply_func['b'] = round(0.5 + np.random.rand()*9.5,2)
+        supply_func['a'] = round(0.5 + legacy_np.rand()*9.5,2)
+        supply_func['b'] = round(0.5 + legacy_np.rand()*9.5,2)
         # quantity supplied as a function of price (the elasticity formulas
         # in supply_elasticity differentiate with respect to P)
         supply_func['function_string'] = f"Q = {supply_func['a']}P + {supply_func['b']}"
     elif family == 'quadratic':
-        supply_func['a'] = round(0.05 + np.random.rand()*(max_coeff - 0.05),2)
-        supply_func['b'] = round(0.05 + np.random.rand()*(max_coeff - 0.05),2)
-        supply_func['c'] = round(0.05 + np.random.rand()*(max_coeff - 0.05),2)
+        supply_func['a'] = round(0.05 + legacy_np.rand()*(max_coeff - 0.05),2)
+        supply_func['b'] = round(0.05 + legacy_np.rand()*(max_coeff - 0.05),2)
+        supply_func['c'] = round(0.05 + legacy_np.rand()*(max_coeff - 0.05),2)
         supply_func['function_string'] = f"Q = {supply_func['a']}P^2 + {supply_func['b']}P + {supply_func['c']}"
     return supply_func
 
 def sample_agg_demand_function(family='linear',max_coeff=2):
     supply_func = {}
     if family == 'linear':
-        supply_func['a'] = round(np.random.rand()*10,2)
-        supply_func['b'] = round(np.random.rand()*10,2)
+        supply_func['a'] = round(legacy_np.rand()*10,2)
+        supply_func['b'] = round(legacy_np.rand()*10,2)
         supply_func['function_string'] = f"{supply_func['a']}P + {supply_func['b']}"
     elif family == 'quadratic':
-        supply_func['a'] = round(np.random.rand()*max_coeff,2)
-        supply_func['b'] = round(np.random.rand()*max_coeff,2)
-        supply_func['c'] = round(np.random.rand()*max_coeff,2)
+        supply_func['a'] = round(legacy_np.rand()*max_coeff,2)
+        supply_func['b'] = round(legacy_np.rand()*max_coeff,2)
+        supply_func['c'] = round(legacy_np.rand()*max_coeff,2)
         supply_func['function_string'] = f"{supply_func['a']}P^2 + {supply_func['b']}P + {supply_func['c']}"
     return supply_func
 
@@ -243,7 +243,7 @@ def find_profit_max_CD(prod_func,cost,price,capital):
     # find the price where quantity demanded equals quantity supplied
     def profit(x):
         return -CD_profit(x, prod_func, cost, price, capital)
-    result = minimize(profit, x0 = np.array([np.random.rand()]))
+    result = minimize(profit, x0 = np.array([legacy_np.rand()]))
     if result.success:
         return result.x
     else:
@@ -256,7 +256,7 @@ def find_profit_max_dyn(capital_1,discount,prod_func,price_1,price_2):
     # find the price where quantity demanded equals quantity supplied
     def profit(x):
         return -dynamic_profit(x, capital_1, discount, prod_func, price_1, price_2)
-    result = minimize(profit, x0 = np.array([np.random.rand()]))
+    result = minimize(profit, x0 = np.array([legacy_np.rand()]))
     if result.success:
         return result.x
     else:
@@ -290,7 +290,7 @@ def _pct_change_options(answer_pct):
     values = [answer_pct, -answer_pct, 0.0, overshoot]
     options = [f"{v:.2f}%" for v in values]
     answer = options[0]
-    shuffle(options)
+    pyrng.shuffle(options)
     answer_mask = [1 if o == answer else 0 for o in options]
     return [answer_mask], [options]
 
@@ -366,8 +366,8 @@ def gen_prod_decrease():
     }
 
 def gen_labor_increase():
-    alpha = round(float(np.random.uniform(0.4, 0.6)), 2)
-    labor_price_increase = int(np.random.randint(5, 15))  # 5% to 14%
+    alpha = round(float(legacy_np.uniform(0.4, 0.6)), 2)
+    labor_price_increase = int(legacy_np.randint(5, 15))  # 5% to 14%
     answer_mask, options_list = _tfp_wage_options(labor_price_increase / 100, alpha)
     return {
         'prod_fn': f"Q = A * L^{alpha} * K^{round(1 - alpha, 2)}",
@@ -378,8 +378,8 @@ def gen_labor_increase():
     }
 
 def gen_labor_decrease():
-    alpha = round(float(np.random.uniform(0.4, 0.6)), 2)
-    labor_price_decrease = int(np.random.randint(5, 15))  # 5% to 14%
+    alpha = round(float(legacy_np.uniform(0.4, 0.6)), 2)
+    labor_price_decrease = int(legacy_np.randint(5, 15))  # 5% to 14%
     answer_mask, options_list = _tfp_wage_options(-labor_price_decrease / 100, alpha)
     return {
         'prod_fn': f"Q = A * L^{alpha} * K^{round(1 - alpha, 2)}",

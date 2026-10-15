@@ -1,7 +1,7 @@
-import random
 from scipy.optimize import minimize, Bounds, LinearConstraint
 import numpy as np
 import sympy as sp
+from autosteer.filler_tools.rng import legacy_np, pyrng
 
 class UtilityFunction:
     """
@@ -66,17 +66,17 @@ class UtilityFunction:
 
     def _gen_random_coefficients(self):
         if self.family == 'linear':
-            return np.random.rand(self.num_inputs)
+            return legacy_np.rand(self.num_inputs)
         elif self.family == 'cobb-douglas':
-            return np.round(np.random.rand(self.num_inputs),2)
+            return np.round(legacy_np.rand(self.num_inputs),2)
         elif self.family == 'leontief':
-            return np.random.rand(self.num_inputs)
+            return legacy_np.rand(self.num_inputs)
         elif self.family == 'log':
-            return np.random.rand(1)
+            return legacy_np.rand(1)
         elif self.family == 'exponential':
-            return np.random.rand(1)
+            return legacy_np.rand(1)
         elif self.family == 'quadratic':
-            return np.random.rand(self.num_inputs * 2)
+            return legacy_np.rand(self.num_inputs * 2)
         else:
             raise ValueError(f"Unsupported family: {self.family}")
 
@@ -123,7 +123,7 @@ class UtilityFunction:
         - ValueError: If the optimization fails.
         """
         if initial_guess is None:
-            initial_guess = np.random.rand(self.num_inputs)
+            initial_guess = legacy_np.rand(self.num_inputs)
         if p is None:
             p = np.array([0]*self.num_inputs)
         neg_func = lambda x: -self.utility_func(x)
@@ -195,9 +195,9 @@ class DemandFunction:
         self.kind = kind
         # Generate random coefficients for the demand function
         if kind == 'linear':
-            self.coefficients = [random.uniform(-10, -1), random.uniform(1, 10)]  # Ensure the slope is negative
+            self.coefficients = [pyrng.uniform(-10, -1), pyrng.uniform(1, 10)]  # Ensure the slope is negative
         else:  # Quadratic
-            self.coefficients = [random.uniform(-10, -1), random.uniform(-10, -1), random.uniform(1, 10)]  # Ensure the quadratic term is negative
+            self.coefficients = [pyrng.uniform(-10, -1), pyrng.uniform(-10, -1), pyrng.uniform(1, 10)]  # Ensure the quadratic term is negative
 
     @classmethod
     def from_utility_fn(cls, utility_function: UtilityFunction, budget: float):
@@ -317,19 +317,19 @@ class DemandFunction:
 def sample_utility_function(family='linear',max_coeff=2):
     prod_func = {}
     if family.lower() == 'linear':
-        prod_func['x'] = round(np.random.rand()*10,2)
-        prod_func['y'] = round(np.random.rand()*10,2)
+        prod_func['x'] = round(legacy_np.rand()*10,2)
+        prod_func['y'] = round(legacy_np.rand()*10,2)
         prod_func['function_string'] = f"{prod_func['x']}x + {prod_func['y']}y"
     elif family.lower() == 'cobb_douglas':
-        prod_func['x'] = round(np.random.rand()*max_coeff,2)
-        prod_func['y'] = round(np.random.rand()*max_coeff+0.01,2)
+        prod_func['x'] = round(legacy_np.rand()*max_coeff,2)
+        prod_func['y'] = round(legacy_np.rand()*max_coeff+0.01,2)
         prod_func['function_string'] = f"x^{prod_func['x']}y^{prod_func['y']}"
     elif family.lower() == 'quadratic':
-        prod_func['a'] = round(np.random.rand()*max_coeff,2)
-        prod_func['b'] = round(np.random.rand()*max_coeff,2)
-        prod_func['c'] = round(np.random.rand()*max_coeff,2)
-        prod_func['d'] = round(np.random.rand()*max_coeff,2)
-        prod_func['e'] = round(np.random.rand()*max_coeff,2)
+        prod_func['a'] = round(legacy_np.rand()*max_coeff,2)
+        prod_func['b'] = round(legacy_np.rand()*max_coeff,2)
+        prod_func['c'] = round(legacy_np.rand()*max_coeff,2)
+        prod_func['d'] = round(legacy_np.rand()*max_coeff,2)
+        prod_func['e'] = round(legacy_np.rand()*max_coeff,2)
         prod_func['x'] = [prod_func['a'],prod_func['c'],prod_func['e']]
         prod_func['y'] = [prod_func['b'],prod_func['d'], prod_func['e']]
         var_list = ['x', 'y', 'x^2', 'y^2', 'xy']

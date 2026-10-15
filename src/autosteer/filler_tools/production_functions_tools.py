@@ -4,6 +4,7 @@ from .fill_registry import FillRegister
 from .utilities.filler_utils import rng
 from .utilities.filler_utils import gen_answer_and_options
 from .utilities.mistake_options import mistake_options, pick_mistakes
+from autosteer.filler_tools.rng import legacy_np
 
 function_registry = FillRegister()
 
@@ -16,12 +17,12 @@ def gen_marginal_cost(metadata):
     # options are distinct; the wage never ends in a 0 cent (the sampler would print "8.4").
     while True:
         prod_fn = sample_prod_function(family)
-        cost = round(np.random.rand()*9.5+0.5,2)
-        capital = round(np.random.rand()*9.5+0.5,2)
-        fixed_cost = round(np.random.rand()*100+1,2)
+        cost = round(legacy_np.rand()*9.5+0.5,2)
+        capital = round(legacy_np.rand()*9.5+0.5,2)
+        fixed_cost = round(legacy_np.rand()*100+1,2)
         if family == 'linear':
             marginal_cost = round(cost/prod_fn['L'],2)
-            options = [prod_fn['L'],prod_fn['K'],round(marginal_cost*np.random.rand(),2),marginal_cost]
+            options = [prod_fn['L'],prod_fn['K'],round(marginal_cost*legacy_np.rand(),2),marginal_cost]
         else:
             # VC(Q) = w K^(-b/a) Q^(1/a); MC = (w/a) K^(-b/a) Q^(1/a - 1).
             # 1/a is used exactly (it was rounded to 2 dp inside the coefficient).
@@ -29,7 +30,7 @@ def gen_marginal_cost(metadata):
             expon = round(inv_a,2)
             coefficient = round(((1/(capital**prod_fn['K']))**inv_a)*cost/prod_fn['L'],2)
             marginal_cost = f"{coefficient}Q^{round(inv_a-1,2)}"
-            options = [f"{prod_fn['L']}Q^{expon}",f"{prod_fn['K']}Q^{round(expon-1,2)}",f"{round(coefficient*np.random.choice([np.random.uniform(0.3, 0.8), np.random.uniform(1.25, 2)]),2)}Q^{round(expon-1,2)}",marginal_cost]
+            options = [f"{prod_fn['L']}Q^{expon}",f"{prod_fn['K']}Q^{round(expon-1,2)}",f"{round(coefficient*legacy_np.choice([legacy_np.uniform(0.3, 0.8), legacy_np.uniform(1.25, 2)]),2)}Q^{round(expon-1,2)}",marginal_cost]
         # (and not 'Q^0.0': an exponent 1/a - 1 rounding to 0)
         coef_ok = family == 'linear' or (0.05 <= coefficient <= 1000 and abs(inv_a - 1) >= 0.05)
         if coef_ok and len({str(o) for o in options}) == len(options) and round(cost * 100) % 10:
@@ -55,19 +56,19 @@ def gen_average_cost(metadata):
     # options are distinct; the wage never ends in a 0 cent (the sampler would print "8.4").
     while True:
         prod_fn = sample_prod_function(family)
-        cost = round(np.random.rand()*9.5+0.5,2)
-        capital = round(np.random.rand()*9.5+0.5,2)
-        fixed_cost = round(np.random.rand()*100+1,2)
+        cost = round(legacy_np.rand()*9.5+0.5,2)
+        capital = round(legacy_np.rand()*9.5+0.5,2)
+        fixed_cost = round(legacy_np.rand()*100+1,2)
         if family == 'linear':
             average_cost = round(cost/prod_fn['L'],2)
-            options = [prod_fn['L'],prod_fn['K'],round(average_cost*np.random.rand(),2),average_cost]
+            options = [prod_fn['L'],prod_fn['K'],round(average_cost*legacy_np.rand(),2),average_cost]
         else:
             # AC(Q) = w K^(-b/a) Q^(1/a - 1) + F/Q, with 1/a used exactly
             inv_a = 1/prod_fn['L']
             expon = round(inv_a,2)
             coefficient = round(((1/(capital**prod_fn['K']))**inv_a)*cost,2)
             average_cost = f"{coefficient}Q^{round(inv_a-1,2)}+{fixed_cost}/Q"
-            options = [f"{prod_fn['L']}Q^{expon}+{fixed_cost}/Q",f"{prod_fn['K']}Q^{expon}",f"{round(coefficient*np.random.choice([np.random.uniform(0.3, 0.8), np.random.uniform(1.25, 2)]),2)}Q^{round(expon-1,2)}+{fixed_cost}/Q",average_cost]
+            options = [f"{prod_fn['L']}Q^{expon}+{fixed_cost}/Q",f"{prod_fn['K']}Q^{expon}",f"{round(coefficient*legacy_np.choice([legacy_np.uniform(0.3, 0.8), legacy_np.uniform(1.25, 2)]),2)}Q^{round(expon-1,2)}+{fixed_cost}/Q",average_cost]
         # (and not 'Q^0.0': an exponent 1/a - 1 rounding to 0)
         coef_ok = family == 'linear' or (0.05 <= coefficient <= 1000 and abs(inv_a - 1) >= 0.05)
         if coef_ok and len({str(o) for o in options}) == len(options) and round(cost * 100) % 10:
@@ -90,9 +91,9 @@ def gen_returns_to_scale(metadata):
     if not family:
         family = 'Cobb_Douglas'
     prod_fn = sample_prod_function(family)
-    cost = round(np.random.rand()*10,2)
-    capital = round(np.random.rand()*10,2)
-    fixed_cost = round(np.random.rand()*100,2)
+    cost = round(legacy_np.rand()*10,2)
+    capital = round(legacy_np.rand()*10,2)
+    fixed_cost = round(legacy_np.rand()*100,2)
     rts=0
     if family == 'linear':
         rts = "Returns to scale are Constant"
@@ -126,9 +127,9 @@ def gen_returns_to_scale(metadata):
 def gen_output_elasticity(metadata):
     family = metadata['type']
     prod_fn = sample_prod_function(family)
-    capital = round(np.random.rand()*9.5+0.5,2)   # K = 0.0 made the linear key equal to the '1' distractor
+    capital = round(legacy_np.rand()*9.5+0.5,2)   # K = 0.0 made the linear key equal to the '1' distractor
     if family == 'linear':
-        capital = int(np.random.randint(2, 11))   # bK then has 2 decimals and is shown exactly (Review)
+        capital = int(legacy_np.randint(2, 11))   # bK then has 2 decimals and is shown exactly (Review)
     elasticity = 0
     if family == 'linear':
         # Review: bK is exact (K is a whole number; bK was rounded to 2 decimals unannounced), and the distractors are
@@ -146,7 +147,7 @@ def gen_output_elasticity(metadata):
         elasticity = round(prod_fn['L'],2)
         options = [elasticity]
         for cand in (1.0, prod_fn['K'], round(prod_fn['L'] + prod_fn['K'], 2), 0.5,
-                     round(np.random.rand()*prod_fn['L'], 2), 2.0):
+                     round(legacy_np.rand()*prod_fn['L'], 2), 2.0):
             if len(options) < 4 and all(abs(float(cand) - float(o)) > 0.005 for o in options):
                 options.append(cand)
     answer = elasticity
@@ -247,9 +248,9 @@ def gen_cost_minimization(metadata, family = 'Cobb_Douglas'):
     no_answer =True
     while no_answer:
         prod_fn = ProductionFunction(family) 
-        Y = round(np.random.rand() * 50 + 10, 2) # (Y) min output
-        lcost = round(np.random.rand() * 10 + 0.5, 2)  # labor cost per unit (bounded away from 0)
-        kcost = round(np.random.rand() * 10 + 0.5, 2)  # capital cost per unit
+        Y = round(legacy_np.rand() * 50 + 10, 2) # (Y) min output
+        lcost = round(legacy_np.rand() * 10 + 0.5, 2)  # labor cost per unit (bounded away from 0)
+        kcost = round(legacy_np.rand() * 10 + 0.5, 2)  # capital cost per unit
 
         if family == 'Cobb_Douglas':
             # Closed form (a convention; SLSQP often failed or stopped
@@ -429,7 +430,7 @@ def gen_supply_elasticity(metadata):
     # the key of a linear supply with a positive intercept is below 1). Distractors are now mistakes in the formula,
     # three chosen at random; draws with an elasticity below 0.05 or too few distinct mistakes are redrawn.
     while True:
-        price = round(np.random.rand()*10+0.01,2)
+        price = round(legacy_np.rand()*10+0.01,2)
         if metadata['type'] == "Linear_supply_given":
             family = 'linear'
             sup_fn = sample_supply_function(family)
@@ -473,8 +474,8 @@ def gen_comp_stat_cobb(metadata):
     prod_fn = sample_prod_function(family,max_coeff=1)
     while not 0.05 <= prod_fn['L'] <= 0.95:  # exponent 0 or 1 divides by zero below
         prod_fn = sample_prod_function(family,max_coeff=1)
-    capital = round(np.random.rand()*10+0.01,2)
-    price = round(np.random.rand()*10+0.01,2)
+    capital = round(legacy_np.rand()*10+0.01,2)
+    price = round(legacy_np.rand()*10+0.01,2)
     coeff = capital**prod_fn['K']*price
     exp = 1/(prod_fn['L']-1)
     const = exp*(1/(coeff*prod_fn['L']))**exp
@@ -493,7 +494,7 @@ def gen_comp_stat_cobb(metadata):
 def gen_comp_stat_leon(metadata):
     family = 'Leonteif'
     prod_fn = ProductionFunction(family)
-    price = round(np.random.rand()*10+0.01,2)
+    price = round(legacy_np.rand()*10+0.01,2)
     coeff = (1/(0.5*price*(1/prod_fn.L)**0.5))**-2
     exp = -2
     const = exp*coeff
@@ -540,9 +541,9 @@ def prod_fn_to_mrp(prod_function,K):
 def gen_labor_tax_distortion(metadata):
     variant = metadata.get("type", "labor_change")
 
-    A = round(np.random.uniform(6, 12), 2)
-    w = round(np.random.uniform(1.0, 3.0), 2)
-    tau = round(np.random.uniform(0.1, 0.5), 2)  
+    A = round(legacy_np.uniform(6, 12), 2)
+    w = round(legacy_np.uniform(1.0, 3.0), 2)
+    tau = round(legacy_np.uniform(0.1, 0.5), 2)  
 
     l_no_tax = A / 2
     l_with_tax = A / (2 + tau)
@@ -609,7 +610,7 @@ def gen_duality_linked_combined(metadata):
         }
 
     elif variant == "type2":
-        theta = round(np.random.uniform(0.3, 0.7), 2)
+        theta = round(legacy_np.uniform(0.3, 0.7), 2)
         pf = ProductionFunction("Cobb_Douglas", max_coeff=2)
         pf.K = theta
         pf.L = round(1 - theta, 2)
@@ -618,8 +619,8 @@ def gen_duality_linked_combined(metadata):
         prod_fn = f"Y = K^{pf.K} * L^{pf.L}"
         label = "optimal fraction of total cost spent on labor"
 
-        w = round(np.random.uniform(1.0, 4.0), 2)
-        r = round(np.random.uniform(1.0, 4.0), 2)
+        w = round(legacy_np.uniform(1.0, 4.0), 2)
+        r = round(legacy_np.uniform(1.0, 4.0), 2)
 
         mask, opts = gen_answer_and_options(correct, 4)
         return {
@@ -634,9 +635,9 @@ def gen_duality_linked_combined(metadata):
         }
 
     elif variant == "type3":
-        w = round(np.random.uniform(1.0, 4.0), 2)
-        beta = round(np.random.uniform(0.4, 0.9), 2)
-        Y = round(np.random.uniform(10, 100), 2)
+        w = round(legacy_np.uniform(1.0, 4.0), 2)
+        beta = round(legacy_np.uniform(0.4, 0.9), 2)
+        Y = round(legacy_np.uniform(10, 100), 2)
         pf = ProductionFunction("Cobb_Douglas", max_coeff=2)
         pf.K = 0
         pf.L = beta

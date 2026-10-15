@@ -33,7 +33,6 @@ The templates are now written here (code templates):
       count hundreds of dollars, e.g. $700 per hour).
   quadratic: the problem stated bare, without a story ("Maximize f(x, y) = ... subject to ..."), three phrasings.
 """
-import random
 from fractions import Fraction
 from itertools import combinations
 from string import ascii_uppercase
@@ -45,6 +44,7 @@ from . import code_templates as ct
 from .fill_registry import FillRegister
 from .utilities import filler_utils
 from .utilities.story_utils import num, pick_apart
+from autosteer.filler_tools.rng import pyrng
 
 ALPHABET = list(ascii_uppercase)
 function_registry = FillRegister()
@@ -363,11 +363,11 @@ def discrete_opt_values(metadata):
     num_options = 2 if 'two_options' in metadata['tags'] else 3
 
     if metadata['domain'] == 'base':
-        random_numbers = random.sample(range(-100, 100), num_options)
+        random_numbers = pyrng.sample(range(-100, 100), num_options)
     elif metadata['domain'] == 'sports':
-        random_numbers = random.sample(range(1, 100), num_options)
+        random_numbers = pyrng.sample(range(1, 100), num_options)
     elif metadata['domain'] == 'finance':
-        random_numbers = [round(random.uniform(0, 1), 2) for _ in range(num_options)]
+        random_numbers = [round(pyrng.uniform(0, 1), 2) for _ in range(num_options)]
     else:
         raise ValueError(f"Unknown domain {metadata['domain']}")
 
