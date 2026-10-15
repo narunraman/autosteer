@@ -38,7 +38,7 @@ def _apart(v, vals):
     return all(abs(v - w) >= max(1.0, 0.05 * max(v, w)) for w in vals)
 
 
-# The question states the rounding (BAYES_NOTE, appended at load time by sampler.template_fixes), and every option
+# The question states the rounding (BAYES_NOTE, stated in the stored templates), and every option
 # has two decimals. At most one distractor is a number copied from the question (P(B|A) or P(A)); the other is a
 # computed mistake (the wrong inversion P(B|A) P(B) / P(A), the joint P(B|A) P(A), or P(A) / P(B), which leaves out
 # the likelihood), so the key is not singled out as the only option that needs a computation.

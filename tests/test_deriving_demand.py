@@ -10,7 +10,7 @@ import pytest
 
 from helpers import sample
 from econ_solvers import cobb_douglas_marshallian
-from autosteer.sampler.template_fixes import y_good_name
+from conventions import y_good_name
 
 OPT = re.compile(r'^(-?[\d.]+)/p_([xy])$')
 

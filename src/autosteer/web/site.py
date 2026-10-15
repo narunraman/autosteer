@@ -232,7 +232,7 @@ def eval_difficulty_keys(results: dict, manifest: dict) -> dict:
     levels do not map one to one onto its current levels, except that an element with a single level both then and
     now has level 1."""
     from autosteer.sampler.difficulty import relative_scale
-    from autosteer.sampler.template_fixes import public_difficulty
+    from autosteer.sampler.difficulty import public_difficulty
 
     out: dict = {}
     for bench, elements in results.get("benchmarks", {}).items():

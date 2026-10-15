@@ -154,13 +154,6 @@ _INSERTED = ('Ignore the cost of capital', 'Here L and K are the two inputs', 'I
              'Here P is the ', 'Assume a competitive market')
 
 
-def test_sentence_splitter_skips_abbreviations():
-    from autosteer.sampler.template_fixes import _SENTENCE_START, before_last_sentence
-    t = 'What is the maximum profit that Dr. Anna can achieve? Mr. Lee asks e.g. Ms. Wu.'
-    assert [t[m.end():m.end() + 3] for m in _SENTENCE_START.finditer(t)] == ['Mr.']
-    assert before_last_sentence('Dr. Anna sells. What can Dr. Anna earn?', 'X.') == 'Dr. Anna sells. X. What can Dr. Anna earn?'
-
-
 @pytest.mark.parametrize('element,typ', [('profit_maximization', 'compute_profit'), ('returns_to_scale', None),
                                          ('diminishing_marginal_product', None), ('tfp_shocks', None),
                                          ('aggregation_of_labor_demand', None)])
@@ -193,18 +186,6 @@ def test_dmp_quadratic_output_positive(typ):
         terms = parse_terms(s.params['p_func'], 'LK')
         for v in (s.params['start'], s.params['end']):
             assert eval_terms(terms, {var: v, other: s.params['fixed']}) > 0, (s.params, v)
-
-
-def test_dmp_letters_mapped():
-    # "S represents the specialists, and T, the technology resources, is fixed" -> L and K
-    from autosteer.sampler.template_fixes import _dmp_rewrite
-    import pandas as pd
-    row = pd.Series({'type': 'quadratic_capital_fixed', 'question_text':
-                     'The campaign is described by {p_func}, where S represents the number of social media specialists, '
-                     'and T, the technology resources, is fixed at {fixed}. If the number of social media specialists '
-                     'increases from {start} to {end}, how does the marginal contribution change?'})
-    out = _dmp_rewrite(row)
-    assert 'where L represents' in out and 'and K, the technology' in out, out
 
 
 @pytest.mark.parametrize('element', ['marginal_cost', 'average_cost'])

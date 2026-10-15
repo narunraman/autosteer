@@ -104,7 +104,7 @@ def arc_elasticity(q0, q1, p0, p1):
 def gen_elasticity_values(metadata):
     """
     Price elasticity of demand by the simple percentage-change formula, relative to the initial values (the
-    templates say so: template_fixes inserts PRICE_ELASTICITY_METHOD). Quantities are whole numbers (they count
+    templates say so: the stored templates state PRICE_ELASTICITY_METHOD). Quantities are whole numbers (they count
     clients, units, ...). Prices change by at least 5% and the elasticity is between -0.1 and -10 in size, so the
     key never rounds to 0. Distractors are common mistakes (the inverse ratio, the slope dQ/dP, percentage changes
     relative to the final values, double, half), at least 0.05 and 10% from the key, from each other and from the

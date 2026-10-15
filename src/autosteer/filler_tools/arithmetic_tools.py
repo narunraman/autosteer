@@ -65,7 +65,7 @@ def labels(element: str) -> dict[str, dict]:
 
 
 # mult_div: every story or explicit template that is not an exact division asks for a rounded number; the
-# convention is stated in the question (appended at load time by sampler.template_fixes, stripped again here so the
+# convention is stated in the question (stated in the stored templates, stripped again here so the
 # label lookup sees the template text of the data directory).
 ROUNDING_NOTE = ' If the result is not a whole number, round it to two decimal places.'
 
@@ -73,7 +73,7 @@ ROUNDING_NOTE = ' If the result is not a whole number, round it to two decimal p
 # and then ask for a magnitude ("how far", "how much do you owe") have no consistent reading: the keyed signed sum
 # is not the distance or amount asked for. Only the stories below, which ask for a signed quantity (a balance, a
 # score, an elevation change) or state the sign convention, are kept; the other story templates with a
-# negative slot are dropped (sampler.template_fixes). Explicit arithmetic ("-69 - 11") is unaffected.
+# negative slot are dropped from the stored templates. Explicit arithmetic ("-69 - 11") is unaffected.
 SIGNED_STORY_KEEP = re.compile(
     r'think of your debt as negative numbers|start with negative points|bank balance which is -\{a\}'
     r'|overdrawn by -\{a\} dollars\. You deposit|elevation of -\{a\} feet')

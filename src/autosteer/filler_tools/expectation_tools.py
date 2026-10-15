@@ -44,7 +44,7 @@ def labels() -> dict:
         return {r['template']: r for r in csv.DictReader(f)}
 
 
-# Conventions stated in the question (appended at load time by sampler.template_fixes; stripped again for the label
+# Conventions stated in the question (stated in the stored templates; stripped again for the label
 # lookup): a coin or die is fair, and a die has six faces numbered 1 to 6.
 FAIR_COIN = ' Assume the coin is fair.'
 FAIR_DIE = ' Assume a fair six-sided die with faces numbered 1 to 6.'

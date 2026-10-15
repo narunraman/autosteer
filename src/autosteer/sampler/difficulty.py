@@ -1,6 +1,6 @@
 """Relative difficulty: the difficulty users see.
 
-Templates carry raw difficulty levels (after template_fixes.public_difficulty): STEER's are grade-like (0 to 13),
+Templates carry raw difficulty levels (after public_difficulty, below): STEER's are grade-like (0 to 13),
 other elements use small integers of their own. Raw levels mean different things in different elements, so every
 public surface (the dataset `difficulty` column, /api/sample and /api/elements, the site) shows a relative level
 instead: an element's distinct raw levels, sorted ascending, numbered 1..k, so 1 is the element's easiest level and
@@ -12,6 +12,22 @@ An element's raw levels are the manifest's `difficulty_levels` (pass `manifest` 
 from __future__ import annotations
 
 import os
+
+
+# Published difficulty is 0/1/2. Some elements use their own internal levels, which the fillers branch on; they are
+# mapped only in the sampler output (and in SamplerConfig filtering / the manifest).
+DIFFICULTY_MAPS: dict[str, dict[int, int]] = {
+    # 0: 2 goods, prices given; 1: 2 goods, functional form; 3: 3 goods, linear utility, prices given;
+    # 4: 3 goods, prices given; 2: 3 goods, functional form
+    'deriving_hicksian_demand': {0: 0, 1: 1, 3: 1, 4: 1, 2: 2},
+    # 5: single prospect; 6: scenarios with a population / several options
+    'expected_value_counts_aug2024': {5: 0, 6: 1},
+}
+
+
+def public_difficulty(element: str, level) -> int:
+    level = int(level)
+    return DIFFICULTY_MAPS.get(element, {}).get(level, level)
 
 _CACHE: dict = {}
 

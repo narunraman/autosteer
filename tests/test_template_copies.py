@@ -11,7 +11,7 @@ import pytest
 
 from autosteer.sampler import ElementSampler
 from autosteer.sampler.generator import SAMPLING_BALANCE
-from autosteer.sampler.template_fixes import exact_copies
+from conventions import exact_copies
 
 N = 1200
 

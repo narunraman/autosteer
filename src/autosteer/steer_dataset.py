@@ -3,7 +3,7 @@
 # Built-in packages
 from itertools import combinations
 import os
-from typing import Optional, Union
+from typing import Union
 # External packages
 import pandas as pd
 from tqdm import tqdm

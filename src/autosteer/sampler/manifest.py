@@ -9,7 +9,7 @@ from autosteer.steer_dataset import Dataset
 from autosteer.paths import data_dir, templates_dir
 from autosteer.filler_tools import function_registry
 from autosteer.filler_tools import code_templates
-from .template_fixes import apply_template_fixes, public_difficulty
+from .difficulty import public_difficulty
 
 MANIFEST_PATH: str | None = None   # set to write the manifest somewhere else (tests); default: in the data directory
 
@@ -57,23 +57,20 @@ def _template_names_on_disk() -> set[str]:
 
 
 def load_raw_templates(element_name: str) -> Dataset:
-    """The element's templates before the load-time fixes: its code templates if it has any (they replace a
-    template set in the data directory); for a composite element the concatenated corrected templates of its source
-    elements (code_templates.register_composite); else templates/<element>/ of the data directory."""
+    """The element's templates: its code templates if it has any (they replace a template set in the data
+    directory); for a composite element the concatenated templates of its source elements
+    (code_templates.register_composite); else templates/<element>/ of the data directory (stored corrected)."""
     if code_templates.has_code_templates(element_name):
         return code_templates.dataset(element_name)
     if code_templates.is_composite(element_name):
         return code_templates.composite_dataset(
-            element_name, lambda source: apply_template_fixes(source, load_raw_templates(source)))
+            element_name, load_raw_templates)
     return Dataset.load(os.path.join(templates_dir(), element_name))
 
 
 def _build_entry(element_name: str) -> dict:
     """Build a manifest entry from the template dataset (source of truth for sampling)."""
-    if code_templates.has_code_templates(element_name) or code_templates.is_composite(element_name):
-        dataset = apply_template_fixes(element_name, load_raw_templates(element_name))
-    else:
-        dataset = load_raw_templates(element_name)   # stored corrected (scripts/migrations/fold_template_fixes.py)
+    dataset = load_raw_templates(element_name)
 
     q = dataset.questions
     return {

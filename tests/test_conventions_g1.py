@@ -108,7 +108,6 @@ def test_backward_induction_mislabelled_treatment_stories_dropped():
                  'whether to stick with her experimental protocol, earning {p1_round2}',
                  'persist with it, which will grant Dr. Smith {p1_round1}'):
         assert not any(frag in t for t in texts), frag
-    assert set(ma.TEMPLATE_DROPS['backward_induction']) and set(ma.TEMPLATE_DROPS['trigger'])
 
 
 # ----------------------------------------------------------------------------- trigger

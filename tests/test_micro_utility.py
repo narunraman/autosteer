@@ -10,7 +10,7 @@ import re
 
 from helpers import sample
 from autosteer.filler_tools.micro_utility_tools import TWO_BUNDLES
-from autosteer.sampler.template_fixes import _names_x_and_y
+from conventions import _names_x_and_y
 
 BUNDLE = re.compile(r'^x = (\d+), y = (\d+)$')
 NUM = r'(\d+(?:\.\d+)?)'

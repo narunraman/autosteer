@@ -347,7 +347,7 @@ def gen_diminishing_marginal_product(metadata):
     input. All numbers are computed from the displayed (rounded) parameters.
     """
     vary_labor = 'capital_fixed' in metadata['type']
-    var_term = 'L' if vary_labor else 'K'  # the templates name the inputs L and K (template_fixes._dmp_rewrite)
+    var_term = 'L' if vary_labor else 'K'  # the templates name the inputs L and K (the stored templates)
     if 'cobb_douglas' in metadata['type']:
         family = 'cobb_douglas'
     elif 'quadratic' in metadata['type']:

@@ -7,6 +7,9 @@ the data and the runtime no longer applies them.
 Elements whose templates are written in code (code_templates) and composite elements are skipped: their data
 folders, if any, are not read. The corrections are not idempotent, so this is run once, together with the change
 that stops applying them at load. data_files.json is re-pinned afterwards (data_files.write_list).
+
+It ran at commit 8d15105; the correction modules it imports were deleted in the next commit, so it is kept as
+a record of how templates/ was made, and runs only in a checkout of that commit.
 """
 import argparse
 import warnings

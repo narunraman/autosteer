@@ -17,7 +17,7 @@ from autosteer.steer_dataset import Dataset
 
 from .config import SamplerConfig
 from .manifest import load_manifest, get_sampleable_elements, load_raw_templates
-from .template_fixes import apply_template_fixes, public_difficulty
+from .difficulty import public_difficulty
 
 
 
@@ -222,7 +222,7 @@ class ElementSampler:
     Option order is shuffled for every sampled question (uniform correct
     position) unless shuffle_options=False. Samples whose options collide
     after rounding to 2 decimals are redrawn (up to max_attempts times).
-    Templates are corrected at load time (template_fixes.py), and templates
+    Templates are stored corrected (scripts/migrations/fold_template_fixes.py), and templates
     with placeholders the filler never fills are skipped.
     """
 
@@ -461,7 +461,7 @@ class ElementSampler:
                     dataset = _SHARED_TEMPLATES.get(key)
                     if dataset is None:
                         if fixed is None:
-                            fixed = apply_template_fixes(element_name, load_raw_templates(element_name))
+                            fixed = load_raw_templates(element_name)
                         dataset = self._drop_unfillable(element_name, fixed)
                         # templates loaded under an older manifest are not needed by new samplers: let them go
                         for old in [k for k in _SHARED_TEMPLATES if k[1] != key[1]]:

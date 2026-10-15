@@ -9,7 +9,7 @@ import pytest
 
 from helpers import sample
 from autosteer.sampler import ElementSampler
-from autosteer.sampler import template_fixes as tf
+import conventions as tf
 from autosteer.filler_tools import tax_incidence_tools as ti
 
 

@@ -11,7 +11,7 @@ from autosteer.formatting import format_value
 from autosteer.filler_tools import categorical_syllogism_tools as cs
 from autosteer.filler_tools.arithmetic_tools import NEG_SLOT, ROUNDING_NOTE, labels
 from autosteer.filler_tools.probability_tools import BAYES_NOTE
-from autosteer.sampler.template_fixes import COMPLEMENT_REWORDS
+from conventions import COMPLEMENT_REWORDS
 from helpers import get_sampler, sample
 
 N = 300

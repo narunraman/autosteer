@@ -54,7 +54,7 @@ def _record(element: str) -> dict:
 def _templates(element: str) -> list[dict]:
     """The element's templates as the sampler uses them (after load-time fixes, unfillable ones dropped)."""
     from autosteer.sampler.difficulty import relative_scale
-    from autosteer.sampler.template_fixes import public_difficulty
+    from autosteer.sampler.difficulty import public_difficulty
 
     key = (element, load_manifest().get("generated_at"))
     with _LOCK:

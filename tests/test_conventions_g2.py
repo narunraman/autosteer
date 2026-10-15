@@ -1,4 +1,4 @@
-"""Review (October 2026), behavioural elements: load-time template fixes in sampler/behav_fixes.py.
+"""Review (October 2026), behavioural elements: conventions stored in their templates (formerly load-time fixes).
 
 Code-template fixes have their tests in the element's own test file (sunk_cost, loss_aversion, endowment_effect,
 ambiguity_aversion, independence)."""
@@ -7,7 +7,7 @@ import re
 import pytest
 
 from autosteer.sampler import ElementSampler
-from autosteer.sampler.behav_fixes import GAMBLERS_FALLACY_DROPS, swap_lottery_order
+from conventions import GAMBLERS_FALLACY_DROPS, swap_lottery_order
 
 
 @pytest.fixture(scope='module')

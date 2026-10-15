@@ -79,7 +79,7 @@ def element_cells(sampler, element: str, pool: str = "questions", exclude=frozen
     """Sorted (type, domain, raw public difficulty) combinations present in the element's templates (minus
     `exclude`, template row ids of the pool). The rows carry the relative level of the raw one (one per raw level,
     so the cells are the same); seeds are derived from the raw level."""
-    from autosteer.sampler.template_fixes import public_difficulty
+    from autosteer.sampler.difficulty import public_difficulty
 
     q = _pool(sampler, element, pool)
     if q is None:
@@ -119,7 +119,7 @@ def few_shot_plan(sampler, element: str, seed: int, max_held_out: int = 5, prote
     import random
 
     from autosteer.sampler.generator import derive_seed
-    from autosteer.sampler.template_fixes import public_difficulty
+    from autosteer.sampler.difficulty import public_difficulty
 
     q = _pool(sampler, element, "questions")
     ex = _pool(sampler, element, "examples")

@@ -14,7 +14,7 @@ import pytest
 
 from helpers import sample
 from autosteer.sampler import ElementSampler
-from autosteer.sampler.consumer_template_fixes import (
+from conventions import (
     AGG_DEMAND_CONVENTION, AGG_OFFER_CONVENTION, DERIVING_DEMAND_PRICES, HICKSIAN_ROUNDING, LAW_OF_DEMAND_CONVENTION,
     MARGINAL_UTILITY_FORMAT, MRS_FORMAT, names_good)
 from autosteer.filler_tools.micro_utility_tools import no_feature_majority
