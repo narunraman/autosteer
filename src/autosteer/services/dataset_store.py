@@ -11,7 +11,7 @@ import pandas as pd
 from autosteer import dataset_io
 
 from autosteer import steer_dataset as sd
-from autosteer.directory_utils import DATA_PATH
+from autosteer import paths
 from autosteer.schemas import DatasetKind, Metadata, OptionRecord, QuestionRecord
 
 
@@ -42,8 +42,8 @@ def _normalized_question_text(text: str) -> str:
 class DatasetStore:
     """Filesystem-backed access to STEER Dataset artifacts."""
 
-    def __init__(self, data_root: str | os.PathLike = DATA_PATH):
-        self.data_root = Path(data_root)
+    def __init__(self, data_root: str | os.PathLike | None = None):
+        self.data_root = Path(data_root) if data_root is not None else paths.data_dir()
 
     def kind_path(self, kind: DatasetKind) -> Path:
         if kind not in DATASET_KINDS:

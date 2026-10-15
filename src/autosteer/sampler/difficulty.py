@@ -22,7 +22,8 @@ def _manifest() -> dict:
 
     def stamp():
         try:
-            return m.MANIFEST_PATH, os.stat(m.MANIFEST_PATH).st_mtime_ns
+            path = m.manifest_path()
+            return path, os.stat(path).st_mtime_ns
         except OSError:
             return None
 

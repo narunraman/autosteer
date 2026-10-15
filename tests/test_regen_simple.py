@@ -21,7 +21,7 @@ import sys
 import pandas as pd
 import pytest
 
-from autosteer.directory_utils import TEMPLATES_PATH
+from autosteer.paths import templates_dir
 from autosteer.filler_tools.arithmetic_tools import base_template, keep_add_sub_template
 from helpers import get_sampler, sample
 
@@ -48,7 +48,7 @@ arith = _load('audit_arith', 'tests/solvers/steer/solvers/arith_prob.py')
 
 
 def labels(element):
-    return pd.read_csv(os.path.join(TEMPLATES_PATH, element, 'template_labels.csv'), keep_default_na=False)
+    return pd.read_csv(os.path.join(templates_dir(), element, 'template_labels.csv'), keep_default_na=False)
 
 
 def template_questions(element):

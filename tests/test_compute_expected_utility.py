@@ -21,14 +21,14 @@ import re
 import pandas as pd
 
 from helpers import get_sampler, sample
-from autosteer.directory_utils import TEMPLATES_PATH
+from autosteer.paths import templates_dir
 from autosteer.sampler import SamplerConfig
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 N = int(os.environ.get('STEER_TEST_N', 1000))
 # a staged release parquet of compute_expected_utility to compare with (optional)
 STAGED = os.environ.get('STEER_STAGED_EU_PARQUET', '')
-LAB = pd.read_csv(os.path.join(TEMPLATES_PATH, 'compute_expected_utility', 'template_labels.csv'))
+LAB = pd.read_csv(os.path.join(templates_dir(), 'compute_expected_utility', 'template_labels.csv'))
 _C = []
 
 

@@ -20,11 +20,15 @@ from fastapi import FastAPI, Form, HTTPException
 from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 
-from autosteer.directory_utils import DATA_PATH
+from autosteer import paths
 from autosteer.sampler import ElementSampler, load_manifest
 
 
-REVIEW_DIR = Path(DATA_PATH) / "review"
+REVIEW_DIR: Path | None = None   # set to keep review records somewhere else (tests); default: review/ in the data directory
+
+
+def _review_dir() -> Path:
+    return REVIEW_DIR or paths.review_dir()
 _LOCK = threading.Lock()
 _SAMPLER: dict = {}
 _ROWS: dict = {}  # (element, manifest) -> its template rows: building them is slow for the big elements
@@ -40,7 +44,7 @@ def _sampler() -> ElementSampler:
 
 
 def _record(element: str) -> dict:
-    path = REVIEW_DIR / f"{element}.json"
+    path = _review_dir() / f"{element}.json"
     try:
         return json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
@@ -204,8 +208,8 @@ def reviewer_name() -> str:
 
 
 def _write_record(element: str, rec: dict) -> None:
-    REVIEW_DIR.mkdir(parents=True, exist_ok=True)
-    (REVIEW_DIR / f"{element}.json").write_text(json.dumps(rec, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    _review_dir().mkdir(parents=True, exist_ok=True)
+    (_review_dir() / f"{element}.json").write_text(json.dumps(rec, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
 def _split_slots(text: str) -> list[dict]:

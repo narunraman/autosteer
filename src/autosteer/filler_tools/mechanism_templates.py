@@ -12,7 +12,7 @@ import re
 
 import pandas as pd
 
-from autosteer.directory_utils import TEMPLATES_PATH
+from autosteer.paths import templates_dir
 from autosteer.steer_dataset import Dataset
 from .mechanism_tools import GRADES
 
@@ -486,7 +486,7 @@ def main(elements=None) -> None:
     import sys
     for e in elements or sys.argv[1:] or ELEMENTS:
         ds = build(e)
-        path = os.path.join(TEMPLATES_PATH, e)
+        path = os.path.join(templates_dir(), e)
         ds.save(path)
         print(f'{e}: {len(ds.questions)} test templates, {len(ds.example_questions)} example templates -> {path}')
 

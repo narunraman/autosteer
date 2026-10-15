@@ -459,10 +459,10 @@ def _nearest_after(nums_pos, kw_ends):
 def _eu_templates():
     """Template regexes for compute_expected_utility: the placeholders name the quantities in the text
     (win_amount, lose_chance, num_days, ...).  Only the template *text* is used, never the filler."""
-    from autosteer.directory_utils import TEMPLATES_PATH
+    from autosteer.paths import templates_dir
     from autosteer.steer_dataset import Dataset
     try:
-        df = Dataset.load(str(Path(TEMPLATES_PATH) / "expected_value_counts_aug2024")).questions
+        df = Dataset.load(str(templates_dir() / "expected_value_counts_aug2024")).questions
     except Exception:  # noqa: BLE001
         return []
     out = []

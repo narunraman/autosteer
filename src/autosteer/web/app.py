@@ -14,6 +14,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from markupsafe import Markup, escape
 
+from autosteer import paths
 from autosteer.sampler import ElementSampler, SamplerConfig, get_sampleable_elements, load_manifest
 from autosteer.sampler.difficulty import level_count, public_entry, raw_levels, relative_scale, to_raw, to_relative
 from autosteer.sampler.generator import SEED_MAX, derive_seed
@@ -588,7 +589,7 @@ def _developer_status() -> dict:
         "browser_key_allowed": allow_browser_key,
         "default_model": default_model,
         "models": model_options,
-        "data_dir": os.getenv("AUTOSTEER_DATA_DIR", os.getenv("STEER_DATA_DIR", "")),
+        "data_dir": str(paths.data_dir()),
     }
 
 

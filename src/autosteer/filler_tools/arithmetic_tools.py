@@ -39,7 +39,7 @@ from .utilities.filler_utils import rng
 
 function_registry = FillRegister()
 
-from autosteer.directory_utils import TEMPLATES_PATH as _TEMPLATES  # the data directory (AUTOSTEER_DATA_DIR)
+from autosteer.paths import templates_dir  # the data directory, resolved when the labels are read
 ADD_SUB_LEVEL = {'integer': 0, 'decimal': 1, 'large': 2}
 NEG_SLOT = re.compile(r'-\$?\s?\{[ab]\}|\$-\{[ab]\}')  # a number written negative in the template
 
@@ -59,7 +59,7 @@ MD_OPS = {
 @lru_cache(maxsize=None)
 def labels(element: str) -> dict[str, dict]:
     """Kept templates of `element`: template text -> label row."""
-    path = os.path.join(_TEMPLATES, element, 'template_labels.csv')
+    path = os.path.join(templates_dir(), element, 'template_labels.csv')
     with open(path, newline='') as f:
         return {r['template']: r for r in csv.DictReader(f) if r['status'] == 'keep'}
 

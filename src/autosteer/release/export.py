@@ -345,7 +345,8 @@ def run(args: argparse.Namespace) -> int:
     import pyarrow.parquet as pq
 
     from autosteer import data_files
-    from autosteer.directory_utils import DATA_PATH
+    from autosteer.paths import data_dir
+    DATA_PATH = data_dir()
     from autosteer.release.rows import element_info, generator_id, git_state
     from autosteer.release.schema import to_table, validate
 

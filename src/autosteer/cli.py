@@ -5,20 +5,14 @@ import os
 from pathlib import Path
 
 
-from autosteer.directory_utils import DEFAULT_DATA_PATH
+from autosteer import paths
 
-DEFAULT_DATA_DIR = Path(DEFAULT_DATA_PATH)  # data/ of the repository, else ~/.autosteer/data
-DATA_SUBDIRS = ("example_seeds", "generated_seeds", "templates")
+DATA_SUBDIRS = paths.DATA_KINDS
 PULL_SCOPES = ("setting", "module", "element")
 
 
 def _data_dir() -> Path:
-    return Path(
-        os.environ.get(
-            "AUTOSTEER_DATA_DIR",
-            os.environ.get("STEER_DATA_DIR", str(DEFAULT_DATA_DIR)),
-        )
-    ).expanduser()
+    return paths.data_dir()
 
 
 def _ensure_data_dir(data_dir: Path) -> None:
@@ -27,9 +21,8 @@ def _ensure_data_dir(data_dir: Path) -> None:
 
 
 def run_dev(args: argparse.Namespace) -> None:
-    data_dir = Path(args.data_dir).expanduser() if args.data_dir else _data_dir()
+    data_dir = paths.set_data_dir(args.data_dir) if args.data_dir else _data_dir()
     _ensure_data_dir(data_dir)
-    os.environ.setdefault("AUTOSTEER_DATA_DIR", str(data_dir))
     os.environ.setdefault("AUTOSTEER_WEB_MODE", "local")
 
     import uvicorn

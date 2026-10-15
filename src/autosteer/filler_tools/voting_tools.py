@@ -26,7 +26,7 @@ from .utilities.filler_utils import rng
 
 function_registry = FillRegister()
 
-from autosteer.directory_utils import TEMPLATES_PATH as _TEMPLATES  # the data directory (AUTOSTEER_DATA_DIR)
+from autosteer.paths import templates_dir  # the data directory, resolved when the labels are read
 NO_WINNER = 'There is no Condorcet winner'
 NO_WINNER_RATE = 0.25
 NOT_PLURALITY_RATE = 0.5
@@ -37,7 +37,7 @@ VOTERS = (1, 60)  # voters per ballot line
 
 @lru_cache(maxsize=None)
 def labels() -> dict[str, dict]:
-    path = os.path.join(_TEMPLATES, 'condorcet_criterion', 'template_labels.csv')
+    path = os.path.join(templates_dir(), 'condorcet_criterion', 'template_labels.csv')
     with open(path, newline='') as f:
         return {r['template']: r for r in csv.DictReader(f)}
 

@@ -6,12 +6,16 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from autosteer.steer_dataset import Dataset
-from autosteer.directory_utils import DATA_PATH, TEMPLATES_PATH
+from autosteer.paths import data_dir, templates_dir
 from autosteer.filler_tools import function_registry
 from autosteer.filler_tools import code_templates
 from .template_fixes import apply_template_fixes, public_difficulty
 
-MANIFEST_PATH = os.path.join(DATA_PATH, 'manifest.json')
+MANIFEST_PATH: str | None = None   # set to write the manifest somewhere else (tests); default: in the data directory
+
+
+def manifest_path() -> str:
+    return os.path.abspath(MANIFEST_PATH or os.path.join(data_dir(), 'manifest.json'))
 _PACKAGE = Path(__file__).resolve().parent.parent
 
 
@@ -30,11 +34,12 @@ def code_fingerprint() -> str:
 def _template_names_on_disk() -> set[str]:
     """Elements with templates: a directory in the data directory's templates/, or code templates."""
     names = set(code_templates.elements()) | set(code_templates.composites())
-    if not os.path.isdir(TEMPLATES_PATH):
+    root = templates_dir()
+    if not os.path.isdir(root):
         return names
     return names | {
-        name for name in os.listdir(TEMPLATES_PATH)
-        if os.path.isdir(os.path.join(TEMPLATES_PATH, name))
+        name for name in os.listdir(root)
+        if os.path.isdir(os.path.join(root, name))
     }
 
 
@@ -47,7 +52,7 @@ def load_raw_templates(element_name: str) -> Dataset:
     if code_templates.is_composite(element_name):
         return code_templates.composite_dataset(
             element_name, lambda source: apply_template_fixes(source, load_raw_templates(source)))
-    return Dataset.load(os.path.join(TEMPLATES_PATH, element_name))
+    return Dataset.load(os.path.join(templates_dir(), element_name))
 
 
 def _build_entry(element_name: str) -> dict:
@@ -87,7 +92,7 @@ def build_manifest(verbose: bool = True) -> dict:
         'elements': manifest,
     }
 
-    manifest_path = os.path.abspath(MANIFEST_PATH)
+    manifest_path = globals()['manifest_path']()
     os.makedirs(os.path.dirname(manifest_path), exist_ok=True)
     # write-then-rename, so that parallel processes never read a half-written file; the temporary name is unique
     # to the thread as well, so two builds at once (the startup warm-up and a first request) do not share it
@@ -124,7 +129,7 @@ _BUILD_LOCK = threading.Lock()
 
 def _current_manifest() -> dict | None:
     """The stored manifest, or None if it is missing or stale."""
-    manifest_path = os.path.abspath(MANIFEST_PATH)
+    manifest_path = globals()['manifest_path']()
     if not os.path.exists(manifest_path):
         return None
     with open(manifest_path) as f:

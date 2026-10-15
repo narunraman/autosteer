@@ -27,7 +27,7 @@ from .fill_registry import FillRegister
 from .utilities import filler_utils
 
 function_registry = FillRegister()
-from autosteer.directory_utils import TEMPLATES_PATH as _TEMPLATES  # the data directory (AUTOSTEER_DATA_DIR)
+from autosteer.paths import templates_dir  # the data directory, resolved when the labels are read
 
 
 def _rng():
@@ -40,7 +40,7 @@ def _int(a, b):
 
 @lru_cache(maxsize=None)
 def labels() -> dict:
-    with open(os.path.join(_TEMPLATES, 'compute_expectations', 'template_labels.csv'), newline='') as f:
+    with open(os.path.join(templates_dir(), 'compute_expectations', 'template_labels.csv'), newline='') as f:
         return {r['template']: r for r in csv.DictReader(f)}
 
 
@@ -150,7 +150,7 @@ def fill_compute_expectations(metadata: dict) -> dict:
 @lru_cache(maxsize=None)
 def eu_labels() -> dict:
     import json
-    with open(os.path.join(_TEMPLATES, 'compute_expected_utility', 'template_labels.csv'), newline='') as f:
+    with open(os.path.join(templates_dir(), 'compute_expected_utility', 'template_labels.csv'), newline='') as f:
         return {r['template']: json.loads(r['labels']) for r in csv.DictReader(f)}
 
 
