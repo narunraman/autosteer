@@ -11,7 +11,7 @@ import numpy as np
 from autosteer.filler_tools import code_templates, function_registry
 from autosteer.filler_tools.utilities import filler_utils
 from autosteer.filler_tools.fill_registry import validate_filler_output
-from autosteer.dataset_filler import format_fill_values, format_value, extract_fstring_keys
+from autosteer.formatting import format_fill_values, format_value, extract_fstring_keys
 from autosteer.directory_utils import TEMPLATES_PATH
 from autosteer.steer_dataset import Dataset
 

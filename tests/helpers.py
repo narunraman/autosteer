@@ -18,7 +18,7 @@ from functools import lru_cache
 from typing import Optional
 
 from autosteer.sampler import ElementSampler, SamplerConfig
-from autosteer.dataset_filler import format_fill_values
+from autosteer.formatting import format_fill_values
 
 warnings.filterwarnings('ignore', category=RuntimeWarning)
 

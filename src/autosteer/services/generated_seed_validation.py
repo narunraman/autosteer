@@ -10,7 +10,7 @@ from typing import Any
 
 from autosteer.filler_tools import function_registry
 from autosteer.filler_tools.fill_registry import validate_filler_output
-from autosteer.dataset_filler import exist_duplicate_options, format_fill_values, format_value
+from autosteer.formatting import exist_duplicate_options, format_fill_values, format_value
 from autosteer.services.dataset_store import DatasetStore
 from autosteer.services.generated_seed_service import (
     _review_key,

@@ -11,6 +11,7 @@ Where things are, for working on the code. How to run autoSTEER is in the [repos
 | `release/` | The fixed datasets: rows, schema, consistency checks and the exporter. |
 | `services/`, `schemas/` | Developer mode's back end: generating seed candidates and templates with a model, and storing the records. |
 | `llm_client.py` | The model providers: OpenAI, Azure OpenAI, Anthropic, Gemini and OpenAI-compatible endpoints. |
-| `template_generation.py`, `dataset_generation.py`, `instruction_parts.py`, `json_utils.py` | Writing seeds and templates with a model: the instructions, and parsing the replies. |
+| `instruction_parts.py`, `json_utils.py` | The instructions for the model, and parsing its replies. |
+| `formatting.py` | Formatting filled values: rounding, placeholders, duplicate options. |
 | `steer_dataset.py`, `dataset_io.py` | The `Dataset` class (question, option and instruction tables) and its Parquet format on disk. |
 | `data_files.py`, `data_cleanup.py` | The pinned list of data files (`autosteer data verify`) and the clean-up of the data carried over from STEER-generation. |

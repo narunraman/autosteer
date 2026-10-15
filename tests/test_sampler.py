@@ -63,7 +63,7 @@ def test_examples_pool():
 
 
 def test_format_value_rounds_each_number_once():
-    from autosteer.dataset_filler import format_value
+    from autosteer.formatting import format_value
     assert format_value('1.5 and 21.53 and 1.5') == '1.5 and 21.53 and 1.5'
     assert format_value('x = 0.123, y = 10.12345') == 'x = 0.12, y = 10.12'
     assert format_value('{0} costs 3.14159') == '{0} costs 3.14'

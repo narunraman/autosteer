@@ -125,7 +125,7 @@ _DECIMAL = re.compile(r'\d+\.\d+')
 
 
 def stable(text: str) -> bool:
-    """True if the sampler's 2-decimal rounding of strings (dataset_filler.format_value) leaves `text` unchanged.
+    """True if the sampler's 2-decimal rounding of strings (formatting.format_value) leaves `text` unchanged.
 
     It rewrites every decimal number with str(round(x, 2)), so "$12.30" would be shown as "$12.3"; fillers that
     show cents redraw values whose text would change.

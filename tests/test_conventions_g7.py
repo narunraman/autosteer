@@ -2,12 +2,12 @@
 
 add_sub, mult_div, bayes_rule, complement_rule, compute_expectations (also tests/test_compute_expectations.py),
 compute_expected_utility, categorical_syllogism, first/second_order_false_belief (tests/test_false_belief.py),
-optimize_continuous, and the option formatting shared by every element (dataset_filler.format_value).
+optimize_continuous, and the option formatting shared by every element (formatting.format_value).
 """
 import re
 from fractions import Fraction
 
-from autosteer.dataset_filler import format_value
+from autosteer.formatting import format_value
 from autosteer.filler_tools import categorical_syllogism_tools as cs
 from autosteer.filler_tools.arithmetic_tools import NEG_SLOT, ROUNDING_NOTE, labels
 from autosteer.filler_tools.probability_tools import BAYES_NOTE
