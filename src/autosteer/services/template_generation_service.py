@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import json
 import random
-from typing import Any
 
 import pandas as pd
 

@@ -1,9 +1,8 @@
 import numpy as np
 # from random import shuffle
-from scipy.optimize import fsolve#, Bounds, root_scalar
-from .utilities.production_utils import sample_prod_function,find_profit_max_dyn, sample_cost_function, _opt_K2
+from .utilities.production_utils import sample_prod_function,_opt_K2
 from .fill_registry import FillRegister
-from .utilities.filler_utils import rng, gen_answer_and_options, band, band_options
+from .utilities.filler_utils import gen_answer_and_options, band_options
 function_registry = FillRegister()
  
 @function_registry.register('dynamic_profit_max')

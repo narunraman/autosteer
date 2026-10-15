@@ -35,7 +35,7 @@ import numpy as np
 
 from . import code_templates as ct
 from .fill_registry import FillRegister
-from .normal_form_tools import COLS, ROWS, fmt, payoffs, table
+from .normal_form_tools import COLS, ROWS, payoffs, table
 from .utilities import filler_utils
 
 function_registry = FillRegister()
@@ -127,7 +127,7 @@ def _pricing_story(sc: dict, symmetric: bool) -> str:
     text = (f"{a} and {b} are the only two {sc['kind']} {sc['place']}. Each can charge either {{price_low}} or "
             f"{{price_high}} per {sc['good']}.")
     if not symmetric:
-        text += f" The two differ in location and reputation, so they do not sell the same amounts."
+        text += " The two differ in location and reputation, so they do not sell the same amounts."
     text += (f" The number of {g} each sells per {sc['period']} depends on both prices."
              f" If both charge {{price_high}}, {a} sells {{a_hh}} {g} and {b} sells {{b_hh}}."
              f" If {a} charges {{price_high}} and {b} charges {{price_low}}, {a} sells {{a_hl}} and {b} sells {{b_hl}}."

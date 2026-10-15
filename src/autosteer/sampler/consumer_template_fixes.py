@@ -132,8 +132,8 @@ _PRICE_DIRECTION = re.compile(
     r"\b(?:higher|lower|cheaper|more expensive)\b", re.I)
 # the direction of the quantity stated in a question that asks for the new quantity
 _QUANTITY_DIRECTION = re.compile(
-    rf"\b(?:quantity|demand|sales|number)\b(?:(?!price|\{{)[^.?]){{0,40}}\b(?:will|would|might|could|to) "
-    rf"(?:likely )?(?:increase|decrease|rise|fall|drop|go up|go down|decline|grow)\b", re.I)
+    r"\b(?:quantity|demand|sales|number)\b(?:(?!price|\{)[^.?]){0,40}\b(?:will|would|might|could|to) "
+    r"(?:likely )?(?:increase|decrease|rise|fall|drop|go up|go down|decline|grow)\b", re.I)
 _CHANGE_IN_Q = re.compile(r'\b(?:scenario for )?(?:the )?(?:probable |likely )?change in (?:the )?quantity demanded',
                           re.I)
 _DEMAND_AS_QUANTITY = [

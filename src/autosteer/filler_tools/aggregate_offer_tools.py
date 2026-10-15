@@ -1,6 +1,5 @@
-from .utilities.production_utils import sample_prod_function,find_profit_max_CD,sample_agg_demand_function
 from .fill_registry import FillRegister
-from .utilities.filler_utils import rng, gen_answer_and_options
+from .utilities.filler_utils import rng
 from .utilities.aggregation_options import function_options, numeric_options, total_mistakes
 function_registry = FillRegister()
 

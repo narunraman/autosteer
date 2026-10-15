@@ -12,14 +12,12 @@ from autosteer.filler_tools import code_templates, function_registry
 from autosteer.filler_tools.utilities import filler_utils
 from autosteer.filler_tools.fill_registry import validate_filler_output
 from autosteer.formatting import format_fill_values, format_value, extract_fstring_keys
-from autosteer.directory_utils import TEMPLATES_PATH
 from autosteer.steer_dataset import Dataset
 
 from .config import SamplerConfig
 from .manifest import load_manifest, get_sampleable_elements, load_raw_templates
 from .template_fixes import apply_template_fixes, public_difficulty
 
-import os
 
 
 def seed_everything(seed: int) -> None:

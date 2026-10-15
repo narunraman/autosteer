@@ -4,11 +4,11 @@ from string import ascii_uppercase
 # External packages
 import numpy as np
 # Local packages
-from .utilities.micro_utility_utils import UtilityFunction, DemandFunction
+from .utilities.micro_utility_utils import UtilityFunction
 from .utilities.filler_utils import rng
 from .utilities.rounding import near_tie
 from .fill_registry import FillRegister
-from .utilities.production_utils import gen_answer_and_options
+from .utilities.filler_utils import gen_answer_and_options
 
 function_registry = FillRegister()
 ALPHABET = list(ascii_uppercase)

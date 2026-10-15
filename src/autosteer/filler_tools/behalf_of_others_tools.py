@@ -1,6 +1,4 @@
 # Built-in packages
-import os
-import shutil
 # External packages
 import pandas as pd
 # Local packages

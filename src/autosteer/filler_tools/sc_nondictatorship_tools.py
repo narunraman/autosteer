@@ -84,8 +84,8 @@ def _templates() -> list[ct.CodeTemplate]:
                     if qtype == 'describe':
                         body = 'Four rules are proposed (the options). '
                     elif qtype == 'consequences':
-                        body = (f"Four rules were tried at {{n_meetings}} meetings. The members' ballots and the "
-                                f"committee rankings produced by each rule were:\n{{table}}\n")
+                        body = ("Four rules were tried at {n_meetings} meetings. The members' ballots and the "
+                                "committee rankings produced by each rule were:\n{table}\n")
                     else:
                         body = 'The proposed rule: {procedure}\n'
                     out.append(ct.CodeTemplate(
@@ -147,14 +147,14 @@ def describe_rules(c: Committee, noun: str, m: int):
     pts = '2 points to its first choice, 1 to its second and 0 to its last' if m == 3 else \
         '3, 2, 1 and 0 points to its choices from first to last'
     dictators = [
-        (f"The chair's ballot becomes the committee's ranking.", chair),
-        (f"The ballot of the member who registered first becomes the committee's ranking.", first_reg),
-        (f"The committee's ranking follows the oldest member's ballot; the next oldest member's ballot is used only "
-         f"to break ties in it.", oldest),
+        ("The chair's ballot becomes the committee's ranking.", chair),
+        ("The ballot of the member who registered first becomes the committee's ranking.", first_reg),
+        ("The committee's ranking follows the oldest member's ballot; the next oldest member's ballot is used only "
+         "to break ties in it.", oldest),
         (f"The {noun} at the top of the secretary's ballot is placed first, the {noun} second on the secretary's "
          f"ballot is placed second, and so on.", sec),
-        (f"The ballots are read in alphabetical order of the members' names, and the first ballot read becomes the "
-         f"committee's ranking.", alpha),
+        ("The ballots are read in alphabetical order of the members' names, and the first ballot read becomes the "
+         "committee's ranking.", alpha),
     ]
     rules = [(t, (lambda d: lambda b, cands: b[d])(d), d) for t, d in dictators]
 

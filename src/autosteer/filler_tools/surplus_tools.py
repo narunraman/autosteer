@@ -2,7 +2,7 @@
 # External packages
 import numpy as np
 # Local packages
-from .utilities.surplus_utils import surplus, total_surplus, deadweight_loss,find_equilibrium,quantity_to_price
+from .utilities.surplus_utils import surplus, total_surplus, deadweight_loss,quantity_to_price
 from .utilities.filler_utils import rng, gen_answer_and_options, band, band_options
 from .fill_registry import FillRegister
 function_registry = FillRegister()

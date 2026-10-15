@@ -3,7 +3,6 @@ import numpy as np
 
 from .fill_registry import FillRegister
 from .utilities.filler_utils import rng, gen_answer_and_options, band
-from .utilities.dynamic_consumption_utils import two_asset_portfolio_optimization, three_asset_min_risk_target_return, generate_random_parameters, solve_optimal_consumption, generate_closed_form_intertemporal_values, compute_optimal_bundle
 
 function_registry = FillRegister()
 

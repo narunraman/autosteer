@@ -1,6 +1,6 @@
-from .utilities.production_utils import sample_prod_function,find_profit_max_CD,gen_answer_and_options,sample_agg_demand_function
+from .utilities.production_utils import sample_prod_function,find_profit_max_CD,sample_agg_demand_function
 from .fill_registry import FillRegister
-from .utilities.filler_utils import rng
+from .utilities.filler_utils import rng, gen_answer_and_options
 from .utilities.mistake_options import mistake_options
 import math
 from .utilities.aggregation_options import function_options, numeric_options, total_mistakes

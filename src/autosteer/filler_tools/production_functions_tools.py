@@ -1,13 +1,9 @@
 import numpy as np
-from random import shuffle
-import sympy as sp
-from scipy.optimize import minimize, Bounds, root_scalar
-from .utilities.production_utils import ProductionFunction,sample_prod_function,CD_profit,find_profit_max_CD,gen_answer_and_options,sample_supply_function
+from .utilities.production_utils import ProductionFunction,sample_prod_function,sample_supply_function
 from .fill_registry import FillRegister
 from .utilities.filler_utils import rng
-from .utilities.filler_utils import rng, gen_answer_and_options
-import re
-from .utilities.mistake_options import mistake_options, pick_mistakes, options_from_values
+from .utilities.filler_utils import gen_answer_and_options
+from .utilities.mistake_options import mistake_options, pick_mistakes
 
 function_registry = FillRegister()
 
@@ -159,7 +155,7 @@ def gen_output_elasticity(metadata):
         "fix_var": "capital (K)",
         "p_function": prod_fn['function_string'],
         "fixed_val": f"K={capital}",
-        "query_var": f"Labor (L)",
+        "query_var": "Labor (L)",
         "options_list":options,
         "correct_answer": answer_mask
     }
@@ -238,7 +234,7 @@ def gen_cost_minimization_linearprod_linearcost(metadata):
     return gen_cost_minimization(metadata, family = 'linear')
 
 @function_registry.register('cost_minimization_problem_leonteifprod_linearcost')
-def gen_cost_minimization_linearprod_linearcost(metadata):
+def gen_cost_minimization_leontiefprod_linearcost(metadata):
     return gen_cost_minimization(metadata, family = 'Leonteif')
 
 def gen_cost_minimization(metadata, family = 'Cobb_Douglas'):

@@ -6,7 +6,6 @@ from string import ascii_uppercase
 ALPHABET = list(ascii_uppercase)
 # External packages
 import numpy as np
-import pandas as pd
 # Local packages
 from .fill_registry import FillRegister
 function_registry = FillRegister()

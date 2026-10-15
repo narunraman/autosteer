@@ -25,7 +25,6 @@ every config loads with datasets.load_dataset("parquet", data_files=...).
 from __future__ import annotations
 
 import argparse
-import collections
 import csv
 import datetime as dt
 import glob
@@ -36,7 +35,7 @@ import shutil
 import sys
 from pathlib import Path
 
-from autosteer.release.export import DATASET_DIRS, DEFAULT_SEED
+from autosteer.release.export import DEFAULT_SEED
 
 REPOS = {"STEER": "narunraman/steer", "STEER-ME": "narunraman/steer_me"}
 REPO_DIRS = {"STEER": "steer", "STEER-ME": "steer-me"}
@@ -451,7 +450,7 @@ def card(benchmark: str, records: list[dict], prov: dict) -> str:
     out += [""]
 
     out += ["## Elements", "",
-            f"Per setting, in paper order. [ELEMENTS.md](ELEMENTS.md) has the full description of every element "
+            "Per setting, in paper order. [ELEMENTS.md](ELEMENTS.md) has the full description of every element "
             "(how its questions are generated, what varies, how the answer and distractors are computed, how it "
             "is graded); `elements.csv` and `elements.jsonl` have the same information for programs.", ""]
     for setting, modules in _by_setting(records).items():
@@ -493,7 +492,7 @@ def card(benchmark: str, records: list[dict], prov: dict) -> str:
                 "belong to STEER and are published there, as are the Foundations elements shared with STEER.",
                 "- Duplicate questions are removed; answer keys are computed by the fillers and rows without "
                 "exactly one correct option are not released."]
-    out += [f"- Provenance of this build (generator commit, seed, data files commit, date, checksums): "
+    out += ["- Provenance of this build (generator commit, seed, data files commit, date, checksums): "
             "[provenance.json](provenance.json).", ""]
 
     out += ["## License", "", f"{LICENSE_NAME}. You may share and adapt the data with attribution; please cite "

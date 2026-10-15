@@ -4,7 +4,7 @@
 
 # Local packages
 from .fill_registry import FillRegister
-from .utilities.filler_utils import rng, gen_answer_and_options
+from .utilities.filler_utils import rng
 from .utilities.rank_pick import pick_ranked
 function_registry = FillRegister()
 

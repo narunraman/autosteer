@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import os
-import json
 import re
 import random
 import secrets
@@ -10,7 +9,7 @@ import time
 from pathlib import Path
 
 from fastapi import Depends, FastAPI, Form, HTTPException, Query, Request
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from markupsafe import Markup, escape
@@ -26,7 +25,6 @@ from autosteer.services.dataset_store import DATASET_KINDS, DatasetStore, get_da
 from autosteer.services.generated_seed_service import (
     build_target_grid,
     delete_generated_seed,
-    elements_with_example_seeds,
     example_seed_summary,
     generate_generated_seed,
     generated_seed_records,
@@ -39,10 +37,8 @@ from autosteer.services.generated_seed_validation import (
     run_single_generated_seed_validation,
 )
 from autosteer.services.template_generation_service import (
-    elements_with_accepted_generated_seeds,
     has_accepted_generated_seeds,
     generate_template_batch,
-    random_template_preview,
     template_generation_summary,
 )
 from autosteer.taxonomy import (

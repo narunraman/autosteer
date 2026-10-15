@@ -236,8 +236,6 @@ def generate_closed_form_intertemporal_values():
     print(f"Correct Answer: (D) C1 = {C1:.2f}, C2 = {C2:.2f}\n")
 
 
-import numpy as np
-from scipy.optimize import minimize
 
 def compute_optimal_bundle(pi, prices, W, utility_function):
     """

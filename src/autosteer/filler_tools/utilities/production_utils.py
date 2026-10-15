@@ -1,7 +1,7 @@
 import numpy as np
-from scipy.optimize import minimize, Bounds, root_scalar, fsolve
+from scipy.optimize import minimize
 from random import shuffle
-from .filler_utils import rng, gen_answer_and_options
+from .filler_utils import rng
 from .mistake_options import pick_mistakes, options_from_values
 '''
 Samples a production function (a function of two variables L and K) 

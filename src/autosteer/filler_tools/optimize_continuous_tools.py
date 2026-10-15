@@ -87,7 +87,7 @@ def _templates() -> list[ct.CodeTemplate]:
         maker = {'anon': 'A workshop makes', 'first_person': 'I make', 'second_person': 'You make',
                  'man': f"{v['subj']} makes", 'woman': f"{v['subj']} makes"}[persp]
         for ask in ('x', 'value'):
-            q = (f"What side length x, in cm, of the cut squares gives the box the largest volume?" if ask == 'x' else
+            q = ("What side length x, in cm, of the cut squares gives the box the largest volume?" if ask == 'x' else
                  "What is the largest possible volume of the box, in cubic cm?")
             text = (maker + " an open-top box from a square sheet of cardboard {s} cm on each side by cutting a square "
                     "of side x cm from each corner and folding up the sides. " + q)

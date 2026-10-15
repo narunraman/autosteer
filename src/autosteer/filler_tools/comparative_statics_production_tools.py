@@ -1,4 +1,3 @@
-import numpy as np
 from .fill_registry import FillRegister
 from .utilities.production_utils import gen_prod_decrease, gen_prod_increase, gen_labor_decrease, gen_labor_increase
 function_registry = FillRegister()
