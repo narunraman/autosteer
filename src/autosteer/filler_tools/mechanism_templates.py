@@ -487,7 +487,7 @@ def main(elements=None) -> None:
     for e in elements or sys.argv[1:] or ELEMENTS:
         ds = build(e)
         path = os.path.join(TEMPLATES_PATH, e)
-        ds.to_pickle(path)
+        ds.save(path)
         print(f'{e}: {len(ds.questions)} test templates, {len(ds.example_questions)} example templates -> {path}')
 
 

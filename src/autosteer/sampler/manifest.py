@@ -47,7 +47,7 @@ def load_raw_templates(element_name: str) -> Dataset:
     if code_templates.is_composite(element_name):
         return code_templates.composite_dataset(
             element_name, lambda source: apply_template_fixes(source, load_raw_templates(source)))
-    return Dataset.from_pickle(os.path.join(TEMPLATES_PATH, element_name))
+    return Dataset.load(os.path.join(TEMPLATES_PATH, element_name))
 
 
 def _build_entry(element_name: str) -> dict:

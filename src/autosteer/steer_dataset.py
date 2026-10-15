@@ -3,16 +3,10 @@
 # Built-in packages
 from itertools import combinations
 import os
-import re
-from string import ascii_uppercase
-import textwrap
 from typing import Optional, Union
-from termcolor import colored
 # External packages
 import pandas as pd
 from tqdm import tqdm
-import dill
-import pickle
 # Local packages
 
 
@@ -453,89 +447,12 @@ class Dataset:
         else:
             return from_tuple(self.questions, self.options, questions, options)
 
-    def _build_mcq(self, question_id, dataframe_type):
-        selected_question, selected_options = self.loc(question_id = question_id, dataframe_type = dataframe_type)
-        # Metadata
-        metadata = selected_question[self.metadata_keys].to_dict('records')[0]
-        # Questions
-        questions = selected_question['question_text'].to_list()
-        # Options
-        if selected_options.empty:
-            options_list = [['No options found']]*len(questions)
-            # Correct answers
-            correct_answers = ['No correct answer found'] * len(questions)
-        else:
-            options_list = [
-                selected_options[selected_options['sub_id'] == sub_id]['option_text'].to_list()
-                for sub_id in selected_options['sub_id'].unique()
-            ]
-            # Correct answers
-            correct_answers = selected_options.query("correct_answer == True")['option_text'].to_list()
-        if not correct_answers:
-            correct_answers = ['No correct answer found'] * len(questions)
-        # Explanations
-        if dataframe_type == 'example_questions':
-            try:
-                explanations = selected_question['explanation'].to_list()
-            except KeyError:
-                explanations = ['No explanation found'] * len(questions)
-        else:
-            explanations = None
-        return {
-            'question': questions,
-            'options_list': options_list,
-            'correct_answer': correct_answers,
-            'explanation': explanations,
-            'metadata': metadata
-        }
     
-    def _print_mcq(self, question_id, dataframe_type = 'questions'):
-        mcq_dict = self._build_mcq(question_id, dataframe_type = dataframe_type)
-        print("Metadata:\n  " + "\n  ".join([f"{key}: {value}" for key, value in mcq_dict['metadata'].items()]))
-        global_option_index = 0
-        for i, question in enumerate(mcq_dict['question']):
-            print(f"\n------------------------------ Question {question_id}-{i}: ------------------------------")
-            question = re.sub(r'\{(.*?)\}', lambda m: colored(m.group(0), 'light_blue'), question)
-            # Split the question into lines, wrap each line, and join them back together
-            wrapped_question = "\n".join(textwrap.fill(line, width=80) for line in question.splitlines())
-            print(wrapped_question)
-            for option in mcq_dict['options_list'][i]:
-                if option == mcq_dict['correct_answer'][i]:
-                    print(f"  {ascii_uppercase[global_option_index]}. {colored(option, 'green')}")
-                else:
-                    print(f"  {ascii_uppercase[global_option_index]}. {option}")
-                global_option_index += 1
-
-            if dataframe_type == 'example_questions':
-                print("\nExplanation:")
-                if not isinstance(mcq_dict['explanation'][i], str):
-                    print("No explanation generated yet.")
-                else:
-                    print(mcq_dict['explanation'][i])
-
-    def _flip_question_id(self, question_id, dataframe_type):
-        questions_type, _ = self._get_dataframe_types(dataframe_type)
-        if question_id < 0:
-            question_id = self[questions_type]['question_id'].max() + question_id + 1
-        return question_id
-
-    def _check_question_id(self, question_id, dataframe_type):
-        questions_type, _ = self._get_dataframe_types(dataframe_type)
-        if question_id not in self[questions_type]['question_id'].values:
-            raise IndexError(f"question_id not found in {questions_type.replace('_', ' ')} DataFrame.")
-        return True
 
 
-    def print_question(self, question_id, dataframe_type = 'questions'):
-        """
-        Print the question and options for a given question_id.
-        """
-        question_id = self._flip_question_id(question_id, dataframe_type = dataframe_type)
-        if self._check_question_id(question_id, dataframe_type = dataframe_type):
-            self._print_mcq(question_id, dataframe_type = dataframe_type)
 
-    def get_metadata(self, question_id):
-        return self.questions[self.questions['question_id'] == question_id][self.metadata_keys].iloc[0].to_dict()
+
+
     
     # def get_example_templates(self, return_type = 'tuple'):
     #     questions_df = self.questions[self.questions['explanation'] != False]
@@ -548,70 +465,7 @@ class Dataset:
     #         raise ValueError("return_type must be either 'tuple' or 'dataset'")
     
 
-    def sample(self, value, suppress_warnings = False):
-        """
-        Sample a fraction of the dataset.
-        Parameters:
-        - value: The fraction of the dataset to sample.
-        Returns:
-        - A tuple containing the sampled questions and options DataFrames.
-
-        Raises:
-        - ValueError: If the value is less than or equal to 0.
-
-        """
-        
-        grouped_questions = self.questions.groupby(["domain", "type", "difficulty_level"])
-
-        if value > 0 and value <= 1:
-            sampled_questions = grouped_questions.apply(lambda x: x.sample(frac=value)).reset_index(drop=True)
-        elif value > 1:
-            if not suppress_warnings:
-                small_groups = []
-                for i, group in grouped_questions:
-                    if len(group) < value:
-                        small_groups.append(i)
-                if small_groups:
-                    print(f"Warning: Groups {small_groups} have less than {value} rows to sample from. Sampling all rows from these groups.")
-            sampled_questions = grouped_questions.apply(lambda x: x.sample(n=min(len(x), value))).reset_index(drop=True)
-        else:
-            raise ValueError("Value must take a value greater than 0!")
-
-        sampled_options = self.options[self.options['question_id'].isin(sampled_questions['question_id'])]
-
-        return from_tuple(sampled_questions, sampled_options, self.example_questions, self.example_options)
     
-    def set_validation_sample(self, sample_frac: int | float = 0.1):
-        """
-        Set a class attribute validation_ids of the question_ids to be used for validation. validation_ids should be a list of question_ids.
-        Append to this list if there are not sample_frac number of question_ids in validation_ids for each metadata group.
-
-        """
-        # get the questions with ids that are in validation_df
-        validation_questions = self.questions[self.questions['question_id'].isin(self.validation_df['question_id'])]
-        validation_ids = []
-
-        grouped_validation_questions = validation_questions.groupby(["domain", "type", "difficulty_level"])
-        grouped_questions = self.questions.groupby(["domain", "type", "difficulty_level"])
-        for group_name, group in grouped_questions:
-            if sample_frac > 1:
-                if not isinstance(sample_frac, int):
-                    raise ValueError("sample_frac must be an integer if it is greater than 1")
-                threshold = sample_frac
-            elif sample_frac > 0 and sample_frac <= 1:
-                threshold = int(len(group) * sample_frac)
-            else:
-                raise ValueError("sample_frac must be greater than 0")
-
-            if self.validation_df.empty or grouped_validation_questions.get_group(group_name).size < threshold:
-                sample_num = threshold - grouped_validation_questions.get_group(group_name).size if not self.validation_df.empty else threshold
-                sampled_group = grouped_questions.get_group(group_name).sample(n = int(sample_num))
-                validation_ids += sampled_group['question_id'].to_list()
-        new_validation_df = pd.DataFrame({'question_id': validation_ids, 'validation_status': [2]*len(validation_ids)})
-        if self.validation_df.empty:
-            self.validation_df = new_validation_df
-        else:
-            self.validation_df = pd.concat([self.validation_df, new_validation_df], ignore_index=True).astype({'validation_status': int})
 
 
     def save(self, data_dir):
@@ -619,8 +473,6 @@ class Dataset:
         from autosteer import dataset_io
         dataset_io.save(pickle_safe_attributes(self.__dict__), data_dir)
 
-    # The old name: datasets used to be pickled. It now writes the Parquet format.
-    to_pickle = save
 
     @staticmethod
     def load(file_path):
@@ -635,68 +487,7 @@ class Dataset:
 
         return dataset
 
-    from_pickle = load  # the old name; reads either format
 
-    def to_old_pickles(self, data_dir):
-        if not os.path.exists(data_dir):
-            os.makedirs(data_dir)
-        # def convert_to_old(data_dir):
-        # with open(os.path.join(data_dir, 'dataset.pkl'), 'rb') as f:
-        #     dataset = dill.load(f)
-        # dataset = from_pickle(data_dir)
-        # Example Questions
-        example_questions = self.example_questions.copy()
-        example_questions['question_id'] = example_questions['question_id'].astype(str) + '_' + example_questions['sub_id'].astype(str)
-        example_questions.drop(columns='sub_id', inplace=True)
-
-        example_questions_metadata = example_questions[['question_id']+metadata_keys]
-
-        # Questions
-        questions = self.questions.copy()
-        # add the maximum question_id from example_questions to the question_id of questions
-        max_question_id = self.example_questions['question_id'].max()
-        questions['question_id'] += int(max_question_id + 1)
-        questions['question_id'] = questions['question_id'].astype(str) + '_' + questions['sub_id'].astype(str)
-        questions.drop(columns = 'sub_id', inplace = True)
-        
-        questions_metadata = questions[['question_id']+metadata_keys]
-
-        # Combine questions
-        questions_df = pd.concat([example_questions, questions]).reset_index(drop = True)
-        # convert all nans in 'explanation' column to False
-        questions_df['explanation'] = questions_df['explanation'].fillna(False)
-        questions_df.drop(columns = metadata_keys, inplace=True)
-
-        # Combine questions metadata
-        questions_metadata_df = pd.concat([example_questions_metadata, questions_metadata]).reset_index(drop = True)
-
-        # Options
-        example_options = self.example_options.copy()
-        example_options['question_id'] = example_options['question_id'].astype(str) + '_' + example_options['sub_id'].astype(str)
-        example_options.drop(columns = 'sub_id', inplace = True)
-        # print(self.example_options)
-
-        options = self.options.copy()
-        # add the maximum question_id from example_questions to the question_id of questions
-        options['question_id'] += int(max_question_id + 1)
-        options['question_id'] = options['question_id'].astype(str) + '_' + options['sub_id'].astype(str)
-        options.drop(columns = 'sub_id', inplace = True)
-
-        # Combine options
-        options_df = pd.concat([example_options, options]).reset_index(drop = True)
-
-        # Answers
-        answers_df = options_df[['question_id', 'option_id', 'correct_answer']].copy()
-        options_df.drop(columns = 'correct_answer', inplace = True)
-
-        with open(os.path.join(data_dir, 'questions.pkl'), 'wb') as f:
-            pickle.dump(questions_df, f)
-        with open(os.path.join(data_dir, 'questions_metadata.pkl'), 'wb') as f:
-            pickle.dump(questions_metadata_df, f)
-        with open(os.path.join(data_dir, 'options.pkl'), 'wb') as f:
-            pickle.dump(options_df, f)
-        with open(os.path.join(data_dir, 'answers.pkl'), 'wb') as f:
-            pickle.dump(answers_df, f)
         # return questions_df, questions_metadata_df, options_df, answers_df
 
     def to_display_json(self, dataframe_type = 'example_questions') -> list[dict]:
@@ -733,69 +524,8 @@ class Dataset:
             json_list.append(json_object)
         return json_list
     
-    def to_dataset_json(self, dataframe_type = 'questions') -> list[dict]:
-        """
-        Convert the questions and options DataFrames to a JSON object.
-        ## Args:
-        **example_questions** (bool): If True, the function will convert the example questions and options DataFrames to a JSON object. If False, the function will convert the questions and options DataFrames to a JSON object.
-        ## Returns:
-        A JSON object in the dataset_json format.
-        """
-        questions_type, options_type = self._get_dataframe_types(dataframe_type)
-
-        self[options_type] = self[options_type].sort_values(['question_id', 'sub_id', 'option_id'])
-
-        groups = self[questions_type].groupby('question_id')
-        json_list = []
-        for question_id, group in groups:
-            json_object = {}
-            for sub_id, sub_group in group.groupby('sub_id'):
-                json_object['question_id'] = question_id
-                json_object['sub_id'] = sub_id
-                json_object['question_text'] = sub_group['question_text'].values[0]
-                opts = self[options_type][
-                    (self[options_type]['question_id'] == question_id) &
-                    (self[options_type]['sub_id'] == sub_id)
-                ]
-                if opts.empty:
-                    json_object['options'] = [{'option_text': 'No options found', 'correct_answer': False}]
-                else:
-                    json_object['options'] = opts[['option_id', 'option_text', 'correct_answer']].to_dict(orient='records')
-            json_object.update(**sub_group[self.metadata_keys].to_dict('records')[0])
-            if dataframe_type == 'example_questions':
-                command = build_command({k: v for k, v in json_object.items() if k in self.metadata_keys})
-                instructions = self.instruction_set.query(command)['instructions']
-                json_object['instructions'] = instructions.values[0] if not instructions.empty else 'No instructions found.'
-            json_list.append(json_object)
-        return json_list
     
-    def to_json(self, dataframe_type = 'questions', object_format = 'dataset_json'):
-        if object_format == 'dataset_json':
-            return self.to_dataset_json(dataframe_type = dataframe_type)
-        elif object_format == 'display_json':
-            return self.to_display_json(dataframe_type = dataframe_type)
-        else:
-            raise ValueError("object_format must be either 'dataset_json' or 'display_json'")
     
-    def to_mcq_string(self, question_id, dataframe_type = 'questions', format = 'markdown'):
-        mcq_json = self._build_mcq(question_id, dataframe_type = dataframe_type)
-        mcq_string = ""
-        for i, question in enumerate(mcq_json['question']):
-            mcq_string += f"\nQuestion {question_id}-{i}:\n"
-            mcq_string += question
-            mcq_string += "\n"
-            for j, option in enumerate(mcq_json['options_list'][i]):
-                if option == mcq_json['correct_answer'][i]:
-                    mcq_string += f":green[{ascii_uppercase[j]}. {option}]\n"
-                else:
-                    mcq_string += f"{ascii_uppercase[j]}. {option}\n"
-            if mcq_json['explanation']:
-                mcq_string += f"\nExplanation:\n{mcq_json['explanation'][i]}\n"
-        if format == 'markdown':
-            mcq_string = mcq_string.replace('\n', '  \n')
-            mcq_string = re.sub(r'(?<!\\)\$', r'\$', mcq_string)
-            return mcq_string
-        return mcq_string
 
     def __getitem__(self, key):
         if key in self.__dict__:
@@ -857,8 +587,6 @@ class Dataset:
     def metadata(self, dataframe_type = 'questions'):
         return self[dataframe_type][self.metadata_keys].drop_duplicates().reset_index(drop = True)
     
-    def __len__(self):
-        return {'questions': self.size('questions'), 'example_questions': self.size('example_questions')}
     
     def __repr__(self):
         return f"Dataset(questions={self.questions}, options={self.options}, example_questions={self.example_questions}, example_options={self.example_options})"
@@ -988,105 +716,7 @@ def flatten_index(df: pd.DataFrame) -> pd.DataFrame:
 
     return df
 
-# TODO: make this from_dill
-def from_dill(data_dir, get_dataset = True, is_single_part_question = True):
-    if not os.path.exists(data_dir):
-        raise FileNotFoundError(f"{data_dir} does not exist.")
-    
-    if get_dataset:
-        if os.path.exists(os.path.join(data_dir, 'dataset.dill')):
-            with open(os.path.join(data_dir, 'dataset.dill'), 'rb') as f:
-                dataset = Dataset()
-                attributes = dill.load(f)
-                dataset.__dict__.update(attributes)
-        elif os.path.exists(os.path.join(data_dir, 'questions_metadata.pkl')):
-            dataset = from_old_pickles(data_dir, is_single_part_question = is_single_part_question)
-        else:
-            raise FileNotFoundError(f"{data_dir} does not contain a dataset.pkl file or a questions_metadata.pkl file.")
-    else:
-        with open(data_dir, 'rb') as f:
-            dataset = dill.load(f)
 
-    if not hasattr(dataset, 'element_name') or dataset.element_name is None or dataset.element_name != os.path.basename(data_dir):
-        dataset.element_name = os.path.basename(data_dir)
-    dataset.set_validation_sample()
-    
-    dataset = reindex(dataset, is_single_part_question=is_single_part_question)
-    # for dataframe_type in ['questions', 'example_questions']:
-    #     dataset[dataframe_type] = reindex(dataset[dataframe_type])
-    # dataset.questions.index = dataset.questions.index.set_levels(dataset.questions.index.levels[0].astype(int), level = 0)
-    return dataset
-
-def from_old_pickles(data_dir, overwrite = False, is_single_part_question = False):
-    questions = pd.read_pickle(os.path.join(data_dir, 'questions.pkl'))
-    questions_metadata = pd.read_pickle(os.path.join(data_dir, 'questions_metadata.pkl'))
-    # merge questions and questions_metadata
-    questions = pd.merge(questions, questions_metadata, on = 'question_id')
-    questions['sub_id'] = questions['question_id'].str.split('_').str[-1].astype(int)
-    
-    if questions['sub_id'].sum() == 0:
-        questions = questions.reset_index()
-        questions['question_id'] = questions['index']
-        questions = questions.drop('index', axis = 1)
-    # if is_single_part_question:
-    #     questions = questions.reset_index()
-    #     questions['question_id'] = questions['index']
-    #     questions = questions.drop('index', axis = 1)
-    else:
-        questions['question_id'] = questions['question_id'].str.split('_').str[0].astype(int)
-    if 'difficulty_level' in questions.columns:
-        questions['difficulty_level'] = questions['difficulty_level'].astype(int)
-    
-    example_questions = questions.query("explanation != False").copy()
-    questions = questions.query("explanation == False").copy()
-    
-    options = pd.read_pickle(os.path.join(data_dir, 'options.pkl'))
-    answers = pd.read_pickle(os.path.join(data_dir, 'answers.pkl'))
-    options = pd.merge(options, answers, on = ['question_id', 'option_id'])
-    options['sub_id'] = options['question_id'].str.split('_').str[-1].astype(int)
-    options['question_id'] = options['question_id'].str.split('_').str[0].astype(int)
-
-    # if correct is a column in the options, rename it to correct_answer
-    if 'correct' in options.columns and 'correct_answer' not in options.columns:
-        options.rename(columns = {'correct': 'correct_answer'}, inplace = True)
-    elif 'correct' in options.columns and 'correct_answer' in options.columns:
-        options.drop(columns = 'correct', inplace = True)
-    
-    
-    # Ensure the correct_answer column is of the correct dtype
-    # if 'correct_answer' in options.columns:
-    #     options['correct_answer'] = options['correct_answer'].astype(str)
-    
-
-    example_options = options[options['question_id'].isin(example_questions['question_id'])].copy()
-    options = options[options['question_id'].isin(questions['question_id'])].copy()
-
-    dataset = from_tuple(questions, options, example_questions, example_options)
-    dataset.element_name = os.path.basename(data_dir)
-    # display(dataset.questions)
-
-    if os.path.exists(os.path.join(data_dir, 'instruction_set.pkl')):
-        instruction_set = pd.read_pickle(os.path.join(data_dir, 'instruction_set.pkl'))
-        # set the data types of the instruction_set DataFrame
-        instruction_set['difficulty_level'] = instruction_set['difficulty_level'].astype(int)
-        dataset.instruction_set = instruction_set
-
-    # if no tags column in the questions_metadata, add it
-    if 'tags' not in dataset.questions.columns:
-        dataset.questions['tags'] = None
-    if 'tags' not in dataset.example_questions.columns:
-        dataset.example_questions['tags'] = None
-
-    dataset = reindex(dataset)
-    if overwrite:
-        # delete the old files
-        os.remove(os.path.join(data_dir, 'questions_metadata.pkl'))
-        os.remove(os.path.join(data_dir, 'answers.pkl'))
-        os.remove(os.path.join(data_dir, 'questions.pkl'))
-        os.remove(os.path.join(data_dir, 'options.pkl'))
-        # save the new files
-        dataset.to_pickle(data_dir)
-    return dataset
 
 def from_tuple(questions, options, example_questions = None, example_options = None):
     dataset = Dataset()
@@ -1101,28 +731,6 @@ def from_tuple(questions, options, example_questions = None, example_options = N
         dataset.example_options = example_options
     return dataset
 
-def get_metadata(rows, suppress_warnings = False):
-    """
-    Extract metadata from a row.
-    ## Args:
-    rows: Either a single row or a pandas DataFrame containing the rows.
-    ## Returns:
-    A dictionary containing the metadata of the row.
-    ### Warning:
-    If the rows DataFrame contains multiple rows, the function will only return the metadata of the first row.
-    """
-
-    # drop duplicates on metadata keys
-    rows = rows.drop_duplicates(subset = metadata_keys)
-
-    if isinstance(rows, pd.DataFrame):
-        if len(rows) > 1 and not suppress_warnings:
-            print("Warning: The function will only return the metadata of the first row.")
-        row = rows.iloc[0]
-    else:
-        row = rows
-
-    return {key: row[key] for key in ['domain', 'type', 'difficulty_level', 'tags']}
 
 def get_metadata_df(df: pd.DataFrame):
     """
@@ -1181,7 +789,7 @@ def split(combined_df: pd.DataFrame = None, dataframe_type: str = 'questions') -
         questions = combined_df[id_keys + question_keys].drop_duplicates()
         try:
             options = combined_df[id_keys + options_keys]
-        except KeyError as e:
+        except KeyError:
             options = pd.DataFrame()
         return questions, options
     
@@ -1198,48 +806,6 @@ def split(combined_df: pd.DataFrame = None, dataframe_type: str = 'questions') -
 
     
 
-def get_display_json(questions_df: pd.DataFrame, options_df: pd.DataFrame, instruction_set: pd.DataFrame = None):
-    """
-    Convert the questions and options DataFrames to a JSON object.
-    ## Args:
-    **questions_df**: (pd.DataFrame) A DataFrame containing the questions.
-    **options_df**: (pd.DataFrame) A DataFrame containing the options.
-    **instruction_set**: (pd.DataFrame) A DataFrame containing the instructions.
-    ## Returns:
-    A JSON object in the display_json format.
-    """
-    display_json = {}
-    for question_id, group in questions_df.groupby('question_id'):
-        # Questions
-        questions = group['question_text'].to_list()
-        # Options
-        options_list = [
-            options_df[
-                (options_df['question_id'] == question_id) &
-                (options_df['sub_id'] == sub_id)
-            ].sort_values('option_id')['option_text'].to_list()
-            for sub_id in group['sub_id'].unique()
-        ]
-        # Correct answers
-        correct_answers = options_df[
-            (options_df['question_id'] == question_id) &
-            (options_df['correct_answer'] == True)
-        ]['option_text'].to_list()
-        if not correct_answers:
-            correct_answers = ['No correct answer found'] * len(questions)
-        
-        for i, question in enumerate(questions):
-            display_json[f"question_{i+1}"] = question
-            display_json[f"options_{i+1}"] = options_list[i]
-            display_json[f"answer_{i+1}"] = correct_answers[i]
-        
-        display_json["metadata"] = get_metadata(group)
-
-        if instruction_set is not None:
-            metadata = display_json["metadata"]
-            instructions = instruction_set.query(" & ".join([f"{key} ==@ value" for key, value in metadata.items()]))['instructions'].to_list()
-            display_json['instructions'] = instructions[0] if instructions else None
-    return display_json
 
 
 def build_command(query_json: list[dict] | dict) -> str:
@@ -1362,20 +928,6 @@ def display_to_dataset_json(display_json, ignore_options = False):
 
     return dataset_json
 
-def get_json_format(json_object):
-    """
-    Get the format of a JSON object. This is a necessary check not a sufficient one.
-    ## Args:
-    **json_object** (dict): The JSON object.
-    ## Returns:
-    The format of the JSON object. Can be either 'display_json' or 'dataset_json'.
-    """
-    if 'question_1' in json_object:
-        return 'display_json'
-    elif 'question_id' in json_object:
-        return 'dataset_json'
-    else:
-        raise ValueError("Invalid JSON object format.")
     
 
 def get_instructions(instruction_set: pd.DataFrame, metadata: dict, get_closest_match: bool = True) -> str:
