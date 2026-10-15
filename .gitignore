@@ -1,0 +1,14 @@
+.DS_Store
+.venv
+__pycache__/
+*.egg-info/
+.env
+# the template data is in data/; the sampler rebuilds the manifest, and Setup's choices are per machine
+data/manifest.json
+data/devmode/settings.json
+dist/
+build/
+*.pyc
+
+# private planning notes, not published
+plans/

@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+{% import "_md_pills.html" as pills with context %}
+{% block content %}
+<section class="dev-head"><h1>{{ i.display_name }}</h1></section>
+{% include "_dev_messages.html" %}
+
+{% if sample_error %}<div class="notice error">Could not draw the sample: {{ sample_error }}</div>{% endif %}
+{% if not total and not sample_error %}<p class="muted">No templates to read yet.{% if not i.code %} <a href="/developer/e/{{ i.element }}/templates">Go to Templates →</a>{% endif %}</p>{% endif %}
+
+{% set legacy = record.reviewed_at and not n_marked %}
+{% if legacy %}
+<section class="rv-done">
+  <p><svg class="bi" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.2 11.6 2.7 8.1l1.2-1.2 2.3 2.3 5.9-5.9 1.2 1.2z"/></svg>
+    Reviewed by {{ record.reviewer or 'the maintainer' }} on {{ record.reviewed_at[:10] }}.</p>
+  {% if sample %}<button type="button" class="tl-link" id="rv-show" aria-expanded="false">Read the sample anyway</button>{% endif %}
+</section>
+{% endif %}
+{% if sample %}
+<div id="rv-sample"{% if legacy %} hidden{% endif %}>
+<section class="rv-summary">
+  <p class="rv-rule">A sample of <b>{{ n }}</b> of {{ "{:,}".format(total) }} template{{ '' if total == 1 else 's' }} ({{ '%.1f'|format(100 * n / total) if n < total else '100' }}%),
+    spread over its types and levels and filled once each. Every element follows one rule ({{ (rule.share * 100)|round|int }}% of its templates, at least {{ rule.min }}, at most {{ rule.max }}) and one seed, so the sample is the same every time.</p>
+  <p class="rv-bound" id="rv-bound" data-n="{{ n }}"{% if bound is none %} hidden{% endif %}>{% if bound is not none %}With 95% confidence, at most {{ '%.0f'|format(100 * bound) }}% of this element's templates have a problem.{% endif %}</p>
+</section>
+
+<section class="dev-cands rv-cands">
+  <div class="cand-bar">
+    <div class="dev-tabs" role="tablist" aria-label="Show">
+      {% set groups = [('open', 'Not read', n - n_marked), ('ok', 'Fine', n_ok), ('problem', 'Problem', n_problems), ('all', 'All', n)] %}
+      {% set default = 'open' if n_marked < n else 'all' %}
+      {% for key, label, count in groups %}<button type="button" class="dev-tab{% if key == default %} active{% endif %}" data-filter="{{ key }}" aria-pressed="{{ 'true' if key == default else 'false' }}">{{ label }} <span data-count="{{ key }}">{{ count }}</span></button>{% endfor %}
+    </div>
+    <button type="button" class="button-sm" id="focus-open">Review one at a time</button>
+  </div>
+  <ol class="dev-cand-list rv-list no-math" id="cand-list" data-el="{{ i.element }}" data-default="{{ default }}">
+    {% for s in sample %}{% set m = marks.get(s.key, {}) %}{% set mk = m.mark or 'open' %}
+    <li data-key="{{ s.key }}" data-mark="{{ mk }}" data-groups="all {{ mk }}">
+      <details>
+        <summary>
+          <span class="record-id">{{ loop.index }}</span>
+          <span class="dev-badge rv-badge" data-mark="{{ mk }}" title="Your read">{{ pills.person }}<span class="bt">{{ {'open': 'not read', 'ok': 'fine', 'problem': 'problem'}[mk] }}</span></span>
+          <span class="dev-cand-text">{% if s.filled %}{{ s.filled.parts[0].question|truncate(170) }}{% else %}The filler could not fill this template{% endif %}</span>
+          <span class="dev-cand-meta">level {{ s.difficulty }}</span>
+          {{ pills.md(s.fill_variant.domain, s.fill_variant.type, s.fill_variant.tags, s.difficulty, s.difficulty_raw) }}
+        </summary>
+        <div class="dev-cand-body">
+          <div class="cand-main">
+            <div class="cand-q">
+              <p class="cand-q-label">Filled question</p>
+              {% if s.filled %}
+                {% for p in s.filled.parts %}
+                {% if s.filled.parts|length > 1 %}<p class="review-part">Part {{ loop.index }}</p>{% endif %}
+                <div class="question">{{ p.question }}</div>
+                <ol class="options-abc">{% for o in p.options %}<li{% if p.correct[loop.index0] %} class="correct"{% endif %}>{{ "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[loop.index0] }}. {{ o }}</li>{% endfor %}</ol>
+                {% endfor %}
+              {% else %}<div class="notice error">{{ s.error }}</div>{% endif %}
+            </div>
+            <div class="dev-cand-actions rv-acts">
+              <button type="button" class="button-sm cand-st{% if mk == 'ok' %} on{% endif %}" data-set="ok" aria-pressed="{{ 'true' if mk == 'ok' else 'false' }}">{{ 'Fine ✓' if mk == 'ok' else 'Fine' }}</button>
+              <button type="button" class="secondary button-sm cand-st{% if mk == 'problem' %} on{% endif %}" data-set="problem" aria-pressed="{{ 'true' if mk == 'problem' else 'false' }}">{{ 'Problem ✕' if mk == 'problem' else 'Problem' }}</button>
+            </div>
+            <label class="rv-note-label"{% if mk != 'problem' %} hidden{% endif %}>What is wrong <input type="text" class="rv-note" value="{{ m.note or '' }}" placeholder="Saved as you type"></label>
+          </div>
+          <aside class="cand-side">
+            <section><h4>Template</h4>{% for piece in s.pieces %}<p class="review-text">{% for x in piece %}{% if x.slot %}<span class="slot">{{ x.slot }}</span>{% else %}{{ x.text }}{% endif %}{% endfor %}</p>{% endfor %}</section>
+            {% if s.fills %}<section><h4>Fill settings</h4>{% for f, vals in s.fills.items() %}<p class="rv-fills">{{ f }}: {% for v in vals %}{% if v == s.fill_variant[f] %}<b>{{ v|replace('_', ' ') }}</b>{% else %}{{ v|replace('_', ' ') }}{% endif %}{% if not loop.last %} · {% endif %}{% endfor %}</p>{% endfor %}<p class="hint">The same text is filled differently for each; this one was filled with the one in bold.</p></section>{% endif %}
+            <section><h4>Fill</h4><p class="hint">seed {{ s.fill_seed }} · template {{ s.fill_variant.template_id }}</p></section>
+          </aside>
+        </div>
+      </details>
+    </li>
+    {% endfor %}
+  </ol>
+  <p class="hint" id="cand-empty" hidden>None in this group.</p>
+</section>
+</div>
+
+<div class="focus" id="focus" role="dialog" aria-modal="true" aria-label="Review the sample one at a time" hidden>
+  <div class="focus-bar">
+    <div class="focus-pos"><strong id="focus-n"></strong> <span id="focus-of"></span><span class="focus-prog"><i id="focus-prog"></i></span></div>
+    <div class="focus-acts">
+      <button type="button" class="secondary button-sm" data-go="-1" title="Previous (←)">← Prev</button>
+      <button type="button" class="secondary button-sm" data-go="1" title="Next (→)">Next →</button>
+      <span class="focus-sep"></span>
+      <button type="button" class="button-sm" data-act="ok" title="Fine (F)">Fine <kbd>F</kbd></button>
+      <button type="button" class="secondary button-sm" data-act="problem" title="Problem (P)">Problem <kbd>P</kbd></button>
+      <button type="button" class="focus-close" aria-label="Close (Esc)" title="Close (Esc)">×</button>
+    </div>
+  </div>
+  <div class="focus-body" id="focus-body"></div>
+  <p class="focus-done" id="focus-done" hidden>That was the last one in this group. <button type="button" class="linkbtn" id="focus-finish">Back to the list</button></p>
+</div>
+{% endif %}
+
+<section class="rv-verdict" id="saved">
+  <h2>Notes</h2>
+  <form method="post" action="/developer/e/{{ i.element }}/review">
+    <textarea name="notes" rows="4" aria-label="Notes" placeholder="Anything about the element as a whole: templates to fix, wording to change before release">{{ record.notes or '' }}</textarea>
+    <button type="submit" class="secondary">Save notes</button>
+  </form>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+(() => {
+  const showBtn = document.getElementById('rv-show');
+  showBtn?.addEventListener('click', () => { document.getElementById('rv-sample').hidden = false; showBtn.closest('.rv-done').querySelector('button').remove(); });
+  const list = document.getElementById('cand-list'); if (!list) return;
+  const el = list.dataset.el, n = +document.getElementById('rv-bound').dataset.n;
+  const LABEL = { open: 'not read', ok: 'fine', problem: 'problem' };
+  const tabs = document.querySelectorAll('.dev-tab');
+  let current = list.dataset.default;
+  const show = key => {
+    current = key; let k = 0;
+    tabs.forEach(t => { const on = t.dataset.filter === key; t.classList.toggle('active', on); t.setAttribute('aria-pressed', on); });
+    list.querySelectorAll(':scope > li').forEach(li => { const ok = li.dataset.groups.split(' ').includes(key); li.hidden = !ok; if (ok) k++; });
+    document.getElementById('cand-empty').hidden = k > 0;
+  };
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.filter)));
+  show(current);
+
+  const recount = j => {
+    const c = { open: n - j.marked, ok: j.ok, problem: j.problems, all: n };
+    document.querySelectorAll('[data-count]').forEach(s => { s.textContent = c[s.dataset.count]; });
+    document.querySelectorAll('[data-step-count="review"]').forEach(s => { s.textContent = `${j.marked}/${n}`; });
+    const b = document.getElementById('rv-bound');
+    b.hidden = j.bound == null;
+    b.textContent = j.bound == null ? '' : `With 95% confidence, at most ${Math.round(100 * j.bound)}% of this element's templates have a problem.`;
+  };
+  /* a row's body moves into the one-at-a-time view while it is shown there: look in both */
+  let home = null;
+  const part = (li, sel) => li.querySelector(sel) || (home && home.li === li ? home.node.querySelector(sel) : null);
+  const parts = (li, sel) => [...li.querySelectorAll(sel), ...(home && home.li === li ? home.node.querySelectorAll(sel) : [])];
+  async function save(li, mark) {
+    const note = part(li, '.rv-note');
+    const body = new URLSearchParams({ template_id: li.dataset.key, mark: mark === 'open' ? 'clear' : mark, note: mark === 'problem' ? note.value : '' });
+    const r = await fetch(`/developer/e/${el}/review/mark`, { method: 'POST', body });
+    if (!r.ok) { alert('Could not save the mark.'); return false; }
+    recount(await r.json());
+    li.dataset.mark = mark; li.dataset.groups = 'all ' + mark;
+    const badge = li.querySelector('.rv-badge'); badge.dataset.mark = mark; badge.querySelector('.bt').textContent = LABEL[mark];
+    parts(li, '[data-set]').forEach(b => {
+      const on = b.dataset.set === mark; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
+      b.textContent = b.dataset.set === 'ok' ? (on ? 'Fine ✓' : 'Fine') : (on ? 'Problem ✕' : 'Problem');
+    });
+    part(li, '.rv-note-label').hidden = mark !== 'problem';
+    return true;
+  }
+  /* pressing the current mark again takes it back to not read */
+  const decide = (li, mark) => save(li, li.dataset.mark === mark ? 'open' : mark);
+  list.addEventListener('click', async e => {
+    const b = e.target.closest('[data-set]'); if (!b) return;
+    const li = b.closest('li');
+    if (await decide(li, b.dataset.set) && li.dataset.mark === 'problem') part(li, '.rv-note').focus();
+  });
+  let t; list.addEventListener('input', e => { if (!e.target.matches('.rv-note')) return; clearTimeout(t); const li = e.target.closest('li'); t = setTimeout(() => save(li, 'problem'), 500); });
+
+  /* one at a time: F fine, P problem, arrows to move */
+  const focus = document.getElementById('focus'), fbody = document.getElementById('focus-body');
+  let queue = [], at = 0;
+  const putBack = () => { if (home) { home.li.querySelector('details').appendChild(home.node); home = null; } };
+  const markFocus = () => {
+    const s = home && home.li.dataset.mark;
+    focus.querySelectorAll('[data-act]').forEach(b => { const on = b.dataset.act === s; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+  };
+  const go = i => {
+    putBack();
+    at = Math.max(0, Math.min(i, queue.length - 1));
+    const li = queue[at], node = li.querySelector('.dev-cand-body');
+    home = { li, node }; fbody.innerHTML = '';
+    const head = document.createElement('div'); head.className = 'focus-head';
+    head.innerHTML = li.querySelector('summary').innerHTML; head.querySelector('.dev-cand-text')?.remove(); head.querySelector('.dev-cand-meta')?.remove();
+    fbody.append(head, node);
+    document.getElementById('focus-n').textContent = `${at + 1} of ${queue.length}`;
+    document.getElementById('focus-prog').style.width = `${(100 * (at + 1) / queue.length).toFixed(1)}%`;
+    document.getElementById('focus-done').hidden = true; fbody.scrollTop = 0;
+    markFocus();
+  };
+  const open = () => {
+    queue = [...list.querySelectorAll(':scope > li')].filter(li => !li.hidden);
+    if (!queue.length) return;
+    document.getElementById('focus-of').textContent = 'in ' + (document.querySelector('.dev-tab.active')?.firstChild.textContent.trim() || 'this group');
+    focus.hidden = false; document.body.classList.add('focus-on'); go(0);
+  };
+  const close = () => { putBack(); focus.hidden = true; document.body.classList.remove('focus-on'); show(current); };
+  const act = async mark => {
+    if (!home) return;
+    const li = home.li;
+    if (!(await decide(li, mark))) return;
+    // the head shows the badge: refresh it
+    const hb = fbody.querySelector('.focus-head .rv-badge'); if (hb) { hb.dataset.mark = li.dataset.mark; hb.querySelector('.bt').textContent = LABEL[li.dataset.mark]; }
+    markFocus();
+    if (li.dataset.mark === 'problem') { part(li, '.rv-note')?.focus(); return; }  // say what is wrong first
+    if (li.dataset.mark === 'open') return;
+    if (at < queue.length - 1) go(at + 1); else document.getElementById('focus-done').hidden = false;
+  };
+  document.getElementById('focus-open').addEventListener('click', open);
+  document.getElementById('focus-finish').addEventListener('click', close);
+  focus.querySelector('.focus-close').addEventListener('click', close);
+  focus.addEventListener('click', e => {
+    const g = e.target.closest('[data-go]'); if (g) go(at + Number(g.dataset.go));
+    const a = e.target.closest('[data-act]'); if (a) act(a.dataset.act);
+  });
+  document.addEventListener('keydown', e => {
+    if (focus.hidden) return;
+    if (e.target.matches('input, textarea, select')) { if (e.key === 'Enter' && home) { e.preventDefault(); e.target.blur(); if (at < queue.length - 1) go(at + 1); } return; }
+    const k = e.key.toLowerCase();
+    if (k === 'escape') close(); else if (k === 'arrowright' || k === 'j') go(at + 1); else if (k === 'arrowleft' || k === 'k') go(at - 1);
+    else if (k === 'f') act('ok'); else if (k === 'p') act('problem');
+  });
+})();
+</script>
+{% endblock %}

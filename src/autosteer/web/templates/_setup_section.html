@@ -1,0 +1,60 @@
+<div class="dev-setup">
+<section class="dev-block">
+  <h3>Providers</h3>
+  <div class="table-wrap">
+  <table class="dev-ptable">
+    <thead><tr><th>Provider</th><th>Key</th></tr></thead>
+    <tbody>
+    {% for p in providers %}
+    <tr>
+      <td data-label="Provider"><strong>{{ p.label }}</strong><span class="dev-pstate {{ 'on' if p.configured else 'off' }}">{{ 'ready' if p.configured else 'not set up' }}</span>{% if p.note %}<span class="hint">{{ p.note }}</span>{% endif %}</td>
+      <td data-label="Environment">
+        {% for group in p.groups %}<div>{% for v in group %}{% if not loop.first %} or {% endif %}<code>{{ v.name }}</code> <span class="{{ 'dev-ok' if v.set else 'muted' }}">{{ ('set for this session' if v.session else 'set') if v.set else 'not set' }}</span>{% endfor %}</div>{% endfor %}
+        {% for v in p.optional_vars %}<div><code>{{ v.name }}</code> <span class="{{ 'dev-ok' if v.set else 'muted' }}">{{ 'set' if v.set else 'not set' }}</span> <span class="muted">(optional)</span></div>{% endfor %}
+      </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  <details class="dev-local">
+    <summary>Running a model on your own machine</summary>
+    <p>Start a server that speaks the OpenAI chat API, then set <code>OPENAI_COMPATIBLE_BASE_URL</code> to its address, before starting autoSTEER or below for this session. On a Mac, with MLX:</p>
+    <div class="codeblock"><button class="copy" type="button" data-copy="local-mlx">Copy</button><pre id="local-mlx">uvx --from mlx-lm mlx_lm.server --model mlx-community/Qwen3-8B-4bit
+export OPENAI_COMPATIBLE_BASE_URL=http://127.0.0.1:8080/v1</pre></div>
+    <p>On a machine with an NVIDIA GPU, with vLLM:</p>
+    <div class="codeblock"><button class="copy" type="button" data-copy="local-vllm">Copy</button><pre id="local-vllm">uvx vllm serve Qwen/Qwen3-8B
+export OPENAI_COMPATIBLE_BASE_URL=http://127.0.0.1:8000/v1</pre></div>
+  </details>
+</section>
+
+<form class="dev-block dev-keyform" method="post" action="/developer/setup/key" autocomplete="off">
+  <h3>Use a key for this session</h3>
+  <p class="hint">Kept until the server stops. To keep a key across restarts, export it before starting, or put it in <code>.env</code> and start with <code class="nowrap">uv run --env-file .env autosteer dev</code>.</p>
+  <div class="dev-action-row">
+    <label>Variable <select name="name">{% for p in providers %}{% for group in p.groups %}{% for v in group %}<option>{{ v.name }}</option>{% endfor %}{% endfor %}{% for v in p.optional_vars %}<option>{{ v.name }}</option>{% endfor %}{% endfor %}</select></label>
+    <label>Value <input type="password" name="value" autocomplete="off" spellcheck="false"></label>
+    <button type="submit">Use key</button>
+  </div>
+</form>
+{% if session_keys %}
+<form method="post" action="/developer/setup/forget" class="dev-forget"><button type="submit" class="secondary button-sm">Forget keys entered here</button></form>
+{% endif %}
+
+
+<form class="dev-block" method="post" action="/developer/setup">
+  <h3>Default models</h3>
+  {% for role, prefix, title, use in [('generation', 'gen', 'Generation', 'seed candidates, templates, AI check'), ('solve', 'solve', 'Solve check', 'answering filled candidates')] %}
+  {% set cur = settings.get(role) or {} %}
+  <fieldset class="dev-default">
+    <legend>{{ title }} <span class="hint">({{ use }})</span></legend>
+    <label>Provider <select name="{{ prefix }}_provider">{% for p in providers %}<option value="{{ p.key }}"{% if cur.get('provider') == p.key %} selected{% endif %}>{{ p.label }}{% if not p.configured %} (not set up){% endif %}</option>{% endfor %}</select></label>
+    <label>Model <input name="{{ prefix }}_model" value="{{ cur.get('model', '') }}" list="model-list" placeholder="for example gpt-5.4"></label>
+    {% if loop.last %}<button type="submit" class="dev-save">Save defaults</button>{% endif %}
+  </fieldset>
+  {% endfor %}
+  <datalist id="model-list">{% for p in providers %}{% for m in p.models %}<option value="{{ m }}">{{ p.label }}</option>{% endfor %}{% endfor %}</datalist>
+</form>
+
+
+</div>

@@ -1,0 +1,29 @@
+{% extends "guide_base.html" %}
+{% block content %}
+<h1>Benchmarks</h1>
+<p>We use <b>benchmark</b> to mean a specification of what is measured and how: a taxonomy of elements, a generator that produces questions for each element from templates, and the rules for scoring answers. A <b>dataset</b> is a fixed sample of questions drawn from a benchmark. The <a class="icon-link ic-hf" href="/datasets">datasets</a> we publish are for results that need to be comparable across papers; the generator, available through the <a href="/reference">API</a> and <a class="icon-link ic-wheel" href="/autosteer#generate">autoSTEER</a>, is for fresh questions.</p>
+
+<h2 id="angles">Two angles on economic reasoning</h2>
+<p>We provide two benchmarks, each taking a distinct angle on economic decision-making.</p>
+<p>In <b>strategic</b> settings the best choice depends on how other agents will respond: a phone manufacturer setting its quantity and price has to anticipate its competitors. This is a well-defined and rich area, but a small part of economics as a field.</p>
+<p>In <b>non-strategic</b> settings each agent is too small to move the market and takes prices as given: a small farm choosing between wheat and corn at today's prices is not playing against anyone. These settings make up much of microeconomics: consumers, firms, competitive markets and welfare.</p>
+<p>The benchmarks are described in the following articles:</p>
+<table class="articles">
+  <thead><tr><th>Benchmark</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td><a href="/steer">STEER</a></td><td>Strategic and behavioral decision-making. It breaks decision theory and game theory into elements of economic rationality: the foundations, choosing alone under certainty and risk, choosing against other agents in games, and choosing on behalf of a group.</td></tr>
+    <tr><td><a href="/steer-me">STEER-ME</a></td><td>Non-strategic microeconomics. It tests whether a model can reason as a price-taking consumer or firm, add individual choices up into markets, find the prices that clear them, and judge whether the outcome is efficient.</td></tr>
+  </tbody>
+</table>
+<p>Both are built the same way: elements grouped into modules and settings, questions that vary in type, domain and perspective, and the same <a href="/scoring">scoring</a>. STEER-ME starts from the same foundations as STEER, so the elements they have in common are published once, in STEER.</p>
+
+<h2 id="terms">Key terms</h2>
+<dl class="terms">
+  <dt>Element</dt><dd>One ability, such as applying the law of demand.</dd>
+  <dt>Template</dt><dd>A question with labeled fields where the numbers go.</dd>
+  <dt>Question</dt><dd>A template filled in, with options and a correct answer computed by code.</dd>
+  <dt>Type</dt><dd>The form a question takes within an element.</dd>
+  <dt>Domain</dt><dd>Its subject matter, such as finance or medicine.</dd>
+  <dt>Perspective</dt><dd>The point of view it is written from.</dd>
+</dl>
+{% endblock %}

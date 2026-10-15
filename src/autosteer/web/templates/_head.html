@@ -1,0 +1,33 @@
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {#- The tab shows just the page's name; link previews, seen out of context, carry the site's name too #}
+  {%- set _title = page_title if page_title is defined and page_title else 'STEER' %}
+  {%- set _share_title = (_title if 'STEER' in _title else _title ~ ' · STEER') if page_title is defined and page_title else 'STEER: benchmarks for the economic reasoning of language models' %}
+  {%- set _desc = page_description if page_description is defined and page_description else site_description %}
+  <title>{{ _title }}</title>
+  <meta name="description" content="{{ _desc }}">
+  {%- if noindex is defined and noindex %}
+  <meta name="robots" content="noindex">
+  {%- else %}
+  <link rel="canonical" href="{{ site_url() }}{{ request.url.path }}">
+  {%- endif %}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="STEER">
+  <meta property="og:title" content="{{ _share_title }}">
+  <meta property="og:description" content="{{ _desc }}">
+  <meta property="og:url" content="{{ site_url() }}{{ request.url.path }}">
+  <meta property="og:image" content="{{ site_url() }}/static/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="STEER: benchmarks for the economic reasoning of language models">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ _share_title }}">
+  <meta name="twitter:description" content="{{ _desc }}">
+  <meta name="twitter:image" content="{{ site_url() }}/static/og.png">
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', path='favicon.svg') }}?v={{ asset_version }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', path='apple-touch-icon.png') }}?v={{ asset_version }}">
+  <meta name="theme-color" content="#c4262e">
+  <script>try { const t = localStorage.getItem('steer-theme'); if (t === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&family=Source+Code+Pro:wght@400;500&display=swap">
+  <link rel="stylesheet" href="{{ url_for('static', path='site.css') }}?v={{ asset_version }}">

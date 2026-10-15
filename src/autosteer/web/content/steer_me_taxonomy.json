@@ -1,0 +1,203 @@
+{
+ "settings": [
+  {
+   "number": 1,
+   "name": "Foundations",
+   "summary": "Core mathematical skills essential for microeconomic reasoning: the arithmetic, optimization, probability and logic of STEER, extended with basic calculus such as single-variable derivatives and linear systems of equations.",
+   "description": [],
+   "modules": [
+    {
+     "number": "1.1",
+     "name": "Optimization",
+     "description": [
+      "Much economic reasoning depends on the primitive operation of identifying the best choice among a set of alternatives, sometimes given constraints."
+     ],
+     "written_for_site": true
+    },
+    {
+     "number": "1.2",
+     "name": "Systems of Equations",
+     "description": [
+      "Many of the later elements end in the same step: several conditions must hold at once, and the answer is the point that satisfies all of them. A market clears where supply equals demand, and a consumer's optimum sits where the budget constraint meets a tangency condition. This module tests whether the agent can solve small systems of linear equations, apart from any economic setting."
+     ],
+     "written_for_site": true
+    },
+    {
+     "number": "1.3",
+     "name": "Derivatives and Homotheticity",
+     "description": [
+      "Marginal reasoning is differentiation: marginal utility, marginal product and marginal cost are all derivatives. This module tests whether the agent can differentiate the functional forms used throughout the benchmark, and whether it can recognise a homothetic function, one where scaling every input by the same factor leaves the trade-offs between inputs unchanged."
+     ],
+     "written_for_site": true
+    }
+   ],
+   "shared_elements": [
+    {
+     "element": "add_sub",
+     "benchmark": "STEER"
+    },
+    {
+     "element": "mult_div",
+     "benchmark": "STEER"
+    },
+    {
+     "element": "compute_expectations",
+     "benchmark": "STEER"
+    }
+   ],
+   "shared_elements_note": "STEER-ME's Foundations setting has six elements (main text; the appendix's Foundations subsection is commented out): the three STEER elements listed here (shared with STEER, shown with links, not duplicated) and STEER-ME's own derivatives and exponents (module Derivatives and Homotheticity) and linear_system_eq (module Systems of Equations). Evidence: the 2024 heatmaps list Linear System Of Equation, Derivatives and Exponents; the main text names STEER's arithmetic, optimization, probability and logic plus single-variable derivatives and linear systems. Decision of 5 October 2026."
+  },
+  {
+   "number": 2,
+   "name": "Consumption Decisions in Non-Strategic Environments",
+   "summary": "Tests an agent's ability to optimally exchange time and money for desired goods and services. The agent is a price taker: it accepts market prices as given rather than forecasting how a purchase might move the market.",
+   "description": [
+    "We begin by characterizing the space of elements that test an agent's ability to optimally allocate their limited resources to goods and services they desire. In economics and decision theory, the most primitive approach to describing the preferences of decision-makers is to use a function that maps a set of possible choices to the agent's optimal choice within that set. Under a set of intuitive assumptions, such as transitivity (i.e., if bundle X is preferred to bundle Y, and Y is preferred to bundle Z, then X must be preferred to Z), it becomes possible to “rationalize” preferences by instead describing a utility function. This function assigns a real number to each bundle, and the agent selects the bundle with the highest utility.",
+    "In this paper, we focus on these “rationalizable” preferences, where agent choice can be implemented as utility maximization constrained by prices and income. The solution to these consumer choice problems provides us with, among other things, individual demand functions, which describe the choice of each good or service as a function of prices and income. The individual demand functions for each good are essential when aggregating to the market demand in Consumer Goods Market Aggregation, which in turn is used to find the price in a non-strategic equilibrium. In addition, we test variations on the framework such as the agent's ability to make tradeoffs between the quantity of goods they would need to be able to purchase for an increase in the amount of work they provide for a given wage (i.e., the elasticity of labor supply), as well as cases of choice under uncertainty where the agent is choosing between possible lotteries under rationalizability assumptions required for von Neumann expected utility."
+   ],
+   "modules": [
+    {
+     "number": "2.1",
+     "name": "Properties of Utility Functions",
+     "description": [
+      "In this section, we test the ability of the agent to use utility functions as a means to compare preferences over different “bundles” of goods or services. A key feature of economic reasoning in this context is for agents to consider how substitution between different goods in a bundle might achieve the same utility (i.e., map out the “indifference curves”). Key tests include correctly distinguishing between substitutes and complements in consumption, and calculating the marginal rate of substitution at a point on an indifference curve. This logic is essential for both agents acting as a planner as we will see in Evaluating Equilibria and Externalities and when fulfilling the role of choice under budget and income constraints, in Deriving Demand."
+     ]
+    },
+    {
+     "number": "2.2",
+     "name": "Deriving Demand",
+     "description": [
+      "The module in this section tests an agent's ability to solve a constrained utility maximization problem to derive a demand function—relying on the results of Properties of Utility Functions. We test the canonical classes of demand functions, check the duality of Marshallian demand and Hicksian demand, and ask the agent to derive these demand functions from first principles."
+     ]
+    },
+    {
+     "number": "2.3",
+     "name": "Comparative Statics of Demand",
+     "description": [
+      "This module considers how agents reason about changes in prices or income, and their effects on the quantity of each good they would purchase. We test the classic law of demand, different types of goods (e.g., normal, inferior, and Giffen), and derive Engel curves from first principles. The key tests are to ensure the agent rationally responds to changes in relative prices, and investigate their substitution between goods in a bundle. In practice, these tests involve comparative statics of the argmax from the utility maximization of the previous section on Deriving Demand—i.e., using an Envelope theorem and perturbing prices or income."
+     ]
+    },
+    {
+     "number": "2.4",
+     "name": "Labor Supply",
+     "description": [
+      "While the preceding elements tested tradeoffs in choices of bundles with different goods, services (in Deriving Demand and over lotteries in Dynamic Consumption Decisions), often agents need to make a choice trading off between leisure and consumption. The elements in this module test an agent's ability to optimally make that tradeoff by balancing the consumption goods required to compensate for decreased leisure—which leads to the labor supply elasticity central to many branches of economics. Since goods must be purchased, agents will consider the relative wage from additional work compared to the price of goods. This leads us to be able to test an agent's ability to distinguish real from nominal prices."
+     ]
+    },
+    {
+     "number": "2.5",
+     "name": "Dynamic Consumption Decisions",
+     "description": [
+      "Individuals often face decisions about how to trade off more consumption today at the cost of additional debt and less consumption in the future, and how best to plan for consumption with various contingencies when the future is uncertain. Among other applications, this provides a formal model of how to best choose a mixture of financial assets—i.e., portfolios. Consequently, this subsection tests intertemporal consumption choices, optimal portfolio choice—which involves selecting a mix of assets that maximizes expected utility given the risks and returns associated with each asset. Understanding portfolio choice helps explain how consumers manage risk and make investment decisions, which is vital for financial planning and economic stability."
+     ]
+    }
+   ]
+  },
+  {
+   "number": 3,
+   "name": "Production Decisions in Non-Strategic Environments",
+   "summary": "Tests an agent's ability to decide on the combination of inputs to efficiently produce goods and services to maximize profits.",
+   "description": [
+    "In the previous section, we derived how an agent facing a set of prices would choose the quantity demanded of each good or service to maximize their utility function. We also tested the amount of time that an agent might choose to work (i.e., the quantity of labor supplied) given market wages—where the agent trades off the additional goods they might purchase against the lost leisure time they must forgo. Here, we look at the other side of the market and test an agent's ability to operate a production technology to maximize profits. Facing market prices for all production factors (e.g., wages and the capital) and the market price of the good or service they produce, the agent chooses the quantity of each factor of production and the total output. Parallel to Consumption Decisions in Non-Strategic Environments, in Properties of Production Functions we first test general properties of production functions to ensure the agent can reason about substitution between factors, economies of scale in production, etc. Then in Deriving Factor Demand we solve the firm's optimal profit maximization problem to determine the optimal choice of factors of production and output given a set of market prices. Finally, in Comparative Statics with Production we test the agent's ability to reason about comparative statics on prices and their impact on factor demand and firm output."
+   ],
+   "modules": [
+    {
+     "number": "3.1",
+     "name": "Properties of Production Functions",
+     "description": [
+      "Production functions in these environments take continuous inputs of each factor, which lets us test an agent's ability to conduct marginal thinking when choosing the composition of inputs. For example, by knowing the hourly wage of hiring an additional worker, the additional output the worker might produce using the particular production process, and the price they can sell the firm's output, they can decide whether hiring the additional worker is profitable. In the absence of prices, this section tests basic decision making of the agent for understanding substitution between factor of production, marginal products for each input, and the understanding of the returns to scale of a production process."
+     ]
+    },
+    {
+     "number": "3.2",
+     "name": "Deriving Factor Demand",
+     "description": [
+      "This module tests the agent's ability to act in the role of a profit maximizer in non-strategic situations where they take as given the price which they could sell goods they produce, and must pay for inputs to their production process at market rates (e.g., a competitive wage). Whereas in Deriving Demand, the agent was solving a utility maximization problem subject to a budget constraint, here they solve a profit maximization problem constrained by a production function. We test decisions on the quantity and composition of inputs, and the quantity of output for canonical production functions such as Cobb-Douglas and Leontief production functions given the agent's understanding of production functions from Properties of Production Functions. The agent is asked to derive the factor demand functions from first principles from profit maximization and test their ability to reason with the dual cost-minimization formulation—analogous to the Hicksian vs. Marshallian demand of Deriving Demand."
+     ]
+    },
+    {
+     "number": "3.3",
+     "name": "Comparative Statics with Production",
+     "description": [
+      "This module considers how agents reason about changes in the prices at which they can sell their goods, as well as changes in the costs of producing those goods. In particular, we can test how this affects their optimal choice of inputs to their production process (e.g., how many people to hire or robots to lease). We test comparative statics on the prices of inputs to the production function, changes to the underlying production technology, and substitution between goods for classic production functions such as Cobb-Douglas and Leontief. Analogous to the relationship between Deriving Demand and Comparative Statics of Demand, these tests involve comparative statics of the argmax from the profit maximization of Deriving Factor Demand—i.e., using an Envelope theorem and perturbing factor prices."
+     ]
+    },
+    {
+     "number": "3.4",
+     "name": "Dynamic Production Decisions",
+     "description": [
+      "While Deriving Factor Demand tested the ability of agents to make static (i.e., within-period) decisions on the mix of input factors to maximize profits, many producer problems are inherently dynamic. For example, we can test if an agent can optimally choose the amount of capital to purchase given forecasts of future consumer demand and prices or choose how much to adjust the labor force in cases when labor is difficult to relocate due to frictions such as hiring and firing costs. Finally, agents are tested on their ability to make optimal entry and exit decisions based on their forecasted profits in an evolving market."
+     ]
+    }
+   ]
+  },
+  {
+   "number": 4,
+   "name": "Non-Strategic Decisions in Multi-Agent Environments",
+   "summary": "Considers consumers and producers who trade with each other. The agent must reason about how the aggregated behaviors of consumers and producers lead to market-clearing prices that balance supply and demand.",
+   "description": [
+    "This setting tests the core logic of the relationship between supply-and-demand and prices, building on the tests of optimal behavior in Production Decisions in Non-Strategic Environments and Consumption Decisions in Non-Strategic Environments. Economists refer to “general equilibrium” as the process where equilibrium prices and quantities emerge with a large number of non-strategic, price-taking market participants interact. Unlike the strategic models found in STEER, the assumption is that the market interactions that lead to this equilibrium occur through an unspecified process that clears markets (i.e., a “Walrasian auctioneer” or “invisible hand”).",
+    "In particular, for non-strategic settings, all market participants take prices as given and choose the quantity demanded or supplied in each market. For example, consumers jointly decide on the quantity demanded of goods and services given relative prices, and the quantity of labor supplied given a wage. Simultaneously, producers choose the quantity supplied of the good and the demand of each factor of production. With a large number of non-strategic market participants we can test the agent's ability to aggregate all of their supply and demand functions to calculate a market-level supply and demand. Finally, given the aggregated supply and demand functions for each market, we can test whether an agent can find the market clearing price where supply is equal to demand in equilibrium—given their internal model of all the market participants.",
+    "In this section, we organize by markets rather than by the role of a decision maker, as in the previous sections. For example, in the goods market we first ensure agents understand how individual demand functions from Deriving Demand aggregate to a market demand function for the good given a price, then that the agent understands how to aggregate the output from each producer at a given price from Comparative Statics with Production, and finally that the agent is able to calculate the price which would equate demand and supply and clear the market in a non-strategic setting. Factor markets are treated similarly.",
+    "Finally, given a system of equations that defines an equilibrium price we can perturb primitives (e.g., technological factors, distortions on decisions such as tax rates, or exogenous prices not determined in equilibrium) to see how the market clearing price would respond. That is an essential tool for agents to be able to reason about the impact of interventions and distortions in Evaluating Equilibria and Externalities."
+   ],
+   "modules": [
+    {
+     "number": "4.1",
+     "name": "Consumer Goods Market Aggregation",
+     "description": [
+      "The market clearing prices in general equilibrium arise from the separate market-level demand and supply curves, which sums the demand or supply across all market participants at a given price. Here we test the aggregation of demand functions derived from individual preferences, as in Deriving Demand and Comparative Statics of Demand, to a market demand function that summarizes the total quantity demanded across all agents at a given price. Central to the tests is to verify that the agent can aggregate the demands of market participants with heterogeneous preferences. On the other side of the market, we test if the agent can aggregate the “supply functions” resulting from the optimal choice of factors in Deriving Factor Demand and Comparative Statics with Production."
+     ]
+    },
+    {
+     "number": "4.2",
+     "name": "Factor Market Aggregation",
+     "description": [
+      "As with the case of the goods market in Consumer Goods Market Aggregation the market demand and supply for factors of production are essential to find the market clearing price. For example, we test whether the agent can aggregate the individual labor supply curve decisions from market participants who work at a particular wage, following Labor Supply, into a market labor supply curve. On the other side of the market, we test whether the agent can aggregate the labor demand in Deriving Factor Demand from producers into a market labor demand curve. The same tests are essential for all factors of production, including capital."
+     ]
+    },
+    {
+     "number": "4.3",
+     "name": "Prices in Static Market Equilibrium",
+     "description": [
+      "In this setting we test the agent's ability to reason about how prices emerge in a non-strategic setting as a process of equating supply and demand, which in turn relies on their ability to aggregate those market demand functions from consumer and producer behavior.",
+      "More specifically, the core logic of general equilibrium is to find the equilibrium price by taking the aggregated demand and supply functions for each market and find the prices which would equate demand and supply. For example, the supply and demand functions for the good, as a function of the price, in Consumer Goods Market Aggregation; or the supply and demand functions for factors of production, as a function of factor prices in Factor Market Aggregation. This is done market by market, taking all other prices as given—which requires the agent reason through comparative statics of the solution to a system of equations while keeping everything else fixed."
+     ]
+    },
+    {
+     "number": "4.4",
+     "name": "Comparative Statics of Equilibrium Prices",
+     "description": [
+      "Here, we test whether agents can reason about how prices and allocations (e.g., labor, capital, and goods) would respond to changes in the environment. The canonical tests are to see how changes in model primitives (e.g., productivity of the production process) or exogenous forces from outside the model (e.g., impact of weather), change the equilibrium price and allocations of labor, capital, etc. that would clear the market and equate demand and supply."
+     ]
+    }
+   ]
+  },
+  {
+   "number": 5,
+   "name": "Evaluating Equilibria and Externalities",
+   "summary": "Tests agents on their ability to evaluate whether equilibria are efficient and to analyze the effects of interventions, such as taxes or price ceilings, on welfare.",
+   "description": [
+    "In Non-Strategic Decisions in Multi-Agent Environments, we tested an agent's ability to reason about equilibrium prices and quantities arising from supply and demand decisions in a non-strategic setting. Although preferences were reflected in the underlying supply and demand functions themselves (i.e., utility maximization in the consumption decisions of Consumption Decisions in Non-Strategic Environments and profit maximization in the production decisions of Production Decisions in Non-Strategic Environments), the equilibria in Non-Strategic Decisions in Multi-Agent Environments do not necessarily reflect broader social preferences.",
+    "However, we can still ask whether the resulting “allocations” (i.e., the physical goods produced and how they are distributed to individuals, the amount of hours worked, and the physical capital installed) from the “invisible hand” in Non-Strategic Decisions in Multi-Agent Environments compare to alternative ways of allocating resources which may directly take social preferences into account. A central result of economics in non-strategic settings is that absent market imperfections and market power (i.e., when self-interested agents cannot directly manipulate prices because they are too small) the competitive equilibria of Non-Strategic Decisions in Multi-Agent Environments typically yields the same allocations a benevolent planner might choose.",
+    "In this section, we consider how a social planner would evaluate the underlying welfare, efficiency, and inequality that comes about in non-strategic equilibria with prices derived from equating supply and demand. This leads to testing the ability of the agent to evaluate Pareto efficiency, consider the welfare theorems, evaluate Pigouvian externalities, and weigh the welfare impact of various market interventions which change the equilibria derived in Non-Strategic Decisions in Multi-Agent Environments."
+   ],
+   "modules": [
+    {
+     "number": "5.1",
+     "name": "Welfare and Decentralization",
+     "description": [
+      "In this section, we test whether the agent can determine cases where the competitive equilibrium they calculate would yield the same distribution of resources and consumer welfare as that of a benevolent social planner directly making the consumption and production decisions of all agents directly (also known as the “Welfare Theorems”). In cases where the supply-and-demand relationships lead to the same results as those of a planner, the competitive equilibrium and its prices are said to “decentralize” the problem of a social planner. We then test that the agent recognizes cases where the welfare theorems fail, and can calculate the degree of welfare loss due to the distortions."
+     ]
+    },
+    {
+     "number": "5.2",
+     "name": "Welfare Analysis of Market Equilibrium",
+     "description": [
+      "In this section, we focus on the agent's ability to evaluate welfare implications of various forms of market equilibrium, particularly how different policies and distortions impact overall efficiency and resource allocation. The agent is tested on their understanding of how different interventions—such as taxes, subsidies, and price controls—affect welfare outcomes, and their ability to distinguish between distortionary and non-distortionary policies."
+     ]
+    }
+   ]
+  }
+ ]
+}

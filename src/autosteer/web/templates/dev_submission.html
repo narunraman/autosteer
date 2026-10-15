@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="dev-head"><h1>Review and submission</h1></section>
+
+<section class="how">
+  <h2>What to include</h2>
+  <ul>
+    <li><b>The generator:</b> the element's filler in <code>filler_tools/</code>, which computes every answer, and a solver test that solves the filled questions independently.</li>
+    <li><b>The data:</b> the element's folders under <code>data/</code> (<code>example_seeds/&lt;id&gt;</code>, <code>generated_seeds/&lt;id&gt;</code>, <code>templates/&lt;id&gt;</code>).</li>
+    <li><b>Your review:</b> your marks on the sample and your notes from the element's Review step (<code>data/review/&lt;id&gt;.json</code>).</li>
+  </ul>
+</section>
+
+<section class="how">
+  <h2>How to send it</h2>
+  <p>Open a pull request to the <a href="https://github.com/narunraman/autosteer">autoSTEER repository</a> on GitHub with those files. The maintainer fills the templates with fresh seeds, runs the solver test, and reads your review before merging.</p>
+</section>
+{% endblock %}

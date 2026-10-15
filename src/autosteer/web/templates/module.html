@@ -1,0 +1,22 @@
+{% extends "browse_base.html" %}
+{% block content %}
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/{{ vslug }}">{{ version }}</a><span aria-hidden="true">›</span><a href="/{{ vslug }}/setting/{{ setting.number }}">{{ setting.short }}</a><span aria-hidden="true">›</span><span>Module {{ module.number }}</span></nav>
+<h1>{{ module.name }}</h1>
+{% for p in module.paragraphs %}<p{% if loop.first %} class="lead"{% endif %}>{{ p }}</p>
+{% endfor %}
+
+<h2 id="elements">Elements</h2>
+{% if module.elements %}
+<ol class="rows c-{{ setting.color }}">
+  {% for e in module.elements %}
+  <li>
+    {% if e.element %}<a class="row-title" href="/elements/{{ e.element }}">{% if e.id %}<span class="num">{{ e.id }}</span>{% endif %}{{ e.display_name }}</a>
+    {% else %}<span class="row-title muted">{% if e.id %}<span class="num">{{ e.id }}</span>{% endif %}{{ e.display_name }}</span>{% endif %}
+    {% if e.status == 'held' %}<span class="soon">soon</span>{% elif e.status == 'covered' %}<span class="soon">covered</span>{% elif e.shared %}<span class="soon">STEER</span>{% endif %}
+    {% if e.summary %}<p>{{ e.summary }}</p>{% endif %}
+    {% if e.status == 'covered' %}<p class="row-meta">Covered by <a href="/elements/{{ e.covered_by }}">{{ e.covered_name }}</a>, which tests the same behaviour.</p>{% endif %}
+  </li>
+  {% endfor %}
+</ol>
+{% else %}<p class="fine">No elements yet.</p>{% endif %}
+{% endblock %}

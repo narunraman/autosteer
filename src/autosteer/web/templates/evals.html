@@ -1,0 +1,14 @@
+{% extends "guide_base.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+{% if where.level == 'root' %}<p class="lead">Click a setting to go inside it, and click a score to see how it breaks down.</p>
+{% elif where.level == 'module' %}<p class="lead">Each model's score on each element of this module. Click a score to see how it breaks down.</p>
+{% else %}<p class="lead">Click a module to go inside it, and click a score to see how it breaks down.</p>{% endif %}
+<div class="ev-controls2" id="ev-metrics"></div>
+<div class="ev-out" id="ev-out" data-src="{{ url_for('static', path='evals_results.json') }}?v={{ asset_version }}"></div>
+<div class="ev-scrim" id="ev-scrim" hidden></div>
+<aside class="ev-detail" id="ev-detail" aria-label="Breakdown" hidden></aside>
+<script type="application/json" id="evals-data">{{ evals_data|tojson }}</script>
+<script type="application/json" id="evals-where">{{ where|tojson }}</script>
+<script src="{{ url_for('static', path='evals.js') }}?v={{ asset_version }}"></script>
+{% endblock %}

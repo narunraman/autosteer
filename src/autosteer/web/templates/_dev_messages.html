@@ -1,0 +1,6 @@
+{% set m = message if message is defined and message else {} %}
+{% set all_errors = (m.get('errors') or []) + (errors if errors is defined and errors else []) %}
+{% set all_warnings = (m.get('warnings') or []) + (warnings if warnings is defined and warnings else []) %}
+{% if m.get('success') %}<div class="notice success" role="status"><strong>{{ m.success }}</strong></div>{% endif %}
+{% if all_errors %}<div class="notice error" role="alert"><ul class="dev-msg-list">{% for e in all_errors %}<li>{% if e == no_provider_text %}No AI provider is set up. <a href="/developer/setup">Add a key for one in Setup</a>.{% else %}{{ e }}{% endif %}</li>{% endfor %}</ul></div>{% endif %}
+{% if all_warnings %}<div class="notice"><strong>Check before going on.</strong><ul class="dev-msg-list">{% for w in all_warnings %}<li>{{ w }}</li>{% endfor %}</ul></div>{% endif %}

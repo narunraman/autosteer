@@ -1,0 +1,13 @@
+{% extends "guide_base.html" %}
+{% block content %}
+<h1>Page not found</h1>
+<p class="lead">There is no page at <code>{{ request.url.path }}</code>. It may have moved, or the address may be mistyped.</p>
+<p>Try the search box, or one of these:</p>
+<ul class="notfound-links">
+  <li><a href="/">Home</a></li>
+  <li><a href="/tutorial">Tutorial</a></li>
+  <li><a href="/steer">STEER</a></li>
+  <li><a href="/steer-me">STEER-ME</a></li>
+  <li><a href="/reference">API reference</a></li>
+</ul>
+{% endblock %}

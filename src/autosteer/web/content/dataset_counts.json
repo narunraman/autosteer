@@ -1,0 +1,604 @@
+{
+ "export": {
+  "generator": "autosteer@0.1.0+5d46892",
+  "created_at": "2026-10-05T16:38:44+00:00",
+  "seed": 20261003
+ },
+ "elements": {
+  "add_sub": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 8
+  },
+  "aggregation_of_capital_demand": {
+   "questions": 300,
+   "rows": 300,
+   "cells": 15
+  },
+  "aggregation_of_consumer_demand": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 8
+  },
+  "aggregation_of_labor_demand": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 9
+  },
+  "aggregation_of_labor_supply": {
+   "questions": 380,
+   "rows": 380,
+   "cells": 19
+  },
+  "aggregation_of_offer_curve": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 5
+  },
+  "ambiguity_aversion": {
+   "questions": 200,
+   "rows": 400,
+   "cells": 2
+  },
+  "arbitrage": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 9
+  },
+  "auctions_affiliated": {
+   "questions": 960,
+   "rows": 960,
+   "cells": 48
+  },
+  "auctions_risk": {
+   "questions": 480,
+   "rows": 480,
+   "cells": 24
+  },
+  "average_cost": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 8
+  },
+  "backward_induction": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 4
+  },
+  "bayes_nash": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 2
+  },
+  "bayes_rule": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 2
+  },
+  "best_response": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 8
+  },
+  "bic_mechanism": {
+   "questions": 800,
+   "rows": 800,
+   "cells": 40
+  },
+  "borda_count": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 3
+  },
+  "budget_balance": {
+   "questions": 480,
+   "rows": 480,
+   "cells": 24
+  },
+  "capital_market_distortions": {
+   "questions": 480,
+   "rows": 480,
+   "cells": 24
+  },
+  "categorical_syllogism": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 4
+  },
+  "certainty_effect": {
+   "questions": 200,
+   "rows": 300,
+   "cells": 8
+  },
+  "complement_rule": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 2
+  },
+  "completeness": {
+   "questions": 240,
+   "rows": 1920,
+   "cells": 12
+  },
+  "completeness_risk": {
+   "questions": 240,
+   "rows": 1920,
+   "cells": 12
+  },
+  "compute_expectations": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 4
+  },
+  "compute_expected_utility": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 7
+  },
+  "conditional_syllogism": {
+   "questions": 640,
+   "rows": 640,
+   "cells": 32
+  },
+  "condorcet_criterion": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 6
+  },
+  "constrained_optimization": {
+   "questions": 240,
+   "rows": 240,
+   "cells": 12
+  },
+  "consumer_surplus": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 9
+  },
+  "consumption_changes": {
+   "questions": 320,
+   "rows": 320,
+   "cells": 16
+  },
+  "copeland_method": {
+   "questions": 480,
+   "rows": 480,
+   "cells": 24
+  },
+  "cost_minimization_problem": {
+   "questions": 420,
+   "rows": 420,
+   "cells": 21
+  },
+  "deadweight_loss": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 7
+  },
+  "derivatives": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 3
+  },
+  "deriving_demand": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 3
+  },
+  "deriving_hicksian_demand": {
+   "questions": 360,
+   "rows": 360,
+   "cells": 18
+  },
+  "deriving_labor_supply": {
+   "questions": 360,
+   "rows": 360,
+   "cells": 18
+  },
+  "diminishing_marginal_product": {
+   "questions": 840,
+   "rows": 840,
+   "cells": 42
+  },
+  "diminishing_marginal_utility": {
+   "questions": 720,
+   "rows": 720,
+   "cells": 36
+  },
+  "dominant_strategies": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 3
+  },
+  "dominated_strategies": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 8
+  },
+  "dsic_mechanism": {
+   "questions": 380,
+   "rows": 415,
+   "cells": 19
+  },
+  "dynamic_profit_max": {
+   "questions": 280,
+   "rows": 280,
+   "cells": 14
+  },
+  "efficient_surplus": {
+   "questions": 480,
+   "rows": 480,
+   "cells": 24
+  },
+  "elastic_inelastic_supply": {
+   "questions": 420,
+   "rows": 420,
+   "cells": 21
+  },
+  "elasticity_of_substitution": {
+   "questions": 420,
+   "rows": 420,
+   "cells": 21
+  },
+  "endowment_effect": {
+   "questions": 200,
+   "rows": 400,
+   "cells": 6
+  },
+  "enforceability": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 1
+  },
+  "engel_curves": {
+   "questions": 480,
+   "rows": 480,
+   "cells": 24
+  },
+  "entry_exit_decisions": {
+   "questions": 560,
+   "rows": 560,
+   "cells": 28
+  },
+  "equiv_contrapositive": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 3
+  },
+  "exponents": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 2
+  },
+  "factor_demand": {
+   "questions": 420,
+   "rows": 840,
+   "cells": 21
+  },
+  "factor_shares_equilibrium": {
+   "questions": 420,
+   "rows": 420,
+   "cells": 21
+  },
+  "fair_division": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 7
+  },
+  "feasibility": {
+   "questions": 240,
+   "rows": 240,
+   "cells": 12
+  },
+  "find_eq_price": {
+   "questions": 560,
+   "rows": 560,
+   "cells": 28
+  },
+  "finding_tfp": {
+   "questions": 560,
+   "rows": 560,
+   "cells": 28
+  },
+  "first_order_false_belief": {
+   "questions": 320,
+   "rows": 320,
+   "cells": 16
+  },
+  "fixed_factor_aggregation": {
+   "questions": 360,
+   "rows": 360,
+   "cells": 18
+  },
+  "gamblers_fallacy": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 2
+  },
+  "hicksian_duality": {
+   "questions": 480,
+   "rows": 960,
+   "cells": 24
+  },
+  "income_elasticity": {
+   "questions": 480,
+   "rows": 480,
+   "cells": 24
+  },
+  "independence": {
+   "questions": 200,
+   "rows": 400,
+   "cells": 2
+  },
+  "independence_risk": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 6
+  },
+  "input_price_response": {
+   "questions": 280,
+   "rows": 280,
+   "cells": 14
+  },
+  "interpret_games": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 8
+  },
+  "intertemporal_consumption_smoothing": {
+   "questions": 320,
+   "rows": 320,
+   "cells": 16
+  },
+  "ir_mechanism": {
+   "questions": 640,
+   "rows": 640,
+   "cells": 32
+  },
+  "iterated_removal": {
+   "questions": 240,
+   "rows": 480,
+   "cells": 12
+  },
+  "labor_supply_distortions": {
+   "questions": 480,
+   "rows": 480,
+   "cells": 24
+  },
+  "labor_supply_elasticity": {
+   "questions": 320,
+   "rows": 320,
+   "cells": 16
+  },
+  "law_of_demand": {
+   "questions": 320,
+   "rows": 320,
+   "cells": 16
+  },
+  "linear_system_eq": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 2
+  },
+  "loss_aversion": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 10
+  },
+  "marginal_cost": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 10
+  },
+  "marginal_production": {
+   "questions": 320,
+   "rows": 320,
+   "cells": 16
+  },
+  "marginal_utility": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 7
+  },
+  "maximize_expected_utility": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 3
+  },
+  "micro_utility": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 3
+  },
+  "mrs_labor_supply": {
+   "questions": 640,
+   "rows": 640,
+   "cells": 32
+  },
+  "mrs_tangency": {
+   "questions": 480,
+   "rows": 480,
+   "cells": 24
+  },
+  "mrs_utility": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 8
+  },
+  "mult_div": {
+   "questions": 240,
+   "rows": 240,
+   "cells": 12
+  },
+  "non_distortionary_taxes": {
+   "questions": 240,
+   "rows": 240,
+   "cells": 12
+  },
+  "optimal_portfolio_choice": {
+   "questions": 320,
+   "rows": 320,
+   "cells": 16
+  },
+  "optimize_continuous": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 5
+  },
+  "output_elasticity": {
+   "questions": 400,
+   "rows": 400,
+   "cells": 20
+  },
+  "pareto_sc": {
+   "questions": 240,
+   "rows": 240,
+   "cells": 12
+  },
+  "plurality_voting": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 4
+  },
+  "present_value": {
+   "questions": 480,
+   "rows": 480,
+   "cells": 24
+  },
+  "price_elasticity": {
+   "questions": 320,
+   "rows": 320,
+   "cells": 16
+  },
+  "price_of_risk": {
+   "questions": 320,
+   "rows": 320,
+   "cells": 16
+  },
+  "prob_basic": {
+   "questions": 280,
+   "rows": 280,
+   "cells": 14
+  },
+  "producer_surplus": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 8
+  },
+  "profit_maximization": {
+   "questions": 320,
+   "rows": 320,
+   "cells": 16
+  },
+  "pure_nash": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 5
+  },
+  "reflection_effect": {
+   "questions": 200,
+   "rows": 300,
+   "cells": 8
+  },
+  "returns_to_scale": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 2
+  },
+  "sc_monotonicity_rules": {
+   "questions": 240,
+   "rows": 240,
+   "cells": 12
+  },
+  "sc_nondictatorship": {
+   "questions": 360,
+   "rows": 360,
+   "cells": 18
+  },
+  "sc_transitivity_rules": {
+   "questions": 240,
+   "rows": 240,
+   "cells": 12
+  },
+  "second_order_false_belief": {
+   "questions": 320,
+   "rows": 320,
+   "cells": 16
+  },
+  "shephards_lemma": {
+   "questions": 280,
+   "rows": 280,
+   "cells": 14
+  },
+  "state_based_consumption": {
+   "questions": 340,
+   "rows": 340,
+   "cells": 17
+  },
+  "subgame_nash": {
+   "questions": 480,
+   "rows": 480,
+   "cells": 24
+  },
+  "substitutes_complements": {
+   "questions": 480,
+   "rows": 480,
+   "cells": 24
+  },
+  "sunk_cost": {
+   "questions": 320,
+   "rows": 320,
+   "cells": 16
+  },
+  "supply_elasticity": {
+   "questions": 320,
+   "rows": 320,
+   "cells": 16
+  },
+  "tax_incidence": {
+   "questions": 480,
+   "rows": 960,
+   "cells": 24
+  },
+  "tfp_shocks": {
+   "questions": 260,
+   "rows": 260,
+   "cells": 13
+  },
+  "time_inconsistency": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 2
+  },
+  "top_trading": {
+   "questions": 400,
+   "rows": 400,
+   "cells": 20
+  },
+  "transitivity": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 10
+  },
+  "transitivity_risk": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 4
+  },
+  "trigger": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 4
+  },
+  "welfare_theorem_1": {
+   "questions": 280,
+   "rows": 280,
+   "cells": 14
+  },
+  "welfare_theorem_2": {
+   "questions": 200,
+   "rows": 200,
+   "cells": 10
+  }
+ }
+}

@@ -1,0 +1,91 @@
+{% extends "guide_base.html" %}
+{% block content %}
+<h1>Question formats</h1>
+<p class="subtitle">The same question can be put to a model in several ways</p>
+<p>A format fixes what the model is shown, in what order, and what it gives back. The question and its correct answer stay the same; only the presentation changes, so a difference in score between two formats is a difference in how the model was asked.</p>
+<p>There are two baseline formats and three variants of multiple choice. Each diagram reads left to right.</p>
+
+<section class="fgroup">
+  <header>
+    <h2 id="baseline">Baseline</h2>
+    <p>The two plain ways of asking: with options to choose from, and without. Scores in the other formats are read against these.</p>
+  </header>
+  <div class="format" id="multiple-choice">
+    <div>
+      <h3>Multiple choice</h3>
+      <p>The model sees the question and its options and returns one option straight away, without reasoning first (no chain of thought, or CoT). The probabilities it gives to the options are what the calibration metrics use.</p>
+    </div>
+    <div class="flow" role="img" aria-label="The model sees the question and the options, and returns one option.">
+      <div class="step"><span class="who">Model sees</span><span class="chip q">Question</span><span class="chip o">Options A–D</span></div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="step out"><span class="who">Model returns</span><span class="chip a">B</span></div>
+    </div>
+  </div>
+  <div class="format" id="free-text">
+    <div>
+      <h3>Free text</h3>
+      <p>The model gets no options and writes out its answer, which is closest to how models are used in practice. The final answer is extracted from the response and compared with the correct value.</p>
+    </div>
+    <div class="flow" role="img" aria-label="The model sees only the question and writes its reasoning and an answer.">
+      <div class="step"><span class="who">Model sees</span><span class="chip q">Question</span></div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="step out"><span class="who">Model writes</span><span class="chip r">Reasoning</span><span class="chip a">140</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="fgroup">
+  <header>
+    <h2 id="variants">Variants of multiple choice</h2>
+    <p>Unlike free text, multiple choice can be posed in more than one way. We use the following three. The first two have the model reason before it answers, known as chain of thought (CoT).</p>
+  </header>
+  <div class="format" id="shown">
+    <div>
+      <h3>Options shown before CoT</h3>
+      <p>The model writes out its reasoning before it chooses, and sees the options while it reasons.</p>
+    </div>
+    <div class="flow two" role="img" aria-label="Step one: the model sees the question and options and writes its reasoning. Step two: it is asked to choose and returns one option.">
+      <span class="n">1</span>
+      <div class="step"><span class="who">Model sees</span><span class="chip q">Question</span><span class="chip o">Options A–D</span></div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="step out"><span class="who">Model writes</span><span class="chip r">Reasoning</span></div>
+      <span class="n">2</span>
+      <div class="step"><span class="who">Model is asked</span><span class="chip plain">Which option?</span></div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="step out"><span class="who">Model returns</span><span class="chip a">B</span></div>
+    </div>
+  </div>
+  <div class="format" id="hidden">
+    <div>
+      <h3>Options hidden during CoT</h3>
+      <p>The model reasons from the question alone and sees the options only when it has to choose.</p>
+    </div>
+    <div class="flow two" role="img" aria-label="Step one: the model sees only the question and writes its reasoning. Step two: it sees the options and returns one.">
+      <span class="n">1</span>
+      <div class="step"><span class="who">Model sees</span><span class="chip q">Question</span></div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="step out"><span class="who">Model writes</span><span class="chip r">Reasoning</span></div>
+      <span class="n">2</span>
+      <div class="step"><span class="who">Model sees</span><span class="chip o">Options A–D</span></div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="step out"><span class="who">Model returns</span><span class="chip a">B</span></div>
+    </div>
+  </div>
+  <div class="format" id="none">
+    <div>
+      <h3>"No other option is correct" (NOTA)</h3>
+      <p>One option is replaced by this sentence, which we abbreviate as NOTA, as in "none of the above". In one question out of every <i>n</i>, where <i>n</i> is the number of options, it replaces the correct option; otherwise it replaces a wrong one. A model that always picks the sentence does no better than guessing.</p>
+    </div>
+    <div class="swap" role="img" aria-label="Two cases. Usually a wrong option is replaced and the original correct option is still the answer. In one question out of n, the correct option is replaced and the sentence itself is the answer.">
+      <div class="case">
+        <span class="who">Most questions: a wrong option is replaced</span>
+        <ol class="mini"><li>96</li><li class="ok">140</li><li>110</li><li class="rep">No other option is correct</li></ol>
+      </div>
+      <div class="case">
+        <span class="who">1 in <i>n</i>: the correct option is replaced</span>
+        <ol class="mini"><li>96</li><li class="rep ok">No other option is correct</li><li>110</li><li>120</li></ol>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

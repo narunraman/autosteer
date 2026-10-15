@@ -1,0 +1,112 @@
+  <div class="scrim" id="scrim"></div>
+  <script>
+    (() => {
+      const items = {{ search_items|tojson }};
+      const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+      function rank(q) {
+        q = q.trim().toLowerCase(); if (!q) return [];
+        const words = q.split(/\s+/), out = [];
+        for (const it of items) {
+          const t = it.label.toLowerCase(), k = (it.keys || '').toLowerCase();
+          if (!words.every(w => t.includes(w) || k.includes(w))) continue;
+          const s = t === q ? 0 : t.startsWith(q) ? 1 : (' ' + t).includes(' ' + q) ? 2 : t.includes(q) ? 3 : 4;
+          out.push([s, t.length, it]);
+        }
+        return out.sort((x, y) => x[0] - y[0] || x[1] - y[1]).slice(0, 8).map(x => x[2]);
+      }
+      function mark(label, q) {
+        const i = label.toLowerCase().indexOf(q.trim().toLowerCase());
+        return i < 0 || !q.trim() ? esc(label) : esc(label.slice(0, i)) + '<mark>' + esc(label.slice(i, i + q.trim().length)) + '</mark>' + esc(label.slice(i + q.trim().length));
+      }
+      document.querySelectorAll('.search').forEach((box, n) => {
+        const input = box.querySelector('.site-search'); if (!input) return;
+        const pop = document.createElement('ul'); pop.className = 'search-pop'; pop.id = 'search-pop-' + n; pop.setAttribute('role', 'listbox'); pop.hidden = true;
+        box.appendChild(pop);
+        Object.entries({ role: 'combobox', 'aria-expanded': 'false', 'aria-controls': pop.id, 'aria-autocomplete': 'list' }).forEach(([k, v]) => input.setAttribute(k, v));
+        let hits = [], cur = -1;
+        const show = on => { pop.hidden = !on; input.setAttribute('aria-expanded', String(on)); };
+        function render() {
+          const q = input.value;
+          if (!q.trim()) { show(false); return; }
+          hits = rank(q); if (cur >= hits.length) cur = hits.length - 1;
+          pop.innerHTML = hits.length ? hits.map((h, i) => `<li role="option" id="${pop.id}-${i}" aria-selected="${i === cur}"${i === cur ? ' class="on"' : ''}><a href="${esc(h.href)}" tabindex="-1"><span class="sp-t">${mark(h.label, q)}</span><span class="sp-k">${esc(h.kind)}${h.sub ? ' · ' + esc(h.sub) : ''}</span></a></li>`).join('')
+            : '<li class="sp-none">No matches</li>';
+          input.setAttribute('aria-activedescendant', cur >= 0 ? `${pop.id}-${cur}` : '');
+          show(true);
+        }
+        input.addEventListener('input', () => { cur = 0; render(); });
+        input.addEventListener('focus', () => { if (input.value.trim()) render(); });
+        input.addEventListener('blur', () => setTimeout(() => show(false), 120));
+        pop.addEventListener('mousedown', e => e.preventDefault());
+        input.addEventListener('keydown', e => {
+          if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            if (!hits.length) return; e.preventDefault();
+            cur = (cur + (e.key === 'ArrowDown' ? 1 : -1) + hits.length) % hits.length; render();
+            const on = pop.querySelector('.on'); if (on) on.scrollIntoView({ block: 'nearest' });
+          } else if (e.key === 'Enter') {
+            const h = hits[cur >= 0 ? cur : 0]; if (h && !pop.hidden) { e.preventDefault(); location.href = h.href; }
+          } else if (e.key === 'Escape') { if (!pop.hidden) { e.stopPropagation(); show(false); } else input.blur(); }
+        });
+      });
+      document.addEventListener('keydown', e => {
+        if (e.key !== '/' || e.metaKey || e.ctrlKey || /^(input|textarea|select)$/i.test(document.activeElement.tagName) || document.activeElement.isContentEditable) return;
+        const s = document.querySelector('.topbar .site-search'); if (s && s.offsetParent) { e.preventDefault(); s.focus(); }
+      });
+    })();
+    const navToggle = document.getElementById('nav-toggle');
+    const setNav = open => { document.body.classList.toggle('nav-open', open); navToggle.setAttribute('aria-expanded', String(open)); };
+    navToggle.addEventListener('click', () => setNav(!document.body.classList.contains('nav-open')));
+    document.getElementById('scrim').addEventListener('click', () => setNav(false));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.body.classList.contains('nav-open')) { setNav(false); navToggle.focus(); } });
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      const dark = document.documentElement.dataset.theme !== 'dark';
+      if (dark) document.documentElement.dataset.theme = 'dark'; else delete document.documentElement.dataset.theme;
+      try { localStorage.setItem('steer-theme', dark ? 'dark' : 'light'); } catch (e) {}
+    });
+    /* light syntax highlighting for the code blocks: JSON, shell, Python and BibTeX */
+    const esc = s => s.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+    const paint = (src, rules) => {
+      const re = new RegExp(rules.map(r => '(' + r[0].source + ')').join('|'), 'gm');
+      let out = '', last = 0, m;
+      while ((m = re.exec(src))) {
+        if (!m[0]) { re.lastIndex++; continue; }
+        const i = m.slice(1).findIndex(x => x !== undefined);
+        out += esc(src.slice(last, m.index)) + '<span class="tk-' + rules[i][1] + '">' + esc(m[0]) + '</span>';
+        last = re.lastIndex;
+      }
+      return out + esc(src.slice(last));
+    };
+    const LANGS = {
+      json: [[/"(?:[^"\\]|\\.)*"(?=\s*:)/, 'key'], [/"(?:[^"\\]|\\.)*"/, 'str'], [/-?\b\d+(?:\.\d+)?(?:e[+-]?\d+)?\b/, 'num'], [/\b(?:true|false|null)\b/, 'kw']],
+      shell: [[/#.*$/m, 'com'], [/"(?:[^"\\]|\\.)*"|'[^']*'/, 'str'], [/^(?:curl|uvx|uv|export|inspect|autosteer|pip|git|cd|make|sllm|qscope|steer-bench)\b/m, 'fn'], [/(?:^|\s)--?[\w-]+/, 'kw'], [/<[^>\s]+>/, 'num']],
+      python: [[/#.*$/m, 'com'], [/"(?:[^"\\]|\\.)*"|'[^']*'/, 'str'], [/\b(?:from|import|as|def|return|for|in|if|else|with|None|True|False)\b/, 'kw'], [/\b\d+(?:\.\d+)?\b/, 'num'], [/\b[A-Za-z_]\w*(?=\()/, 'fn']],
+      bibtex: [[/^@\w+/m, 'kw'], [/(?<=^@\w+\{)[^,\s]+/m, 'fn'], [/^\s*\w+(?=\s*=)/m, 'key'], [/\{.*\}(?=,?$)/m, 'str']],
+    };
+    document.querySelectorAll('.codeblock pre').forEach(pre => {
+      const t = pre.textContent.trimStart();
+      const lang = /^[{\[]/.test(t) ? 'json' : /^(?:from|import)\b/.test(t) ? 'python' : /^@\w+\{/.test(t) ? 'bibtex' : /^(?:curl|uvx|uv|export|inspect|autosteer|git|sllm|qscope|steer-bench)\b/.test(t) ? 'shell' : null;
+      /* BibTeX and shell lines are wrapped one by one, so a long line wraps under itself rather than back to the margin */
+      if (lang === 'bibtex' || lang === 'shell') pre.innerHTML = pre.textContent.split('\n').map(l => '<span class="ln">' + paint(l, LANGS[lang]) + '</span>').join('\n');
+      else if (lang) pre.innerHTML = paint(pre.textContent, LANGS[lang]);
+      /* commands meant to be run one after another get a copy button each, in place of one for the block */
+      const cmds = lang === 'shell' ? [...pre.querySelectorAll('.ln')].filter(l => l.textContent.trim() && !l.textContent.trim().startsWith('#')) : [];
+      if (cmds.length > 1) {
+        pre.closest('.codeblock').classList.add('steps');
+        cmds.forEach(l => {
+          const b = document.createElement('button');
+          b.type = 'button'; b.className = 'copy-ln'; b.title = 'Copy this command'; b.setAttribute('aria-label', 'Copy this command');
+          b.dataset.text = l.textContent.replace(/\s+#.*$/, '').trim();
+          b.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5.75 1h6.5C13.22 1 14 1.78 14 2.75v6.5c0 .97-.78 1.75-1.75 1.75h-6.5C4.78 11 4 10.22 4 9.25v-6.5C4 1.78 4.78 1 5.75 1Zm0 1.5a.25.25 0 0 0-.25.25v6.5c0 .14.11.25.25.25h6.5a.25.25 0 0 0 .25-.25v-6.5a.25.25 0 0 0-.25-.25ZM2 5.75C2 4.78 2.78 4 3.75 4H4v1.5h-.25a.25.25 0 0 0-.25.25v6.5c0 .14.11.25.25.25h6.5a.25.25 0 0 0 .25-.25V12h1.5v.25c0 .97-.78 1.75-1.75 1.75h-6.5C2.78 14 2 13.22 2 12.25Z"/></svg>';
+          b.addEventListener('click', async () => {
+            try { await navigator.clipboard.writeText(b.dataset.text); b.classList.add('done'); setTimeout(() => b.classList.remove('done'), 1200); } catch {}
+          });
+          l.appendChild(b);
+        });
+      }
+    });
+    document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(document.getElementById(b.dataset.copy).textContent); b.textContent = 'Copied'; }
+      catch { b.textContent = 'Select and copy'; }
+      setTimeout(() => (b.textContent = 'Copy'), 1500);
+    }));
+  </script>

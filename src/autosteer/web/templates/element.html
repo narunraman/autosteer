@@ -1,0 +1,93 @@
+{% extends "browse_base.html" %}
+{% block content %}
+<nav class="crumbs" aria-label="Breadcrumb">
+  <a href="/{{ vslug }}">{{ version }}</a>
+  {% if setting %}<span aria-hidden="true">›</span><a href="/{{ vslug }}/setting/{{ setting.number }}">{{ setting.short }}</a><span aria-hidden="true">›</span><a href="/{{ vslug }}/module/{{ module.number }}">{{ module.name }}</a>{% endif %}
+</nav>
+<h1>{{ te.display_name if te else d.display_name }}</h1>
+<p class="lead">{{ (te.summary if te and te.summary else d.summary) }}</p>
+{% if held %}<p class="draft-note">Not in this release{% if d.status_reason %}: {{ d.status_reason }}{% endif %}</p>{% endif %}
+
+<section class="example c-{{ setting.color if setting else 'red' }}" aria-labelledby="ex-label">
+  <div class="ex-head">
+    <span class="ex-label" id="ex-label">{{ 'Question template' if template else 'Example question' }}</span>
+  </div>
+  <div class="ex-body" id="seed-view">
+    {% for part in template %}{% if template|length > 1 %}<p class="ex-part">Part {{ loop.index }}</p>{% endif %}<p class="ex-q">{% for x in part %}{% if x.slot %}<span class="slot">{{ x.slot|replace('_', ' ') }}</span>{% else %}{{ x.text }}{% endif %}{% endfor %}</p>{% else %}<p class="ex-q">{{ d.example }}</p>{% endfor %}
+  </div>
+  {% if can_generate %}
+  <div class="ex-body" id="live-view" hidden></div>
+  <div class="ex-actions">
+    <button class="btn primary" id="gen" type="button">Generate a question</button>
+    <button class="btn" id="reveal" type="button" hidden>Show answer</button>
+    {% if axes %}<button class="btn quiet" id="custom-toggle" type="button" aria-expanded="false" aria-controls="custom">Customize</button>{% endif %}
+    <span class="ex-status" id="q-status" role="status"></span>
+  </div>
+  <div class="custom" id="custom" hidden>
+    {% for axis in axes %}
+    <label for="f-{{ axis.param }}">{{ axis.label }}
+      <select id="f-{{ axis.param }}" data-param="{{ axis.param }}"><option value="">Any</option>{% for code, text in axis['values'] %}<option value="{{ code }}">{{ text }}</option>{% endfor %}</select>
+    </label>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
+
+<h2 id="use-it">Use it</h2>
+<div class="tabs" role="tablist" aria-label="Ways to get questions">
+  <button role="tab" id="tab-ds" aria-selected="true" aria-controls="panel-ds" type="button">Dataset</button>
+  <button role="tab" id="tab-api" aria-selected="false" aria-controls="panel-api" type="button">API</button>
+</div>
+<div class="tabpanel" id="panel-ds" role="tabpanel" aria-labelledby="tab-ds">
+  <div class="codeblock"><button class="copy" type="button" data-copy="code-ds">Copy</button><pre id="code-ds">from datasets import load_dataset
+ds = load_dataset("{{ hf }}", "{{ element }}")</pre></div>
+</div>
+<div class="tabpanel" id="panel-api" role="tabpanel" aria-labelledby="tab-api" hidden>
+  <div class="codeblock"><button class="copy" type="button" data-copy="code-api">Copy</button><pre id="code-api">curl "https://steer-benchmark.cs.ubc.ca/api/sample?element_name={{ element }}&amp;n=5&amp;seed=42"</pre></div>
+  <p class="fine">See the <a href="/reference">Reference</a> for the parameters.</p>
+</div>
+{% endblock %}
+{% block aside %}
+<div class="label">At a glance</div>
+<dl>
+  {% if te and te.id %}<div><dt>In the paper</dt><dd>Element {{ te.id }}</dd></div>{% endif %}
+  {% if d.paper_name and d.paper_name != (te.display_name if te else d.display_name) %}<div><dt>Paper name</dt><dd>{{ d.paper_name }}</dd></div>{% endif %}
+  <div><dt>Scoring</dt><dd>{{ scoring }}</dd></div>
+  {% for axis in axes %}<div><dt>{{ axis.label }}</dt><dd class="glance-vals">{% for code, text in axis['values'] %}{% if axis.kind %}<a href="/by/{{ axis.kind }}/{{ code|urlencode }}">{{ text }}</a>{% else %}<span>{{ text }}</span>{% endif %}{% if not loop.last %}, {% endif %}{% endfor %}</dd></div>{% endfor %}
+  {% if dataset_n %}<div><dt>In the dataset</dt><dd>{{ "{:,}".format(dataset_n) }} questions</dd></div>{% endif %}
+</dl>
+{% endblock %}
+{% block scripts %}
+<script>
+  const $ = id => document.getElementById(id);
+  {% if can_generate %}
+  const el = {{ element|tojson }}, reveal = $('reveal');
+  async function generate() {
+    const p = new URLSearchParams({ element_name: el });
+    document.querySelectorAll('#custom select').forEach(s => { if (s.value) p.set(s.dataset.param, s.value); });
+    $('q-status').textContent = 'Generating…';
+    try {
+      const r = await fetch('/api/sample?' + p); const j = await r.json();
+      if (!r.ok) throw new Error(j.detail || r.statusText);
+      const parts = j.sub_questions || [j], live = $('live-view'); live.innerHTML = '';
+      parts.forEach((part, k) => {
+        if (parts.length > 1) { const h = document.createElement('p'); h.className = 'ex-part'; h.textContent = 'Part ' + (k + 1); live.appendChild(h); }
+        const q = document.createElement('p'); q.className = 'ex-q'; q.textContent = part.question; live.appendChild(q);
+        const ol = document.createElement('ol'); ol.className = 'opts';
+        part.options.forEach((o, i) => { const li = document.createElement('li'); if (o.correct) li.className = 'correct';
+          li.innerHTML = '<b>' + String.fromCharCode(65 + i) + '</b><span></span>'; li.lastChild.textContent = o.text; ol.appendChild(li); });
+        live.appendChild(ol);
+      });
+      $('seed-view').hidden = true; live.hidden = false; reveal.hidden = false; reveal.dataset.on = ''; reveal.textContent = 'Show answer';
+      $('ex-label').textContent = 'Generated question'; $('gen').textContent = 'Generate another'; $('q-status').textContent = '';
+    } catch (e) { $('q-status').textContent = 'Could not generate this combination: ' + e.message; }
+  }
+  $('gen').addEventListener('click', generate);
+  reveal.addEventListener('click', () => { const on = !reveal.dataset.on; reveal.dataset.on = on ? '1' : ''; document.querySelectorAll('#live-view .opts').forEach(o => o.classList.toggle('revealed', on)); reveal.textContent = on ? 'Hide answer' : 'Show answer'; });
+  const ct = $('custom-toggle'); if (ct) ct.addEventListener('click', () => { const open = $('custom').hidden; $('custom').hidden = !open; ct.setAttribute('aria-expanded', String(open)); });
+  {% endif %}
+  document.querySelectorAll('[role=tab]').forEach(tab => tab.addEventListener('click', () => {
+    document.querySelectorAll('[role=tab]').forEach(t => { const on = t === tab; t.setAttribute('aria-selected', String(on)); $(t.getAttribute('aria-controls')).hidden = !on; });
+  }));
+</script>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% set dkey, _, dmodel = choices.default.partition(':') %}
+{% if choices.providers %}
+<div class="model-pick">
+  <label>{{ label }}
+    <span class="mp-row">
+      <select class="mp-provider" aria-label="Provider"{% if dev.no_provider %} disabled{% endif %}>{% for p in choices.providers %}<option value="{{ p.key }}" data-suggest="{{ p.suggest|join('|') }}"{% if p.key == dkey %} selected{% endif %}>{{ p.label }}</option>{% endfor %}</select>
+      <input class="mp-model" aria-label="Model" value="{{ dmodel }}" placeholder="any model the provider offers" autocomplete="off" spellcheck="false"{% if dev.no_provider %} disabled{% endif %}>
+    </span>
+  </label>
+  <input type="hidden" name="ai_model" value="{{ choices.default }}">
+</div>
+<script>
+(() => {
+  const box = document.currentScript.previousElementSibling, sel = box.querySelector('.mp-provider'), inp = box.querySelector('.mp-model'),
+        out = box.querySelector('input[name="ai_model"]'), list = document.createElement('datalist');
+  list.id = 'mp-' + Math.random().toString(36).slice(2); box.appendChild(list); inp.setAttribute('list', list.id);
+  const sync = () => {
+    list.innerHTML = (sel.selectedOptions[0]?.dataset.suggest || '').split('|').filter(Boolean).map(m => `<option value="${m}">`).join('');
+    out.value = inp.value.trim() ? `${sel.value}:${inp.value.trim()}` : '';
+  };
+  sel.addEventListener('change', sync); inp.addEventListener('input', sync); sync();
+})();
+</script>
+{% else %}
+<label>{{ label }}
+  <select name="ai_model"{% if dev.no_provider %} disabled{% endif %}>
+    {% for o in choices.options %}<option value="{{ o.value }}"{% if o.value == choices.default %} selected{% endif %}>{{ o.label }}</option>{% endfor %}
+  </select>
+</label>
+{% endif %}

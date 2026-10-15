@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "autosteer"
+version = "0.1.0"
+description = "Local authoring tools for STEER-style economics templates and datasets."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "anthropic>=0.32.0",
+  "backoff>=2.2.1",
+  "dill>=0.3.8",
+  "fastapi>=0.115.0",
+  "jinja2>=3.1.0",
+  "markupsafe>=2.1.0",
+  "numpy>=2.0.0",
+  "openai>=1.40.0",
+  "pandas>=2.2.0",
+  "pyarrow>=17",
+  "pydantic>=2.8.0",
+  "python-multipart>=0.0.20",
+  "scipy>=1.14.0",
+  "sympy>=1.13.0",
+  "termcolor>=2.4.0",
+  "tqdm>=4.66.0",
+  "uvicorn>=0.35.0",
+]
+
+[project.scripts]
+autosteer = "autosteer.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["autosteer*"]
+
+[tool.setuptools.package-data]
+"autosteer" = ["data_files.json"]
+"autosteer.web" = ["templates/*.html", "static/*", "content/*.json"]
+"autosteer.filler_tools" = ["README.md", "*.json"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]

@@ -1,0 +1,408 @@
+{% set lv = level_scale(i.element, (records or [])|map(attribute='metadata.difficulty_level')|list + [draft.difficulty_level]) %}
+{% set posted = draft.posted_parts or {} %}
+<form class="seed-workspace" id="seed-form" method="post" action="/developer/e/{{ i.element }}/seeds">
+  <input type="hidden" name="question_id" value="{{ draft.question_id }}">
+  <input type="hidden" name="sub_id" value="{{ draft.sub_id }}">
+  <input type="hidden" name="saved_element_name" value="{{ draft.saved_element_name }}">
+  <input type="hidden" name="element_name" value="{{ i.element }}">
+  <input type="hidden" name="parts_form" value="1">
+  <input type="hidden" name="instructions" id="instructions-input" value="">
+  <input type="hidden" name="options_text" id="options-text" value="{{ draft.options_text }}">
+  <input type="hidden" name="correct_answer" id="correct-answer" value="{{ draft.correct_answer }}">
+
+  <section class="seed-draft">
+    {% if draft.question_id != "" %}<h2 class="dev-editor-title">Seed {{ editing_id }}</h2>{% endif %}
+
+    <label>
+      Question
+      <textarea name="question_text" rows="6" required placeholder="Use placeholders like {price} or {utility_function}.">{{ draft.question_text }}</textarea>
+    </label>
+    <div class="placeholder-row" id="placeholder-row"></div>
+
+    <div class="form-grid seed-meta">
+      <label>
+        Domain
+        <input name="domain" value="{{ draft.domain }}" list="domain-list" required>
+        <datalist id="domain-list">{% for d in domains %}<option value="{{ d.name }}">{{ d.label }}</option>{% endfor %}</datalist>
+      </label>
+      <label>
+        Type
+        <input name="type" value="{{ draft.type }}" required>
+      </label>
+      <label>
+        Difficulty
+        <input name="difficulty" type="number" min="1" required
+          value="{{ lv.get(draft.difficulty_level|int, 1) if draft.difficulty_level|string|trim else 1 }}"
+          title="As on the site, the API and the datasets: 1 is this element's easiest level{% if lv|length > 1 %}, {{ lv|length }} its hardest so far{% endif %}. A higher number adds a harder level; levels are numbered 1, 2, 3, ... in order, so it shows as the next one up.">
+      </label>
+      <label>
+        Tags
+        <input name="tags" value="{{ draft.tags }}" placeholder="first_person" list="tag-list">
+        <datalist id="tag-list">{% for t in tags %}<option value="{{ t }}"></option>{% endfor %}</datalist>
+      </label>
+    </div>
+
+    <details class="seed-options" id="seed-options"{% if draft.options_text %} open{% endif %}>
+      <summary>Options <span class="hint" id="options-summary"></span></summary>
+      <ol class="option-rows" id="option-rows"></ol>
+      <button type="button" class="linkbtn add-option" id="add-option">+ Add option</button>
+    </details>
+
+    <fieldset class="instr-parts">
+      <legend>Instructions for the model</legend>
+      <p class="hint">Each part is written once and reused where its label says. The preview shows the full text the model gets.</p>
+      <label class="part" data-kind="task">
+        <span class="part-head">Element <span class="part-scope">what it tests · every seed of this element</span></span>
+        <textarea name="part_task" rows="2" placeholder="Please give an MCQ example testing the ability to …">{{ posted.task if posted else parts.task }}</textarea>
+      </label>
+      <label class="part" data-kind="type">
+        <span class="part-head">Type <code id="type-key"></code> <span class="part-scope">seeds of this type · optional</span></span>
+        <textarea name="part_type" rows="2" placeholder="What this kind of question asks"></textarea>
+      </label>
+      <label class="part" data-kind="level">
+        <span class="part-head">Level <code id="level-key"></code> <span class="part-scope">seeds at this level · optional</span></span>
+        <input name="part_level" placeholder="What makes this level harder or easier">
+      </label>
+      <label class="part" data-kind="domain" id="domain-part">
+        <span class="part-head">Domain <code id="domain-key"></code> <span class="part-scope">every element</span></span>
+        <input name="part_domain" placeholder="e.g. financial settings">
+      </label>
+      <div id="tag-parts"></div>
+      {% if legacy_instructions %}
+      <details class="legacy-instr">
+        <summary>Instructions saved with this seed, written by hand</summary>
+        <p>{{ legacy_instructions }}</p>
+        <p class="hint">Saving replaces them with the text built from the parts above, so move anything you still need into them.</p>
+      </details>
+      {% endif %}
+    </fieldset>
+
+    <div class="form-actions">
+      <button type="submit">{% if draft.question_id != "" %}Save changes{% else %}Save seed{% endif %}</button>
+      <a class="button secondary" href="/developer/e/{{ i.element }}/seeds">Close</a>
+    </div>
+  </section>
+
+  <aside class="panel seed-preview-panel">
+    <h2>Checks</h2>
+    <div class="validation-box">
+      <p class="dev-label">Local checks</p>
+      <ul class="check-list" id="check-list"></ul>
+    </div>
+
+    <div class="ai-check-box">
+      <div class="ai-check-head">
+        <p class="dev-label">AI check</p>
+        {% if not dev.no_provider %}<button type="button" class="button secondary button-sm button-ai" id="verify-seed-btn"><svg class="ai-spark" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0c.5 4.2 3.8 7.5 8 8-4.2.5-7.5 3.8-8 8-.5-4.2-3.8-7.5-8-8 4.2-.5 7.5-3.8 8-8z"/></svg>Check with AI</button>{% endif %}
+      </div>
+      {% if dev.no_provider %}<p class="hint">To have a model write a seed from this, set up a provider: <a href="/developer/setup">AI setup</a>.</p>{% endif %}
+      <div class="model-gets">
+        <div class="instr-preview" id="instr-preview"></div>
+        <div class="seed-preview-box" id="seed-preview-box">
+          <p class="muted">Start typing to see the seed.</p>
+        </div>
+      </div>
+      {% if not dev.no_provider %}
+      {% with label="Model", choices=models %}{% include "_model_select.html" %}{% endwith %}
+      <div class="ai-response" id="ai-response">The model's seed appears here.</div>
+      {% endif %}
+    </div>
+  </aside>
+</form>
+
+<dialog class="dev-dialog" id="leave-dialog" aria-labelledby="leave-title">
+  <p class="dev-dialog-title" id="leave-title">Leave without saving?</p>
+  <p>Your changes to this seed are not saved.</p>
+  <div class="dev-dialog-actions">
+    <button type="button" class="secondary" id="leave-stay">Keep editing</button>
+    <a class="button" id="leave-go" href="#">Discard changes</a>
+  </div>
+</dialog>
+
+<script type="application/json" id="parts-data">{{ {"types": parts.types, "levels": parts.levels, "domains": parts.domains, "tags": parts.tags, "shared_tags": parts.shared_tags, "level_raw": lv_raw, "posted": posted}|tojson }}</script>
+<script>
+(function () {
+  var form = document.getElementById('seed-form');
+  var verifyButton = document.getElementById('verify-seed-btn');
+  var instructions = document.getElementById('instructions-input');
+  var preview = document.getElementById('seed-preview-box');
+  var instrPreview = document.getElementById('instr-preview');
+  var placeholders = document.getElementById('placeholder-row');
+  var checks = document.getElementById('check-list');
+  var aiResponse = document.getElementById('ai-response');
+  var optionsText = document.getElementById('options-text');
+  var correctAnswer = document.getElementById('correct-answer');
+  var rowsBox = document.getElementById('option-rows');
+  var PARTS = JSON.parse(document.getElementById('parts-data').textContent);
+  var letters = 'ABCDEFGH';
+  var formDirty = false;
+  var missingParts = [];
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function renderInline(str) {
+    return typeof marked !== 'undefined' ? marked.parseInline(str) : escapeHtml(str);
+  }
+
+  function reRenderMath(el) {
+    if (typeof renderMathInElement !== 'undefined') {
+      renderMathInElement(el, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false }
+        ],
+        throwOnError: false
+      });
+    }
+  }
+
+  function formValue(name) {
+    return form.elements[name] ? form.elements[name].value.trim() : '';
+  }
+
+  /* ---- options: one row per option, a mark for the correct one, + to add ---- */
+  function optionRow(text, correct) {
+    var li = document.createElement('li');
+    li.innerHTML = '<label class="opt-correct" title="Correct answer"><input type="radio" name="opt-correct"' + (correct ? ' checked' : '') + '><span aria-hidden="true">✓</span></label>' +
+      '<input class="opt-text" aria-label="Option" placeholder="Option text, may use {placeholders}">' +
+      '<button type="button" class="opt-remove" aria-label="Remove option" title="Remove">×</button>';
+    li.querySelector('.opt-text').value = text;
+    rowsBox.appendChild(li);
+    return li;
+  }
+  function syncOptions() {
+    var rows = Array.prototype.slice.call(rowsBox.children);
+    var texts = rows.map(function (li) { return li.querySelector('.opt-text').value.trim(); });
+    var kept = [], correct = '';
+    rows.forEach(function (li, i) {
+      if (!texts[i]) return;
+      if (li.querySelector('input[type=radio]').checked) correct = String(kept.length);
+      kept.push(texts[i]);
+    });
+    optionsText.value = kept.join('\n');
+    correctAnswer.value = kept.length ? correct : '';
+    document.getElementById('options-summary').textContent = kept.length
+      ? kept.length + ' option' + (kept.length === 1 ? '' : 's') + (correct === '' ? ', none marked correct' : '')
+      : 'none';
+  }
+  (function initOptions() {
+    var lines = optionsText.value.split(/\n+/).map(function (x) { return x.trim(); }).filter(Boolean);
+    var ans = correctAnswer.value.trim();
+    var idx = /^\d+$/.test(ans) ? Number(ans) : lines.indexOf(ans);
+    lines.forEach(function (t, i) { optionRow(t, i === idx); });
+    if (!lines.length) { optionRow('', false); optionRow('', false); }
+    syncOptions();
+  })();
+  document.getElementById('add-option').addEventListener('click', function () {
+    optionRow('', false).querySelector('.opt-text').focus();
+  });
+  rowsBox.addEventListener('click', function (e) {
+    var rm = e.target.closest('.opt-remove');
+    if (!rm) return;
+    rm.closest('li').remove();
+    formDirty = true; syncOptions(); refresh();
+  });
+
+  function optionLines() {
+    return optionsText.value.split(/\n+/).map(function (x) { return x.trim(); }).filter(Boolean);
+  }
+  function correctIndex(options, answer) {
+    if (/^\d+$/.test(answer)) return Number(answer);
+    return options.indexOf(answer);
+  }
+  function findPlaceholders() {
+    var text = [formValue('question_text'), optionsText.value].join('\n');
+    var matches = text.match(/\{[^{}]+\}/g) || [];
+    return matches.filter(function (x, i) { return matches.indexOf(x) === i; });
+  }
+
+  /* ---- instruction parts: the type, level, domain and tag fields follow the seed's metadata ---- */
+  var shown = { type: null, level: null, domain: null };
+  function tagList() {
+    return formValue('tags').split(/[;,]/).map(function (t) { return t.trim(); }).filter(Boolean);
+  }
+  function levelRaw() {
+    var n = formValue('difficulty');
+    return n in PARTS.level_raw ? String(PARTS.level_raw[n]) : 'new:' + n;
+  }
+  function remember() {  // keep what was typed for the current type/level/domain/tags before switching
+    if (shown.type) PARTS.types[shown.type] = form.elements.part_type.value;
+    if (shown.level) PARTS.levels[shown.level] = form.elements.part_level.value;
+    if (shown.domain) PARTS.domains[shown.domain] = form.elements.part_domain.value;
+    document.querySelectorAll('#tag-parts .part').forEach(function (el) {
+      PARTS.tags[el.dataset.key] = el.querySelector('input[name=part_tag_texts]').value;
+    });
+  }
+  function layoutParts(first) {
+    if (!first) remember();
+    var type = formValue('type'), raw = levelRaw(), domain = formValue('domain');
+    var p = first ? PARTS.posted : {};
+    shown.type = type || null; shown.level = raw; shown.domain = domain && domain !== 'base' ? domain : null;
+    document.getElementById('type-key').textContent = type || '…';
+    form.elements.part_type.value = p.type !== undefined ? p.type : (PARTS.types[type] || '');
+    form.elements.part_type.disabled = !type;
+    document.getElementById('level-key').textContent = formValue('difficulty') || '…';
+    form.elements.part_level.value = p.level !== undefined ? p.level : (PARTS.levels[raw] || '');
+    document.getElementById('domain-part').hidden = !shown.domain;
+    document.getElementById('domain-key').textContent = domain;
+    form.elements.part_domain.value = p.domain !== undefined ? p.domain : (PARTS.domains[domain] || '');
+    var box = document.getElementById('tag-parts');
+    box.innerHTML = tagList().map(function (t) {
+      var v = p.tags && p.tags[t] !== undefined ? p.tags[t] : (PARTS.tags[t] || '');
+      var shared = PARTS.shared_tags.indexOf(t) >= 0;
+      return '<label class="part" data-kind="tag" data-key="' + escapeHtml(t) + '"><span class="part-head">' + (shared ? 'Perspective' : 'Tag') + ' <code>' + escapeHtml(t) +
+        '</code> <span class="part-scope">' + (shared ? 'every element' : 'this element · optional') + '</span></span><input type="hidden" name="part_tag_keys" value="' + escapeHtml(t) +
+        '"><input name="part_tag_texts" value="' + escapeHtml(v) + '" placeholder="' + (shared ? 'e.g. The question should be written in the first person' : 'What this tag means for the question, if the model should know') + '"></label>';
+    }).join('');
+  }
+
+  /* ---- preview: the instructions as the model gets them, built on the server, then the example ---- */
+  var composeTimer = null, composeSeq = 0;
+  function compose() {
+    var seq = ++composeSeq;
+    fetch('/api/seeds/compose', { method: 'POST', body: new FormData(form) })
+      .then(function (r) { if (!r.ok) throw new Error('Could not build the instructions.'); return r.json(); })
+      .then(function (data) {
+        if (seq !== composeSeq) return;
+        instructions.value = data.text;
+        missingParts = data.segments.filter(function (s) { return s.missing; });
+        instrPreview.innerHTML = data.segments.map(function (s) {
+          return s.missing
+            ? ' <span class="ip-missing" title="Write this part on the left">' + escapeHtml(s.text) + '</span> '
+            : '<span class="ip-' + s.kind + '">' + escapeHtml(s.text) + '</span>';
+        }).join('');
+        renderChecks();
+      })
+      .catch(function (err) { instrPreview.innerHTML = '<p class="error-text">' + escapeHtml(String(err.message || err)) + '</p>'; });
+  }
+  function refresh() {
+    clearTimeout(composeTimer);
+    composeTimer = setTimeout(compose, 250);
+    renderPreview();
+  }
+
+  function renderPreview() {
+    var question = formValue('question_text');
+    var options = optionLines();
+    var idx = correctIndex(options, correctAnswer.value.trim());
+    if (!question) {
+      preview.innerHTML = '<p class="muted">Start typing to see the seed.</p>';
+    } else {
+      var html = '<div class="question">' + (typeof marked !== 'undefined' ? marked.parse(question) : '<p>' + escapeHtml(question) + '</p>') + '</div>';
+      if (options.length) {
+        html += '<ul class="options-abc">';
+        options.forEach(function (option, i) {
+          html += '<li class="' + (i === idx ? 'correct' : '') + '"><strong>' + letters[i] + '.</strong> ' + renderInline(option) + '</li>';
+        });
+        html += '</ul>';
+      }
+      preview.innerHTML = html;
+      reRenderMath(preview);
+    }
+    var vars = findPlaceholders();
+    placeholders.innerHTML = vars.length
+      ? vars.map(function (v) { return '<span class="chip">' + escapeHtml(v) + '</span>'; }).join('')
+      : '<span class="hint">No placeholders detected.</span>';
+    renderChecks();
+  }
+  function renderChecks() {
+    var options = optionLines();
+    var idx = correctIndex(options, correctAnswer.value.trim());
+    var checkItems = [
+      { ok: Boolean(formValue('question_text')), text: 'Question text present' },
+      { ok: Boolean(formValue('domain')) && Boolean(formValue('type')), text: 'Domain and type present' },
+      { ok: findPlaceholders().length > 0, text: 'At least one placeholder detected' },
+      options.length ? { ok: idx >= 0, text: 'Correct answer marked' } : null,
+      { ok: !missingParts.length, text: missingParts.length ? 'Instructions missing: ' + missingParts.map(function (s) { return s.kind === 'task' ? 'element' : s.kind; }).join(', ') : 'Instructions complete' }
+    ];
+    checks.innerHTML = checkItems.filter(Boolean).map(function (item) {
+      return '<li class="' + (item.ok ? 'ok' : 'missing') + '">' + escapeHtml(item.text) + '</li>';
+    }).join('');
+  }
+
+  function setAiResponseText(text, isError) {
+    if (!aiResponse) return;
+    aiResponse.textContent = text;
+    aiResponse.className = isError ? 'ai-response error-text' : 'ai-response';
+  }
+  function renderAiResult(data) {
+    var payload = data.result_json;
+    if (!payload || !payload.question_text) {
+      setAiResponseText(data.result_text || '', false);
+      return;
+    }
+    var html = '<p class="muted" style="margin-top:0;">Model: ' + escapeHtml(data.model || '') + '</p>';
+    html += '<div class="question">' + (typeof marked !== 'undefined' ? marked.parse(payload.question_text) : '<p>' + escapeHtml(payload.question_text) + '</p>') + '</div>';
+    if (Array.isArray(payload.options) && payload.options.length) {
+      html += '<ul class="options-abc">';
+      payload.options.forEach(function (option, i) {
+        var text = typeof option === 'string' ? option : (option.option_text || '');
+        var correct = typeof option === 'object' && Boolean(option.correct_answer);
+        html += '<li class="' + (correct ? 'correct' : '') + '"><strong>' + letters[i] + '.</strong> ' + renderInline(text) + '</li>';
+      });
+      html += '</ul>';
+    }
+    if (payload.notes) html += '<p class="hint" style="margin-bottom:0;">' + escapeHtml(payload.notes) + '</p>';
+    aiResponse.className = 'ai-response rendered';
+    aiResponse.innerHTML = html;
+    reRenderMath(aiResponse);
+  }
+
+  form.addEventListener('input', function (e) {
+    formDirty = true;
+    if (e.target.closest('#option-rows')) syncOptions();
+    if (['type', 'difficulty', 'domain', 'tags'].indexOf(e.target.name) >= 0) layoutParts(false);
+    refresh();
+  });
+  form.addEventListener('change', function (e) {
+    if (e.target.name === 'opt-correct') { formDirty = true; syncOptions(); refresh(); }
+  });
+  form.addEventListener('submit', function () { syncOptions(); formDirty = false; });
+
+  var leaveDialog = document.getElementById('leave-dialog');
+  var leaveGo = document.getElementById('leave-go');
+  document.addEventListener('click', function (event) {
+    if (!formDirty || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey) return;
+    var link = event.target.closest('a[href]');
+    if (!link || link === leaveGo || link.target === '_blank' || link.getAttribute('href').charAt(0) === '#') return;
+    event.preventDefault();
+    leaveGo.href = link.href;
+    leaveDialog.showModal();
+  });
+  document.getElementById('leave-stay').addEventListener('click', function () { leaveDialog.close(); });
+  leaveGo.addEventListener('click', function () { formDirty = false; });
+  window.addEventListener('beforeunload', function (event) {
+    if (!formDirty) return;
+    event.preventDefault();
+    event.returnValue = '';
+  });
+
+  layoutParts(true);
+  renderPreview();
+  compose();
+
+  if (verifyButton) verifyButton.addEventListener('click', function () {
+    verifyButton.disabled = true;
+    verifyButton.lastChild.textContent = 'Checking…';
+    setAiResponseText('Checking…', false);
+    syncOptions();
+    fetch('/api/seeds/verify', { method: 'POST', body: new FormData(form) })
+      .then(function (response) {
+        return response.json().then(function (data) {
+          if (!response.ok) throw new Error(data.detail || 'AI verification failed.');
+          return data;
+        });
+      })
+      .then(renderAiResult)
+      .catch(function (err) { setAiResponseText(String(err.message || err), true); })
+      .finally(function () {
+        verifyButton.disabled = false;
+        verifyButton.lastChild.textContent = 'Check with AI';
+      });
+  });
+})();
+</script>

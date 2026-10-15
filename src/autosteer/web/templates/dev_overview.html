@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% set has_rail = true %}
+{% block rail_label %}At a glance{% endblock %}
+{% block content %}
+<section class="dev-head el-head">
+  <h1>{{ i.display_name }}</h1>
+  {% if i.on_site or (i.filler and i.in_manifest) %}<p class="el-meta">
+    {% if i.on_site %}<span><a href="/elements/{{ i.element }}" target="_blank" rel="noopener">Public page ↗</a></span>{% endif %}
+    {% if i.filler and i.in_manifest %}<span><a href="/api/sample?element_name={{ i.element }}" target="_blank" rel="noopener">Sample a question ↗</a></span>{% endif %}
+  </p>{% endif %}
+  {% if i.status_reason %}<p class="dev-reason">{{ i.status_reason }}</p>{% endif %}
+</section>
+
+{% if i.merged_into %}<p class="el-note">This folder was merged into <a href="/developer/e/{{ i.merged_into }}">{{ i.merged_into_name or i.merged_into }}</a>.</p>{% endif %}
+{% if not i.filler and not i.merged_into %}<p class="el-note">No filler is registered as <code>{{ i.element }}</code>: add one in <code>filler_tools</code> so its templates can be filled.</p>{% endif %}
+
+<ol class="el-steps-list">
+  {% for s in i.steps %}
+  <li class="{{ 'done' if s.done and s.linked else 'off' if not s.linked else 'todo' }}">
+    {% if s.linked %}<a href="/developer/e/{{ i.element }}/{{ s.key }}">{% else %}<span class="el-step-off">{% endif %}
+      <span class="el-step-n">{{ loop.index }}</span>
+      <span class="el-step-mark" aria-hidden="true">{% if not s.linked %}–{% elif s.done %}✓{% endif %}</span>
+      <span class="el-step-name">{{ s.title }}</span>
+      <span class="el-step-count">{{ s.count }}</span>
+    {% if s.linked %}</a>{% else %}</span>{% endif %}
+  </li>
+  {% endfor %}
+</ol>
+{% if i.code %}<p class="hint">The templates are written in code (<code>{{ i.code }}</code>), so steps 1 and 2 are not used.</p>{% endif %}
+
+{% if i.review.notes %}<section class="el-notes"><h2>Review notes</h2><p class="dev-notes-text">{{ i.review.notes }}</p></section>{% endif %}
+
+{% if i.draft and not i.seeds and not i.candidates.total and i.templates is none %}
+<form method="post" action="/developer/e/{{ i.element }}/discard" class="dev-discard" onsubmit="return confirm('Discard the draft {{ i.display_name }}?');">
+  <button type="submit" class="secondary button-sm">Discard this draft</button>
+</form>
+{% endif %}
+{% endblock %}
+{% block right_rail %}
+<div class="el-glance">
+  <p class="el-glance-label">At a glance</p>
+  <dl>
+    {% if i.version %}<div><dt>Benchmark</dt><dd>{{ i.version }}</dd></div>{% endif %}
+    {% if i.setting %}<div><dt>Setting</dt><dd>{{ i.setting }}</dd></div>{% endif %}
+    {% if i.module %}<div><dt>Module</dt><dd>{{ i.module }}</dd></div>{% endif %}
+    <div><dt>Filename</dt><dd><code>{{ i.element }}</code></dd></div>
+    <div><dt>Status</dt><dd>{% if i.merged_into %}merged into <a href="/developer/e/{{ i.merged_into }}">{{ i.merged_into_name or i.merged_into }}</a>{% elif i.status == legacy %}legacy folder{% else %}{{ i.status_label }}{% endif %}</dd></div>
+  </dl>
+</div>
+{% endblock %}

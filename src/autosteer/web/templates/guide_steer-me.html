@@ -1,0 +1,12 @@
+{% extends "guide_base.html" %}
+{% block content %}
+<h1>STEER-ME</h1>
+<p class="subtitle">Non-strategic microeconomics</p>
+<p>STEER-ME covers the microeconomics of settings where nobody acts strategically: each agent takes prices as given and chooses what is best for it. The questions have numerical answers that are worked out from the economics. It is described in the <a class="icon-link ic-arxiv" href="{{ paper }}">STEER-ME paper</a> (NeurIPS 2025), and a fixed sample of its questions is published as a <a class="icon-link ic-hf" href="/datasets">dataset</a>.</p>
+<h2 id="findings" data-toc="Findings">High-level findings</h2>
+<ul class="findings">
+  <li><b>The stronger the model, the more systematic and diagnosable the errors.</b> While many easy elements were solved correctly, on harder elements, strong models often made systematic errors. These were usually near misses that a non-expert would find hard to tell apart from the correct solution. Examples include deriving the Marshallian demand function when the Hicksian was asked for, collapsing several time periods into one, and using the wrong formula for the deadweight loss triangle. Because these mistakes are systematic, we could write the common wrong calculations as solvers, compute the answer each produces, and match model answers against them. This showed which mistake a model made and how often; some models used one particular wrong formula in nearly half their answers.</li>
+  <li><b>Models reasoned over the option set.</b> Many of the hardest elements, models could not consistently solve in free text. In multiple choice, however, we observed models plugging each option into the problem to identify the correct answer, or using the options as hints about what the answer should look like. Scores fell when the options were hidden and fell again when no options were given at all.</li>
+</ul>
+{% include "_benchmark_tax.html" %}
+{% endblock %}

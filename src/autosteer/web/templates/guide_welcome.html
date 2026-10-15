@@ -1,0 +1,39 @@
+{% extends "guide_base.html" %}
+{% block content %}
+<h1>STEER</h1>
+<p class="subtitle">Benchmarks for the economic reasoning of language models</p>
+
+<h2 id="welcome">Welcome</h2>
+<p>Language models are increasingly asked to make economic decisions, or to advise the people who make them. STEER is a way to check whether a model is up to it. Instead of one overall score, it breaks economic reasoning into small, named abilities, such as computing an expected utility, finding a dominated strategy, or applying the law of demand, and tests each one separately.</p>
+<p>Across both papers, we observed that models' mistakes often sound right, that bigger models are not uniformly more rational, and that performance can be brittle depending on the context. For more, read the pages for <a href="/steer#findings">STEER</a> and <a href="/steer-me#findings">STEER-ME</a>.</p>
+<p>New here? Start with the <a href="/tutorial">Tutorial</a>.</p>
+<div class="callout tip" role="note">
+  <p class="callout-title"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5c-2.36 0-4.25 1.84-4.25 4.12 0 1.4.72 2.4 1.43 3.13.36.37.57.83.57 1.32V11h4.5v-.93c0-.49.21-.95.57-1.32.71-.73 1.43-1.73 1.43-3.13C12.25 3.34 10.36 1.5 8 1.5ZM6 12.5h4V13a1.5 1.5 0 0 1-1.5 1.5h-1A1.5 1.5 0 0 1 6 13v-.5Z"/></svg>Tip</p>
+  <p>The benchmarks are large, and every question can be sampled again and again with fresh values. We publish a fixed test set and results for many models, but producing them was an undertaking, and a single score was never the point: STEER is about diagnosing where a model fails, on the parts that matter for your use. Our recent work, <a class="icon-link ic-qs" href="https://quickscope.narunraman.com/">QuickScope</a>, does that adaptively, searching for where a model is reliably wrong without evaluating everything.</p>
+</div>
+
+<h2 id="cite">Cite</h2>
+<p>If you use STEER or STEER-ME, please cite the paper for the benchmark you used.</p>
+<h3 id="cite-steer">STEER</h3>
+<p>Raman, Lundy, Amouyal, Levine, Leyton-Brown and Tennenholtz. <i>STEER: Assessing the Economic Rationality of Large Language Models.</i> ICML 2024. <a href="https://arxiv.org/abs/2402.09552">arXiv:2402.09552</a></p>
+<div class="codeblock bib"><button class="copy" type="button" data-copy="bib-steer">Copy</button><pre id="bib-steer">{% raw %}@inproceedings{ramansteer,
+  author = {Narun Krishnamurthi Raman and Taylor Lundy and Samuel Joseph Amouyal and Yoav Levine and Kevin Leyton{-}Brown and Moshe Tennenholtz},
+  title = {{STEER:} {A}ssessing the {E}conomic {R}ationality of {L}arge {L}anguage {M}odels},
+  booktitle = {Forty-first International Conference on Machine Learning, {ICML} 2024, Vienna, Austria, July 21-27, 2024},
+  publisher = {OpenReview.net},
+  year = {2024},
+  url = {https://openreview.net/forum?id=nU1mtFDtMX}
+}{% endraw %}</pre></div>
+
+<h3 id="cite-steer-me">STEER-ME</h3>
+<p>Raman, Lundy, Amin, Perla and Leyton-Brown. <i>STEER-ME: Assessing the Microeconomic Reasoning of Large Language Models.</i> NeurIPS 2025, Datasets and Benchmarks Track. <a href="https://arxiv.org/abs/2502.13119">arXiv:2502.13119</a></p>
+<div class="codeblock bib"><button class="copy" type="button" data-copy="bib-steerme">Copy</button><pre id="bib-steerme">{% raw %}@inproceedings{raman2025steerme,
+  title = {{STEER-ME}: Assessing the Microeconomic Reasoning of Large Language Models},
+  author = {Raman, Narun and Lundy, Taylor and Amin, Thiago and Perla, Jesse and Leyton-Brown, Kevin},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume = {38},
+  year = {2025},
+  note = {Datasets and Benchmarks Track},
+  url = {https://arxiv.org/abs/2502.13119}
+}{% endraw %}</pre></div>
+{% endblock %}

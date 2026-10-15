@@ -1,0 +1,30 @@
+{% extends "guide_base.html" %}
+{% block content %}
+<h1>Metrics</h1>
+<p class="subtitle">What is computed from a model's answers</p>
+<p>Most questions have <b>one correct answer</b>. The model picks an option and is right or wrong. Some elements, however, test whether a model is <b>consistent</b> instead, such as the certainty effect or the endowment effect. No single option is correct on its own. The model answers two related questions, and the pair is scored: a pair is consistent if a rational agent could have given both answers. Each element page says which kind it is.</p>
+<p>A model's overall score on an element is the average over that element's questions.</p>
+
+<h2 id="accuracy">Accuracy</h2>
+<p>These use only the answer the model chose.</p>
+<dl class="terms">
+  <dt>Exact match</dt><dd>The fraction of questions answered correctly.</dd>
+  <dt>Normalized</dt><dd>One point for a correct answer, minus 1 / (options − 1) for a wrong one, a correction for guessing (<a href="https://doi.org/10.1111/j.1745-3984.1993.tb00427.x">Budescu and Bar-Hillel, 1993</a>). Random guessing scores zero on every element, whatever the number of options, so elements can be compared. In free text there are no options to guess from, so it is the same as exact match.</dd>
+</dl>
+
+<h2 id="calibration">Calibration</h2>
+<p>These use the probability the model gives to each option, so they need a model that reports them. They show whether the model knows when it is unsure.</p>
+<dl class="terms">
+  <dt>Expected calibration error</dt><dd>The gap between how confident the model is in its top answer and how often that answer is right, averaged over 10 confidence bins (<a href="https://doi.org/10.1609/aaai.v29i1.9602">Naeini et al., 2015</a>; <a href="https://arxiv.org/abs/1706.04599">Guo et al., 2017</a>). A well-calibrated model that says 70% is right about 70% of the time. We follow the usage in <a href="https://arxiv.org/abs/2211.09110">HELM</a>.</dd>
+  <dt>Brier score</dt><dd>The squared distance between the model's probabilities and the correct answer, averaged over the options (<a href="https://doi.org/10.1175/1520-0493(1950)078%3C0001:VOFEIT%3E2.0.CO;2">Brier, 1950</a>). Confident wrong answers cost the most.</dd>
+  <dt>Expected probability assignment</dt><dd>The average probability given to the correct option.</dd>
+</dl>
+
+<h3 id="invalid">Which probabilities are used</h3>
+<p>A model's output is a distribution over every token it could produce, and some of that probability can land on text that is not one of the options. The calibration measures are computed on the part of the distribution that falls on the valid options, reshaped into a distribution in one of two ways:</p>
+<dl class="terms">
+  <dt>Conditioning</dt><dd>Keep only the probabilities on the valid options and renormalize them. If the model put very little weight on any valid option, this can make it look more confident than it was.</dd>
+  <dt>Mixing</dt><dd>Blend the probabilities on the valid options with a uniform distribution, in proportion to how much probability fell outside them. A model that mostly answered outside the options ends up close to uniform, that is, unsure.</dd>
+</dl>
+<p>Neither changes which valid option has the highest probability, so accuracy is unaffected. The share of answers that were not a valid option is reported separately.</p>
+{% endblock %}

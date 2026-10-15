@@ -1,0 +1,12 @@
+{% extends "guide_base.html" %}
+{% block content %}
+<h1>STEER</h1>
+<p class="subtitle">Strategic and behavioral decision-making</p>
+<p>STEER asks whether a model reasons the way an economically rational agent would. It starts from the foundations and builds up to settings with other agents in them, and to decisions made on behalf of a group. It is described in the <a class="icon-link ic-arxiv" href="{{ paper }}">STEER paper</a> (ICML 2024), and a fixed sample of its questions is published as a <a class="icon-link ic-hf" href="/datasets">dataset</a>.</p>
+<h2 id="findings" data-toc="Findings">High-level findings</h2>
+<ul class="findings">
+  <li><b>Scale and bias sometimes moved in opposite directions.</b> For many elements evaluating cognitive biases, like the sunk-cost fallacy, the bigger the model, the better it was at avoiding it. However, for some, like the endowment effect, the reverse was true: the largest models displayed it most, while small models largely avoided it.</li>
+  <li><b>Framing effects found in humans also appeared in models.</b> When evaluated on the sunk-cost fallacy, models were more likely to fall prey to the bias when made the subject rather than a third-party observer. We furthermore observed that staying consistent across risky choices was much harder when outcomes were gains than when they were losses.</li>
+</ul>
+{% include "_benchmark_tax.html" %}
+{% endblock %}

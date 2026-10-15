@@ -1,0 +1,16 @@
+# The autosteer package
+
+Where things are, for working on the code. How to run autoSTEER is in the [repository README](../../README.md).
+
+| Path | What it does |
+|---|---|
+| `cli.py` | The `autosteer` command: `autosteer dev`, `autosteer data verify`, ... |
+| `sampler/` | Turning templates into questions: `generator.py` (`ElementSampler`), `manifest.py` (a summary of every element's templates), template fixes and difficulty levels. |
+| `filler_tools/` | The fill functions, one `*_tools.py` per family of elements: they pick the values for a template and compute the answer. Its [README](filler_tools/README.md) explains how to write one. |
+| `web/` | The site and developer mode: `app.py` (the app and the API), `site.py` (guide and benchmark pages), `public.py` (the public site's switches), `devmode.py` and `review.py` (developer mode), `content/` (the site's text), `templates/` and `static/`. |
+| `release/` | The fixed datasets: rows, schema, consistency checks and the exporter. |
+| `services/`, `schemas/` | Developer mode's back end: generating seed candidates and templates with a model, and storing the records. |
+| `llm_client.py` | The model providers: OpenAI, Azure OpenAI, Anthropic, Gemini and OpenAI-compatible endpoints. |
+| `template_generation.py`, `dataset_generation.py`, `instruction_parts.py`, `json_utils.py` | Writing seeds and templates with a model: the instructions, and parsing the replies. |
+| `steer_dataset.py`, `dataset_io.py` | The `Dataset` class (question, option and instruction tables) and its Parquet format on disk. |
+| `data_files.py`, `data_cleanup.py` | The pinned list of data files (`autosteer data verify`) and the clean-up of the data carried over from STEER-generation. |

@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% set has_rail = true %}
+{% block content %}
+<section class="dev-head"><h1>Dashboard</h1></section>
+{% include "_dev_messages.html" %}
+
+<div class="el-top">
+  <nav class="el-bench" role="tablist" aria-label="Benchmark">
+    {% for sec in sections if sec.bench != 'legacy' %}<button type="button" role="tab" data-bench="{{ sec.bench }}">{{ sec.label }} <span>{{ sec.count }}</span></button>{% endfor %}
+  </nav>
+  <div class="el-top-right">
+    <input type="search" id="f-q" placeholder="Find by name or id" aria-label="Find by name or id">
+    <a class="button secondary" href="/developer/new">+ New element</a>
+  </div>
+</div>
+
+{% for sec in sections %}
+<section class="el-sec" data-bench="{{ sec.bench }}">
+  <table class="el-table">
+    <thead>
+      <tr>
+        <th scope="col">Element</th>
+        <th scope="col"><span class="th-tip">Source<span class="el-tip" tabindex="0" aria-label="About Source">?<span class="el-tip-box" role="tooltip">Where the templates come from. <b>Code</b>: written in the element's filler module, no AI steps. <b>AI pipeline</b>: example seeds, then seed candidates, then templates, each checked by a person.</span></span></span></th>
+        <th scope="col"><span class="th-tip">Steps<span class="el-tip" tabindex="0" aria-label="About Steps">?<span class="el-tip-box" role="tooltip">One dot per step, in order: 1 example seeds, 2 seed candidates, 3 templates, 4 review (how many of the sample are read). Hover a dot for its count; click it to open that step.<span class="el-key"><span><span class="dot on"></span>done</span><span><span class="dot"></span>to do</span><span><span class="dot off"></span>not used (source is code)</span></span></span></span></span></th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for st in sec.settings %}
+      {% if st.name %}<tr class="grp grp-setting" data-setting="{{ st.name }}"><th colspan="4" scope="rowgroup">{% if st.number %}<span class="dev-num">{{ st.number }}</span> {% endif %}{{ st.name }}</th></tr>{% endif %}
+      {% for m in st.modules %}
+      {% if m.name %}<tr class="grp grp-module" data-setting="{{ st.name }}" data-module="{{ m.name }}"><th colspan="4" scope="rowgroup">{% if m.number %}<span class="dev-num">{{ m.number }}</span> {% endif %}{{ m.name }}</th></tr>{% endif %}
+      {% for r in m.rows %}
+      <tr class="el-row" data-setting="{{ st.name }}" data-module="{{ m.name }}" data-built="{{ 'code' if r.code else 'ai' }}" data-review="{{ 'done' if r.reviewed else 'not' }}" data-status="{{ r.status }}" data-text="{{ (r.display_name ~ ' ' ~ r.element)|lower }}">
+        <td class="el-name"><a href="/developer/e/{{ r.element }}">{{ r.display_name }}</a><span class="dev-id">{{ r.element }}</span></td>
+        <td class="el-built"><span class="built built-{{ 'code' if r.code else 'ai' }}">{{ 'Code' if r.code else 'AI pipeline' }}</span></td>
+        <td class="el-steps">{% for s in r.steps %}{% if s.linked %}<a class="step-dot" href="/developer/e/{{ r.element }}/{{ s.key }}" data-tip="{{ loop.index }}. {{ s.title }}: {{ s.count }}" aria-label="{{ s.title }}: {{ s.count }}"><span class="dot{% if s.done %} on{% endif %}"></span></a>{% else %}<span class="step-dot" data-tip="{{ loop.index }}. {{ s.title }}: not used, the templates are written in code"><span class="dot off"></span></span>{% endif %}{% endfor %}</td>
+        <td class="el-status"><span class="dev-status dev-status-{{ r.status }}">{% if r.merged_into %}merged into {{ r.merged_into }}{% elif r.status == 'legacy' %}legacy folder{% else %}{{ r.status_label }}{% endif %}</span></td>
+      </tr>
+      {% endfor %}
+      {% endfor %}
+    {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endfor %}
+<p class="dev-empty" id="none" hidden>No element matches. <button type="button" class="linkbtn" onclick="document.getElementById('f-clear').click()">Clear the filters</button></p>
+{% endblock %}
+
+
+{% block right_rail %}
+<div class="dash-tools el-side">
+  {% set reviewed = standing.on_site - standing.not_reviewed %}
+  <a class="dash-ring" href="/developer?review=not" title="{{ reviewed }} of {{ standing.on_site }} elements on the site reviewed{% if standing.open_candidates %}; {{ standing.open_candidates }} seed candidate{{ '' if standing.open_candidates == 1 else 's' }} waiting for review{% endif %}. Click to list the ones not reviewed.">
+    <svg viewBox="0 0 36 36" width="44" height="44" aria-hidden="true"><circle cx="18" cy="18" r="15.5" class="ring-bg"/>{% if reviewed %}<circle cx="18" cy="18" r="15.5" class="ring-fg" pathLength="100" stroke-dasharray="{{ '%.1f'|format((100 * (standing.on_site - standing.not_reviewed) / standing.on_site) if standing.on_site else 0) }} 100"/>{% endif %}</svg>
+    <span><b>{{ reviewed }}</b> of {{ standing.on_site }} reviewed</span>
+  </a>
+  <form class="el-filters" id="filters" onsubmit="return false" aria-label="Filters">
+    <div class="el-side-head"><span>Filter</span><button type="button" class="linkbtn" id="f-clear" hidden>Clear all</button></div>
+    <label>Setting <select id="f-setting"><option value="">All</option></select></label>
+    <label>Module <select id="f-module"><option value="">All</option></select></label>
+    <label>Source <select id="f-built"><option value="">Any</option><option value="code">In code</option><option value="ai">With the AI pipeline</option></select></label>
+    <label>Status <select id="f-status"><option value="">Any</option><option value="release-candidate">Released</option><option value="held">Held</option><option value="legacy">Legacy folder</option></select></label>
+  </form>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const keys = ['bench', 'setting', 'module', 'built', 'review', 'status', 'q'];
+  const params = new URLSearchParams(location.search);
+  const state = Object.fromEntries(keys.map(k => [k, params.get(k) || '']));
+  if (!state.bench) state.bench = state.status === 'draft' ? 'draft' : 'STEER';
+  const tabs = document.querySelectorAll('.el-bench button');
+  const esc = v => v.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+  function options(select, first, values, chosen) {
+    select.innerHTML = `<option value="">${first}</option>` + values.map(v => `<option value="${esc(v)}"${v === chosen ? ' selected' : ''}>${esc(v)}</option>`).join('');
+    if (!values.includes(chosen)) select.value = '';
+  }
+  const sectionFor = () => document.querySelector(`.el-sec[data-bench="${state.status === 'legacy' ? 'legacy' : state.bench}"]`);
+  function apply() {
+    tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.bench === state.bench && state.status !== 'legacy')));
+    const sec = sectionFor();
+    document.querySelectorAll('.el-sec').forEach(s => { s.hidden = s !== sec; });
+    const uniq = a => [...new Set(a)].filter(Boolean);
+    options($('f-setting'), 'All', uniq([...sec.querySelectorAll('tr.grp-setting')].map(r => r.dataset.setting)), state.setting);
+    state.setting = $('f-setting').value;
+    options($('f-module'), 'All', uniq([...sec.querySelectorAll('tr.grp-module')].filter(r => !state.setting || r.dataset.setting === state.setting).map(r => r.dataset.module)), state.module);
+    state.module = $('f-module').value;
+    ['built', 'status'].forEach(k => { $('f-' + k).value = state[k]; });
+    $('f-q').value = state.q;
+    const q = state.q.toLowerCase();
+    const shownBy = { setting: {}, module: {} };
+    let shown = 0;
+    sec.querySelectorAll('tr.el-row').forEach(tr => {
+      const d = tr.dataset;
+      const ok = (!state.setting || d.setting === state.setting) && (!state.module || d.module === state.module)
+        && (!state.built || d.built === state.built) && (!state.review || d.review === state.review)
+        && (!state.status || d.status === state.status) && (!q || d.text.includes(q));
+      tr.hidden = !ok;
+      if (ok) { shown++; shownBy.setting[d.setting] = 1; shownBy.module[d.setting + '|' + d.module] = 1; }
+    });
+    sec.querySelectorAll('tr.grp-setting').forEach(r => { r.hidden = !shownBy.setting[r.dataset.setting]; });
+    sec.querySelectorAll('tr.grp-module').forEach(r => { r.hidden = !shownBy.module[r.dataset.setting + '|' + r.dataset.module]; });
+    sec.querySelector('thead').hidden = !shown;
+    $('none').hidden = shown > 0;
+    $('f-clear').hidden = !['setting', 'module', 'built', 'review', 'status', 'q'].some(k => state[k]);
+    const out = new URLSearchParams();
+    keys.forEach(k => { if (state[k] && !(k === 'bench' && state[k] === 'STEER')) out.set(k, state[k]); });
+    history.replaceState(null, '', location.pathname + (out.toString() ? '?' + out : ''));
+  }
+  tabs.forEach(t => t.addEventListener('click', () => { state.bench = t.dataset.bench; state.setting = state.module = ''; if (state.status === 'legacy') state.status = ''; apply(); }));
+  [['f-setting', 'setting'], ['f-module', 'module'], ['f-built', 'built'], ['f-status', 'status']].forEach(([id, k]) =>
+    $(id).addEventListener('change', e => { state[k] = e.target.value; if (k === 'setting') state.module = ''; apply(); }));
+  $('f-q').addEventListener('input', e => { state.q = e.target.value.trim(); apply(); });
+  $('f-clear').addEventListener('click', () => { ['setting', 'module', 'built', 'review', 'status', 'q'].forEach(k => { state[k] = ''; }); apply(); });
+  apply();
+})();
+</script>
+{% endblock %}

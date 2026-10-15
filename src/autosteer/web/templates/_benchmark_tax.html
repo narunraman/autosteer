@@ -1,0 +1,10 @@
+<div class="h2row"><h2 id="taxonomy">Taxonomy</h2><a href="/{{ vslug }}/setting/1">Browse all elements →</a></div>
+<div class="tax">
+  {% for s in taxonomy %}
+  <a class="tax-setting c-{{ s.color }}" href="/{{ vslug }}/setting/{{ s.number }}">
+    <div class="tax-head"><span class="tax-num">Setting {{ s.number }}</span><span class="tax-name">{{ s.name }}</span></div>
+    <p class="tax-desc">{{ s.summary }}</p>
+    <ul class="tax-mods">{% for m in s.modules %}<li><span class="mod-num">{{ m.number }}</span>{{ m.name }}</li>{% endfor %}</ul>
+  </a>
+  {% endfor %}
+</div>

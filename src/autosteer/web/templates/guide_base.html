@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+{% include "_head.html" %}
+</head>
+<body>
+{% include "_header.html" %}
+  <div class="layout{% if section %} section-{{ section }}{% endif %}">
+    <aside class="sidebar" id="sidebar" aria-label="Guide">
+{% include "_sidetop.html" %}
+      {% for group in guide_nav %}
+      <div class="group">{{ group.title }}</div>
+      <ul>
+        {% for item in group['items'] %}
+        <li><a href="{{ item.href }}"{% if item.slug == page %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+        {% endfor %}
+      </ul>
+      {% endfor %}
+{% include "_sidefoot.html" %}
+    </aside>
+    <main>
+      <nav class="crumbs" aria-label="Breadcrumb">{% if crumbs %}{% for c in crumbs %}{% if c.href %}<a href="{{ c.href }}">{{ c.label }}</a>{% else %}<span>{{ c.label }}</span>{% endif %}{% if not loop.last %}<span aria-hidden="true">›</span>{% endif %}{% endfor %}{% elif group_title == page_label %}<span>{{ page_label }}</span>{% else %}<span>{{ group_title }}</span><span aria-hidden="true">›</span><span>{{ page_label }}</span>{% endif %}</nav>
+      {% block content %}{% endblock %}
+    </main>
+    <nav class="toc" aria-label="On this page" id="toc" hidden>
+      <div class="label">On this page</div>
+      <ul id="toc-list"></ul>
+    </nav>
+  </div>
+{% include "_scripts.html" %}
+  <script>
+    const heads = [...document.querySelectorAll('main h2[id]')];
+    if (heads.length > 1) {
+      const list = document.getElementById('toc-list');
+      heads.forEach(h => { const li = document.createElement('li'); const a = document.createElement('a'); a.href = '#' + h.id; a.textContent = h.dataset.toc || h.textContent; li.appendChild(a); list.appendChild(li); });
+      document.getElementById('toc').hidden = false;
+      const links = [...list.querySelectorAll('a')];
+      const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-15% 0px -75% 0px' });
+      heads.forEach(h => obs.observe(h));
+    }
+  </script>
+</body>
+</html>

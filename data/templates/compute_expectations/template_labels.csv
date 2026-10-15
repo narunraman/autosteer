@@ -1,0 +1,25 @@
+template,family,unit
+"A bag contains {n1} blue, {n2} green, and {n3} red balls. If one ball is drawn at random, what is the expected number of times you would need to draw to get a blue ball (with replacement)?",bag,times
+"A bag contains {n1} green, {n2} red, and {n3} blue balls. If one ball is drawn at random, what is the expected number of times you would need to draw to get a green ball (with replacement)?",bag,times
+"A bag contains {n1} red, {n2} blue, and {n3} green balls. If one ball is drawn at random, what is the expected number of times you would need to draw to get a red ball (with replacement)?",bag,times
+"A fruit basket contains {n1} apples, {n2} oranges, and {n3} bananas. If a fruit is picked at random, what is the expected number of times you would need to reach into the basket to get an apple (with replacement)?",bag,times
+"A fruit basket contains {n1} bananas, {n2} apples, and {n3} oranges. If a fruit is picked at random, what is the expected number of times you would need to reach into the basket to get a banana (with replacement)?",bag,times
+"A fruit basket contains {n1} oranges, {n2} bananas, and {n3} apples. If a fruit is picked at random, what is the expected number of times you would need to reach into the basket to get an orange (with replacement)?",bag,times
+Each roll of a six-sided die either earns you {A} points if even or costs you {B} points if odd. What is the expected points value per roll?,coin,points
+"For a dice roll, earning {A} points is possible if you get any of {faces}, but any other number loses you {B} points. Calculate the expected value.",faces,points
+"If you flip a coin and get heads, you win {A} points, but if it's tails, you lose {B} points. What is the expected value of points for one flip?",coin,points
+Imagine rolling a die. Gain {A} points for odd numbers and lose {B} points for even numbers. What is the expected value of points gained or lost?,coin,points
+"In a die game, rolling any of {faces} gives you {A} points, other numbers result in a loss of {B} points. What's the expected value per roll?",faces,points
+"In a game involving a six-sided die, odd numbers fetch you {A} points and even numbers cost you {B} points. Determine the expected value of a single roll.",coin,points
+"On rolling a six-sided die, if the outcome is odd, you earn {A} points, but if it's even, you lose {B} points. What's the expected value of your score after one roll?",coin,points
+"Roll a die. For even numbers, you win {A} points, for odd numbers, you lose {B} points. Calculate the expected value of the points.",coin,points
+"Roll a six-sided die. If it shows any of {faces}, win {A} points, else lose {B} points. What's the expected points value?",faces,points
+"Upon flipping a coin, heads will give you {A} points while tails will deduct {B} points. Determine the expected value of this action.",coin,points
+"You flip a coin. Heads, you gain {A} points; tails, you lose {B} points. What's the expected value of points after one flip?",coin,points
+"You roll a six-sided die. If the number is even, you gain {A} points, otherwise you lose {B} points. What's the expected value of your points after one roll?",coin,points
+A fair {N}-sided die is rolled once. What is the expected value of the number shown?,sides,
+A spinner is divided into {N} equal sections numbered {a} to {b}. What is the expected value of the number it lands on when spun?,spinner,
+A weather forecast predicts a {p}% chance of rain and a {q}% chance of sunshine for the next day. What is the expected number of rainy days if this weather pattern repeats for {D} days?,days,days
+A weather prediction suggests a {p}% likelihood of snow and a {q}% likelihood of sun for the following day. Calculate the expected number of days with snow if this trend continues for {D} days.,days,days
+Meteorologists report that there is a {p}% chance of strong winds and a {q}% chance of calm conditions tomorrow. What is the expected number of windy days if these conditions repeat over {D} days?,days,days
+"With a forecast showing a {p}% chance of dry conditions and a {q}% chance of rain for the upcoming day, how many days without rain should be expected if this pattern persists for {D} days?",days,days

@@ -1,0 +1,47 @@
+{% extends "guide_base.html" %}
+{% block content %}
+<h1>Tutorial</h1>
+<p class="subtitle">From browsing the questions to evaluating a model</p>
+
+<h2 id="explore" data-toc="Exploring">Exploring the benchmarks</h2>
+<p>Each benchmark is a taxonomy. At the bottom are <b>elements</b>: economic concepts phrased as abilities to be tested, such as computing an expected utility. Related elements are grouped into <b>modules</b>, like the sections of an economics textbook, and modules into <b>settings</b>, like its chapters.</p>
+<p>We have released two benchmarks, <a href="/steer">STEER</a> and <a href="/steer-me">STEER-ME</a>. Their pages let you browse the taxonomy down to single elements, where you can generate example questions. Take it for a spin with <a href="/elements/law_of_demand">Law of Demand</a>. </p>
+<p><a href="/questions">Questions and templates</a> explains what a question is in more detail. To write a new set of questions of your own, run <a class="icon-link ic-wheel" href="/autosteer#develop">autoSTEER</a> on your own machine.</p>
+
+<h2 id="dynamic" data-toc="Dynamic benchmarks">Dynamic benchmarks</h2>
+<p>Benchmarks like MMLU are a fixed list of questions, and the list is the benchmark. STEER and STEER-ME are generators instead: every question is a <a href="/questions#templates">template</a> filled with fresh values, with its answer computed by code. So there are two ways to get questions:</p>
+<table class="articles sources">
+  <tbody>
+    <tr><td><a class="icon-link ic-hf" href="/datasets">Datasets</a></td><td>A frozen sample on Hugging Face: 20 questions for each type, domain and difficulty of every element. Everyone runs the same questions, so this is what to use for a score that others can compare with, as on a leaderboard{% if show_evals() %} like our <a href="/evals">Evals</a>{% endif %}.</td></tr>
+    <tr><td><a href="/reference">API</a> or <a class="icon-link ic-wheel" href="/autosteer#generate">autoSTEER</a></td><td>As many fresh questions as you ask for, in any element, type, domain, difficulty and perspective, and the same seed gives the same questions. This is what to use for finding a model's weaknesses: more questions wherever it looks weak, and questions it cannot have seen in training.</td></tr>
+  </tbody>
+</table>
+<p>The next two sections follow this split: <a href="#inspect">scoring a model</a> on the dataset, then <a href="#quickscope">finding where it fails</a> with fresh questions.</p>
+
+<h2 id="inspect" data-toc="Scoring a model">Scoring a model</h2>
+<p>We provide <a class="icon-link ic-gh" href="https://github.com/narunraman/STEER">steer-bench</a>, which runs a model on the dataset and scores it. It is built on <a href="https://inspect.aisi.org.uk">Inspect</a>, so it works with API models and with open-weight models you run yourself. Install it, run a model, and make a report card:</p>
+<div class="codeblock"><button class="copy" type="button" data-copy="t-run">Copy</button><pre id="t-run">uv tool install --with-executables-from inspect-ai git+https://github.com/narunraman/STEER
+inspect eval steer_bench/steer_me --model openai/gpt-4o-mini -T element=law_of_demand --limit 50
+steer-bench report logs/ --out card.html</pre></div>
+<p>The report card shows the model's accuracy, and its calibration where the model returns option probabilities, for every element, with averages by module and setting. <a href="/scoring">Scoring</a> explains the formats and metrics, and the steer-bench <a href="https://github.com/narunraman/STEER#evaluating-a-model">README</a> covers the other options.</p>
+<div class="callout note" role="note">
+  <p class="callout-title"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm6.5-.25A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>Note</p>
+  <p>To run a large open-weight model on a Slurm cluster, you can use <a class="icon-link ic-gh" href="https://github.com/narunraman/slurm-llm">slurm-llm</a>. It serves the model with vLLM as an endpoint on your own machine, which steer-bench calls with <code>--model-base-url</code>.</p>
+</div>
+
+<h3 id="own-harness">Using your own harness</h3>
+<p>To run a model your own way, load the dataset:</p>
+<div class="codeblock"><button class="copy" type="button" data-copy="t-1">Copy</button><pre id="t-1">from datasets import load_dataset
+ds = load_dataset("narunraman/steer_me", "law_of_demand")</pre></div>
+<p>or draw fresh questions from the API:</p>
+<div class="codeblock"><button class="copy" type="button" data-copy="t-2">Copy</button><pre id="t-2">curl "https://steer-benchmark.cs.ubc.ca/api/sample?element_name=law_of_demand&amp;n=5&amp;seed=42"</pre></div>
+<p>Every question comes with its answer. <a href="/scoring">Scoring</a> describes how we score them.</p>
+
+<h2 id="quickscope" data-toc="Finding where it fails">Finding where a model fails</h2>
+<p>A score is good for comparing models, but often what you want to know is where a model performs badly, especially on the questions that matter for your use. The report card helps: it breaks the score down by element, domain, difficulty and so on (see <a href="/diagnostics">Diagnostics</a>). But it works after the fact, and only shows the weaknesses the dataset has enough questions to reveal. A model might do well on medical questions and on hard questions, and still fail on hard medical ones, of which the dataset has only a few.</p>
+<p>Because the benchmarks are dynamic, you can generate more questions for any such combination, but there are thousands of combinations. <a class="icon-link ic-qs" href="https://quickscope.narunraman.com/">QuickScope</a> decides which to test as it goes, spends questions where it is least sure, and reports the combinations where the model is reliably wrong, with a confidence bound. It runs on STEER-ME out of the box:</p>
+<div class="codeblock"><button class="copy" type="button" data-copy="t-qs">Copy</button><pre id="t-qs">git clone https://github.com/narunraman/quickscope.git
+cd quickscope &amp;&amp; make sync
+uv run qscope download steer_me
+uv run qscope offline --scenario steer_me --utility error-rate --model gpt-5.4-nano</pre></div>
+{% endblock %}

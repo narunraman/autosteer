@@ -1,0 +1,113 @@
+{
+ "format": "autosteer-dataset/1",
+ "attributes": {
+  "element_name": "marginal_production",
+  "metadata_keys": [
+   "domain",
+   "type",
+   "difficulty_level",
+   "tags"
+  ],
+  "question_keys": [
+   "question_text",
+   "domain",
+   "type",
+   "difficulty_level",
+   "tags"
+  ],
+  "options_keys": [
+   "option_id",
+   "option_text",
+   "correct_answer"
+  ],
+  "id_keys": [
+   "question_id",
+   "sub_id"
+  ],
+  "example_question_keys": [
+   "question_text",
+   "explanation",
+   "domain",
+   "type",
+   "difficulty_level",
+   "tags"
+  ],
+  "example_options_keys": [
+   "option_id",
+   "option_text",
+   "correct_answer"
+  ],
+  "instruction_keys": [
+   "domain",
+   "type",
+   "difficulty_level",
+   "tags",
+   "instructions"
+  ],
+  "generated_seed_metadata": null,
+  "generated_template_metadata": null
+ },
+ "tables": {
+  "questions": {
+   "text": [
+    "question_text",
+    "explanation",
+    "type",
+    "domain",
+    "tags"
+   ],
+   "json": [],
+   "nulls": {},
+   "object_names": true
+  },
+  "options": {
+   "text": [
+    "option_id",
+    "option_text",
+    "correct_answer"
+   ],
+   "json": [],
+   "nulls": {},
+   "object_names": true
+  },
+  "example_questions": {
+   "text": [
+    "question_text",
+    "explanation",
+    "domain",
+    "type",
+    "tags"
+   ],
+   "json": [],
+   "nulls": {
+    "explanation": "nan"
+   },
+   "object_names": true
+  },
+  "example_options": {
+   "text": [
+    "option_text"
+   ],
+   "json": [],
+   "nulls": {},
+   "object_names": true
+  },
+  "instruction_set": {
+   "text": [
+    "domain",
+    "type",
+    "tags",
+    "instructions"
+   ],
+   "json": [],
+   "nulls": {},
+   "object_names": true
+  },
+  "validation_df": {
+   "text": [],
+   "json": [],
+   "nulls": {},
+   "object_names": true
+  }
+ }
+}

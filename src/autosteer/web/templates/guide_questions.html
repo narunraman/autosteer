@@ -1,0 +1,19 @@
+{% extends "guide_base.html" %}
+{% block content %}
+<h1>Questions and templates</h1>
+<p class="subtitle">What a question is made of, and where its answer comes from</p>
+
+<h2 id="elements">Elements</h2>
+<p>An element is one ability a rational economic agent needs. Elements are grouped into modules, and modules into settings, such as consumption decisions or strategic decisions. Together they form a taxonomy, which is what you browse on this site.</p>
+<p>Each question in an element is described by three things: its <b>type</b>, a distinct way of testing the element (for profit maximization, asking for the maximum profit and asking for the labor needed to reach it are two types); its <b>domain</b>, the subject matter, such as medicine, finance or sports; and its <b>perspective</b>, whether it is written in the first, second or third person.</p>
+
+<h2 id="templates">Templates</h2>
+<p>We do not write questions one at a time. For each type, we hand-write an example <b>template</b>: a question with labeled fields where the numbers go:</p>
+<div class="example"><div class="ex-body"><p class="ex-q">Suppose the price for a basketball is <span class="slot">start price</span>, and the quantity demanded is <span class="slot">start quantity</span>. If the price of a basketball increases to <span class="slot">end price</span>, what is the most likely new quantity demanded?</p></div></div>
+<p>A language model then rewrites this template for other domains, such as medicine, finance or sports, and other perspectives. Each rewrite is a candidate <b>seed</b>, and we vet every one by hand, checking that it still makes economic sense and still asks what the type is meant to ask. The seeds that pass are used to generate many more templates in the same domain and perspective, phrased differently, and we review a random sample of each element's generated templates.</p>
+
+<h2 id="filling">Filling in a question</h2>
+<p>A question is a template with its fields filled by random values, constrained to make economic sense: demand curves slope downward, equilibrium prices are positive, and so on. The correct answer and the wrong options are then <b>computed by code</b>, not written by a model. This is what happens each time you press "Generate a question" on an element page, and no language model is involved at that point.</p>
+<p>Because questions are generated, new ones can be produced at any time, so a model cannot have seen them in training, and each can be asked in many phrasings, which matters because much of the variation in model performance comes from how a question is worded.</p>
+<p>To see how templates are written and checked, or to write an element of your own, see <a class="icon-link ic-wheel" href="/autosteer#develop">autoSTEER</a>. For fixed samples and fresh ones, see <a class="icon-link ic-hf" href="/datasets">Datasets</a> and the <a href="/reference">API</a>.</p>
+{% endblock %}

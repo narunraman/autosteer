@@ -1,0 +1,25 @@
+{% extends "guide_base.html" %}
+{% block content %}
+<h1>Diagnostics</h1>
+<p class="subtitle">Finding where a model is weak, or where it matters to you</p>
+<p>Accuracy and calibration summarize a model over many questions. Diagnostics look for the places where it is weak, or for how it does on the part of the benchmark that matters for your use. We support two ways of analyzing a model's answers: slicing them by what the questions are about or how they are asked, and looking at the worst case.</p>
+
+<h2 id="slicing" data-toc="Slicing">Slicing by what a question is about</h2>
+<p>Every question carries rich metadata: its element, module and setting, and its type, domain, perspective and difficulty. Any <a href="/metrics">metric</a> can be recomputed on any subset, so results can be cut in whatever way suits the question at hand. Someone deploying a model for medical decisions can score only the medical domain. Someone studying games can score only the strategic elements.</p>
+<h3 id="first-principles">By format: answering from first principles</h3>
+<p>Slicing by format catches a model that picks the right option without working the answer out. Two <a href="/formats">question formats</a> check for this. With <a href="/formats#free-text">free text</a> there are no options to choose from, so the model has to produce the answer itself. <a href="/formats#none">"No other option is correct"</a> (NOTA) asks the same thing while staying with multiple choice, by sometimes taking the right answer off the list.</p>
+
+<h2 id="robustness" data-toc="Worst-case analysis">Worst-case analysis</h2>
+<p>Slicing answers a question you already have. It finds only the weaknesses you thought to look for. One way to find the others is to look at the worst case in place of the average. This is what our robustness measures do. For each element, they report the <b>lowest</b> normalized accuracy along one axis:</p>
+<dl class="terms">
+  <dt>Domain</dt><dd>The lowest score across the element's domains. A model that handles a concept in finance but not in medicine scores badly here.</dd>
+  <dt>Type</dt><dd>The lowest across the forms the question takes.</dd>
+  <dt>Perspective</dt><dd>The lowest across points of view.</dd>
+</dl>
+<p>Read it against the element's average. Where the two are close, the model's grasp of the element does not depend on how the question is dressed. Where the worst case sits far below the average, something that should not matter does, and the axis tells you which slice to open.</p>
+<div class="callout note" role="note">
+  <p class="callout-title"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm6.5-.25A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>Note</p>
+  <p>These measures find the worst domain or the worst type, one at a time. But a model can do well on medical questions and well on hard questions, and still fail on hard medical ones. Finding combinations like that takes more questions than a fixed sample has. <a class="icon-link ic-qs" href="https://quickscope.narunraman.com/">QuickScope</a> does it: it generates questions for the combinations it is least sure about, and reports the ones where the model is reliably wrong.</p>
+</div>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "guide_base.html" %}
+{% block content %}
+<h1>Scoring</h1>
+<p>Scoring turns the answers a model gives to a set of questions into scores for each element, and presents those scores for the part of the benchmark you care about. It is described in the following articles:</p>
+<table class="articles">
+  <thead><tr><th>Article</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td><a href="/formats">Question formats</a></td><td>The ways a question can be put to a model: multiple choice and free text, and the variants of multiple choice in which the model reasons first, with the options shown or hidden.</td></tr>
+    <tr><td><a href="/metrics">Metrics</a></td><td>What counts as a correct answer, and what is computed from a model's answers: exact-match and normalized accuracy, and the calibration measures.</td></tr>
+    <tr><td><a href="/diagnostics">Diagnostics</a></td><td>Finding where a model is weak: slicing scores by what a question is about, worst-case analysis across domains, types and perspectives, and checking whether a model answers from first principles.</td></tr>
+  </tbody>
+</table>
+<p>For the questions themselves, see <a class="icon-link ic-hf" href="/datasets">Datasets</a> and the <a href="/reference">Reference</a>.{% if show_evals() %} Model results are under <a href="/evals">Evals</a>.{% endif %}</p>
+{% endblock %}

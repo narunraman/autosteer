@@ -1,0 +1,11 @@
+      <div class="side-mobile">
+        <label class="search"><span class="sr">Search</span>
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input class="site-search" type="search" placeholder="Search elements and guides" autocomplete="off" spellcheck="false">
+        </label>
+        <nav aria-label="Site">
+          <a href="/reference"{% if page == 'api' %} aria-current="page"{% endif %}>Reference</a>
+          {% if show_evals() %}<a href="/evals"{% if section == 'evals' %} aria-current="page"{% endif %}>Evals</a>{% endif %}
+          {% if not public_mode() %}<a href="/developer"{% if request.url.path.startswith('/developer') %} aria-current="page"{% endif %}>Developer</a>{% endif %}
+        </nav>
+      </div>

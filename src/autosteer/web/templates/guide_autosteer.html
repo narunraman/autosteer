@@ -1,0 +1,24 @@
+{% extends "guide_base.html" %}
+{% import "_logos.html" as logos %}
+{% block content %}
+<h1 class="h1-auto">{{ logos.wheel("g") }}{{ logos.autosteer() }}</h1>
+<p class="subtitle">Generate questions and write new elements, on your own machine</p>
+<p>autoSTEER is the application behind STEER and STEER-ME, and this site is autoSTEER running in its read-only public mode. Run it on your own machine to generate fresh questions for any element, or to write new elements for either benchmark.</p>
+{% if not public_mode() %}<p>You are running it now. <a href="/developer">Open developer mode</a>.</p>{% endif %}
+
+<h2 id="run" data-toc="Run it">Run it</h2>
+<p>autoSTEER runs from a clone of its <a class="icon-link ic-gh" href="https://github.com/narunraman/autosteer">repository</a>, which includes the template data. You need <a href="https://docs.astral.sh/uv/">uv</a>.</p>
+<div class="codeblock"><button class="copy" type="button" data-copy="clone-autosteer">Copy</button><pre id="clone-autosteer">git clone https://github.com/narunraman/autosteer.git
+cd autosteer</pre></div>
+
+<h3 id="generate">Generate questions</h3>
+<div class="codeblock"><button class="copy" type="button" data-copy="py-autosteer">Copy</button><pre id="py-autosteer">from autosteer.sampler.generator import ElementSampler
+
+sampler = ElementSampler()
+question = sampler.sample_question("consumer_surplus", seed=1)</pre></div>
+<p>Run it with <code>uv run python</code> inside the clone. The same seed always gives the same question, and the <a href="/reference">API</a> serves the same questions over HTTP.</p>
+
+<h3 id="develop">Develop new elements</h3>
+<div class="codeblock"><button class="copy" type="button" data-copy="dev-autosteer">Copy</button><pre id="dev-autosteer">uv run autosteer dev</pre></div>
+<p>This opens the site on your machine with developer mode, which walks you through writing an element, from example seeds to reviewed templates, and how to submit it.</p>
+{% endblock %}

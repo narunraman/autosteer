@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+{% include "_head.html" %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+          onload="renderMathInElement(document.querySelector('main'), {delimiters: [{left: '$', right: '$', display: false}], throwOnError: false})"></script>
+</head>
+<body>
+{% include "_header.html" %}
+  <div class="layout">
+    <aside class="sidebar" id="sidebar" aria-label="{{ version }} taxonomy">
+{% include "_sidetop.html" %}
+      <a class="back" href="/{{ vslug }}">‹ {{ version }} overview</a>
+      {% for s in tree %}
+      <details{% if setting and s.number == setting.number %} open{% endif %}>
+        <summary><a class="s-link" href="/{{ vslug }}/setting/{{ s.number }}"{% if current == 's' ~ s.number %} aria-current="page"{% endif %}><i class="dot c-{{ s.color }}"></i>{{ s.short }}</a></summary>
+        {% for m in s.modules %}
+        <a class="module" href="/{{ vslug }}/module/{{ m.number }}"{% if current == 'm' ~ m.number %} aria-current="page"{% endif %}>{{ m.name }}</a>
+        <ul>
+          {% for e in m.elements %}
+          <li>{% if e.status == 'covered' %}<a class="held" href="/elements/{{ e.covered_by }}" title="Covered by {{ e.covered_name }}">{{ e.display_name }}<small>covered</small></a>{% elif e.element and e.status != 'held' %}<a href="/elements/{{ e.element }}"{% if e.element == current %} aria-current="page"{% endif %}>{{ e.display_name }}</a>{% elif e.element %}<a class="held" href="/elements/{{ e.element }}"{% if e.element == current %} aria-current="page"{% endif %}>{{ e.display_name }}<small>soon</small></a>{% else %}<span class="held" title="No questions in this release">{{ e.display_name }}<small>soon</small></span>{% endif %}</li>
+          {% endfor %}
+        </ul>
+        {% endfor %}
+      </details>
+      {% endfor %}
+{% include "_sidefoot.html" %}
+    </aside>
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+    <aside class="glance">{% block aside %}{% endblock %}</aside>
+  </div>
+{% include "_scripts.html" %}
+{% block scripts %}{% endblock %}
+</body>
+</html>

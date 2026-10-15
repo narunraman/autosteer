@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="dev-head"><h1>{{ i.display_name }}</h1></section>
+{% include "_dev_messages.html" %}
+{% with code_extra="" %}{% include "_code_notice.html" %}{% endwith %}
+
+{% if not i.code %}
+{% with what="template generation" %}{% include "_dev_noprovider.html" %}{% endwith %}
+{% if summary %}
+<form class="dev-block dev-action cand-step" id="tgen-form" method="post" action="/developer/e/{{ i.element }}/templates/generate">
+  <input type="hidden" name="element_name" value="{{ i.element }}">
+  <h2>Generate</h2>
+  <div class="dev-action-row">
+    {% with label="Model", choices=models %}{% include "_model_select.html" %}{% endwith %}
+    <label>Per target <input id="per-target" name="templates_per_target" type="number" min="1" max="25" step="1" value="1" class="dev-num-input"></label>
+    <button id="tgen-button" type="submit" {% if dev.no_provider or summary.target_count == 0 %}disabled{% endif %}>Generate <span id="tgen-count">{{ summary.target_count }}</span> templates</button>
+  </div>
+  <p class="hint" id="tgen-pending" hidden>Generating templates and adding them to <code>templates/{{ i.element }}</code>.</p>
+</form>
+{% else %}
+<div class="dev-empty"><p>No accepted candidates yet.</p><a class="button button-sm" href="/developer/e/{{ i.element }}/candidates">Go to Seed candidates →</a></div>
+{% endif %}
+{% endif %}
+
+{% if not total and not list_error %}<p class="muted">No templates yet.</p>{% endif %}
+{% if rows and not i.in_manifest %}<p class="hint">These templates are not in the manifest yet; restart the server to rebuild it.</p>{% endif %}
+{% include "_template_list.html" %}
+{% if rows %}<p class="tl-next"><a href="/developer/e/{{ i.element }}/review">Go to Review →</a></p>{% endif %}
+{% endblock %}
+{% block scripts %}
+<script>
+(() => {
+  const form = document.getElementById('tgen-form'); if (!form) return;
+  const targets = {{ summary.target_count if summary else 0 }}, input = document.getElementById('per-target');
+  const update = () => { document.getElementById('tgen-count').textContent = targets * Math.max(1, parseInt(input.value || '1', 10) || 1); };
+  input.addEventListener('input', update);
+  form.addEventListener('submit', () => { document.getElementById('tgen-pending').hidden = false; const b = document.getElementById('tgen-button'); b.disabled = true; b.textContent = 'Generating…'; });
+})();
+</script>
+{% endblock %}

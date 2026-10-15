@@ -1,0 +1,17 @@
+{% extends "guide_base.html" %}
+{% block content %}
+<h1>{{ value_label|capitalize }}</h1>
+<p class="lead">{{ count }} element{{ '' if count == 1 else 's' }} {{ 'has' if count == 1 else 'have' }} questions {% if kind == 'domain' %}set in this domain{% elif kind == 'perspective' %}written from this perspective{% else %}of this type{% endif %}.</p>
+{% if others %}<p class="facet-others">Other {{ kind_label|lower }}s: {% for code, text in others %}<a href="/by/{{ kind }}/{{ code|urlencode }}">{{ text }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>{% endif %}
+{% for group in groups %}
+<h2 id="{{ group.vslug }}">{{ group.version }}</h2>
+<ol class="rows">
+  {% for row in group.rows %}
+  <li class="c-{{ row.color }}">
+    <a class="row-title" href="/elements/{{ row.element.element }}">{{ row.element.display_name }}</a>
+    <p class="row-meta">{{ row.module }}</p>
+  </li>
+  {% endfor %}
+</ol>
+{% endfor %}
+{% endblock %}

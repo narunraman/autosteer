@@ -1,0 +1,8 @@
+<section class="dev-block">
+  <h2>Data directory</h2>
+  <dl class="dev-facts">
+    <dt>Path</dt><dd><code>{{ data_dir }}</code></dd>
+    <dt>Check</dt><dd>{% if verify.error %}<span class="muted">could not run: {{ verify.error }}</span>{% else %}{{ 'all pinned files present and unchanged' if verify.ok else 'differs from the pinned list' }}: {{ verify.checked }} files checked, {{ verify.missing|length }} missing, {{ verify.changed|length }} changed, {{ verify.extra|length }} not in the list.{% endif %}</dd>
+    <dt>Manifest</dt><dd>{{ manifest_count }} elements, built {{ manifest_date[:16]|replace('T', ' ') or 'never' }} UTC</dd>
+  </dl>
+</section>

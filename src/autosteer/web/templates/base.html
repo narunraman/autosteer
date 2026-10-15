@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+{% include "_head.html" %}
+  <link rel="stylesheet" href="{{ url_for('static', path='authoring.css') }}?v={{ asset_version }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="document.addEventListener('DOMContentLoaded', function(){ renderMathInElement(document.body, { delimiters: [{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}], ignoredClasses: ['no-math'], throwOnError: false }); });"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+  {% block head_extra %}{% endblock %}
+</head>
+<body>
+{% include "_header.html" %}
+  <div class="layout wide{% if has_rail is defined and has_rail %} has-rail{% endif %}">
+    <aside class="sidebar dev-side" id="sidebar" aria-label="Developer mode">
+{% include "_sidetop.html" %}
+{% set dv = dev if dev is defined else none %}
+      <div class="group">Guide</div>
+      <ul class="dev-tree">
+        <li><a href="/developer/how"{% if dv and dv.page == 'how' %} aria-current="page"{% endif %}>How elements are made</a></li>
+        <li><a href="/developer/submission"{% if dv and dv.page == 'submission' %} aria-current="page"{% endif %}>Review and submission</a></li>
+      </ul>
+      <div class="group">Workspace</div>
+      <ul class="dev-tree">
+        <li><a href="/developer"{% if dv and dv.page == 'dashboard' %} aria-current="page"{% endif %}>Dashboard</a>
+          {% block side_elements %}{% endblock %}
+          {% if dv and dv.info %}{% set di = dv.info %}
+          <ul class="dev-tree-el">
+            <li><a class="dev-el" href="/developer/e/{{ di.element }}"{% if dv.step == 'overview' %} aria-current="page"{% endif %}>{{ di.display_name }}</a>
+              <ul class="dev-steps">
+                {% for s in di.steps %}
+                <li>{% if s.linked %}<a href="/developer/e/{{ di.element }}/{{ s.key }}"{% if dv.step == s.key %} aria-current="page"{% endif %}>{% else %}<span class="dev-step-off">{% endif %}
+                  <span class="dev-tick{% if s.done %} done{% endif %}" aria-hidden="true">{% if s.done %}✓{% endif %}</span>
+                  <span class="dev-step-label">{{ s.title }}</span>
+                  <span class="dev-step-count" data-step-count="{{ s.key }}" title="{{ s.count }}">{{ s.short }}</span>{% if s.done %}<span class="sr"> (done)</span>{% endif %}
+                {% if s.linked %}</a>{% else %}</span>{% endif %}</li>
+                {% endfor %}
+              </ul>
+            </li>
+          </ul>
+          {% endif %}
+        </li>
+        <li><a href="/developer/new"{% if dv and dv.page == 'new' %} aria-current="page"{% endif %}>New element</a></li>
+      </ul>
+      <div class="group">Settings</div>
+      <ul class="dev-tree">
+        <li><a href="/developer/setup"{% if dv and dv.page == 'setup' %} aria-current="page"{% endif %}>AI setup</a></li>
+      </ul>
+{% include "_sidefoot.html" %}
+    </aside>
+    <main class="authoring {% block main_class %}{% endblock %}">
+      {% if dev is defined and dev.crumbs %}
+      <nav class="dev-crumbs" aria-label="Breadcrumb">{% for c in dev.crumbs %}{% if not loop.first %}<span class="sep" aria-hidden="true">›</span>{% endif %}{% if c.href %}<a href="{{ c.href }}">{{ c.label }}</a>{% else %}<span aria-current="page">{{ c.label }}</span>{% endif %}{% endfor %}</nav>
+      {% endif %}
+      {% block content %}{% endblock %}
+    </main>
+    {% if has_rail is defined and has_rail %}<aside class="dev-rail" aria-label="{% block rail_label %}Filter{% endblock %}">{% block right_rail %}{% endblock %}</aside>{% endif %}
+  </div>
+
+    <!-- Global metadata tooltip — responds to any [data-meta] chip on any page -->
+    <div id="meta-tooltip" aria-live="polite">
+      <p class="meta-tooltip-title" id="meta-tooltip-title"></p>
+      <p class="meta-tooltip-body" id="meta-tooltip-body"></p>
+    </div>
+
+    <script>
+    (function () {
+      var META = {
+        element: {
+          title: 'Element',
+          body: 'An element is a unit of economic reasoning that defines a family of related MCQs. Each element captures a specific microeconomic skill — such as computing consumer surplus or deriving demand — that can be instantiated across domains, types, and perspectives.'
+        },
+        type: {
+          title: 'Type',
+          body: 'The type specifies the task variant within an element. For example, price elasticity has types like point elasticity and arc elasticity. Different types require different reasoning steps while sharing the same underlying concept.'
+        },
+        domain: {
+          title: 'Domain',
+          body: 'The domain sets the real-world context — finance, medicine, sports, education, and so on — while keeping the underlying economic structure identical. Domain variation tests whether a model generalises across surface reframings.'
+        },
+        perspective: {
+          title: 'Perspective',
+          body: 'The perspective controls the narrative framing: first-person ("I own a firm…"), second-person ("You manage a bakery…"), or third-person. Gender variants test for demographic bias in model responses.'
+        }
+      };
+
+      var tooltip = document.getElementById('meta-tooltip');
+
+      function show(chip) {
+        var key = chip.getAttribute('data-meta');
+        var val = chip.getAttribute('data-val') || chip.textContent.trim();
+        var desc = META[key] || { title: key, body: '' };
+        document.getElementById('meta-tooltip-title').textContent = desc.title + ': ' + val;
+        document.getElementById('meta-tooltip-body').textContent = desc.body;
+
+        tooltip.style.display = 'block';
+
+        var rect = chip.getBoundingClientRect();
+        var tw = 284;
+        var left = rect.left + window.scrollX;
+        var top  = rect.bottom + window.scrollY + 8;
+
+        // Keep within right edge
+        if (rect.left + tw > window.innerWidth - 12) {
+          left = window.scrollX + window.innerWidth - tw - 12;
+        }
+        // Flip above if clipped at bottom
+        tooltip.style.top  = top + 'px';
+        tooltip.style.left = left + 'px';
+        var afterHeight = tooltip.offsetHeight;
+        if (rect.bottom + afterHeight + 16 > window.innerHeight) {
+          tooltip.style.top = (rect.top + window.scrollY - afterHeight - 8) + 'px';
+        }
+      }
+
+      function hide() {
+        tooltip.style.display = 'none';
+      }
+
+      document.addEventListener('click', function (e) {
+        var chip = e.target.closest('[data-meta]');
+        if (chip) { e.stopPropagation(); show(chip); }
+        else { hide(); }
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') hide();
+      });
+    })();
+    </script>
+{% block scripts %}{% endblock %}
+{% include "_scripts.html" %}
+</body>
+</html>

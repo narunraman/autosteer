@@ -1,0 +1,1593 @@
+{
+  "generated_at": "2026-10-12T19:53:35.340823+00:00",
+  "code_fingerprint": "58b8699aafbdc11f",
+  "elements": {
+    "ambiguity_aversion": {
+      "domains": [
+        "mythical",
+        "objects"
+      ],
+      "types": [
+        "two_part"
+      ],
+      "difficulty_levels": [
+        "5"
+      ],
+      "tags": [
+        "second_person"
+      ],
+      "has_filler": true,
+      "template_question_count": 828
+    },
+    "auctions_affiliated": {
+      "domains": [
+        "charity",
+        "collectibles",
+        "energy",
+        "entertainment",
+        "forestry",
+        "retail",
+        "sports",
+        "travel"
+      ],
+      "types": [
+        "info_policy",
+        "ranking3",
+        "ranking4"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2",
+        "3"
+      ],
+      "tags": [
+        "ai_assistant;explicit",
+        "ai_assistant;subtle",
+        "anon;explicit",
+        "anon;subtle",
+        "first_person;explicit",
+        "first_person;subtle",
+        "second_person;explicit",
+        "second_person;subtle"
+      ],
+      "has_filler": true,
+      "template_question_count": 192
+    },
+    "bic_mechanism": {
+      "domains": [
+        "agriculture",
+        "art",
+        "charity",
+        "community",
+        "government",
+        "school",
+        "sports",
+        "workplace"
+      ],
+      "types": [
+        "agv",
+        "bne_bid",
+        "english",
+        "first_price",
+        "pay_your_bid",
+        "posted_report",
+        "proportional_share",
+        "scaled_payment",
+        "second_price",
+        "third_price"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2",
+        "3"
+      ],
+      "tags": [
+        "ai_assistant",
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 160
+    },
+    "capital_market_distortions": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "finance",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "capital_shortfall",
+        "capital_stock",
+        "output"
+      ],
+      "difficulty_levels": [
+        "0",
+        "1"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 120
+    },
+    "categorical_syllogism": {
+      "domains": [
+        "animals_plants",
+        "fictional",
+        "objects",
+        "people"
+      ],
+      "types": [
+        "default"
+      ],
+      "difficulty_levels": [
+        "1"
+      ],
+      "tags": [
+        ""
+      ],
+      "has_filler": true,
+      "template_question_count": 36
+    },
+    "completeness": {
+      "domains": [
+        "finance",
+        "housing",
+        "jobs",
+        "medical",
+        "technology",
+        "travel"
+      ],
+      "types": [
+        "pairwise"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "second_person"
+      ],
+      "has_filler": true,
+      "template_question_count": 192
+    },
+    "completeness_risk": {
+      "domains": [
+        "agriculture",
+        "finance",
+        "game_show",
+        "medical",
+        "travel",
+        "workplace"
+      ],
+      "types": [
+        "pairwise"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "second_person"
+      ],
+      "has_filler": true,
+      "template_question_count": 192
+    },
+    "conditional_syllogism": {
+      "domains": [
+        "daily_life",
+        "finance",
+        "health",
+        "numbers",
+        "school",
+        "sports",
+        "travel",
+        "work"
+      ],
+      "types": [
+        "affirming_consequent",
+        "denying_antecedent",
+        "modus_ponens",
+        "modus_tollens"
+      ],
+      "difficulty_levels": [
+        "1"
+      ],
+      "tags": [
+        "",
+        "third_person;man",
+        "third_person;woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 312
+    },
+    "constrained_optimization": {
+      "domains": [
+        "agriculture",
+        "base",
+        "chemicals",
+        "energy",
+        "food",
+        "manufacturing",
+        "mining",
+        "nutrition"
+      ],
+      "types": [
+        "max",
+        "min"
+      ],
+      "difficulty_levels": [
+        "4",
+        "5"
+      ],
+      "tags": [
+        "linear;anon",
+        "linear;second_person",
+        "quadratic"
+      ],
+      "has_filler": true,
+      "template_question_count": 46
+    },
+    "consumption_changes": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "finance",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "direction",
+        "new_share"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 100
+    },
+    "copeland_method": {
+      "domains": [
+        "education",
+        "entertainment",
+        "family",
+        "leisure",
+        "politics",
+        "workplace"
+      ],
+      "types": [
+        "profile",
+        "table"
+      ],
+      "difficulty_levels": [
+        "2",
+        "3"
+      ],
+      "tags": [
+        "defined",
+        "named"
+      ],
+      "has_filler": true,
+      "template_question_count": 72
+    },
+    "dominant_strategies": {
+      "domains": [
+        "finance",
+        "job_market"
+      ],
+      "types": [
+        "non-symmetric",
+        "symmetric"
+      ],
+      "difficulty_levels": [
+        "2",
+        "3"
+      ],
+      "tags": [
+        "explicit;a_firm",
+        "explicit;b_firm",
+        "explicit;man_woman",
+        "explicit;two_men",
+        "explicit;two_women",
+        "explicit;woman_man"
+      ],
+      "has_filler": true,
+      "template_question_count": 60
+    },
+    "dsic_mechanism": {
+      "domains": [
+        "auction",
+        "facility_location",
+        "matching",
+        "public_project"
+      ],
+      "types": [
+        "auction_allpay",
+        "auction_clock",
+        "auction_first",
+        "auction_lottery",
+        "auction_posted",
+        "auction_reserve",
+        "auction_second",
+        "auction_third",
+        "location_mean",
+        "location_median",
+        "location_misreport",
+        "match_cycles",
+        "match_da_proposers",
+        "match_da_receivers",
+        "match_immediate",
+        "match_serial",
+        "project_equal",
+        "project_pivot",
+        "project_pledge"
+      ],
+      "difficulty_levels": [
+        "10",
+        "8",
+        "9"
+      ],
+      "tags": [
+        "ai_assistant",
+        "ai_assistant;bidder_payoff",
+        "ai_assistant;revenue",
+        "ai_assistant;winner_payment",
+        "anon",
+        "anon;bidder_payoff",
+        "anon;revenue",
+        "anon;winner_payment"
+      ],
+      "has_filler": true,
+      "template_question_count": 658
+    },
+    "elastic_inelastic_supply": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "compare",
+        "elastic_cost_shock",
+        "inelastic_cost_shock",
+        "inelastic_demand_shift"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 105
+    },
+    "elasticity_of_substitution": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "from_function",
+        "from_ratios",
+        "ratio_response"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 210
+    },
+    "endowment_effect": {
+      "domains": [
+        "advice",
+        "charity_shop",
+        "gift",
+        "raffle",
+        "store",
+        "survey"
+      ],
+      "types": [
+        "mirror_trade"
+      ],
+      "difficulty_levels": [
+        "1"
+      ],
+      "tags": [
+        "ai_assistant",
+        "second_person",
+        "third_person;man",
+        "third_person;woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 14
+    },
+    "engel_curves": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "finance",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "curve_x",
+        "curve_y",
+        "income_change"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 150
+    },
+    "entry_exit_decisions": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "break_even_price",
+        "entry",
+        "shutdown",
+        "shutdown_price"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 280
+    },
+    "equiv_contrapositive": {
+      "domains": [
+        "daily_life",
+        "finance",
+        "medicine"
+      ],
+      "types": [
+        "other"
+      ],
+      "difficulty_levels": [
+        "2"
+      ],
+      "tags": [
+        ""
+      ],
+      "has_filler": true,
+      "template_question_count": 429
+    },
+    "exponents": {
+      "domains": [
+        "base"
+      ],
+      "types": [
+        "integer",
+        "real_value"
+      ],
+      "difficulty_levels": [
+        "0",
+        "1"
+      ],
+      "tags": [
+        ""
+      ],
+      "has_filler": true,
+      "template_question_count": 10
+    },
+    "factor_demand": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "capital",
+        "cost",
+        "labor"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 420
+    },
+    "factor_shares_equilibrium": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "cobb_douglas",
+        "cobb_douglas_crs",
+        "linear"
+      ],
+      "difficulty_levels": [
+        "0",
+        "1",
+        "2"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 420
+    },
+    "fair_division": {
+      "domains": [
+        "business",
+        "food",
+        "inheritance",
+        "land"
+      ],
+      "types": [
+        "adjusted_winner",
+        "divider_chooser",
+        "envy_check",
+        "last_diminisher"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "ai_assistant",
+        "anon",
+        "first_person",
+        "second_person"
+      ],
+      "has_filler": true,
+      "template_question_count": 52
+    },
+    "feasibility": {
+      "domains": [
+        "agriculture",
+        "business",
+        "energy",
+        "environment",
+        "marketing",
+        "research"
+      ],
+      "types": [
+        "discount",
+        "folk"
+      ],
+      "difficulty_levels": [
+        "7",
+        "8"
+      ],
+      "tags": [
+        "anon;defined",
+        "anon;described",
+        "anon;named"
+      ],
+      "has_filler": true,
+      "template_question_count": 24
+    },
+    "finding_tfp": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "cobb_douglas",
+        "input_prices",
+        "leontief",
+        "linear"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 280
+    },
+    "first_order_false_belief": {
+      "domains": [
+        "garden",
+        "home",
+        "library",
+        "office",
+        "restaurant",
+        "school",
+        "travel",
+        "workplace"
+      ],
+      "types": [
+        "false_belief",
+        "true_belief"
+      ],
+      "difficulty_levels": [
+        "0"
+      ],
+      "tags": [
+        "second_person",
+        "third_person;man",
+        "third_person;woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 120
+    },
+    "fixed_factor_aggregation": {
+      "domains": [
+        "consumer_goods",
+        "entertainment",
+        "environmental_policy",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "different_exponents",
+        "equal_exponents",
+        "rental_rate"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 90
+    },
+    "hicksian_duality": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "finance",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "bundle",
+        "good_x",
+        "good_y"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 300
+    },
+    "income_elasticity": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "finance",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "direct",
+        "income",
+        "quantity"
+      ],
+      "difficulty_levels": [
+        "1"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 150
+    },
+    "independence": {
+      "domains": [
+        "everyday_products",
+        "technological_products"
+      ],
+      "types": [
+        "asymmetric_decoy"
+      ],
+      "difficulty_levels": [
+        "1"
+      ],
+      "tags": [
+        "second_person;context",
+        "second_person;no_context"
+      ],
+      "has_filler": true,
+      "template_question_count": 2148
+    },
+    "input_price_cobb": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "cobb_douglas"
+      ],
+      "difficulty_levels": [
+        "2"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 140
+    },
+    "input_price_leontief": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "leontief"
+      ],
+      "difficulty_levels": [
+        "2"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 140
+    },
+    "input_price_response": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "cobb_douglas",
+        "leontief"
+      ],
+      "difficulty_levels": [
+        "2"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 280
+    },
+    "labor_supply_distortions": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "finance",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "equilibrium_wage_quantity",
+        "hours_worked",
+        "labor_supply"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 72
+    },
+    "labor_supply_elasticity": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "finance",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "quantity_supplied",
+        "wage"
+      ],
+      "difficulty_levels": [
+        "0",
+        "1"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 80
+    },
+    "linear_system_eq": {
+      "domains": [
+        "base"
+      ],
+      "types": [
+        "three_equation",
+        "two_equation"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        ""
+      ],
+      "has_filler": true,
+      "template_question_count": 10
+    },
+    "loss_aversion": {
+      "domains": [
+        "business",
+        "gambling",
+        "game_show",
+        "investing",
+        "workplace"
+      ],
+      "types": [
+        "accept_reject",
+        "sure_amount"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "ai_assistant",
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 60
+    },
+    "maximize_expected_utility": {
+      "domains": [
+        "gambling",
+        "job_offer"
+      ],
+      "types": [
+        "regular"
+      ],
+      "difficulty_levels": [
+        "3",
+        "4"
+      ],
+      "tags": [
+        "second_person;money"
+      ],
+      "has_filler": true,
+      "template_question_count": 31
+    },
+    "mrs_labor_supply": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "finance",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "cobb_douglas",
+        "linear",
+        "non_linear",
+        "optimal_hours"
+      ],
+      "difficulty_levels": [
+        "0",
+        "1",
+        "2"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 160
+    },
+    "mrs_tangency": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "finance",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "adjust",
+        "mrs_at_optimum",
+        "tangency_bundle"
+      ],
+      "difficulty_levels": [
+        "1"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 150
+    },
+    "non_distortionary_taxes": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "environmental_policy",
+        "finance",
+        "medical",
+        "technology"
+      ],
+      "types": [
+        "identify",
+        "zero_dwl"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 60
+    },
+    "optimal_portfolio_choice": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "finance",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "best_fund",
+        "one_asset"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 80
+    },
+    "optimize_continuous": {
+      "domains": [
+        "agriculture",
+        "business",
+        "manufacturing",
+        "math"
+      ],
+      "types": [
+        "box",
+        "cubic",
+        "fence",
+        "quadratic"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2",
+        "3"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 37
+    },
+    "pareto_sc": {
+      "domains": [
+        "education",
+        "entertainment",
+        "family",
+        "leisure",
+        "politics",
+        "workplace"
+      ],
+      "types": [
+        "which",
+        "yes_no"
+      ],
+      "difficulty_levels": [
+        "4"
+      ],
+      "tags": [
+        "explicit"
+      ],
+      "has_filler": true,
+      "template_question_count": 24
+    },
+    "present_value": {
+      "domains": [
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "finance",
+        "gambling",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "amount",
+        "perpetuity",
+        "stream"
+      ],
+      "difficulty_levels": [
+        "0",
+        "1"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 240
+    },
+    "price_of_risk": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "finance",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "risk_allocation",
+        "utility_analysis"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 120
+    },
+    "prob_basic": {
+      "domains": [
+        "cards",
+        "coins",
+        "dice",
+        "games",
+        "health",
+        "mixed",
+        "sports",
+        "urns",
+        "weather"
+      ],
+      "types": [
+        "compute",
+        "least_likely",
+        "most_likely",
+        "same_probability"
+      ],
+      "difficulty_levels": [
+        "0",
+        "1"
+      ],
+      "tags": [
+        ""
+      ],
+      "has_filler": true,
+      "template_question_count": 27
+    },
+    "pure_nash": {
+      "domains": [
+        "finance",
+        "job_market",
+        "matrix_form"
+      ],
+      "types": [
+        "column",
+        "non-symmetric",
+        "row",
+        "symmetric"
+      ],
+      "difficulty_levels": [
+        "8",
+        "9"
+      ],
+      "tags": [
+        "explicit;firm",
+        "explicit;pair",
+        "opponent",
+        "pair",
+        "self"
+      ],
+      "has_filler": true,
+      "template_question_count": 56
+    },
+    "sc_monotonicity_rules": {
+      "domains": [
+        "education",
+        "entertainment",
+        "family",
+        "leisure",
+        "politics",
+        "workplace"
+      ],
+      "types": [
+        "consequences",
+        "procedures"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "ai_assistant;defined",
+        "ai_assistant;named",
+        "anon;defined",
+        "anon;named",
+        "first_person;defined",
+        "first_person;named",
+        "man;defined",
+        "man;named",
+        "second_person;defined",
+        "second_person;named",
+        "woman;defined",
+        "woman;named"
+      ],
+      "has_filler": true,
+      "template_question_count": 288
+    },
+    "sc_nondictatorship": {
+      "domains": [
+        "education",
+        "entertainment",
+        "family",
+        "leisure",
+        "politics",
+        "workplace"
+      ],
+      "types": [
+        "consequences",
+        "describe",
+        "procedures"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2",
+        "3"
+      ],
+      "tags": [
+        "ai_assistant",
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 216
+    },
+    "sc_transitivity_rules": {
+      "domains": [
+        "education",
+        "entertainment",
+        "family",
+        "leisure",
+        "politics",
+        "workplace"
+      ],
+      "types": [
+        "consequences",
+        "procedures"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "ai_assistant;intransitive",
+        "ai_assistant;transitive",
+        "anon;intransitive",
+        "anon;transitive",
+        "first_person;intransitive",
+        "first_person;transitive",
+        "man;intransitive",
+        "man;transitive",
+        "second_person;intransitive",
+        "second_person;transitive",
+        "woman;intransitive",
+        "woman;transitive"
+      ],
+      "has_filler": true,
+      "template_question_count": 252
+    },
+    "second_order_false_belief": {
+      "domains": [
+        "garden",
+        "home",
+        "library",
+        "office",
+        "restaurant",
+        "school",
+        "travel",
+        "workplace"
+      ],
+      "types": [
+        "observer_right",
+        "observer_wrong"
+      ],
+      "difficulty_levels": [
+        "1"
+      ],
+      "tags": [
+        "second_person",
+        "third_person;man",
+        "third_person;woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 280
+    },
+    "shephards_lemma": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "capital",
+        "labor"
+      ],
+      "difficulty_levels": [
+        "0"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 140
+    },
+    "substitutes_complements": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "finance",
+        "medical",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "elasticity",
+        "linear_demand",
+        "utility"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 120
+    },
+    "sunk_cost": {
+      "domains": [
+        "agriculture",
+        "construction",
+        "education",
+        "entertainment",
+        "events",
+        "food_service",
+        "manufacturing",
+        "marketing",
+        "medical",
+        "personal_finance",
+        "research",
+        "retail",
+        "technology",
+        "travel",
+        "workplace"
+      ],
+      "types": [
+        "money",
+        "time"
+      ],
+      "difficulty_levels": [
+        "2"
+      ],
+      "tags": [
+        "ai_assistant",
+        "first_person",
+        "second_person",
+        "third_person;man",
+        "third_person;woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 100
+    },
+    "tax_incidence": {
+      "domains": [
+        "consumer_goods",
+        "education",
+        "entertainment",
+        "environmental_policy",
+        "medical",
+        "politics",
+        "sports",
+        "technology"
+      ],
+      "types": [
+        "buyer_price",
+        "quantity",
+        "seller_price"
+      ],
+      "difficulty_levels": [
+        "1"
+      ],
+      "tags": [
+        "anon",
+        "first_person",
+        "man",
+        "second_person",
+        "woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 240
+    },
+    "top_trading": {
+      "domains": [
+        "books",
+        "collectibles",
+        "household",
+        "instruments",
+        "sports"
+      ],
+      "types": [
+        "check_proposed",
+        "first_cycle",
+        "full_allocation",
+        "own_item"
+      ],
+      "difficulty_levels": [
+        "1",
+        "2"
+      ],
+      "tags": [
+        "",
+        "ai_assistant",
+        "second_person"
+      ],
+      "has_filler": true,
+      "template_question_count": 45
+    },
+    "transitivity": {
+      "domains": [
+        "activities",
+        "countries",
+        "fruits",
+        "jobs",
+        "people"
+      ],
+      "types": [
+        "least_preferred",
+        "most_preferred"
+      ],
+      "difficulty_levels": [
+        "1"
+      ],
+      "tags": [
+        "ai_assistant",
+        "second_person",
+        "third_person;man",
+        "third_person;woman"
+      ],
+      "has_filler": true,
+      "template_question_count": 40
+    }
+  }
+}

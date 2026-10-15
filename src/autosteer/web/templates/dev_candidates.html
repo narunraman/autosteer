@@ -1,0 +1,407 @@
+{% extends "base.html" %}
+{% import "_md_pills.html" as pills with context %}
+{% block content %}
+<section class="dev-head"><h1>{{ i.display_name }}</h1></section>
+{% include "_dev_messages.html" %}
+{% with code_extra=("The candidates below are from earlier work and are kept." if records else "") %}{% include "_code_notice.html" %}{% endwith %}
+{% with what="generation and the solve check" %}{% include "_dev_noprovider.html" %}{% endwith %}
+
+{% if not i.code %}
+{% if summary %}
+<form class="dev-block dev-action cand-step" id="generate-form" method="post" action="/developer/e/{{ i.element }}/candidates/generate">
+  <input type="hidden" name="element_name" value="{{ i.element }}">
+  <input type="hidden" name="background" value="1">
+  <h2>1. Generate</h2>
+  <fieldset class="dev-domains">
+    <legend>Domains</legend>
+    {% for domain in candidate_domains %}
+    <label class="dev-domain"><input type="checkbox" name="domains" value="{{ domain.name }}" {% if domain.name in selected_domains %}checked{% endif %}> {{ domain.name|replace('_', ' ') }}</label>
+    {% endfor %}
+  </fieldset>
+  <div class="dev-action-row">
+    {% with label="Model", choices=gen_models %}{% include "_model_select.html" %}{% endwith %}
+    <button id="generate-button" type="submit" {% if dev.no_provider or not targets or job_running %}disabled{% endif %}>Generate <span id="target-count">{{ targets|length }}</span> candidate<span id="target-plural">{{ '' if targets|length == 1 else 's' }}</span></button>
+  </div>
+  {% set gj = gen_job %}
+  <div class="gen-progress" id="gen-progress"{% if not gj %} hidden{% endif %} data-url="/developer/e/{{ i.element }}/candidates/progress" data-running="{{ 1 if gj and gj.running else 0 }}" data-kind="generate">
+    <div class="gen-progress-head"><span class="gp-spin" aria-hidden="true"></span><span class="gp-text" id="gen-progress-text">{% if gj %}{% if gj.running %}Generating candidates: {{ gj.done }} of {{ gj.total }}{% else %}Generated {{ gj.done - gj.failed }} of {{ gj.total }}{% endif %}{% if gj.failed %} · {{ gj.failed }} failed{% endif %}{% endif %}</span>
+      <span class="hint gp-note" id="gen-progress-note">{% if gj and gj.running %}This keeps going if you leave the page.{% endif %}</span></div>
+    <progress class="gp-bar" id="gen-progress-bar" max="{{ gj.total if gj else 1 }}" value="{{ gj.done if gj else 0 }}"></progress>
+    <ul class="gen-errors gp-errors" id="gen-errors">{% for e in (gj.errors if gj else []) %}<li>{{ e }}</li>{% endfor %}</ul>
+  </div>
+</form>
+{% else %}
+<div class="dev-empty"><p>No example seeds yet.</p><a class="button button-sm" href="/developer/e/{{ i.element }}/seeds">Go to Example seeds →</a></div>
+{% endif %}
+{% endif %}
+
+{% if records %}
+<form class="dev-block dev-action cand-step" id="check-form" method="post" action="/developer/e/{{ i.element }}/candidates/check">
+  <input type="hidden" name="element_name" value="{{ i.element }}">
+  <input type="hidden" name="background" value="1">
+  <h2>2. Solve check</h2>
+  <p class="hint">{{ validation_summary.passed }} solved, {{ validation_summary.failed }} missed, {{ validation_summary.errors }} filler errors, {{ validation_summary.not_run }} not checked.</p>
+  {% if not has_filler %}<p class="dev-oneline">No filler is registered as <code>{{ i.element }}</code>, so the solve check cannot fill the candidates yet.</p>{% endif %}
+  <div class="dev-action-row">
+    {% with label="Model", choices=solve_models %}{% include "_model_select.html" %}{% endwith %}
+    <label>Runs <input name="runs_per_seed" type="number" min="1" max="10" step="1" value="3" class="dev-num-input"></label>
+    <button type="submit" class="secondary" {% if dev.no_provider or not has_filler or validation_summary.checkable == 0 or job_running %}disabled{% endif %} id="check-button">Run solve check</button>
+  </div>
+  {% set cj = check_job %}
+  <div class="gen-progress" id="check-progress"{% if not cj %} hidden{% endif %} data-url="/developer/e/{{ i.element }}/candidates/progress?kind=check" data-running="{{ 1 if cj and cj.running else 0 }}" data-kind="check">
+    <div class="gen-progress-head"><span class="gp-spin" aria-hidden="true"></span><span class="gp-text">{% if cj %}{% if cj.running %}Checking candidates{% if cj.total %}: {{ cj.done }} of {{ cj.total }}{% else %}…{% endif %}{% else %}Checked {{ cj.done }}: {{ cj.passed }} solved, {{ cj.missed }} missed{% if cj.failed %}, {{ cj.failed }} filler errors{% endif %}{% endif %}{% endif %}</span><span class="gp-run">{% if cj and cj.running and cj.runs %}run {{ cj.run }} of {{ cj.runs }}{% endif %}</span>
+      <span class="hint gp-note">{% if cj and cj.running %}This keeps going if you leave the page.{% endif %}</span></div>
+    <progress class="gp-bar" max="{{ cj.total if cj and cj.total else 1 }}"{% if cj and cj.total %} value="{{ cj.done }}"{% endif %}></progress>
+    <ul class="gen-errors gp-errors">{% for e in (cj.errors if cj else []) %}<li>{{ e }}</li>{% endfor %}</ul>
+  </div>
+</form>
+
+<section class="dev-cands">
+  <h2 class="cand-step-head">3. Review</h2>
+  <div class="cand-bar">
+  <div class="dev-tabs" role="tablist" aria-label="Show candidates">
+    {% for f in filters %}<button type="button" class="dev-tab{% if f.key == default_filter %} active{% endif %}" data-filter="{{ f.key }}" aria-pressed="{{ 'true' if f.key == default_filter else 'false' }}">{{ f.label }} <span>{{ f.count }}</span></button>{% endfor %}
+  </div>
+  <button type="button" class="button-sm" id="focus-open">Review one at a time</button>
+  </div>
+  <div class="cand-select">
+    <label class="cand-all"><input type="checkbox" id="cand-all"> <span id="cand-all-label">Select all shown</span></label>
+    <span class="cand-bulk" id="cand-bulk" hidden>
+      <button type="button" class="button-sm" data-bulk="accepted">Accept</button>
+      <button type="button" class="secondary button-sm" data-bulk="rejected">Reject</button>
+      <button type="button" class="secondary button-sm" data-bulk="draft">Back to needs review</button>
+      <button type="button" class="secondary button-sm dev-danger" data-bulk="delete">Delete</button>
+    </span>
+  </div>
+  <ol class="dev-cand-list no-math" id="cand-list">
+    {% for record in records %}{% set rid = record.question_id|int ~ '.' ~ record.sub_id|int %}{% set key = record.question_id|int ~ '-' ~ record.sub_id|int %}
+    {% set st = record.review.status %}
+    {% set checks = record.review.checks if record.review.checks is defined else {} %}
+    {% set solve_check = checks.solve_check if checks.solve_check is defined else checks.ai_validation if checks.ai_validation is defined else none %}
+    {% set structure = checks.structure if checks.structure is defined else none %}
+    <li id="c-{{ key }}" data-groups="{{ record.groups|join(' ') }}" data-status="{{ st }}" data-qid="{{ record.question_id|int }}" data-sid="{{ record.sub_id|int }}">
+      <input type="checkbox" class="cand-pick" aria-label="Select candidate {{ rid }}">
+      <details>
+        <summary>
+          <span class="record-id">{{ rid }}</span>
+          <span class="dev-badge dev-badge-{{ st }}" title="Your review">{{ pills.person }}<span class="bt">{{ {'draft': 'needs review', 'needs_edit': 'needs edit'}.get(st, st) }}</span></span>
+          <span class="dev-badge dev-solve-{{ record.validation_status }}" title="Solve check (a model)">{{ pills.spark }}<span class="bt">{{ record.validation_label }}</span></span>
+          <span class="dev-cand-text">{{ record.question_text|truncate(160) }}</span>
+          <span class="dev-cand-meta">{{ record.metadata.domain|replace('_', ' ') }}</span>
+          {{ pills.md(record.metadata.domain, record.metadata.type, record.metadata.tags, level_scale(i.element, [record.metadata.difficulty_level]).get(record.metadata.difficulty_level|int, record.metadata.difficulty_level), record.metadata.difficulty_level) }}
+        </summary>
+        <div class="dev-cand-body">
+          <div class="cand-main">
+          <div class="cand-q">
+            <p class="cand-q-label">Candidate</p>
+            <p class="question">{{ record.question_text|highlight_placeholders }}</p>
+            {% if shows_options and record.options and not (record.options|length == 1 and not record.options[0].option_text) %}
+            <ul class="options-abc">{% for option in record.options %}<li class="{% if option.correct_answer %}correct{% endif %}"><strong>{{ "ABCDEFGH"[loop.index0] }}.</strong> {{ option.option_text }}</li>{% endfor %}</ul>
+            {% endif %}
+          </div>
+          {% if structure and not structure.passed %}
+          <div class="dev-problem"><strong>Structure problem</strong><ul>{% for e in structure.errors or [] %}<li>{{ e }}</li>{% endfor %}{% for w in structure.warnings or [] %}<li>{{ w }}</li>{% endfor %}</ul></div>
+          {% endif %}
+          {% if solve_check %}
+          <details class="dev-solver">
+            <summary>Solve check: {{ record.validation_label }}, {{ solve_check.passed_runs }} of {{ solve_check.total_runs }} run{{ '' if solve_check.total_runs == 1 else 's' }} matched ({{ solve_check.model }})</summary>
+            <ol class="dev-runs">
+              {% for run in solve_check.runs %}
+              <li class="dev-run dev-run-{{ run.status }}">
+                <strong>Run {{ run.run }}</strong>{% if run.error is defined %} <span>{{ run.error }}</span>{% endif %}
+                {% if run.question is defined %}
+                <p>{{ run.question }}</p>
+                {% if run.options is defined %}
+                {% set correct_letter = run.answer_letter if run.answer_letter is defined else run.expected[0] if run.expected is defined and run.expected else none %}
+                <ul class="options-abc">
+                  {% for option in run.options %}{% set letter = "ABCDEFGH"[loop.index0] %}
+                  <li class="{% if correct_letter == letter %}correct{% endif %}"><strong>{{ letter }}.</strong> {{ option }}{% if correct_letter == letter %} <span class="dev-tag">answer</span>{% endif %}{% if run.predicted is defined and run.predicted and run.predicted[0] == letter %} <span class="dev-tag dev-tag-{{ 'ok' if correct_letter == letter else 'bad' }}">solver</span>{% endif %}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+                {% endif %}
+                {% if run.solver_explanation is defined and run.solver_explanation %}
+                <div class="solver-explanation"><script type="application/json" class="model-response-json">{{ run.solver_explanation|tojson }}</script><div class="model-response-markdown"></div></div>
+                {% endif %}
+              </li>
+              {% endfor %}
+            </ol>
+          </details>
+          {% endif %}
+          <div class="dev-cand-actions">
+            <form method="post" action="/developer/e/{{ i.element }}/candidates/review">
+              <input type="hidden" name="element_name" value="{{ i.element }}">
+              <input type="hidden" name="question_id" value="{{ record.question_id|int }}">
+              <input type="hidden" name="sub_id" value="{{ record.sub_id|int }}">
+              <input type="hidden" name="notes" value="{{ record.review.notes or '' }}">
+              <button type="submit" name="status" value="{{ 'draft' if st == 'accepted' else 'accepted' }}" class="button-sm cand-st{% if st == 'accepted' %} on{% endif %}" aria-pressed="{{ 'true' if st == 'accepted' else 'false' }}" title="{{ 'Accepted: press again to undo' if st == 'accepted' else 'Accept' }}">{{ 'Accepted ✓' if st == 'accepted' else 'Accept' }}</button>
+              <button type="button" class="secondary button-sm" data-toggle="edit-{{ key }}">Edit</button>
+              <button type="submit" name="status" value="{{ 'draft' if st == 'rejected' else 'rejected' }}" class="secondary button-sm cand-st{% if st == 'rejected' %} on{% endif %}" aria-pressed="{{ 'true' if st == 'rejected' else 'false' }}" title="{{ 'Rejected: press again to undo' if st == 'rejected' else 'Reject' }}">{{ 'Rejected ✕' if st == 'rejected' else 'Reject' }}</button>
+            </form>
+            {% if not solve_check and has_filler %}
+            <form method="post" action="/developer/e/{{ i.element }}/candidates/check-one">
+              <input type="hidden" name="element_name" value="{{ i.element }}">
+              <input type="hidden" name="question_id" value="{{ record.question_id|int }}">
+              <input type="hidden" name="sub_id" value="{{ record.sub_id|int }}">
+              <button type="submit" class="secondary button-sm"{% if dev.no_provider %} disabled{% endif %}>Solve check this one</button>
+            </form>
+            {% endif %}
+            <form method="post" action="/developer/e/{{ i.element }}/candidates/delete" data-confirm="Delete candidate {{ rid }} for good?" class="dev-push cand-del">
+              <input type="hidden" name="element_name" value="{{ i.element }}">
+              <input type="hidden" name="question_id" value="{{ record.question_id|int }}">
+              <input type="hidden" name="sub_id" value="{{ record.sub_id|int }}">
+              <button type="submit" class="secondary button-sm dev-danger">Delete</button>
+            </form>
+          </div>
+          <form class="dev-edit" id="edit-{{ key }}" method="post" action="/developer/e/{{ i.element }}/candidates/edit" hidden>
+            <input type="hidden" name="element_name" value="{{ i.element }}">
+            <input type="hidden" name="question_id" value="{{ record.question_id|int }}">
+            <input type="hidden" name="sub_id" value="{{ record.sub_id|int }}">
+            <label>Question <textarea name="question_text" rows="4">{{ record.question_text }}</textarea></label>
+            {% if shows_options and record.options and not (record.options|length == 1 and not record.options[0].option_text) %}
+            <label>Options, one per line <textarea name="options_text" rows="4">{% for option in record.options %}{{ option.option_text }}{% if not loop.last %}
+{% endif %}{% endfor %}</textarea></label>
+            <label>Correct answer <select name="correct_answer">{% for option in record.options %}<option value="{{ loop.index0 }}" {% if option.correct_answer %}selected{% endif %}>{{ "ABCDEFGH"[loop.index0] }}. {{ option.option_text }}</option>{% endfor %}</select></label>
+            {% endif %}
+            <button type="submit" class="button-sm">Save edit</button>
+          </form>
+          <form class="dev-note" method="post" action="/developer/e/{{ i.element }}/candidates/review">
+            <input type="hidden" name="element_name" value="{{ i.element }}">
+            <input type="hidden" name="question_id" value="{{ record.question_id|int }}">
+            <input type="hidden" name="sub_id" value="{{ record.sub_id|int }}">
+            <input type="hidden" name="status" value="{{ st }}">
+            <label>Note <input name="notes" value="{{ record.review.notes or '' }}" placeholder="Optional, saved with the review state"></label>
+            <button type="submit" class="secondary button-sm">Save note</button>
+          </form>
+          </div>
+          <aside class="cand-side">
+            <section>
+              <h4>What it was asked for</h4>
+              {% if record.asked %}<p class="cand-instr">{{ record.asked }}</p>{% else %}<p class="muted">The instructions were not saved for this candidate.</p>{% endif %}
+            </section>
+            {% if record.seed_example %}<section><h4>Example seed it follows</h4><p class="cand-seed">{{ record.seed_example|highlight_placeholders }}</p></section>{% endif %}
+          </aside>
+        </div>
+      </details>
+    </li>
+    {% endfor %}
+  </ol>
+  <p class="hint" id="cand-empty" hidden>No candidates in this group.</p>
+</section>
+
+<div class="focus" id="focus" role="dialog" aria-modal="true" aria-label="Review candidates one at a time" hidden>
+  <div class="focus-bar">
+    <div class="focus-pos"><strong id="focus-n"></strong> <span id="focus-of"></span><span class="focus-prog"><i id="focus-prog"></i></span></div>
+    <div class="focus-acts">
+      <button type="button" class="secondary button-sm" data-go="-1" title="Previous (←)">← Prev</button>
+      <button type="button" class="secondary button-sm" data-go="1" title="Next (→)">Next →</button>
+      <span class="focus-sep"></span>
+      <button type="button" class="button-sm" data-act="accepted" title="Accept (A)">Accept <kbd>A</kbd></button>
+      <button type="button" class="secondary button-sm" data-act="edit" title="Edit (E)">Edit <kbd>E</kbd></button>
+      <button type="button" class="secondary button-sm" data-act="rejected" title="Reject (R)">Reject <kbd>R</kbd></button>
+      <button type="button" class="secondary button-sm dev-danger" data-act="delete" title="Delete (D)">Delete <kbd>D</kbd></button>
+      <button type="button" class="focus-close" aria-label="Close (Esc)" title="Close (Esc)">×</button>
+    </div>
+  </div>
+  <div class="focus-body" id="focus-body"></div>
+  <p class="focus-done" id="focus-done" hidden>That was the last one in this group. <button type="button" class="linkbtn" id="focus-finish">Back to the list</button></p>
+</div>
+<dialog class="dev-dialog" id="cand-dialog" aria-labelledby="cand-dialog-title">
+  <p class="dev-dialog-title" id="cand-dialog-title">Delete?</p>
+  <p id="cand-dialog-text"></p>
+  <div class="dev-dialog-actions">
+    <button type="button" class="secondary" id="cand-dialog-no">Keep</button>
+    <button type="button" class="dev-danger-solid" id="cand-dialog-yes">Delete</button>
+  </div>
+</dialog>
+{% elif summary %}
+<div class="dev-empty"><p>No candidates yet.</p></div>
+{% endif %}
+{% endblock %}
+{% block scripts %}
+<script>
+(() => {
+  const form = document.getElementById('generate-form');
+  if (form) {
+    const pairs = {{ summary.type_difficulty_pairs|length if summary else 0 }};
+    const update = () => {
+      const n = form.querySelectorAll('input[name="domains"]:checked').length * pairs;
+      document.getElementById('target-count').textContent = n;
+      document.getElementById('target-plural').textContent = n === 1 ? '' : 's';
+    };
+    form.addEventListener('change', update);
+    form.addEventListener('submit', () => { const b = document.getElementById('generate-button'); b.disabled = true; b.textContent = 'Starting…'; });
+    update();
+  }
+  /* generation and the solve check run on the server; follow them here, and reload to show the results when done */
+  const esc = s => String(s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+  const say = j => j.kind === 'check'
+    ? (j.running ? (j.total ? `Checking candidates: ${j.done} of ${j.total}` : 'Checking candidates…')
+                 : `Checked ${j.done}: ${j.passed} solved, ${j.missed} missed` + (j.failed ? `, ${j.failed} filler errors` : ''))
+    : (j.running ? `Generating candidates: ${j.done} of ${j.total}` : `Generated ${j.done - j.failed} of ${j.total}`) + (j.failed ? ` · ${j.failed} failed` : '');
+  document.querySelectorAll('.gen-progress[data-running="1"]').forEach(prog => {
+    const text = prog.querySelector('.gp-text'), bar = prog.querySelector('.gp-bar'), errs = prog.querySelector('.gp-errors');
+    const poll = () => fetch(prog.dataset.url).then(r => r.json()).then(j => {
+      j.kind = prog.dataset.kind;
+      if (j.total) { bar.max = j.total; bar.value = j.done || 0; } else bar.removeAttribute('value');
+      text.textContent = say(j);
+      const runEl = prog.querySelector('.gp-run');
+      if (runEl) runEl.textContent = j.running && j.runs ? `run ${j.run} of ${j.runs}` : '';
+      if (!j.running) prog.dataset.running = '0';
+      errs.innerHTML = (j.errors || []).map(e => `<li>${esc(e)}</li>`).join('');
+      if (j.running) setTimeout(poll, 2000); else location.reload();
+    }).catch(() => setTimeout(poll, 5000));
+    setTimeout(poll, 2000);
+  });
+  const checkForm = document.getElementById('check-form');
+  if (checkForm) checkForm.addEventListener('submit', () => { const b = document.getElementById('check-button'); b.disabled = true; b.textContent = 'Starting…'; });
+  {
+  }
+  const list = document.getElementById('cand-list');
+  if (list) {
+    const tabs = document.querySelectorAll('.dev-tab');
+    const show = key => {
+      let n = 0;
+      tabs.forEach(t => { const on = t.dataset.filter === key; t.classList.toggle('active', on); t.setAttribute('aria-pressed', on); });
+      list.querySelectorAll(':scope > li').forEach(li => { const ok = li.dataset.groups.split(' ').includes(key); li.hidden = !ok; if (ok) n++; });
+      document.getElementById('cand-empty').hidden = n > 0;
+    };
+    tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.filter)));
+    const target = location.hash && document.querySelector(location.hash);
+    show(target && target.closest('#cand-list') ? 'all' : {{ default_filter|tojson }});
+    if (target && target.closest('#cand-list')) { target.querySelector('details').open = true; target.scrollIntoView({ block: 'center' }); }
+  }
+  /* one at a time: the current group's candidates, each shown whole with what it was asked for; A / R / E and arrows */
+  const focus = document.getElementById('focus');
+  if (list && focus) {
+    const body = document.getElementById('focus-body');
+    const label = { accepted: 'accepted', rejected: 'rejected', draft: 'needs review', needs_edit: 'needs edit' };
+    let queue = [], at = 0, home = null;
+    const putBack = () => { if (home) { home.li.querySelector('details').appendChild(home.node); home = null; } };
+    const show = i => {
+      putBack();
+      at = Math.max(0, Math.min(i, queue.length - 1));
+      const li = queue[at], node = li.querySelector('.dev-cand-body');
+      home = { li, node }; body.innerHTML = '';
+      const head = document.createElement('div'); head.className = 'focus-head';
+      head.innerHTML = li.querySelector('summary').innerHTML; head.querySelector('.dev-cand-text')?.remove(); head.querySelector('.dev-cand-meta')?.remove();
+      body.append(head, node);
+      document.getElementById('focus-n').textContent = `${at + 1} of ${queue.length}`;
+      document.getElementById('focus-prog').style.width = `${(100 * (at + 1) / queue.length).toFixed(1)}%`;
+      document.getElementById('focus-done').hidden = true; body.scrollTop = 0;
+      markFocus();
+    };
+    const open = () => {
+      queue = [...list.querySelectorAll(':scope > li')].filter(li => !li.hidden);
+      if (!queue.length) return;
+      document.getElementById('focus-of').textContent = 'in ' + (document.querySelector('.dev-tab.active')?.firstChild.textContent.trim() || 'this group');
+      focus.hidden = false; document.body.classList.add('focus-on'); show(0);
+    };
+    const close = () => { putBack(); focus.hidden = true; document.body.classList.remove('focus-on'); };
+    const decide = async status => {
+      const form = home && home.node.querySelector('form[action$="/candidates/review"]');
+      if (!form) return;
+      if (home.li.dataset.status === status) status = 'draft';  // pressing the current decision again undoes it
+      const data = new FormData(form); data.set('status', status);
+      const note = home.node.querySelector('.dev-note input[name="notes"]'); if (note) data.set('notes', note.value);
+      const r = await fetch(form.action, { method: 'POST', body: data, redirect: 'manual' });
+      if (!(r.ok || r.type === 'opaqueredirect')) { alert('Could not save: ' + r.status); return; }
+      const li = home.li, badge = li.querySelector('summary .dev-badge');
+      badge.className = 'dev-badge dev-badge-' + status; badge.querySelector('.bt').textContent = label[status];
+      li.dataset.groups = li.dataset.groups.split(' ').filter(g => !['open', 'accepted', 'rejected'].includes(g)).concat(status === 'draft' ? 'open' : status).join(' ');
+      li.dataset.status = status; markFocus();
+      if (status === 'draft') return;  // undone: stay on it
+      if (at < queue.length - 1) show(at + 1); else document.getElementById('focus-done').hidden = false;
+    };
+    const markFocus = () => {
+      const s = home && home.li.dataset.status;
+      focus.querySelectorAll('[data-act="accepted"], [data-act="rejected"]').forEach(b => {
+        const on = b.dataset.act === s; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
+        b.title = on ? 'Press again to take it back to needs review' : (b.dataset.act === 'accepted' ? 'Accept (A)' : 'Reject (R)');
+      });
+    };
+    const removeCurrent = async () => {
+      const f = home && home.node.querySelector('form.cand-del');
+      if (!f || !(await ask(f.dataset.confirm))) return;
+      const r = await fetch(f.action, { method: 'POST', body: new FormData(f), redirect: 'manual' });
+      if (!(r.ok || r.type === 'opaqueredirect')) return;
+      const li = home.li; home = null; li.remove(); queue.splice(at, 1);
+      if (!queue.length) { close(); location.reload(); return; }
+      show(Math.min(at, queue.length - 1));
+    };
+    document.getElementById('focus-open').addEventListener('click', open);
+    document.getElementById('focus-finish').addEventListener('click', () => { close(); location.reload(); });
+    focus.querySelector('.focus-close').addEventListener('click', close);
+    focus.addEventListener('click', e => {
+      const g = e.target.closest('[data-go]'); if (g) show(at + Number(g.dataset.go));
+      const a = e.target.closest('[data-act]'); if (!a) return;
+      if (a.dataset.act === 'edit') { const f = home.node.querySelector('form.dev-edit'); if (f) { f.hidden = false; f.querySelector('textarea')?.focus(); } }
+      else if (a.dataset.act === 'delete') removeCurrent();
+      else decide(a.dataset.act);
+    });
+    document.addEventListener('keydown', e => {
+      if (focus.hidden || e.target.matches('input, textarea, select')) return;
+      const k = e.key.toLowerCase();
+      if (k === 'escape') close(); else if (k === 'arrowright' || k === 'j') show(at + 1); else if (k === 'arrowleft' || k === 'k') show(at - 1);
+      else if (k === 'a') decide('accepted'); else if (k === 'r') decide('rejected'); else if (k === 'd') removeCurrent();
+      else if (k === 'e') { e.preventDefault(); focus.querySelector('[data-act="edit"]').click(); }
+    });
+  }
+  /* the house dialog for deleting */
+  const dlg = document.getElementById('cand-dialog');
+  function ask(text) {
+    if (!dlg) return Promise.resolve(confirm(text));
+    document.getElementById('cand-dialog-text').textContent = text;
+    dlg.showModal();
+    return new Promise(res => {
+      const done = v => { dlg.close(); yes.removeEventListener('click', y); no.removeEventListener('click', n); res(v); };
+      const yes = document.getElementById('cand-dialog-yes'), no = document.getElementById('cand-dialog-no');
+      const y = () => done(true), n = () => done(false);
+      yes.addEventListener('click', y); no.addEventListener('click', n);
+      dlg.addEventListener('cancel', () => done(false), { once: true });
+    });
+  }
+  document.addEventListener('submit', async e => {
+    const f = e.target.closest('form.cand-del'); if (!f || f.dataset.ok) return;
+    e.preventDefault();
+    if (await ask(f.dataset.confirm)) { f.dataset.ok = '1'; f.submit(); }
+  });
+  /* selection: one or all shown, then accept / reject / back to needs review / delete together */
+  if (list) {
+    const all = document.getElementById('cand-all'), bulk = document.getElementById('cand-bulk'), lbl = document.getElementById('cand-all-label');
+    const shownRows = () => [...list.querySelectorAll(':scope > li')].filter(li => !li.hidden);
+    const picked = () => shownRows().filter(li => li.querySelector('.cand-pick').checked);
+    const sync = () => {
+      const n = picked().length, m = shownRows().length;
+      bulk.hidden = !n; all.checked = n > 0 && n === m; all.indeterminate = n > 0 && n < m;
+      lbl.textContent = n ? `${n} selected` : 'Select all shown';
+    };
+    list.addEventListener('change', e => { if (e.target.matches('.cand-pick')) sync(); });
+    all.addEventListener('change', () => { shownRows().forEach(li => { li.querySelector('.cand-pick').checked = all.checked; }); sync(); });
+    document.querySelectorAll('.dev-tab').forEach(t => t.addEventListener('click', () => {
+      list.querySelectorAll('.cand-pick').forEach(c => { c.checked = false; }); sync();
+    }));
+    bulk.addEventListener('click', async e => {
+      const b = e.target.closest('[data-bulk]'); if (!b) return;
+      const rows = picked(); if (!rows.length) return;
+      if (b.dataset.bulk === 'delete' && !(await ask(`Delete ${rows.length} candidate${rows.length === 1 ? '' : 's'} for good?`))) return;
+      const data = new FormData();
+      data.set('element_name', {{ i.element|tojson }}); data.set('action', b.dataset.bulk);
+      rows.forEach(li => data.append('ids', `${li.dataset.qid}.${li.dataset.sid}`));
+      bulk.querySelectorAll('button').forEach(x => { x.disabled = true; });
+      const r = await fetch({{ ('/developer/e/' ~ i.element ~ '/candidates/bulk')|tojson }}, { method: 'POST', body: data, redirect: 'manual' });
+      if (r.ok || r.type === 'opaqueredirect') location.reload(); else { alert('Could not apply: ' + r.status); bulk.querySelectorAll('button').forEach(x => { x.disabled = false; }); }
+    });
+    sync();
+  }
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-toggle]'); if (!b) return;
+    const t = document.getElementById(b.dataset.toggle); if (t) t.hidden = !t.hidden;
+  });
+  if (window.marked) document.querySelectorAll('.model-response-json').forEach(src => {
+    const out = src.parentElement.querySelector('.model-response-markdown');
+    try { out.innerHTML = marked.parse(JSON.parse(src.textContent || '""') || ''); } catch (err) { out.textContent = src.textContent; }
+  });
+})();
+</script>
+{% endblock %}

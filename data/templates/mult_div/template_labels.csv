@@ -1,0 +1,601 @@
+template_id,template,status,op,flags,drop_reason,tag,domain,money_a,money_b,release_rows,release_example_numbers
+mu0000,"A bag of potatoes weighs {a} pounds. If you buy {b} bags, how many pounds of potatoes will you have?",keep,a*b,B,,multiply,numbers,False,False,45,74 5
+mu0001,A baker used {a} grams of flour to make {b} loaves of bread. How many grams of flour were used per loaf?,keep,a/b,B,,divide,numbers,False,False,45,74 5
+mu0002,"A bakery sells delicious cupcakes at {a} each. If you buy {b} cupcakes, how much will you have to pay?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0003,"A bakery sells loaves of bread for {a} each. If a grocer buys {b} loaves to sell in his store, what is the total cost?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0004,A book has {a} pages and a student plans to finish it in {b} days. How many pages does she need to read per day?,keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0005,A bookseller managed to sell all of his old novels and earned a total of {a}. If he sold each novel for {b} how many novels did he sell?,keep,a/b,X,,divide,money,True,True,45,"74 5,"
+mu0006,"A bookstore is selling a new hardcover book for {a}. If you decided to buy {b} books as gifts, how much would you have to spend in total?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0007,"A bottle of water has {a} liters, how much will it be if you have {b} bottles?",keep,a*b,B,,multiply,numbers,False,False,45,74 5
+mu0008,"A boutique charges {a} to tailor one dress. If a client ordered {b} dresses, how much would the total tailoring costs be?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0009,"A box contains {a} pencils. If {b} boxes are packed, how many pencils are there in total?",keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0010,"A car can travel {a} miles on a full tank. If the car needs to make {b} equally long trips, how long can each trip be?",keep,a/b,B,,divide,numbers,False,False,45,74 5
+mu0011,A car travelled {a} miles using {b} gallons of fuel. What is its miles per gallon?,keep,a/b,,,divide,numbers,False,False,45,74 5
+mu0012,A car travels at a speed of {a} km/h and completes a journey in {b} hours. How far did the car travel?,keep,a*b,,,divide,numbers,False,False,45,74 5
+mu0013,A car travels at a speed of {a} miles per hour. How long will it take to travel {b} miles?,keep,b/a,,,divide,numbers,False,False,45,74 5
+mu0014,"A car travels {a} kilometers per hour. If it maintains this speed for {b} hours, how far will it have traveled?",keep,a*b,,,multiply,numbers,False,False,45,74 5
+mu0015,"A carpenter charges {a} dollars for a piece of furniture. If you want to order {b} pieces, how much would you pay in total?",keep,a*b,B,,multiply,numbers,False,False,45,74 5
+mu0016,A charity has {a} dollars to evenly distribute among {b} beneficiaries. How much will each beneficiary receive?,keep,a/b,B,,divide,numbers,False,False,45,74 5
+mu0017,A charity organization received a donation of {a}. They want to evenly distribute this donation among {b} underprivileged families. How much would each family receive?,keep,a/b,B,,divide,money,True,False,45,74 5
+mu0018,"A charity you are donating to is requesting {a} per month. If you wish to donate for {b} months, what would be the total amount of your donation?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0019,"A child comes to you with his homework, struggling with this number problem. He needs your help. What is {a} divided by {b}?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0020,A classroom has {a} students and {b} desks. How many students will sit at each desk?,keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0021,A clothing store has {a} shirts they want to put on {b} racks. How many shirts should they put on each rack?,keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0022,A company has {a} dollars and it wants to divide it equally among its {b} employees. How much money will each employee get?,keep,a/b,B,,divide,numbers,False,False,45,74 5
+mu0023,"A company manufactures {a} units of a product each day, and it operates {b} days in a month. What is the total number of products manufactured in a month?",keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0024,A company paid {a} each for two advertisement spots on a popular channel. By how much did their total marketing budget for the spots increase if you multiply the cost by {b}?,drop,,,garbled ('two spots' then multiply by b),multiply,money,True,True,45,74 5
+mu0025,"A company plans to run a promotion on its website and sell its premium product for only {a}. If the company sold {b} of these products during the promotion, how much revenue would they generate?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0026,A company produces {a} products per day and each of the products sells for {b} dollars. How much daily revenue can be expected?,keep,a*b,A,,multiply,numbers,False,False,45,74 5
+mu0027,A company spent {a} on advertising and earned {b} in subsequent sales. What is the ratio of their sales to their advertising spend?,keep,b/a,,,divide,money,True,True,45,74 5
+mu0028,A factory produced {a} widgets in {b} hours. What is the production rate of widgets per hour?,keep,a/b,A,,divide,numbers,False,False,45,74 5
+mu0029,"A factory produces {a} bags of flour per day, each bag weighing {b} pounds. What is the total weight of the flour produced in a day?",keep,a*b,A,,multiply,numbers,False,False,45,74 5
+mu0030,"A factory produces {a} cars in a month. If these cars are to be exported to {b} countries, how many cars will each country get?",keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0031,"A factory produces {a} toys every hour. If it works for {b} hours in a day, how many toys does it produce in a day?",keep,a*b,A,,multiply,numbers,False,False,45,74 5
+mu0032,A factory produces {a} widgets in {b} hours. What is the production rate per hour?,keep,a/b,A,,divide,numbers,False,False,45,74 5
+mu0033,A farm has {a} cows and each cow gives {b} liters of milk. How much milk do they produce in total?,keep,a*b,A,,multiply,numbers,False,False,45,74 5
+mu0034,A farmer harvested {a} bushels of corn from his {b} acre farm. How many bushels per acre did he yield?,keep,a/b,,,divide,numbers,False,False,45,74 5
+mu0035,A farmer harvested {a} kilograms of potatoes. He is selling them in {b} sacks. How many kilograms of potatoes will there be in each sack?,keep,a/b,B,,divide,numbers,False,False,45,74 5
+mu0036,"A farmer has {a} acres of land. He grows corn in all of his lands. If each acre yields {b} bushels, how many bushels of corn does he have in total?",keep,a*b,,,multiply,numbers,False,False,45,74 5
+mu0037,A farmer has {a} apple trees. Each tree yields {b} apples. How many apples does the farmer get in total?,keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0038,A field can grow {a} bushels of wheat per acre. How many bushels would {b} acres yield?,keep,a*b,,,multiply,numbers,False,False,45,74 5
+mu0039,"A friend challenges your mathematical ability. She asks you, what do you get when you multiply {a} with {b}?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0040,A fundraiser managed to collect {a} for a local charity. The charity then invested {b} in a new community center. What percentage of the fundraiser's proceeds was spent on the community center?,drop,,,asks a percentage,divide,money,True,True,45,74 5
+mu0041,A grocery store sells a pound of tomatoes for {a} and a pound of cucumbers for {b}. How much more does a pound of tomatoes cost than a pound of cucumbers?,drop,,,asks a difference,divide,money,True,True,45,74 5
+mu0042,A hiker walked {a} kilometers in {b} days. What is his average distance covered per day?,keep,a/b,,,divide,numbers,False,False,45,74 5
+mu0043,"A kid at the park asks for your help with their homework, presenting the following problem. What is the value of {a} divided by {b}?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0044,"A ladybug crawls at a speed of {a} cm per minute. If it crawls for {b} minutes without stopping, how far does it travel?",keep,a*b,,,multiply,numbers,False,False,45,74 5
+mu0045,A local farmer sells his pumpkins for {a} each. A grocery store chain decides to purchase {b} of his pumpkins for all their stores. How much will the farmer receive for this deal?,keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0046,"A local library sells used books for {a} each. If Harry wants to buy {b} books, what would be the total cost?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0047,"A marathon is {a} kilometers long. If you can run {b} kilometers per hour, how many hours would it take for you to finish?",keep,a/b,,,divide,numbers,False,False,45,74 5
+mu0048,A math competition question asks you to solve the following problem quickly. What is {a} divided by {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0049,A math teacher presents a problem during a lesson. Can you tell the quotient when you divide {a} by {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0050,"A movie theater has {a} rows of seats, with {b} seats in each row. How many seats are in the movie theater?",keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0051,A movie ticket costs {a}. You bought tickets for {b} of your friends. How much did you spend in total?,keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0052,A parent has saved up {a} for their child's college tuition. They have to divide this amount equally among the {b} years the child will be in college. How much money is allotted for each year's tuition?,keep,a/b,B,,divide,money,True,False,45,74 5
+mu0053,A piece of trivia catches your eye. It asks you: what is {a} divided by {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0054,A pizza joint sells {a} pizzas each day for {b} days. How many pizzas do they sell in total?,keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0055,A question in your math quiz is as follows: {a} * {b} equals to what?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0056,A question in your mathematics textbook asks you to calculate the product of {a} and {b}. What is the result?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0057,"A restaurant made {a} revenue in a night. To figure out labor costs, the manager decides to divide this number by the total hours worked by staff, which was {b}. How much did they make per hour?",keep,a/b,,,divide,money,True,False,45,74 5
+mu0058,"A restaurant sells burgers for {a} dollars each. If you buy {b} burgers, how much would it cost?",keep,a*b,B,,multiply,numbers,False,False,45,74 5
+mu0059,A restaurant served {a} customers with {b} servers. How many customers did each server handle?,keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0060,A riddle asks: What's the outcome when you multiply {a} with {b}?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0061,A runner finished a marathon of {a} miles in {b} minutes. What is the runner's average speed in minutes per mile?,keep,b/a,,,divide,numbers,False,False,45,74 5
+mu0062,A school canteen sells their sandwich for {a} each and they sold {b} sandwiches today. How much money did they make from selling the sandwiches?,keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0063,A school has {a} students and there are {b} classrooms. What is the average number of students in each classroom?,keep,a/b,AB,,divide,numbers,False,False,45,74 5
+mu0064,A small business made {a} in one fiscal quarter. The business had to pay {b} in taxes for the same period. How many times the taxes did the business make in profits?,drop,,,'times the taxes ... in profits': ambiguous,divide,money,True,True,45,74 5
+mu0065,"A software company sells their latest software at {a} each. If they sell {b} software, how much revenue will they generate?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0066,A storekeeper needs to divide {a} packets evenly among {b} customers. How many packets does each customer receive?,keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0067,A student buys coffee for {a} each morning. How much would the student spend on coffee in {b} days?,keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0068,A student needs help with their homework. They are stuck on this question: What is the product of {a} times {b}?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0069,"A tailor charges {a} to alter a pair of trousers. If a customer brings in {b} pairs, how much will the total cost be?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0070,"A tailor has {a} yards of fabric. If he uses {b} yards for each dress, how many dresses can he make?",keep,a/b,X,,multiply,numbers,False,False,45,74 5
+mu0071,A tank fills up at a rate of {a} gallons per minute. How many gallons would it fill in {b} minutes?,keep,a*b,,,multiply,numbers,False,False,45,74 5
+mu0072,"A taxi charges {a} per kilometer traveled. If a passenger travels {b} kilometers, how much would they have to pay?",keep,a*b,,,multiply,money,True,False,45,74 5
+mu0073,A teacher asks her pupils to perform an arithmetic operation. What is the product of {a} and {b}?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0074,"A teacher comes to you, each student needs {a} pencils for a drawing class and he has {b} students in his classes. How many pencils does he need in total?",keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0075,A toy factory produces {a} toys in an hour. How many toys does it produce in {b} hours?,keep,a*b,A,,multiply,numbers,False,False,45,74 5
+mu0076,A train travels {a} miles in {b} hours. How many miles does the train travel per hour?,keep,a/b,,,divide,numbers,False,False,45,74 5
+mu0077,"A traveler spends {a} per day during their trip. If the trip lasts for {b} days, how much money do they spend?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0078,"A tree produces {a} apples in a year. If a family eats {b} apples per week, how many weeks can they eat apples from this tree?",keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0079,Aaron and Emily went out for dinner. Emily paid {a} for the main course and Aaron paid {b} for the wine. What is the cost of the main course divided by the cost of the wine?,keep,a/b,,,divide,money,True,True,45,74 5
+mu0080,"After a profitable day at the market, you decide to split your earnings equally with your business partner. What will each of you receive when you divide {a} by {b}?",keep,a/b,,,divide,money,True,False,45,74 5
+mu0081,"After your big lottery win, you ended up with a total of {a}. If you decided to share your good fortune with your family of {b} how much would each family member receive?",keep,a/b,B,,divide,money,True,False,45,"74 5,"
+mu0082,Alan runs a small business that produces handmade candles. Each candle costs him {a} to make and he sells each candle for {b}. How much profit does he make per candle?,drop,,,asks a difference (profit),multiply,money,True,True,45,74 5
+mu0083,"Alex bought {a} worth of apples and {b} worth of oranges. If we consider the price of apples as the base, how many times more or less expensive were the oranges?",drop,,,'more or less expensive': ambiguous direction,divide,money,True,True,45,74 5
+mu0084,"Alice has just started a small business creating handcrafted jewelry. She sells each piece for {a} and during the monthly local craft fair, she manages to sell {b} of her creations. What total revenue did Alice earn during the craft fair?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0085,Aliens are contacting you. They provide you {a} and {b} and wish to know their product. What is it?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0086,An art collector is selling a painting for {a}. A group of friends want to purchase the painting together. If they split the cost evenly and each contribute {b} how many friends are required to purchase the painting?,keep,a/b,X,,divide,money,True,True,45,"74 5,"
+mu0087,An investment yields a return of {a} dollars for every dollar invested. What will be the return on an investment of {b} dollars?,keep,a*b,,,multiply,numbers,False,False,45,74 5
+mu0088,"An online test question appears, asking you to solve {a}. How much is it when divided by {b}?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0089,"Anne and Lisa have started a small bakery business. After calculating all of the expenses, the profit they made in the first month is {a}. They have decided to divide the profit equally among the {b} partners. How much will each person get?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0090,"Arlene loves to read. She found a book store where each book is sold at {a}. If she bought {b} books, how much did Arlene spend in total?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0091,"As a brain teaser, you are asked: What's the result of {a} divided by {b}?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0092,"As a business owner, you're considering buying a bulk supply of an item for resale. The total cost of the items is given, and you would like to know the cost of individual items. How much is one item if {a} is divided by {b}?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0093,"As a teacher, you need to quickly figure out the total number of items in your classroom. You multiply the number of rows, {a} by the number of columns, {b}.",keep,a*b,AB,,multiply,numbers,False,False,45,"74, 5"
+mu0094,"At a fundraising event, each participant raises {a} dollars, and there are a total of {b} participants. What is the total amount raised?",keep,a*b,B,,multiply,numbers,False,False,45,74 5
+mu0095,"At a party, each guest is given {a} balloons. If there are {b} guests, how many balloons were given out in total?",keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0096,"At a party, playfully you're asked to solve a math problem to win a game: What's the product of {a} and {b}?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0097,"At a science fair, a question arises: If we divide {a} by {b} what would be the outcome?",keep,a/b,E,,divide,numbers,False,False,45,"74 5,"
+mu0098,"At the end of the fiscal year, a company distributed a bonus of {a} among its {b} employees. How much bonus will each employee receive?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0099,Bill wants to sell concert tickets for {a} apiece in order to generate {b} dollars in revenue for his venue. How many tickets does he need to sell?,keep,b/a,X,,divide,money,True,False,45,74 5
+mu0100,Bob went to a tech shop where he found a wireless speaker costing {a}. He desired to buy {b} speakers. What will be Bob's total expenditure?,keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0101,"Brenda is planning to buy desk chairs for her new office. Each chair is priced at {a}. If she is planning to buy {b} chairs, how much money will she need?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0102,Calculate the result when {a} is multiplied with {b}.,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0103,Calculate {a} multiplied by {b}.,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0104,Can you calculate {a} multiplied by {b}?,keep,a*b,E,,multiply,numbers,False,False,90,74 5
+mu0105,Can you find the result of {a} times {b}?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0106,"Candace had a budget of {a} for a study resources for her students. When she visited the school supplies store, she found out a single pack of the resources costs {b}. How many of these study packs can she purchase in total?",keep,a/b,X,,divide,money,True,True,45,74 5
+mu0107,"Claire bought {a} flowers, each at a price of {b}. What is the total cost of the flowers?",keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0108,Compute the result of {a} divided by {b}.,keep,a/b,E,,divide,numbers,False,False,90,74 5
+mu0109,"Consider two numbers, {a} and {b}. If multiplied, what will be their product?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0110,"Daniel is buying {a} packs of a special craft paper for his art project, with each pack priced at {b}. What would be his total expenditure?",keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0111,David has {a} to invest in stocks. If each share is priced at {b} how many shares can he buy?,keep,a/b,X,,divide,money,True,True,45,"74 5,"
+mu0112,"David wanted to sell his old car for {a}. After bargaining, the buyer suggested he would buy it for only {b}. How many cars at this reduced price could David sell for his original asking price?",drop,,,question does not make sense,divide,money,True,True,45,74 5
+mu0113,Divide {a} by {b}. What do you get?,keep,a/b,E,,divide,numbers,False,False,90,74 5
+mu0114,"Drawing from a hat, you pick a note that reads: ""Calculate the product of {a} and {b}.""",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0115,"During a game, a task requires you to multiply {a} by {b}. What is your answer?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0116,"During a game of baseball, your team has scored {a} runs in {b} innings. What is the average number of runs per inning?",keep,a/b,AB,,divide,numbers,False,False,45,74 5
+mu0117,"During a game of trivia, one of the questions asks for the quotient of {a} and {b}. Can you calculate the answer?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0118,"During a game of trivia, you're asked to calculate {a} / {b}. What is the answer?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0119,"During a game show, the host asks you this question. How much is {a} times {b}?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0120,"During a game show, you are asked to answer the question: What is the result of {a} multiplied by {b}?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0121,"During a job interview, the interviewer tests your mental arithmetic with this question. What does {a} times {b} equal?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0122,"During a math class, the teacher asks you to solve the following problem. What is {a} divided by {b}?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0123,"During a math competition, the judge voices the final question: What is {a} divided by {b}?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0124,"During a math quiz, you encounter this problem. What is the result of {a} divided by {b}?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0125,"During a math quiz, you're asked: What is the multiplication of {a} and {b}?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0126,"During a quick review, your tutor asks: Can you find the product of {a} and {b}?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0127,"During a quiz, your math teacher asks you to solve this: What does {a} multiplied by {b} equal to?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0128,"During a quiz, your teacher asks you this question. What is the outcome of {a} divided by {b}?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0129,"During a timed math test, you need to find the answer to {a} / {b} quickly.",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0130,"During a trivia game, a question pops up: ""What is the result when {a} is divided by {b}?""",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0131,"During a trivia night, the host asks a math question. What is {a} times {b}?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0132,"During a trivia night, you're asked to solve this math problem. Find the multiplication of {a} and {b}.",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0133,"During a weekend shopping trip, Maria found a dress that cost {a}. However, she has only {b} left in her allowance. Could she afford it?",drop,,,yes/no question,divide,money,True,True,45,74 5
+mu0134,"During an art exhibition, {a} people visited on the first day and {b} on the second day. What is the ratio of visitors on the first day to the second day?",keep,a/b,AB,,divide,numbers,False,False,45,74 5
+mu0135,"During class, your teacher poses a question. What is the product of {a} multiplied by {b}?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0136,"During her homework, a student encounters the following multiplication problem. Can you find the result of {a} * {b}?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0137,During your break you decided to open your math book and tackle a problem. What is the result of {a} multiplied by {b}?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0138,"Each page in a book has {a} lines. If the book has {b} pages, how many lines are in the book?",keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0139,"Each page of a book has {a} lines. If the book has {b} pages, how many total lines are in the book?",keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0140,"Each slice of pizza has {a} calories. If you eat {b} slices, how many calories have you consumed?",keep,a*b,B,,multiply,numbers,False,False,45,74 5
+mu0141,"Each unit of a skincare product costs {a}. If you want to stock up for {b} months, how much will it cost you?",drop,,,units per month not given,multiply,money,True,False,45,74 5
+mu0142,Emily has {a} saved in her account. If a cooking class costs {b} how many classes can Emily afford to take?,keep,a/b,X,,divide,money,True,True,45,"74 5,"
+mu0143,"Emma's savings total {a}. She wants to purchase a new laptop that costs {b}. If she uses all of her savings, how many laptops can she afford to buy?",keep,a/b,X,,divide,money,True,True,45,74 5
+mu0144,"Ethan runs a carwash business and charges {a} per car. If he served {b} cars today, what is Ethan's revenue?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0145,Find the multiplication answer of {a} and {b},keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0146,Find the product of the numbers {a} and {b}.,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0147,Find the product of {a} and {b}.,keep,a*b,E,,multiply,numbers,False,False,135,74 5
+mu0148,Find the value of {a} multiplied by {b}.,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0149,"For his birthday party, Chris received {a} cars and {b} trucks as presents from his friends. What is the ratio of cars to trucks Chris received?",drop,,,counts of toys formatted as money,divide,numbers,True,True,45,74 5
+mu0150,"For your latest art project, you purchased a {a} canvas bundle. The bundle contains {b} canvases. What is the cost per canvas?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0151,"For your travels, if you drive {a} miles per hour for {b} hours, how many miles would you have covered?",keep,a*b,,,multiply,numbers,False,False,45,74 5
+mu0152,"For {a} days, you parked your car at a place where parking costs {b} per day. What will be the total parking fees?",keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0153,George is saving up to buy a new bike that costs {a}. He plans to set aside {b} dollars each week from his allowance. How many weeks will it take for George to afford the bike?,keep,a/b,X,,multiply,money,True,False,45,74 5
+mu0154,"Hannah is saving to buy a designer bag that costs {a}. If she saves {b} per month, how many months will it take her to buy the bag?",keep,a/b,X,,divide,money,True,True,45,74 5
+mu0155,Henry read a {a}-page book in {b} days. How many pages did he read per day?,keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0156,Here's an arithmetic problem you need to solve. What's the result of {a} times {b}?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0157,How many times will {a} fit into {b}?,keep,b/a,E,,divide,numbers,False,False,45,74 5
+mu0158,How much total income will you get if you have {a} per day for {b} days?,keep,a*b,B,,multiply,numbers,False,False,45,74 5
+mu0159,"If a bag of apples costs {a} dollars and you buy {b} bags, how much will you be charged?",keep,a*b,B,,multiply,numbers,False,False,45,74 5
+mu0160,"If a baking recipe calls for {a} cups of flour per loaf and I want to bake {b} loaves, how many cups of flour do I need in total?",keep,a*b,B,,multiply,numbers,False,False,45,74 5
+mu0161,"If a book costs {a} and you bought {b} copies, what is the total price?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0162,"If a box contains {a} balls and we have {b} boxes, what is the total number of balls we have?",keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0163,"If a bulb uses {a} watts of energy per hour, how many watts of energy does it use in {b} hours?",keep,a*b,,,multiply,numbers,False,False,45,74 5
+mu0164,"If a car can travel {a} miles on a gallon of gas, how many miles can it travel on {b} gallons?",keep,a*b,,,multiply,numbers,False,False,45,74 5
+mu0165,"If a car can travel {a} miles per gallon of gas, how far can the car travel with {b} gallons of gas?",keep,a*b,,,multiply,numbers,False,False,45,74 5
+mu0166,"If a car travels {a} miles and uses {b} gallons of gas in total, what is the car's miles per gallon ratio?",keep,a/b,,,divide,numbers,False,False,45,74 5
+mu0167,"If a car travels {a} miles per hour, how far would it travel in {b} hours?",keep,a*b,,,multiply,numbers,False,False,45,74 5
+mu0168,If a cookie costs {a} dollars and you buy {b} how much will you spend?,keep,a*b,B,,multiply,numbers,False,False,45,"74 5,"
+mu0169,"If a cyclist travels {a} kilometers in {b} hours, what is his average speed per hour?",keep,a/b,,,divide,numbers,False,False,45,74 5
+mu0170,"If a farm yields {a} bushels of corn per acre and the farmer has {b} acres of land, how many bushels of corn will the farmer yield?",keep,a*b,,,multiply,numbers,False,False,45,74 5
+mu0171,If a farmer plants {a} seeds in each row and there are {b} rows. How many seeds were planted in total?,keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0172,If a pack of pens costs {a} how much would it cost to buy {b} packs?,keep,a*b,B,,multiply,money,True,False,45,"74, 5"
+mu0173,"If a pizza is sliced into {a} pieces and to be shared between {b} friends, how many pieces of pizza does each friend get?",keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0174,"If a recipe calls for {a} grams of flour for {b} cookies, how many grams of flour will it take to make one cookie?",keep,a/b,B,,divide,numbers,False,False,45,74 5
+mu0175,"If a round of mini golf costs {a} and {b} people played, how much was earned in total?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0176,"If a runner completed his run with {a} kilometers in {b} hours, what was his average speed in km/hr?",keep,a/b,,,divide,numbers,False,False,45,74 5
+mu0177,"If a toy car costs {a} and Sam wants to buy {b} for his children, how much money would he spend?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0178,"If a toy store sells teddy bears at a price of {a} each, how much would the total cost be if a customer wants to buy {b} teddy bears?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0179,"If a tree gives {a} apples in the spring and {b} apples in the fall, how many apples does the tree give in a year?",drop,,,asks a sum,multiply,numbers,False,False,45,74 5
+mu0180,"If a water tank has a capacity of {a} liters and you have containers that can hold {b} liters each, how many containers can you fill from the tank?",keep,a/b,X,,divide,numbers,False,False,45,74 5
+mu0181,"If, at a fundraiser dinner, each plate costs {a} and the total number of plates sold were {b} then what were the total fundraising proceeds?",keep,a*b,B,,multiply,money,True,False,45,"74 5,"
+mu0182,"If each book costs {a} dollars and you buy {b} books, how much will you spend?",keep,a*b,B,,multiply,numbers,False,False,45,74 5
+mu0183,"If each box contains {a} items and there are {b} boxes, what is the total number of items?",keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0184,"If each person donates {a} dollars and there are {b} people, how much money is donated in total?",keep,a*b,B,,multiply,numbers,False,False,45,74 5
+mu0185,If I have {a} apples and I buy {b} more times of what I have. How many apples do I have in total?,drop,,,garbled ('buy b more times of what I have'),multiply,numbers,False,False,45,74 5
+mu0186,"If I have {a} bags of candy and each bag contains {b} candies, how many candies do I have in total?",keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0187,If I multiply {a} by {b} what would be the outcome?,keep,a*b,E,,multiply,numbers,False,False,45,"74 5,"
+mu0188,If I multiply {a} by {b} what would be the product?,keep,a*b,E,,multiply,numbers,False,False,45,"74 5,"
+mu0189,"If it takes {a} minutes to boil one egg, how long will it take to boil {b} eggs assuming you can boil them all simultaneously?",drop,,,trick question (simultaneous boiling),multiply,numbers,False,False,45,74 5
+mu0190,"If Jack has {a} candies and he decides to divide them equally among his {b} friends, how many candies does each friend receive?",keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0191,"If one book requires {a} sheets of paper to make, and a printing facility can produce {b} books a day, how many sheets of paper does the facility need daily?",keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0192,"If one cookie contains {a} calories, how many calories are in {b} cookies?",keep,a*b,B,,multiply,numbers,False,False,45,74 5
+mu0193,"If one notebook costs {a} dollars and you decide to buy {b} notebooks, how much will you spend in total?",keep,a*b,B,,multiply,numbers,False,False,45,74 5
+mu0194,"If Sarah earns {a} per hour and she works {b} hours in a week, how much does she earn in a week?",keep,a*b,,,multiply,money,True,False,45,74 5
+mu0195,"If the bus holds {a} passengers and there are {b} buses, how many passengers can be accommodated?",keep,a*b,AB,,divide,numbers,False,False,45,74 5
+mu0196,"If the total cost of a dinner at a restaurant is {a} and there are {b} people in the group, how much does each person need to pay for the dinner?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0197,"If there are {a} stairs in a flight and there are {b} flights, how many stairs will you climb in total?",keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0198,If we divide {a} by {b} what is the quotient?,keep,a/b,E,,divide,numbers,False,False,45,"74 5,"
+mu0199,"If we have {a} apples in one box and we have {b} boxes, how many apples do we have in total?",keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0200,If you bought {a} apples each costing {b} how much total money did you spend?,keep,a*b,A,,multiply,money,False,True,45,"74 5,"
+mu0201,If you bought {a} bottles of sodas each worth {b} how much did you spend in total?,keep,a*b,A,,multiply,money,False,True,45,"74 5,"
+mu0202,"If you bought {a} gallons of gas at a rate of {b} per gallon, how much is your total expense?",keep,a*b,,,multiply,money,False,True,45,74 5
+mu0203,"If you bought {a} items each for {b} during a clearance sale, how much did you spend in total?",keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0204,"If you burn {a} calories per hour of jogging, and you jog for {b} hours, how many total calories will you burn?",keep,a*b,,,multiply,numbers,False,False,45,74 5
+mu0205,If you divide {a} by {b} what would be the outcome?,keep,a/b,E,,divide,numbers,False,False,45,"74 5,"
+mu0206,"If you divide {a} dollars evenly among {b} people, how much does each person get?",keep,a/b,B,,divide,numbers,False,False,45,74 5
+mu0207,"If you divide {a} marbles equally between {b} friends, how many marbles would each friend get?",keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0208,"If you have to pay a monthly subscription of {a} for {b} months, how much would you be paying in total?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0209,"If you have {a} apples and each apple is worth {b} dollars, how much total value do you have?",keep,a*b,A,,multiply,numbers,False,False,45,74 5
+mu0210,"If you have {a} candies and each candy has {b} calories, how many total calories will you consume if you eat all of them?",keep,a*b,A,,multiply,numbers,False,False,45,74 5
+mu0211,"If you have {a} to invest in a new business and you wish to divide it evenly amongst {b} partners, how much would each partner invest?",keep,a/b,B,,multiply,money,True,False,45,74 5
+mu0212,"If you invest {a} per month and do this for {b} months, how much money did you invest in total?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0213,"""If you jump {a} times a minute, how many jumps are there in {b} minutes?""",keep,a*b,A,,multiply,numbers,False,False,45,74 5
+mu0214,If you multiply your age {a} by {b} what do you get?,drop,,,age as an arbitrary number,multiply,numbers,False,False,45,"74 5,"
+mu0215,If you multiply {a} by {b} what do you get?,keep,a*b,E,,multiply,numbers,False,False,90,"74 5,"
+mu0216,If you multiply {a} by {b} what would the resulting value be?,keep,a*b,E,,multiply,numbers,False,False,45,"74 5,"
+mu0217,If you multiply {a} by {b} what would you get?,keep,a*b,E,,multiply,numbers,False,False,45,"74 5,"
+mu0218,"If you owe {a} on your credit card and want to pay it off in {b} monthly payments, what will be the amount of each payment?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0219,If you plan on getting {a} pairs of shoes that each cost {b} how much would you spend in total?,keep,a*b,A,,multiply,money,False,True,45,"74 5,"
+mu0220,"If you purchased {a} shares of a company's stock at a price of {b} per share, how much did the total purchase cost?",keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0221,If you're saving {a} each month for a trip that would cost you {b} how many months will it take to save up enough money?,keep,b/a,X,,divide,money,True,True,45,"74 5,"
+mu0222,"If you received a gift of {a} for your birthday and you wanted to share it equally with your friend, how much would each of you get if you divided the {b} between the two of you?",drop,,,garbled (split between two but divide by b),divide,money,True,True,45,74 5
+mu0223,"If you save {a} dollars every day for {b} days, how much will you have saved?",keep,a*b,B,,multiply,numbers,False,False,45,74 5
+mu0224,"If you sell your vintage record collection and divide {a} by the number of records, {b} how much would each record be worth?",keep,a/b,B,,divide,money,True,True,45,"74 5,"
+mu0225,If you sold your car for {a} and bought a new one for {b} how much more did you spend?,drop,,,asks a difference,divide,money,True,True,45,"74 5,"
+mu0226,"If you sold {a} units of your product at a price of {b} each, how much total revenue would you generate?",keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0227,If you take {a} how many times can {b} fit into it?,keep,a/b,E,,divide,numbers,False,False,45,"74, 5"
+mu0228,"If you've been saving {a} each day for the past {b} days, how much have you saved in total?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0229,"If you won a lottery of {a} and decided to split the prize with your best friend, how much would each of you receive if you divided the {b} equally?",drop,,,garbled (split with one friend but divide by b),divide,money,True,True,45,74 5
+mu0230,"If you won the lottery and you have to split it with your best friend, what would each person get if you split {a} by {b}?",drop,,,split with one friend but divide by b,divide,money,True,False,45,74 5
+mu0231,"If you worked {a} hours at a rate of {b} per hour, how much is your total wage?",keep,a*b,,,multiply,money,False,True,45,74 5
+mu0232,"If your monthly rent is {a} and you live there for {b} months, what is the total rent you paid?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0233,If your monthly rent is {a} and your salary is {b} how many months of rent can your salary cover?,keep,b/a,X,,divide,money,True,True,45,"74 5,"
+mu0234,"If {a} apples are in a basket and each person picks {b} apples, how many apples are picked in total?",drop,,,number of people not given,multiply,numbers,False,False,45,74 5
+mu0235,"If {a} candies are shared equally between {b} children, how many candies will each child receive?",keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0236,"If {a} cars are produced each day in a automotive factory and the production lasts {b} days, how many cars will be produced in total?",keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0237,If {a} is shared equally by {b} how much does each one get?,keep,a/b,E,,divide,numbers,False,False,45,"74 5,"
+mu0238,"If {a} teams each play {b} games, how many total games are played?",drop,,,total games ambiguous (double counting),multiply,numbers,False,False,45,74 5
+mu0239,"If {a} water bottles are sold per hour for {b} hours, what is the total number of water bottles sold?",keep,a*b,A,,multiply,numbers,False,False,45,74 5
+mu0240,"If {a} workers are each paid {b} dollars for their jobs, what is the total payment amount?",keep,a*b,A,,multiply,numbers,False,False,45,74 5
+mu0241,"Imagine you are a landlord and each apartment in your building rents for {a} per month. If you have {b} apartments rented for the whole month, what is your total rental income for the month?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0242,Imagine you are a shopkeeper and you have {a} apples in your shop. If you decide to divide those apples into boxes of {b} how many boxes will you end up with?,keep,a/b,ABX,,divide,numbers,False,False,45,"74 5,"
+mu0243,Imagine you have {a} apples and you need to divide them equally among your {b} friends. How many apples does each friend get?,keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0244,"Imagine you work at a factory. Each day, the factory produces {a} widgets per hour for {b} hours. How many widgets are produced in one day?",keep,a*b,A,,multiply,numbers,False,False,45,74 5
+mu0245,"In a bakery, each cookie costs {a}. If you buy {b} how much will you pay?",keep,a*b,B,,multiply,numbers,False,False,45,"74 5,"
+mu0246,"In a board game, to advance, you must solve this: {a} divided by {b} equals what amount?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0247,"In a boxing match, each round lasts {a} minutes. If there are {b} rounds, how long does the entire match last in minutes?",keep,a*b,B,,multiply,numbers,False,False,45,74 5
+mu0248,"In a class of {a} students, each student is given {b} books. How many books were given out in total?",keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0249,"In a fun math trivia game, you're asked: ""What is {a} multiplied by {b}?""",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0250,"In a math challenge, you are given a problem where you need to find out what {a} divided by {b} is. What's the answer?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0251,"In a math competition, you are asked to quickly solve the following: What is the quotient of {a} and {b}?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0252,"In a math test, you're confronted with this question: What is {a} multiplied by {b}?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0253,"In a math textbook, you encounter the following question: What is {a} multiplied by {b}?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0254,"In a Maths puzzle, you saw this. What would be the outcome of {a} and {b} multiplication?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0255,"In a parking lot, there are {a} sedans and {b} SUVs. What is the sedan to SUV ratio?",keep,a/b,AB,,divide,numbers,False,False,45,74 5
+mu0256,"In a puzzle, you read the instruction: Calculate the product of {a} and {b}.",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0257,"In a quick-fire round of a quiz, the question is: What does {a} multiplied by {b} equal?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0258,"In a quiz competition, the host throws a multiplication question at the participants. You, as a participant, are asked to multiply {a} by {b}.",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0259,"In a recipe, {a} grams of sugar are needed for {b} cookies. How much sugar is needed per cookie?",keep,a/b,B,,divide,numbers,False,False,45,74 5
+mu0260,"In a shopping mall, there is an offer where for every {a} items bought, you get {b} free items. How many free items do you get per item bought?",keep,a/b,AB,,divide,numbers,False,False,45,74 5
+mu0261,"In a test, you come across a question asking for the multiplication of {a} and {b}. Can you solve it?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0262,"In a test, your teacher poses the following question. What's the multiplication of {a} and {b}?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0263,"In a trivia game, the host asks: Can anyone tell me what {a} times {b} is?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0264,"In a TV game show, you're asked the following math question. How much is {a} * {b}?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0265,"In a week, Sally exercised for {a} hours and Jake exercised for {b} hours. What is the ratio of Sally's exercise hours to Jake's?",keep,a/b,,,divide,numbers,False,False,45,74 5
+mu0266,"In an auction, you bought {a} painting pieces each for {b}. What is the cumulative cost for all the painting pieces?",keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0267,"In Marie's savings account, she currently has {a}. She decided that she wanted to split her money equally between {b} months for long-term saving. How much money could she use per month?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0268,"In order to qualify for the regional math competition, you have to solve {a} / {b} correctly.",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0269,"In the math competition, you were given a multiplication problem. What's {a} multiplied by {b}?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0270,"In the process of tutoring a younger student, the student asks you to solve this problem. What is {a} divided by {b}?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0271,"In your farm, there are {a} apples ready to be harvested in {b} trees. How many apples are on each tree on average?",keep,a/b,AB,,divide,numbers,False,False,45,74 5
+mu0272,"In your math club, you are tasked with the following calculation. What is the result when {a} is divided by {b}?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0273,"In your small farm, you produced {a} dozens of eggs this week. If each dozen is sold for {b} how much will you make from selling all the eggs?",keep,a*b,A,,multiply,money,False,True,45,"74 5,"
+mu0274,"In your study group, one student asks, ""Can anyone help me compute {a} divided by {b}. I keep getting the wrong result.""",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0275,"Isabella acquired a vintage painting for {a}. Then, she stumbled upon a cute lamp that costs {b}. She thought how many lamps can she acquire if she sold her painting.",keep,a/b,X,,divide,money,True,True,45,74 5
+mu0276,"Jake is selling homemade apple pies at a local farmer's market. If each apple pie costs {a} and he manages to sell {b} pies, how much total money does he make?",keep,a*b,B,,multiply,money,True,False,45,"74, 5"
+mu0277,James is planning an event and rents chairs. Each chair costs {a}. James needs {b} chairs for the event. What is the total cost for the chairs that James will rent?,keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0278,"James went to the market and bought some apples. If he bought {a} apples and had {b} bags, how many apples did he place in each bag?",keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0279,Jane has saved {a} from her last few paychecks to buy a new laptop. If the laptop she wants cost {b} how many of these laptops can she afford?,keep,a/b,X,,divide,money,True,True,45,"74 5,"
+mu0280,Jane has {a} candies and she wants to share them equally among her {b} friends. How many candies will each friend receive?,keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0281,Jason bought a car for {a} and later sold it for {b}. How much times was Jason's selling price compared to his buying price?,keep,b/a,,,divide,money,True,True,45,74 5
+mu0282,Jay is planning to buy a new gaming laptop worth {a}. He has already saved up {b} dollars from his part-time job. How many more similar savings does he need to make to afford the laptop?,drop,,,'how many more similar savings': ambiguous,divide,money,True,False,45,74 5
+mu0283,Jenna has {a} dollars. She wants to divide this amount equally among her {b} friends. How much money will each friend get?,keep,a/b,B,,divide,numbers,False,False,45,74 5
+mu0284,Jenna ran {a} miles each day for {b} days. How many miles did she run in total?,keep,a*b,B,,multiply,numbers,False,False,45,74 5
+mu0285,"Jennifer is planning to save up for a vacation package that costs {a}. If she saves {b} each month, how many months will it take for her to afford the vacation package?",keep,a/b,X,,divide,money,True,True,45,74 5
+mu0286,"Jeremy has a stash of vintage comic books, each of which he bought for {a}. He now wants to buy {b} worth of comic book sleeves to protect his collection. What would be the total cost?",drop,,,garbled (sleeves worth b),multiply,money,True,True,45,74 5
+mu0287,"Jessica sells handmade crafts and has earned {a} from her sales. If each of her crafts costs {b} to make, how many crafts can she produce with her earnings?",keep,a/b,X,,divide,money,True,True,45,74 5
+mu0288,John bought a car for {a} and sold it after a year for {b}. How much did he lose or gain from this transaction?,drop,,,asks a difference,divide,money,True,True,45,74 5
+mu0289,"John bought a new game console for {a}. After a few months, he sold it to his friend, Mike, at {b}. Can you calculate how much John lost or gained on the sale of the console?",drop,,,asks a difference,divide,money,True,True,45,74 5
+mu0290,"John bought {a} candy bars, each costing {b}. What was the total cost?",keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0291,"John decided to sell his vintage car. The initial price he quoted was {a}. However, after negotiations, the price was brought down by the buyer and John agreed to sell his car for {b}. How much did John reduce from the initial amount?",drop,,,asks a difference,divide,money,True,True,45,74 5
+mu0292,"John had a budget of {a} for his road trip. If his gas cost {b} per gallon, how many gallons of gas could he purchase with his budget?",keep,a/b,,,divide,money,True,True,45,74 5
+mu0293,John has a money-related problem he needs help with. He just got a bonus of `{a}`. He wants to split this bonus among his `{b}` siblings. How much would each sibling receive?,drop,,,sibling count formatted as money,divide,money,True,True,45,74 5
+mu0294,John has a total wealth of {a} and he wants to divide it equally among his two children. How much will each child get if one subtracts the {b} debt he has?,drop,,,"garbled (two children, subtract debt)",divide,money,True,True,45,74 5
+mu0295,John has received a scholarship of {a} for his college studies. He plans to complete his college education in {b} years. How much funds he is going to have annually if he equally divides his scholarship?,keep,a/b,B,,divide,money,True,False,45,74 5
+mu0296,"John has saved {a} from his part-time job, but the bicycle he wants to purchase costs {b}. How many times does John's savings go into the price of the bicycle?",keep,b/a,,,divide,money,True,True,45,74 5
+mu0297,John has {a} to spend on books. If each book he wishes to purchase costs {b} how many books can he buy?,keep,a/b,X,,divide,money,True,True,45,"74 5,"
+mu0298,John has {a} worth of merchandise in his store. He wants to sell each item at a profit `* {b} times its investment value. How much will he potentially make from sales?,drop,,,garbled,multiply,money,True,True,45,74 5
+mu0299,"John invested {a} in a startup. After a year, his investment has grown to five times its original value. How much money has John made from his investment, if he multiplies the initial amount by {b}?",drop,,,'five times' conflicts with b,multiply,money,True,True,45,74 5
+mu0300,"John is a lemonade stand owner. He sells a glass of lemonade for {a}. In one particular day, he manages to sell {b} glasses of lemonade. What is his total revenue for that day?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0301,John ran a total of {a} kilometers over {b} days. How many kilometers did he run each day?,keep,a/b,B,,divide,numbers,False,False,45,74 5
+mu0302,"John sells homemade lemonade in his neighborhood. Each cup is {a}. If he sold {b} cups in a day, how much did he earn?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0303,John started a lawn mowing business. He charges {a} for each lawn he mows. His lawn mower broke and it costs {b} to repair it. How many lawns does he need to mow to cover the repair costs?,keep,b/a,X,,divide,money,True,True,45,74 5
+mu0304,John was shopping online and found a pair of shoes for {a}. He wanted to buy the same pair of shoes for himself and his brother. How much will John spend if he buys {b} pairs of shoes?,drop,,,pair count formatted as money; 'himself and his brother' implies 2,multiply,money,True,True,45,74 5
+mu0305,Julia is at a book sale where each book costs {a}. She plans to buy {b} books. How much will she spend on books in total?,keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0306,"Karen makes handmade bracelets and sells them at a local market. If each bracelet costs {a} and she was able to sell {b} bracelets in a day, how much income did Karen generate for the day?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0307,Let's divide {a} by {b}. What is the answer?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0308,Let's say a baker has baked {a} cookies. The baker wants to put these cookies in {b} boxes equally. How many cookies should be placed in each box?,keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0309,Let's say you have {a} ice creams and you want to multiply that amount by {b}. What will be the total number of ice creams?,keep,a*b,A,,multiply,numbers,False,False,45,74 5
+mu0310,"Lisa is looking at a car to purchase, it's listed at {a}. She has a monthly income of {b}. How many months would Lisa need to save all of her income to afford the car?",keep,a/b,X,,divide,money,True,True,45,74 5
+mu0311,Lisa received a monthly allowance of {a} and she spends {b} on her dance classes. What is the ratio of her dance class fee to her total monthly allowance?,keep,b/a,,,divide,money,True,True,45,"74, 5"
+mu0312,"Lucy bought a painting for {a}. A year later, she sold it to her friend for {b} times the price she paid. How much did her friend pay for the painting?",keep,a*b,,,multiply,money,True,False,45,74 5
+mu0313,Martha runs a small bakery. She bought a baking machine worth {a} that can produce {b} batches of bread each day. How much does each batch cost?,drop,,,cost per batch not determined,divide,money,True,False,45,74 5
+mu0314,"Mary is in a home improvement store looking at two options for a new kitchen sink. Sink A is priced at {a} while Sink B amounts to {b}. In terms of dollar value, how would Mary calculate the cost difference ratio between the two sinks?",drop,,,'cost difference ratio': ambiguous,divide,money,True,True,45,74 5
+mu0315,"Mary just moved to New York and got a job in a bookstore. She makes {a} per hour. If she works {b} hours per week, what would be her weekly salary?",keep,a*b,,,multiply,money,True,False,45,74 5
+mu0316,Matthew's monthly commuting cost is {a}. Each commute costs Matthew {b}. How many commutes can Matthew afford in a month?,keep,a/b,X,,divide,money,True,True,45,74 5
+mu0317,"Melanie is a real estate investor interested in buying several apartments for rental purposes. She recently found a building with multiple units, each valued at {a}. With a total of {b} units in the building, what would be the total cost if she decided to buy all the units?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0318,Michael has hired a gardener to maintain his garden. The gardener charges {a} per hour and worked for {b} hours. How much does Michael owe the gardener?,keep,a*b,,,multiply,money,True,False,45,74 5
+mu0319,"Michael is saving for a family vacation. Each month, he saves {a} into a vacation fund. After {b} months, what will be the total amount saved in the vacation fund?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0320,Michael purchased {a} shares of a start-up company for {b}. How much did he pay per share?,keep,a/b,A,,divide,money,False,True,45,74 5
+mu0321,Mike wants to buy {a} books for his kid. If each book costs {b} how much will he spend in total?,keep,a*b,A,,multiply,money,False,True,45,"74 5,"
+mu0322,Mike wants to sell {a} of his video games to a local shop. If each video game is worth {b} how much is the total worth of all his video games?,keep,a*b,A,,multiply,money,False,True,45,"74 5,"
+mu0323,"Paul has {a} in his savings. He wants to divide it equally over the number of months in a year, {b} for a consistent monthly budget. How much will he have for each month?",drop,,,months in a year must be 12,divide,money,True,True,45,"74 5,"
+mu0324,Paul is selling t-shirts at a local market. He prices each one at {a} and sells around {b} per day. How much does he earn in one day?,keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0325,Please tell me what {a} * {b} equals to.,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0326,Rachel ran a distance of {a} meters in {b} minutes. What was her speed in meters per minute?,keep,a/b,,,divide,numbers,False,False,45,74 5
+mu0327,"Rebecca went to the farmer’s market to buy fresh oranges. The oranges were on sale for {a} per pound. If Rebecca bought {b} pounds of oranges, how much did she have to pay in total?",keep,a*b,,,multiply,money,True,False,45,74 5
+mu0328,"Sally invested {a} in a tech startup. After five years, her investment is now worth {b}. What's the ratio of her current investment worth to her initial investment?",keep,b/a,,,divide,money,True,True,45,74 5
+mu0329,Sally recently received her monthly paycheck of {a}. A new designer bag caught her eye in the local mall and it costs {b}. She's trying to figure out how many of her monthly paychecks she'd need to afford the bag.,keep,b/a,X,,divide,money,True,True,45,74 5
+mu0330,Sam has {a} used video games that he wants to sell at a garage sale. If he sells each game for {b} how much will he make from selling all his games?,keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0331,"Samantha is planning to save for a vacation that costs {a}. If she can save {b} every month, how many months will it take for her to save enough money?",keep,a/b,X,,divide,money,True,True,45,74 5
+mu0332,Samantha needs to save {a} dollars weekly for {b} weeks. How much will she have saved by the end of that period?,keep,a*b,B,,multiply,numbers,False,False,45,74 5
+mu0333,Sara has {a} in her savings account and she decides to buy an iPhone worth {b}. What is the ratio of the price of the iPhone to the amount in her savings account?,keep,b/a,,,divide,money,True,True,45,74 5
+mu0334,Sarah earns {a} per month from her freelance work. She decided to set aside an equal portion of money for the next {b} months for an upcoming trip. How much will she save each month?,drop,,,monthly saving not determined,divide,money,True,False,45,74 5
+mu0335,"Sarah makes beautiful clay pots and sells them at {a} per pot. If Sarah was able to sell {b} pots at the local Saturday market, what were her total earnings?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0336,Sarah opened a lemonade stand that earned her {a} every day. She wanted to buy a dress that cost {b}. How many days of the lemonade stand earnings would cover the cost of the dress?,keep,b/a,X,,divide,money,True,True,45,74 5
+mu0337,Say you are purchasing a set of books for a course you're teaching. Each book costs {a} and you need {b} copies for your class. How much will the total cost of the books be?,keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0338,Shelly sold her car for {a}. If gas each month previously cost her {b} how many months of gas could she buy now?,keep,a/b,X,,divide,money,True,True,45,"74 5,"
+mu0339,Solve the following division: {a} / {b},keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0340,"Steven first deposits {a} into his bank account. The following month, he deposits another {b}. What is the fraction for the money deposited in the first month to the second month?",keep,a/b,,,divide,numbers,True,True,45,74 5
+mu0341,Suppose we have {a} pairs of shoes and {b} laces for each pair. How many laces do we have in total?,keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0342,"Susan buys a pretty lamp from a garage sale for {a}. Later, she decides to sell it online and manages to sell multiple of the same lamp, let's say {b} of them. How much total does she earn?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0343,"The city parking garage charges {a} per hour for parking. If John parked his car there for {b} hours, how much was his total parking fee?",keep,a*b,,,multiply,money,True,False,45,74 5
+mu0344,The city received {a} tons of food supply divided equally among {b} shelter homes. How much food will each shelter home receive?,keep,a/b,B,,divide,numbers,False,False,45,74 5
+mu0345,The distance between two cities is {a} miles and you traveled at a constant speed of {b} mph. How long did you travel?,keep,a/b,,,divide,numbers,False,False,45,74 5
+mu0346,The library has {a} books and decided to evenly distribute them between {b} shelves. How many books will be on each shelf?,keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0347,The library has {a} books that have to be arranged equally in {b} shelves. How many books will be on each shelf?,keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0348,The local grocery store earned {a} last month from selling fresh fruits. The cost of a pound of organic apples is {b}. How many pounds of apples did the store sell?,drop,,,revenue from all fruit vs apple price,divide,money,True,True,45,74 5
+mu0349,"The orchard produced {a} apples. If a box of apples holds {b} apples, how many full boxes can the orchard owner fill?",keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0350,The school distributed {a} books among {b} students. How many books does each student get?,keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0351,"There are {a} students in a classroom, each requiring {b} textbooks. How many textbooks are needed in total?",keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0352,Tom's company has a budget of {a} for their annual team building activity. The company has {b} employees. How much is the cost per employee for the activity?,keep,a/b,B,,divide,money,True,False,45,74 5
+mu0353,"Tom sells handmade candles at a local farmers market. If each candle costs {a} and he has {b} candles, how much income will he receive from selling all his candles?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0354,What amount do you get when {a} is multiplied by {b}?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0355,What does {a} multiplied by {b} equal?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0356,What is the division outcome of {a} divided by {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0357,What is the multiplication of {a} times {b}?,keep,a*b,E,,multiply,numbers,False,False,90,74 5
+mu0358,What is the multiplication result of {a} and {b}?,keep,a*b,E,,multiply,numbers,False,False,315,74 5
+mu0359,What is the number obtained when {a} is divided by {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0360,What is the result if a teacher divides {a} textbooks equally among {b} students?,keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0361,What is the result when you multiply {a} with {b}?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0362,What number do you get when you multiply {a} and {b}?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0363,What's the quotient when {a} is divided by {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0364,"While baking, you need to reduce the recipe. It asks you to find the result of {a} divided by {b}.",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0365,"While baking, you noticed that the recipe calls for a {a} to {b} ratio of flour to sugar. What would this ratio be when simplified?",drop,,,asks a simplified ratio,divide,numbers,False,False,45,74 5
+mu0366,"While browsing a math forum online, someone poses this mathematical challenge: What is the product of {a} and {b}?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0367,"While counting candies with your sister, you needed to split the candies equally. You wondered, ""What is the value of {a} divided by {b}?""",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0368,"While grocery shopping, you found a great deal. Each apple cost {a} dollars and you want to buy {b} apples. How much would that be?",keep,a*b,B,,multiply,numbers,False,False,45,74 5
+mu0369,"While helping your little brother with his math homework, he asks you, ""What is {a} divided by {b}?""",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0370,"While helping your younger sibling with their math homework, they ask you what {a} divided by {b} equals.",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0371,"While playing a math-oriented board game, your turn comes with a challenge card that reads: Solve for {a} over {b}. What's the answer?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0372,"While studying astronomy, you come across a question asking for the distance traveled by light in {a} seconds at a speed of {b} miles per second. How far does the light travel?",keep,a*b,,,divide,numbers,False,False,45,74 5
+mu0373,"While studying for an exam, you come across a practice problem. If {a} is multiplied by {b} what's the result?",keep,a*b,E,,multiply,numbers,False,False,45,"74 5,"
+mu0374,"While tutoring a student in mathematics, they ask your help with this problem: {a} divided by {b}. What is the answer?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0375,"While watching a trivia show, a contestant is asked to divide {a} by {b}. You decide to answer it before they do. What's your answer?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0376,"Working as a cashier, a customer bought {a} oranges and {b} apple. If the price is the same for each piece of fruit, what is the ratio of an orange to an apple?",drop,,,ratio of an orange to an apple: nonsense,divide,numbers,False,False,45,74 5
+mu0377,Yesterday you found a great book and bought {a} copies at {b} per copy for your book club. What total amount did you spend?,keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0378,"You and your friends are splitting the cost of a rental house for a holiday. If the house costs {a} and it's split between {b} people, how much does each person pay?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0379,"You and your sibling inherited {a} from your grandmother. If you split the inheritance equally, how much would each person receive after dividing by {b}?",drop,,,split with one sibling but divide by b,divide,money,True,False,45,74 5
+mu0380,"You are a freelance designer who charges {a} per hour for designing logos. You worked for {b} hours on a project, what is your total earnings?",keep,a*b,,,multiply,money,True,False,45,74 5
+mu0381,You are assigned to figure out what {a} multiplied by {b} equals. Can you solve it?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0382,You are at a sporting event and each team scores {a} points per game. How many points are scored in total after {b} games?,drop,,,number of teams not given,multiply,numbers,False,False,45,74 5
+mu0383,You are at a zoo and see a group of {a} monkeys in a large enclosure. If the zookeepers want to divide these monkeys to smaller cages of {b} how many cages will they need?,keep,a/b,ABX,,divide,numbers,False,False,45,"74 5,"
+mu0384,"You are at the store and you want to buy {a} pieces of candy, each costing {b}. How much will all the candies cost?",keep,a*b,A,,multiply,numbers,False,False,45,74 5
+mu0385,"You are budgeting {a} every month for {b} months, how much will you have saved in total by the end of this period?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0386,"You are buying {a} Christmas presents, each priced at {b}. What is the total amount you would spend for all the presents?",keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0387,You are completing your math homework and come across this equation: {a} multiplied by {b} equals?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0388,"You are conducting a study on the rate of a particular bacteria growth. In one hour, {a} bacteria are produced in a petri dish. If each bacteria cell division happens every {b} minutes, how many times did each bacteria divide in an hour?",drop,,,nonsense (bacteria divisions),divide,numbers,False,False,45,74 5
+mu0389,You are designing a room that is {a} meters wide and {b} meters long. What is the total area of the room?,keep,a*b,,,multiply,numbers,False,False,45,74 5
+mu0390,You are doing a research job and you need to distribute {a} surveys over {b} days. How many surveys you need to distribute per day on average?,keep,a/b,AB,,divide,numbers,False,False,45,74 5
+mu0391,You are driving on a road trip. The distance is {a} miles and your car consumes {b} gallons of fuel. What is the mileage of your car in miles per gallon?,keep,a/b,,,divide,numbers,False,False,45,74 5
+mu0392,"You are exploring different investment options and one is promising a return of {a}. However, you know from your research that there will be a capital gain tax of {b}. What would be the return after tax?",drop,,,return after tax is a difference,divide,money,True,True,45,74 5
+mu0393,"You are fundraising for a school project and your team has decided to sell chocolates. The chocolates are each sold for {a}. If you sold {b} chocolates, how much money did you raise?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0394,You are made a treasurer for a club fundraiser and it's your job to distribute the money evenly among all members. If the total funds are {a} how much does each member get when the total is divided by {b}?,keep,a/b,B,,divide,money,True,False,45,"74, 5"
+mu0395,"You are on a quiz show and the host asks you, ""Can you calculate {a} divided by {b}?""",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0396,"You are organizing an event and want to give each attendee a gift bag. The bags cost {a} each. If you are expecting {b} attendees, how much will you spend in total on the gift bags?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0397,"You are out for dinner and the total bill comes to {a}. If it's to be shared equally between you and your {b} friends, what would be the cost per person if we divide the total amount by the number of people?",drop,,,'you and your b friends' is b+1 people,divide,money,True,False,45,74 5
+mu0398,"You are participating in a quiz competition and one of the questions was, what is {a} divided by {b}?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0399,You are paying for your friend's yoga classes for the next {a} days. The daily rate for the class is {b}. How much will this cost in total?,keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0400,"You are planning a budget for your vacation and you want to split the total cost, {a} over {b} months. How much should you set aside each month?",keep,a/b,B,,divide,money,True,False,45,"74, 5"
+mu0401,You are planning a garage sale and want to price your items. If you have a budget of {a} and each item is {b} how many items can you price?,drop,,,nonsense (how many items can you price),divide,money,True,True,45,"74 5,"
+mu0402,You are planning a road trip covering {a} miles and your car's fuel efficiency is {b} miles per gallon. How many gallons of gas will you need?,keep,a/b,,,divide,numbers,False,False,45,74 5
+mu0403,"You are planning a road trip. If your car consumes {a} liters of gas per km and you are planning to travel {b} kms, how many liters of gas will you need?",keep,a*b,,,multiply,numbers,False,False,45,74 5
+mu0404,You are planning a trip and wonder how many days it would take if you travel {a} kilometers at a pace of {b} kilometers per day. How many days would your trip last?,keep,a/b,,,divide,numbers,False,False,45,74 5
+mu0405,You are planning to donate {a} towards a charity. If the cost to sponsor one child's education for a month is {b} how many children can you sponsor?,keep,a/b,X,,divide,money,True,True,45,"74 5,"
+mu0406,"You are playing a game of Monopoly and each player receives {a} dollars for passing go. If you pass go {b} times, how much money will you have?",drop,,,starting money not given,multiply,numbers,False,False,45,74 5
+mu0407,"You are playing a game of trivia with your friends, and a math question pops up. How much is {a} divided by {b}?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0408,You are preparing a meal and you have {a} pieces of chicken that you want to evenly divide among {b} people. How many pieces does each person get?,keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0409,You are preparing for a math test. Solve the following problem: What is the product of {a} and {b}?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0410,"You are reading a book, it says, ""Each person has {a} apples and there are {b} people. How many total apples are there?""",keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0411,You are reviewing for a test and come across this practice problem. What is the division result of {a} and {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0412,You are revising your math knowledge and come across the following problem in your textbook. Calculate the multiplication of {a} and {b}.,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0413,"You are running a fundraiser. If you have total donations of {a} and you divide this amount to give to {b} charities, how much would each charity receive?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0414,You are saving {a} per week to buy a car. How much will you have saved after {b} weeks?,keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0415,"You are self-employed and charge {a} per hr. If you worked total {b} hours this week, how much is your income for the week?",keep,a*b,,,multiply,money,True,False,45,74 5
+mu0416,"You are splitting a pizza with friends. If you have {a} slices of pizza and {b} friends, how many slices does each friend get?",keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0417,You are trying to calculate your total exercise time. You multiply the number of days {a} by the time spent exercising each day {b} what's the total?,keep,a*b,A,,multiply,numbers,False,False,45,"74, 5,"
+mu0418,You are tutoring a student who asks for help with this problem. What is the product of {a} and {b}?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0419,You are working on a multiplication worksheet. The next problem is: What is the product of {a} and {b}?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0420,You are working on a project and need to calculate a ratio. Please find the solution for the division of {a} and {b},keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0421,You bought a brand new laptop for {a}. You plan to pay this off over the course of three months. What would your monthly payments be if you divided the total by {b}?,drop,,,'three months' conflicts with b,divide,money,True,True,45,74 5
+mu0422,You bought a bulk pack of batteries for emergency purposes. If the total price was {a} and each battery costs {b} how many batteries did you buy?,keep,a/b,X,,divide,money,True,True,45,"74, 5,"
+mu0423,You bought a car for {a} and want to sell it in parts totaling {b}. What price should you set each part?,drop,,,number of parts not given,divide,money,True,True,45,"74, 5"
+mu0424,You bought a pack of {a} movie tickets for {b}. How much is each ticket worth?,keep,b/a,A,,divide,money,False,True,45,74 5
+mu0425,You bought flowers for {a} each day for {b} days. How much money did you spend in total?,keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0426,"You bought stocks worth {a} per stock. If you bought {b} stocks in total, how much did you spend?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0427,"You bought {a} books for a book club at {b} each, what's the grand total?",keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0428,You bought {a} books for your university project. Each book costs {b}. What would be the total cost?,keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0429,You bought {a} concert tickets each priced at {b}. What is the total amount you spent on all the tickets?,keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0430,"You bought {a} raffle tickets at your local fair, each costing {b}. How much have you spent on raffle tickets?",keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0431,You bought {a} souvenir t-shirts at {b} each from the last concert. What's the total cost?,keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0432,"You bought {a} worth of stocks, which are now split into {b} equal shares. How much is one share?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0433,You came across a mathematical question in a Quiz. What is {a} times {b}?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0434,You came across a trivia that asked to compute a quotient. What is {a} divided by {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0435,"You come across a puzzle in a magazine: it asks, what is the quotient if you divide {a} by {b}?",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0436,You decide to sell {a} of your comic books for {b} each. What's the total amount you'll make?,keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0437,"You decide to split your lottery winnings evenly among your family members. If the total amount was {a} and you have {b} family members, how much does each person receive?",keep,a/b,B,,divide,money,True,False,45,"74, 5"
+mu0438,You decided to donate {a} to your favorite charity every day for {b} days. What is your total donation?,keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0439,You decided to pay {a} per month for {b} months to fully pay for your new laptop. How much does the laptop cost in total?,keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0440,You decided to save {a} every day for {b} days. How much money will you have saved at the end of this period?,keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0441,You decided to save {a} over the next {b} months. How much do you have to save each month?,keep,a/b,B,,divide,money,True,False,45,74 5
+mu0442,You decided to sell your car for {a} and use the funds to buy {b} second-hand bikes. How much should each bike cost for you to break even?,keep,a/b,B,,divide,money,True,False,45,74 5
+mu0443,You decided to set up a college fund for your child. You aim to save {a} over the course of {b} years. How much would you need to save per year?,keep,a/b,B,,divide,money,True,False,45,74 5
+mu0444,"You decided to start renting out your bicycle for {a} per day. If you want to calculate your potential earning in a timeframe of {b} days, what would be the total amount?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0445,You donated {a} dollars and want to split your donation evenly among {b} charities. How much will each charity receive?,keep,a/b,B,,divide,numbers,False,False,45,74 5
+mu0446,"You earned a bonus of {a} at work. If you decide to donate {b} of it to charity, how many dollars would that be?",drop,,,donate b of it (fraction vs amount) ambiguous,divide,money,True,False,45,74 5
+mu0447,You encounter this division problem in your everyday calculations. What is {a} divided by {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0448,You enter a math competition and the first question is a multiplication one. What is {a} multiplied by {b}?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0449,You find a math problem in a textbook. What would {a} divided by {b} equal to?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0450,You find a piece of paper with a math question written on it. Can you solve for the value of {a} multiplied by {b}?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0451,"You find a puzzle that says ""Multiply {a} with {b}. What is the answer?""",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0452,You find a strange equation written on a piece of paper. It says: {a} * {b}. Can you figure out what that equals?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0453,"You find an ancient cryptic stone. To unlock it, you need to solve {a}. Multiply by {b}. What is the resulting number?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0454,You find an old book of number puzzles on your shelf. One of them asks: what is {a} divided by {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0455,You find the following problem in your textbook. Calculate the result of {a} divided by {b}.,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0456,You find this written equation in your math textbook. Solve the equation presented as {a} / {b}.,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0457,"You got fined {a} for parking tickets. If you received {b} tickets, how much was each ticket on average?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0458,You have a total budget of {a} for your friend's birthday gift. If the cost of each gift is {b} then how many gifts can you afford to buy?,keep,a/b,X,,divide,money,True,True,45,"74 5,"
+mu0459,You have a total budget of {a} for your monthly expenses. If you divide this by your weekly budget of {b} how much do you have left for the rest of the month?,drop,,,"garbled (divide by weekly budget, 'left')",divide,money,True,True,45,"74 5,"
+mu0460,You have a {a} debt that you have decided to pay off in {b} months. How much will you pay each month?,keep,a/b,B,,divide,money,True,False,45,74 5
+mu0461,"You have borrowed {a} from your friend. If you pay him back {b} every month, how many months will it take you to repay him?",keep,a/b,X,,divide,money,True,True,45,74 5
+mu0462,"You have decided to gamble and each bet is {a}. If you placed {b} bets, how much did you bet in total?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0463,You have decided to purchase {a} shares from a company priced at {b} per share. How much is your total investment?,keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0464,"You have got {a} minutes to complete a running track. If it takes you {b} minutes to do one lap, how many laps can you do within that time?",keep,a/b,X,,divide,numbers,False,False,45,74 5
+mu0465,You have recently received a bonus at work and wish to evenly split the amount with your spouse. How much would each person receive if you divided {a} by {b}?,drop,,,split with spouse but divide by b,divide,money,True,False,45,74 5
+mu0466,You have saved {a} for a new phone. If the phone costs {b} how many phones can you afford to buy?,keep,a/b,X,,divide,money,True,True,45,"74 5,"
+mu0467,You have {a} and want to buy books priced at {b} each. How many books can you buy?,keep,a/b,X,,divide,money,True,True,45,74 5
+mu0468,You have {a} apples and {b} bags to distribute them in equally. How many apples will each bag have if you divide them evenly?,keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0469,You have {a} books that you plan to sell at {b} each. What would be your total revenue?,keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0470,"You have {a} boxes, each containing {b} buttons. How many buttons do you have in total?",keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0471,You have {a} buckets and plan to pick {b} apples into each bucket. How many apples will you have in total?,keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0472,You have {a} candies and wanted to distribute them equally to {b} kids. How many candies does each kid get?,keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0473,You held a garage sale and sold {a} old CDs each for {b}. How much money did you make from selling the CDs?,keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0474,You invest {a} in stocks and aim to make a monthly return of {b}. What is your expected monthly income in dollars?,drop,,,monthly return b: rate vs amount ambiguous,divide,money,True,False,45,74 5
+mu0475,You invested {a} in the stock market and experienced a downturn. If losses were divided by {b} how much will you have left in your account?,drop,,,garbled (losses divided by b),divide,money,True,False,45,"74 5,"
+mu0476,"You just bought a new car for a price of {a}. If you decide to pay it off over {b} years, how much are you paying every year?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0477,"You just read a book with {a} pages in {b} days. On average, how many pages did you read each day?",keep,a/b,AB,,divide,numbers,False,False,45,74 5
+mu0478,You just sold your old textbooks to some freshmen. If each book cost {a} how much did you earn from selling {b} textbooks?,keep,a*b,B,,multiply,money,True,False,45,"74, 5"
+mu0479,You made {a} dollars per hour working a part-time job for the last {b} hours. How much money did you make?,keep,a*b,,,multiply,money,False,False,45,74 5
+mu0480,"You need to budget your spending for the month. If you earn {a} and want your weekly spending to be an equal amount, how much can you spend each week if a month has {b} weeks?",drop,,,"weeks in a month is fixed, not b",divide,money,True,False,45,74 5
+mu0481,You noticed that your heart beats {a} times per minute. How many beats would that be in {b} minutes?,keep,a*b,A,,multiply,numbers,False,False,45,74 5
+mu0482,You ordered {a} pizzas for an office party. Each pizza cost {b}. How much is the total bill?,keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0483,"You overhear your teacher asking another student: ""Can you tell me what {a} divided by {b} equals?""",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0484,You participated in a charity event and raised {a}. If each donation were {b} how many donations did you receive?,keep,a/b,X,,divide,money,True,True,45,"74 5,"
+mu0485,"You plan to buy {a} boxes of cookies, each costing {b}. What is the total cost?",keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0486,You plan to lease a vehicle for {a} months and the per month lease payment is {b}. How much will you pay overall?,keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0487,You plan to save {a} each day for the next {b} days. How much will you have saved at the end?,keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0488,"You planned a road trip with your friends. If each person contributes equally, how much would each person need to pay if the total cost is {a} / {b}?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0489,You purchased {a} pants that each cost {b}. How much did you spend in total?,keep,a*b,A,,multiply,numbers,False,False,45,74 5
+mu0490,"You're at a fundraiser selling cupcakes. If each box contains {a} cupcakes and you have {b} boxes, how many cupcakes do you have in total?",keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0491,You're baking a cake and realized you've forgotten to look up the conversion from ounces to grams. Can you find the ratio of {a} ounces to {b} grams?,drop,,,unit conversion ratio: nonsense,divide,numbers,False,False,45,74 5
+mu0492,"You're budgeting and your monthly rent is {a}. To better visualize your spending, how much is your rent if you divide it by {b} (each day of the month) to find out the cost per day?",drop,,,"days of the month is fixed, not b",divide,money,True,False,45,74 5
+mu0493,"You're budgeting for your weekly groceries. If you spend {a} each week, how many weeks would {b} last you?",keep,b/a,X,,divide,money,True,True,45,74 5
+mu0494,You're budgeting {a} for your monthly groceries and plan to shop {b} times in a month. How much can you spend per shopping trip?,keep,a/b,B,,divide,money,True,False,45,74 5
+mu0495,"You're calculating your grocery costs. If you spent {a} on {b} items, how much did each item cost on average?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0496,You're doing a science experiment where you need to multiply the number of bacteria {a} by the number of petri dishes {b}. How many bacteria will you have in total?,keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0497,You're doing homework and stumble upon this problem. What is {a} divided by {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0498,"You're helping your younger sibling with their homework. They ask you, ""What is the result of {a} divided by {b}?""",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0499,You're looking at a problem on a math quiz. What is the solution for {a} divided by {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0500,"You're looking to buy {a} books, each priced at {b}. What's the total cost?",keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0501,You're packing food for a trip and you have {a} sandwiches that need to be divided amongst {b} people. How many sandwiches does each person get?,keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0502,You're participating in a math quiz. What is the result of the multiplication of {a} and {b}?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0503,You're planning a dinner at a fancy restaurant which charges {a} per person. You have a voucher for {b}. How many people can you invite with the voucher?,keep,b/a,X,,divide,money,True,True,45,74 5
+mu0504,"You're planning to sell your artwork online. If you earned {a} after selling {b} pieces of artwork, how much did you earn per piece?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0505,"You’re planning to spend {a} on books this year. If you want to buy the same number of books each month, how much do you have to spend each month out of {b} months in a year?",drop,,,"months in a year is fixed, not b",divide,money,True,False,45,74 5
+mu0506,You're playing a number game on your phone where you need to determine the outcome of {a} times {b}. What's your answer?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0507,"You're practicing mental math. Quickly, what's the product of {a} and {b}?",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0508,You're reselling your old textbooks for {a} dollars each and want to calculate your total earnings. How much will you have if you sell {b} textbooks?,keep,a*b,B,,multiply,money,False,False,45,74 5
+mu0509,You're saving up for a vacation that costs {a}. How much do you need if you want to go on this vacation for {b} times?,keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0510,"You’re saving up to buy a new gaming console that costs {a}. If you’re saving {b} a month, how many months will it take to save enough?",keep,a/b,X,,divide,money,True,True,45,74 5
+mu0511,You're trying to improve your multiplication skills. Computed the product of {a} and {b}.,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0512,You're writing a program that calculates the product of two numbers. Your current test case involves multiplying {a} and {b}.,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0513,You receive a math challenge question from a friend. What's {a} divided by {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0514,You received a bonus of {a} at work and want to divide it equally among your {b} siblings. How much will each sibling receive?,keep,a/b,B,,divide,money,True,False,45,74 5
+mu0515,You received {a} as your annual salary. What is your monthly income if divided by {b} months?,drop,,,"months in a year is fixed, not b",divide,money,True,False,45,74 5
+mu0516,You rented a movie that cost {a} and you and your friend agreed to divide the cost evenly. How much does each of you have to pay if your friend gives you {b}?,drop,,,garbled (friend gives you b),divide,money,True,True,45,74 5
+mu0517,You run {a} miles every day and each mile cost {b} in shoe wear and tear. How much does running cost you each day?,keep,a*b,,,multiply,money,False,True,45,74 5
+mu0518,You run {a} miles every day for {b} days. How many total miles did you run?,keep,a*b,B,,multiply,numbers,False,False,45,74 5
+mu0519,"You saved {a} for a vacation. If you plan to stay for {b} nights and want to spend evenly throughout your stay, how much can you spend each night?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0520,You see a mathematical puzzle in a magazine. It's challenging you to multiply {a} and {b}.,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0521,"You sold your car and made a profit of {a}. If this amount is to be divided between your {b} siblings, how much money will each one receive?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0522,You sold your car and made {a}. You want to donate {b}% of your profit to charity. How much are you donating?,drop,,,asks a percentage,divide,money,True,False,45,74 5
+mu0523,You sold {a} pumpkin pies for Thanksgiving at {b} each. How much money did you earn from selling pies?,keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0524,You stumble upon a math puzzle that asks for the product of {a} and {b}. How would you solve it?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0525,You stumble upon a riddle in an old book. What is the solution to {a} divided by {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0526,You've been buying coffee worth {a} everyday for {b} days. How much have you spent in total?,keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0527,"You've decided to invest in stocks. If each stock costs {a} and you bought {b} of them, how much money have you spent?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0528,"You've just picked {a} on a winning lottery ticket. If you divide your winnings between your {b} family members, how much does each person get?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0529,"You've just sold an antique for {a}. A buyer in another state wants it shipped to them, and the shipping service charges a flat fee of {b}. How many such shipments can you afford?",drop,,,nonsense (how many shipments can you afford),divide,money,True,True,45,74 5
+mu0530,You've saved up {a} to send your {b} kids to college. How much would each kid get for their tuition?,keep,a/b,B,,divide,money,True,False,45,74 5
+mu0531,"You've sold your car and received {a}. You plan to divide the selling price among your siblings. If you have {b} siblings, how much would each one get?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0532,"You want to buy a limited edition comic book that costs {a}. Now, you receive a monthly allowance of {b} from your part-time job. How many months must you save to be able to afford it?",keep,a/b,X,,divide,money,True,True,45,74 5
+mu0533,"You want to buy {a} boxes of your favorite chocolates, each costing {b}. How much will the total cost be if you multiply the number of boxes by the price?",keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0534,You want to donate {a} each to {b} different charities. How much is your total donation?,keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0535,"You want to sell your old books, and each one costs {a}. If you managed to sell {b} books, what amount did you receive in total?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0536,You went shopping and bought clothes worth {a}. If each outfit was priced at {b} how many outfits did you buy?,keep,a/b,X,,divide,money,True,True,45,"74 5,"
+mu0537,You went shopping and found a shirt that cost {a}. You decide to buy {b} of them as gifts. What is the total cost?,keep,a*b,B,,multiply,numbers,False,False,45,74 5
+mu0538,"You won a lottery of {a} and decided to divide the prize amongst your family members. If you have {b} family members, how much does each person receive?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0539,"You won a lottery prize and want to distribute the winnings among your family members. If you have {a} to divide up amongst {b} family members, how much will each person receive?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0540,You worked {a} hours and earned a total of {b} dollars. How much did you earn per hour?,keep,b/a,,,divide,numbers,False,False,45,74 5
+mu0541,"Your annual salary is {a}. If you divide this among the {b} months, then how much do you get per month?",drop,,,"months in a year is fixed, not b",divide,money,True,False,45,74 5
+mu0542,"Your bike ride tracking app tells you that you rode {a} miles in {b} hours. To calculate your average speed, you need to divide the distance by the time. What is your average speed?",keep,a/b,,,divide,numbers,False,False,45,74 5
+mu0543,Your brother is working on a math problem and asks you what {a} divided by {b} is. Can you help him?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0544,Your business made {a} profit each day for the past {b} days. How much overall profit did you make?,keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0545,Your business sold {a} packages of cookies at your local market. Each package was sold for {b}. How much total money did you collect?,keep,a*b,A,,multiply,money,False,True,45,74 5
+mu0546,"Your calculator stops working midway through your math exam, and you encounter the following question: ""What is the multiplication of {a} and {b}?""",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0547,Your car runs {a} miles with one gallon of gas. How many miles could you drive if you had {b} gallons of gas?,keep,a*b,,,multiply,numbers,False,False,45,74 5
+mu0548,Your co-worker is testing your math skills and ask you what is the product of {a} and {b}.,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0549,Your coach asked you to swim {a} laps daily to improve your stamina but you can only manage {b} laps at a time. How many sets would you need to complete your target?,keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0550,Your coach has asked you how many laps you'll need to run total if you have to run {a} laps a day for {b} days.,keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0551,Your coffee cost {a} and you bought {b} cups this week. How much did you spend on coffee this week?,keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0552,"Your company sponsored your daily meals, and you are given {a} per day. If you had meals for {b} days, how much do your company pay for your meals?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0553,Your cousin asks you for help with homework. He is stuck on a multiplication problem. What is {a} multiplied by {b},keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0554,"Your dog walking service charges {a} per walk. If have {b} dog walking appointments this week, how much will you earn in total?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0555,Your end-of-year bonus is {a}. You want to stash it into {b} months worth of savings. How much money would you put away each month?,keep,a/b,B,,divide,money,True,False,45,74 5
+mu0556,"Your favorite author just released a new book priced at {a}. If you've saved up {b} for books, how many copies of this book can you buy?",keep,b/a,X,,divide,money,True,True,45,74 5
+mu0557,Your favorite band is on tour and you plan to see {a} of their shows. If each ticket costs {b} how much will you spend to see them live?,keep,a*b,A,,multiply,money,False,True,45,"74 5,"
+mu0558,Your favorite movie theater charges {a} for regular ticket prices and {b} for matinee showings. How much would you save by going to a matinee?,drop,,,asks a difference,divide,money,True,True,45,74 5
+mu0559,Your friend has a side job that pays {a} after doing {b} projects. How much is earned per project?,keep,a/b,B,,divide,money,True,False,45,74 5
+mu0560,"Your friend has decided to pay their loan back. If they distribute {a} over {b} months, how much would they need to pay each month?",keep,a/b,B,,divide,money,True,False,45,74 5
+mu0561,Your friend lends you {a} books and each book has {b} chapters. How many chapters do you have to read in total?,keep,a*b,AB,,multiply,numbers,False,False,45,74 5
+mu0562,"Your friend loves to divide numbers for fun, one day he comes to you and asks, ""Can you tell me what {a} divided by {b} is?""",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0563,Your friend owes you {a} and you both agreed she would pay it back in equal installments over the next few months. How much would each installment be if divided by {b}?,keep,a/b,B,,divide,money,True,True,45,74 5
+mu0564,Your garden produced {a} tomatoes and you have {b} jars for canning. How many tomatoes will go in each jar?,keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0565,"Your garden produced {a} tomatoes this year. You want to can them in jars, and each jar holds {b} tomatoes. How many jars will you be able to fill?",keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0566,"Your kid sister needs help with her math homework, she asks you what {a} times {b} equals.",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0567,Your little sibling asks for your help in solving a homework problem. What is {a} divided by {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0568,Your math teacher writes on the board: {a} / {b}. What is the solution?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0569,Your monthly subscription service charges {a} to your account. If you divide this monthly fee by your weekly allowance of {b} how much will you be paying weekly?,drop,,,garbled (monthly fee divided by weekly allowance),divide,money,True,True,45,"74 5,"
+mu0570,Your monthly utilities bill adds up to {a}. Electricity accounted for {b} of the total. What is the fraction of electricity cost over the total utilities?,keep,b/a,,,divide,money,True,True,45,74 5
+mu0571,"Your nephew has a lemonade stand and you decided to help him out. If the cost of lemonade is {a} and you managed to sell {b} cups, how much money did you make throughout the day?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0572,"Your parents ask you to help figure out the total by multiplying {a} hours of work by the wage per hour, {b}. What's the result?",keep,a*b,,,multiply,numbers,False,False,45,74 5
+mu0573,"Your physics professor asks you this question. If a train traveled {a} kilometers in {b} hours, what is the train's average speed in kilometers per hour?",keep,a/b,,,divide,numbers,False,False,45,74 5
+mu0574,"Your recent garage sale made a total profit of {a}. If you split the earnings equally with your friend who helped out, how much money does each person get if the total earnings are divided by {b}?",drop,,,split with one friend but divide by b,divide,money,True,False,45,74 5
+mu0575,Your siblings and you receive {a} pieces of candy. Your parents tell you to divide them equally between your {b} siblings. How many pieces does each sibling get?,keep,a/b,ABX,,divide,numbers,False,False,45,74 5
+mu0576,Your sister comes up to you with her math homework. She needs to find the solution to dividing {a} by {b}. Can you help her find the answer?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0577,"Your sister is practicing her multiplication skills, and asks you,""What is {a} multiplied by {b}?""",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0578,"Your teacher asked your class a question. She said, ""If a rectangle has a length of {a} units and a width of {b} units, what is the area of the rectangle?""",keep,a*b,,,multiply,numbers,False,False,45,74 5
+mu0579,Your teacher asks you to help her with the following math problem. What is the quotient of {a} and {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0580,"Your teacher asks you, “What is the result when {a} multiplies with {b}?""",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0581,Your teacher assigns you a math problem in class. What is the solution to {a} divided by {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0582,Your teacher assigns you a problem during math class. Your problem is to find the result of multiplying {a} by {b}. What is the answer?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0583,Your teacher calls on you during class with a math question. What's the answer if you take the number {a} and divide it by {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0584,Your teacher challenges you with this question. Can you find the product of {a} * {b}?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0585,Your teacher gives you a math problem to solve. She asks you to divide {a} by {b}. What is the answer?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0586,"Your teacher gives you an assignment and asks, ""What is the multiplication result of {a} and {b}?""",keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0587,Your teacher gives you the following division problem. What is the solution to {a} divided by {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0588,"Your teacher gives you {a} math problems for homework. If you've completed {b} already, how many more do you have left to finish?",drop,,,asks a difference,divide,numbers,False,False,45,74 5
+mu0589,"Your teacher hands you a question as part of your homework. It reads: ""Find the result of {a} divided by {b}.""",keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0590,Your teacher has given you a maths problem to solve. Can you compute the multiplication of {a} and {b}?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0591,Your teacher poses a quick question during a math quiz. What is the product of {a} and {b}?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0592,Your teacher wrote a math problem on the board. What is the result of {a} divided by {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0593,"Your total drive to work is {a} miles. If you divide this equally among the {b} days of the week, how many miles will you need to drive each day?",drop,,,"days of the week is fixed, not b",divide,numbers,False,False,45,74 5
+mu0594,Your tutor gives you this math problem to solve: What is {a} divided by {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0595,Your tutor poses an unexpected challenge. What is the result of dividing {a} by {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0596,Your tutor sets a question for you to practice your multiplication skills. The question is: What is {a} multiplied by {b}?,keep,a*b,E,,multiply,numbers,False,False,45,74 5
+mu0597,"Your workplace lunch costs {a} each day. If you plan to continue this habit for the next {b} weekdays, what is the total you will spend?",keep,a*b,B,,multiply,money,True,False,45,74 5
+mu0598,Your younger brother is struggling with his homework. He needs help finding the quotient of {a} and {b}.,keep,a/b,E,,divide,numbers,False,False,45,74 5
+mu0599,Your younger sibling is struggling with their math homework. They ask you to help them with this problem. What is {a} / {b}?,keep,a/b,E,,divide,numbers,False,False,45,74 5

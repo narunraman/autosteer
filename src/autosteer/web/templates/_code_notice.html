@@ -1,0 +1,5 @@
+{% if i.code %}
+<div class="dev-code">
+  <p><strong>Written in code:</strong> <code>{{ i.code }}</code>. {{ code_extra|default('') }} <a href="/developer/e/{{ i.element }}/review">Go to Review →</a></p>
+</div>
+{% endif %}

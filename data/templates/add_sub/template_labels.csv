@@ -1,0 +1,600 @@
+template_id,template,status,op,flags,drop_reason,tag,domain,money_a,money_b,release_rows,release_example_numbers
+ad0000,A baker baked {a} loaves of bread in the morning and then another {b} loaves in the afternoon. How many loaves of bread did the baker bake all together?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0001,"A bakery had {a} muffins at the start of the day. However, they sold {b} muffins. How many muffins are left in the bakery at the end of the day?",keep,a-b,IP,,both,numbers,,,15,74 5
+ad0002,A bakery made {a} cupcakes and managed to sell {b}. How many cupcakes are unsold?,keep,a-b,IP,,both,numbers,,,15,74 5
+ad0003,"A bakery produces {a} loaves of bread daily, but {b} loaves were not sold and have to be discarded. How many loaves were sold?",keep,a-b,IP,,both,numbers,,,15,74 5
+ad0004,"A basketball player scored {a} points in the first game. In the second game, his points dropped by {b}. How many points did he score in the second game?",keep,a-b,IP,,both,numbers,,,15,74 5
+ad0005,"A boat capsized leaving a number of people clinging onto life in the frigid waters. Rescuers were able to pull {a} people safely to shore, but {b} succumbed to hypothermia. How many individuals survived the incident?",drop,,,survivors may be the a rescued (b separate) or a-b,both,lives,,,15,74 5
+ad0006,"A boat capsized on a lake, and rescuers were able to pull {a} individuals from the water. Regrettably, {b} passengers did not survive. How many people were saved in this incident?",drop,,,saved may be a or a-b,both,lives,,,15,74 5
+ad0007,"A bomb detonated in a busy market place. Emergency response units were rushed to the scene and were able to rescue {a} people. Unfortunately, {b} people lost their lives on the spot. How many individuals survived the incident?",drop,,,survivors may be a or a-b,both,lives,,,15,74 5
+ad0008,A businessman has {a} dollars. He paid {b} dollars for the rent of his office. How much money does he have now?,keep,a-b,P,,both,numbers,,,15,74 5
+ad0009,"A car accident resulted in {a} casualties yesterday, and today there were {b} more. How many fatalities were there altogether?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0010,A car travels {a} miles on a road trip then backtracks {b} miles. How many miles are left to reach the initial starting point?,keep,a-b,P,,both,numbers,,,15,74 5
+ad0011,A car was at -{a} meters on a track. It moved -{b} meters backward. Where is it located now?,drop,,,moved -b backward: direction ambiguous,sub,numbers,,,15,74 5
+ad0012,A charity event raised ${a} in ticket sales but it cost ${b} to arrange the event. How much profit was made to give to the charity?,keep,a-b,P,,both,money,,,15,74 5
+ad0013,"A climber descends -{a} feet down a mountain, then descends another -{b} feet. How far has the climber descended in total?",keep,-a-b,,,sub,numbers,,,15,74 5
+ad0014,"A company had a loss of ${a} last year, but this year it made a profit of -${b}. How much is the company's total profit or loss?",drop,,,loss then profit of -$b: contradictory,sub,money,,,15,74 5
+ad0015,"A company has experienced a loss of -{a} units this month, and it loses an additional {b} units. What's the company's total loss in units?",drop,,,loss of -a units: sign ambiguous,sub,numbers,,,15,74 5
+ad0016,"A company made {a} product A and {b} product B, what is their total product output?",keep,a+b,I,,add,numbers,,,15,74 5
+ad0017,A customer paid ${a} for a shirt and ${b} for a pair of shoes at your shop. What is the total amount of money the customer paid?,keep,a+b,,,add,money,,,15,74 5
+ad0018,"A devastating earthquake hit a small town, causing large scale destruction. From the debris, rescuers were able to rescue {a} people alive but {b} were found dead. How many people were rescued alive from the debris?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0019,A devastating flood hit a city. The immediate rescue operation saved {a} lives and the subsequent rescue effort saved {b} how many lives were saved in total?,keep,a+b,I,,add,lives,,,15,"74 5,"
+ad0020,A farmer has {a} hens and she buys {b} more. How many hens does the farmer have now?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0021,A farmer has {a} red apples and {b} green apples. How many apples does the farmer have in total?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0022,A fire swept across a massive apartment complex. Firefighters were able to rescue {a} people from the burning buildings and rescued an additional {b} from the wreckage later. How many people were rescued in total?,keep,a+b,I,,add,lives,,,15,74 5
+ad0023,A fisherman caught {a} fish in the morning and {b} more in the afternoon. How many fish did he catch in total?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0024,"A garden initially had {a} flowers. Meanwhile, {b} flowers were plucked. How many flowers are left in the garden?",keep,a-b,IP,,both,numbers,,,15,74 5
+ad0025,A gardener has planted {a} apple trees and {b} pear trees in his orchard. What is the total count of the trees he has planted?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0026,"A Heart surgeon saved {a} lives last week. This week, he saved {b} more. How many lives has the surgeon saved in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0027,A heroic firefighter saved {a} lives from a burning building and {b} lives from a car crash within the same week. How many lives did he save in total?,keep,a+b,I,,add,lives,,,15,74 5
+ad0028,"A librarian lends you {a} books. However, {b} books amongst them were not what you were looking for so you returned them. How many books did you actually keep?",keep,a-b,IP,,both,numbers,,,15,74 5
+ad0029,A library has {a} fiction books and {b} non-fiction books. How many books does the library have in total?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0030,"A life-saving vaccine became available resulting in {a} lives saved in the first week and {b} lives in the second week, how many lives were saved in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0031,"A massive wildfire engulfed a forest near a residential area. Firefighters were able to evacuate {a} individuals, however {b} people sadly died due to the inferno. How many individuals were saved from the wildfire?",drop,,,saved may be a or a-b,both,lives,,,15,74 5
+ad0032,A math problem came up in your revision session with the following form: -{a} - {b}.,keep,-a-b,E,,sub,numbers,,,15,74 5
+ad0033,"A mountain rescue team was able to save {a} mountaineers from a landslide yesterday. Today, they saved another {b} mountaineers. How many mountaineers were saved in all?",keep,a+b,I,,add,lives,,,15,74 5
+ad0034,"A movie theater had {a} seats, but {b} seats were occupied. How many seats are yet to be occupied?",keep,a-b,IP,,both,numbers,,,15,74 5
+ad0035,"A non-profit organization estimates that preventable diseases led to the death of {a} people last quarter, and {b} people this quarter. How many people died in total in these two quarters because of preventable diseases?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0036,A package contains {a} balls and {b} were removed. How many balls are left in the package?,keep,a-b,IP,,both,numbers,,,15,74 5
+ad0037,"A pandemic claimed {a} lives earlier this week, and {b} lives just recently today. How many lives have been claimed by the pandemic this week?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0038,A plumbing system leaked -{a} gallons of water yesterday and -{b} gallons today. What is the total gallons of water leaked?,keep,-a-b,,,sub,numbers,,,15,74 5
+ad0039,A runner ran {a} kilometers in the morning and took a rest. But his running app malfunctioned and subtracted {b} kilometers from his record. How many kilometers does his running app show now?,keep,a-b,P,,both,numbers,,,15,74 5
+ad0040,A scientist has {a} milliliters of Solution A and {b} milliliters of Solution B. He combines them together. What is the total amount of solution now?,keep,a+b,,,add,numbers,,,15,74 5
+ad0041,"A serious flood hit a small town and {a} people were rescued by the coast guard, but regrettably, {b} individuals didn't survive against the severity of the situation. How many people managed to survive the tragedy?",drop,,,survivors may be a or a-b,both,lives,,,15,74 5
+ad0042,"A shipwreck led to {a} passengers being thrown overboard. Luckily, {b} passengers were rescued by lifeguards. How many passengers are still missing?",keep,a-b,IP,,both,lives,,,15,74 5
+ad0043,A spaceship starting at an altitude of -{a} kilometers from sea level ascends -{b} kilometers. What is its new altitude with respect to sea level?,drop,,,ascends -b: direction ambiguous,sub,numbers,,,15,74 5
+ad0044,A stock has a negative value change of -{a} dollars. An increase in its price leads to a further drop of {b} dollars. What is the total change in the stock's value?,drop,,,increase leads to drop: contradictory,sub,numbers,,,15,74 5
+ad0045,"A teacher asks you to assist in a math tutoring session, he asks, ""If we have {a} and subtract -{b} what's our result?""",keep,a+b,E,,both,numbers,,,15,"74 5,"
+ad0046,"A terrorist attack claimed {a} lives last Monday, and a further {b} lives the following Friday. How many people were killed in this week?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0047,"A terrorist attack occurred in a populated city square. The authorities were able to evacuate {a} people, but gruesomely, {b} people were lost in the incident. How many people were saved from the attack?",drop,,,saved may be a or a-b,both,lives,,,15,74 5
+ad0048,A tree has {a} leaves and {b} of these leaves fall from the tree in autumn. How many leaves are left on the tree?,keep,a-b,IP,,both,numbers,,,15,74 5
+ad0049,A zoo had {a} lions and acquired {b} more. How many lions do they have now?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0050,Adam owes his sister -${a} and he also owes his brother -${b}. How much total money does he owe?,keep,-a-b,,,sub,money,,,15,74 5
+ad0051,"After a devastating earthquake, emergency services managed to rescue {a} people from under the rubble on the first day, and {b} more people on the second day. How many people were saved in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0052,"After a stock market loss, your investment portfolio value decreased by -${a} and you incurred additional losses of -${b}. What's the total amount you lost?",keep,-a-b,,,sub,money,,,15,74 5
+ad0053,"After a trip to the mall, you need to calculate how much you've spent on your two favorite stores. How much did you spend if your purchases were ${a} and ${b}?",keep,a+b,,,add,money,,,15,74 5
+ad0054,"After paying for groceries, how much money do you have left in your wallet: ${a} - ${b}",keep,a-b,EP,,both,money,,,15,74 5
+ad0055,After paying your monthly bills of ${a} how much is left from your salary of ${b}?,keep,b-a,P,,both,money,,,15,"74, 5"
+ad0056,"After running {a} miles, you make a wrong turn and end up -{b} miles off your intended track. What's the total distance you covered?",drop,,,off track by -b: ambiguous,both,numbers,,,15,74 5
+ad0057,"After the hurricane, {a} people were found alive amidst the wreckage while {b} people were discovered too late to be saved. How many survivors were there?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0058,"An explosion at the factory caused {a} deaths. Also, {b} more workers died due to their injuries the next day. How many people died in total due to the factory explosion?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0059,"As a farmer, you had a yield of -{a} bushels of wheat this year. However, due to an error in the initial calculation, the accurate yield is -{b} bushels. What is the correct yield for this year?",drop,,,answer is b (given),sub,numbers,,,15,74 5
+ad0060,"As a health professional during a heat wave, {a} patients died under your care on Saturday, and {b} more patients died on Sunday. What is the total number of patients that died over the weekend?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0061,"As a lifeguard at a busy beach, you saved {a} lives this week and {b} lives the following week. How many total lives did you save?",keep,a+b,I,,add,lives,,,15,74 5
+ad0062,"As a lifeguard, you saved {a} people from drowning in the first half of your shift, and {b} in the second half. How many people did you save in total today?",keep,a+b,I,,add,lives,,,15,74 5
+ad0063,"As a mountain climber, you find yourself at an elevation of -{a} feet relative to sea level and wish to descend to -{b} feet. How much further do you need to descend?",keep,b-a,P,,sub,numbers,,,15,74 5
+ad0064,"As a rescue mission lead, you found that {a} people drowned in floodwaters yesterday and {b} people drowned today. How many people drowned over the two days?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0065,"As a surgeon, {a} of your patients died during surgery yesterday, and {b} died today. How many total patients have you lost?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0066,"As a UN health official, you're documenting casualties from a famine. If you accounted for {a} deaths yesterday and {b} deaths today, how many deaths have you accounted for in total?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0067,"As an epidemiologist, you've been tracking the spread of a deadly virus. Yesterday, {a} people died from the virus and {b} died today. What is the total number of deaths over the last two days?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0068,"As part of a math competition, you must quickly answer the following problem: -{a} - {b}.",keep,-a-b,E,,sub,numbers,,,15,74 5
+ad0069,"At a bake sale, you wish to buy two items priced at {a} and {b} respectively. What is the total amount you have to pay?",keep,a+b,,,add,numbers,,,15,74 5
+ad0070,"At a fire outbreak, {a} adults were saved while {b} children were saved, how many people were saved in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0071,"At a party, {a} people arrived at first, then {b} more people showed up. How many people are at the party?",keep,a+b,I,,add,numbers,,,15,74 5
+ad0072,"At the beach, your daughter collects seashells. She had {a} but lost {b}. How many seashells does she have now?",keep,a-b,IP,,both,numbers,,,15,74 5
+ad0073,"At the grocery store, you bought {a} apples but then returned {b} of them. How many apples do you have left?",keep,a-b,IP,,both,numbers,,,15,74 5
+ad0074,"At the grocery store, you decide to buy a bag of apples that costs {a} dollars and a jar of peanut butter that costs {b}. How much do you need to pay in total?",keep,a+b,,,add,numbers,,,15,74 5
+ad0075,"At the scene of the fire, {a} people were able to escape, but {b} were trapped inside and didn't make it. How many people got out of the fire safely?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0076,"At the supermarket, you bought items that cost -${a} and -${b}. How much were your total expenditures?",keep,-a-b,,,sub,money,,,15,74 5
+ad0077,Bart is -{a} points behind in a game. He then scores -{b} points. What's his current score?,keep,-a-b,,,sub,numbers,,,15,74 5
+ad0078,Ben drove {a} miles to get to work and {b} miles back home. What is the total miles he drove today?,keep,a+b,,,add,numbers,,,15,74 5
+ad0079,"Between two rival gangs, {a} members were killed on Sunday and {b} were killed on Monday. How many gang members died in total over the two days?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0080,"Billy has accumulated {a} points in a video game, yet a system error removed -{b} points from his account. How many points does Billy have now in his game account?",drop,,,removed -b points: sign ambiguous,both,numbers,,,15,74 5
+ad0081,Bob had a checking account with an overdraft of -{a}. He made another withdrawal of -{b}. How much is his total overdraft now?,keep,-a-b,,,sub,numbers,,,15,74 5
+ad0082,Bob ran for {a} miles yesterday and {b} miles today. What is the total distance he covered?,keep,a+b,,,add,numbers,,,15,74 5
+ad0083,Calculate the change you'd receive from your purchase: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0084,Challenge yourself by solving this math equation: -{a} - {b}. What do you get?,keep,-a-b,E,,sub,numbers,,,15,74 5
+ad0085,Dave sold his car for ${a} and used that money to pay part of his student loan of ${b}. How much is left of his student loan?,keep,b-a,P,,both,money,,,15,74 5
+ad0086,"Due to a gas leak in a building, several tenants were affected. Emergency services managed to pull out {a} tenants safely, but {b} tenants tragically passed away. How many tenants were saved from the building?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0087,"Due to some miscalculations, you owe money on two accounts. What is your total debt? Subtract -${a} and -${b}.",drop,,,'subtract' contradicts 'total debt',sub,money,,,15,74 5
+ad0088,"During a battle, medic units managed to bring back {a} soldiers to life, and later they saved an additional {b} soldiers. What is the total number of soldiers whose lives were saved?",keep,a+b,I,,add,lives,,,15,74 5
+ad0089,"During a board game, you initially drew a card worth {a}. On your next turn, you drew another card worth {b}. What is your total score now?",keep,a+b,I,,add,numbers,,,15,74 5
+ad0090,"During a boat capsizing incident, the coast guard managed to rescue {a} people from the water. Regrettably, {b} people drowned before they could be saved. How many people did the coast guard manage to save?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0091,"During a catastrophic natural disaster, {a} people were counted as initial survivors. Regrettably, {b} people couldn't sustain their injuries and passed away. How many people ultimately survived the disaster?",keep,a-b,IP,,both,lives,,,15,74 5
+ad0092,"During a critical surgery, the medical team was able to revive {a} patients. However, {b} of them later succumbed to their condition. How many patients survived?",keep,a-b,IP,,both,lives,,,15,74 5
+ad0093,"During a dangerous hurricane, {a} people took refuge in a shelter, unfortunately, {b} people did not make it due to the severity of the storm. How many people survived the hurricane?",drop,,,survivors may be a or a-b,both,lives,,,15,74 5
+ad0094,"During a devastating flood, a rescue team managed to save {a} lives from one neighborhood and {b} from another, how many lives were saved in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0095,"During a fiery building collapse, a firefighter was able to pull {a} people from the wreckage. Later that evening, he went back and saved additional {b} lives. Total, how many lives did the firefighter save?",keep,a+b,I,,add,lives,,,15,74 5
+ad0096,"During a fire outbreak, the first fire brigade team saved {a} lives, and the second team saved {b} what is the total number of lives saved?",keep,a+b,I,,add,lives,,,15,"74 5,"
+ad0097,"During a flood in your city, you saved {a} people by moving them to safety on the first day and another {b} people the next day. What is the total number of lives you saved?",keep,a+b,I,,add,lives,,,15,74 5
+ad0098,"During a flood, you are part of a rescue team. You saved {a} people on the first boat trip and {b} people on the second boat trip. How many people did you manage to save in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0099,"During a flood, {a} people were saved by the coastguards, but sadly, {b} people drowned. How many people were successfully rescued?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0100,"During a game, you scored {a} points in the first half and {b} in the second. What was your total score?",keep,a+b,I,,add,numbers,,,15,74 5
+ad0101,During a harsh winter {a} homeless people died due to exposure last week and {b} more died this week. How many total homeless people lost their lives over these two weeks?,keep,a+b,I,,sub,lives,,,15,74 5
+ad0102,"During a horrific flood, rescue teams managed to evacuate {a} individuals. Unfortunately, {b} individuals were caught in the deluge. How many people were rescued successfully?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0103,"During a large-scale natural disaster, emergency workers rescued {a} individuals from the disaster zone. Unfortunately, {b} individuals did not survive. How many individuals did the emergency workers manage to save successfully?",drop,,,saved may be a or a-b,both,lives,,,15,74 5
+ad0104,"During a major flood, rescue teams managed to save {a} individuals in the morning and {b} more in the evening. How many individuals were saved in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0105,"During a major road accident, {a} people were rescued and rushed to hospital but {b} people died at the scene. How many accident victims made it to the hospital alive?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0106,"During a military conflict, Medic A saved {a} soldiers' lives and Medic B saved {b}. How many lives were saved in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0107,"During a pop quiz, your math teacher suddenly asks: If you add {a} to {b} what do you get?",keep,a+b,E,,add,numbers,,,15,"74 5,"
+ad0108,"During a quiz, a question came up: the sum of {a} and {b} is what?",keep,a+b,E,,add,numbers,,,15,74 5
+ad0109,"During a raging wildfire, firefighters were able to pull {a} people from a burning building. They saved {b} more when they returned for a second round. How many people did they save in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0110,"During a severe heat wave, {a} people succumbed to heat stroke last month and {b} people died this month. What is the total number of casualties due to heat stroke?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0111,"During a storm, {a} sailors got lost at sea. Only {b} sailors were found and rescued. How many sailors are still missing?",keep,a-b,IP,,both,lives,,,15,74 5
+ad0112,"During a timed math competition, you need to quickly solve -{a} - {b} to move on to the next round.",keep,-a-b,E,,sub,numbers,,,15,74 5
+ad0113,"During a violent riot, {a} people were killed on the first day and {b} on the second day. How many people died during these riots in total?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0114,"During a war, a medical team managed to save {a} soldiers out of the total who were injured, however {b} soldiers they unfortunately couldn't save. How many soldiers were saved by the medical team?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0115,"During an epidemic, you as a front-line nurse managed to help {a} patients recover yesterday, and {b}. How many patients have you helped recover so far?",drop,,,garbled second quantity,add,lives,,,15,74 5
+ad0116,"During the avalanche rescue mission, {a} survivors were found, but {b} were not so fortunate. How many people came out alive?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0117,"During the car crash rescue, {a} lives were saved in the initial extraction, and {b} in the final extraction. How many lives were saved altogether?",keep,a+b,I,,add,lives,,,15,74 5
+ad0118,"During the civil unrest, {a} lives were lost yesterday and {b} lives today. What's the total lives lost to this conflict over these two days?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0119,"During the cyclone, {a} people were rescued from the floodwaters and {b} people were saved from under the debris of fallen homes. How many people were saved altogether?",keep,a+b,I,,add,lives,,,15,74 5
+ad0120,"During the epidemic last year, {a} children lost their lives. This year {b} children died. How many children have died across these two years because of the epidemic?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0121,"During the fire in the old mill, firefighters were able to save {a} workers, however, {b} workers didn't make it out. How many workers were saved by the firefighters?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0122,"During the flood relief efforts, {a} lives were saved using helicopters and {b} by boats, how many lives were saved in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0123,"During the flood rescue operation, {a} people were transported to the safe zone, however {b} people were stranded. How many people were saved from the flood?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0124,"During the flood, the relief team was able to save {a} lives on Monday, and {b} lives on Tuesday. How many lives did they save in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0125,"During the flood, {a} people reached the safety zone, but unfortunately {b} people got swept away. How many people were saved during the flood?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0126,"During the natural disaster, the rescue team successfully evacuated {a} people, however {b} people were unfortunately not able to make it out. How many lives were spared?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0127,"During the school shooting, {a} students managed to escape but {b} did not survive. How many kids made it out alive?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0128,"During the two epidemics, {a} lives were saved in the first one while {b} lives were saved during the second one. How many lives were saved in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0129,"During the war, {a} soldiers were sent to the combat zone. Unfortunately, {b} of them were killed in action. How many soldiers survived the battle?",keep,a-b,IP,,both,lives,,,15,74 5
+ad0130,"During your hill climb, you burned {a} calories, but then had a snack that was {b} calories. What's the net calories loss?",keep,a-b,P,,both,numbers,,,15,74 5
+ad0131,Emily paid ${a} for groceries from her salary of ${b}. How much of her salary does she have left?,keep,b-a,P,,both,money,,,15,74 5
+ad0132,Erik earned ${a} from his part-time job and his friend gave him ${b} as a gift. How much money does Erik have now?,keep,a+b,,,add,money,,,15,74 5
+ad0133,"Famine caused {a} deaths in January, and {b} deaths in February. How many deaths in total did famine cause in these two months?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0134,"For your homework, you need to figure out the solution to -{a} - {b}.",keep,-a-b,E,,sub,numbers,,,15,74 5
+ad0135,"From a plane crash, {a} survivors were rescued but unfortunately, {b} perished in the accident. How many people survived in total?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0136,"From the accident, {a} lives were saved by the emergency responders yesterday and {b} were saved today. How many lives were saved in total?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0137,Hannah spends {a} minutes doing her homework and {b} minutes practicing her piano. How many minutes did Hannah spend in total?,keep,a+b,,,add,numbers,,,15,74 5
+ad0138,I had {a} books in my backpack and I took out {b} books to put on my shelf. How many books are now in my backpack?,keep,a-b,IP,,both,numbers,,,15,74 5
+ad0139,If a book costs ${a} and you also want to buy a pencil which costs ${b} how much would you need to spend?,keep,a+b,,,add,money,,,15,"74 5,"
+ad0140,"If John has {a} apples and Mary gives him {b} more apples, how many apples does John now have?",keep,a+b,I,,add,numbers,,,15,74 5
+ad0141,If the entrance fee to the zoo is ${a} and the carousel ride is ${b} how much would you spend in total?,keep,a+b,,,add,money,,,15,"74 5,"
+ad0142,If the price of a concert ticket is ${a} and a burger at the venue costs ${b} what is your total expenditure?,keep,a+b,,,add,money,,,15,"74, 5,"
+ad0143,"If the total cost of your vacation is ${a} and you already paid ${b} for hotel bookings, how much more do you need to pay?",keep,a-b,P,,both,money,,,15,74 5
+ad0144,"If there are {a} students in your English class and {b} students in your Math class, what is the total number of students in both classes?",keep,a+b,I,,add,numbers,,,15,74 5
+ad0145,"If you borrowed -${a} from a friend and then lost -${b} in a bet, how much money do you owe?",drop,,,amount owed unclear (bet loss may not be owed),sub,money,,,15,74 5
+ad0146,If you buy a toy car for ${a} and a doll for ${b} how much did you spend in total?,keep,a+b,,,add,money,,,15,"74 5,"
+ad0147,If you earn ${a} from your part-time job and your friend pays back a loan of ${b} what would be the total amount you have?,keep,a+b,,,add,money,,,15,"74 5,"
+ad0148,"If you earned ${a} from your part-time job and ${b} from dog walking, how much money would you have altogether?",keep,a+b,,,add,money,,,15,74 5
+ad0149,"If you have -${a} and you minus -${b} from it, what would the result be?",keep,b-a,E,,sub,money,,,15,74 5
+ad0150,If you have ${a} in your bank account and your friend gives you ${b} how much do you have in total?,keep,a+b,,,add,money,,,15,"74 5,"
+ad0151,"If you initially saved up ${a} and then spent ${b} on shopping, how much do you have left?",keep,a-b,P,,both,money,,,15,74 5
+ad0152,If you lent ${a} to your friend and she gives you back ${b} how much money did you receive in total?,drop,,,answer is b (given),add,money,,,15,"74 5,"
+ad0153,If you owe your friend -${a} and your sister another -${b} what is the total amount of money you owe both of them?,keep,-a-b,,,sub,money,,,15,"74 5,"
+ad0154,If you owe ${a} and then you pay back ${b} how much do you still owe?,keep,a-b,P,,sub,money,,,15,"74 5,"
+ad0155,If you owed ${a} and then paid off -${b} how much would you now owe?,drop,,,paid off -$b: sign ambiguous,sub,money,,,15,"74 5,"
+ad0156,If you purchased a book for ${a} and added a bookmark for ${b} what is the sum of the two items?,keep,a+b,,,add,money,,,15,"74 5,"
+ad0157,"If you read {a} pages of your book and later read {b} more pages, how many pages have you read?",keep,a+b,I,,add,numbers,,,15,74 5
+ad0158,"If you saved ${a} in January and ${b} in February, what is the total amount saved in both months?",keep,a+b,,,add,money,,,15,74 5
+ad0159,"If you saved {a} lives during your medical mission last year, and {b} lives this year, how many lives have you saved in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0160,"If you spend ${a} on groceries and ${b} on bills, how much money have you spent in total?",keep,a+b,,,add,money,,,15,74 5
+ad0161,"If you spend ${a} on groceries and ${b} on gas, what is the total amount of money you have expended?",keep,a+b,,,add,money,,,15,74 5
+ad0162,If you start with a budget of ${a} for a road trip and gas costs ${b} how much money do you have left for the rest of the trip?,keep,a-b,P,,both,money,,,15,"74 5,"
+ad0163,"If you started with ${a} and spent ${b} on groceries, how much money do you have remaining?",keep,a-b,P,,both,money,,,15,74 5
+ad0164,If you subtract a debt of -${a} from a loan of -${b} how much do you have left?,keep,a-b,E,,sub,money,,,15,"74 5,"
+ad0165,If you subtract -${a} from your total expense of -${b} what will be your final expense?,keep,a-b,E,,sub,money,,,15,74 5
+ad0166,"If you think of your debt as negative numbers, and you owe $-{a} to your friend and another $-{b} to your sibling, how much do you owe in total?",keep,-a-b,,,sub,numbers,,,15,74 5
+ad0167,"If you walk {a} steps forward and then {b} steps backwards, how many steps have you taken altogether?",keep,a+b,I,,add,numbers,,,15,74 5
+ad0168,"If you were able to donate organs and save {a} lives last year and this year you managed to help {b} more lives through organ donations, how many lives have you saved in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0169,"If you won a lottery of ${a} and paid ${b} in taxes, how much money did you actually get?",keep,a-b,P,,both,money,,,15,74 5
+ad0170,If your company has a deficit of -${a} and subtracts another deficit of -${b} what is the total deficit now?,drop,,,'subtracts another deficit' vs 'total deficit',sub,money,,,15,"74, 5,"
+ad0171,If your first paycheck is ${a} and your second paycheck is ${b} how much did you earn in total?,keep,a+b,,,add,money,,,15,"74 5,"
+ad0172,If your first paycheck was ${a} and your second one was ${b} how much money did you make total?,keep,a+b,,,add,money,,,15,"74 5,"
+ad0173,If your phone bill is ${a} how much will you have left from your paycheck of ${b}?,keep,b-a,P,,both,money,,,15,"74, 5"
+ad0174,Imagine having -${a} on your account then your bank mistakenly debits -${b} how much is left now?,drop,,,debits -$b: sign ambiguous,sub,money,,,15,"74 5,"
+ad0175,Imagine that you found {a} coins on the street then lost {b} of them. How many coins do you have now?,keep,a-b,IP,,both,numbers,,,15,74 5
+ad0176,Imagine you have {a} pages left to read in your favorite book and you read {b} pages. How many pages do you have left to read?,keep,a-b,IP,,both,numbers,,,15,74 5
+ad0177,"In a basketball game, one team scored {a} points in the first half and scored {b} points in the second half. What was the team's total score for the game?",keep,a+b,I,,add,numbers,,,15,74 5
+ad0178,"In a big fire incident, {a} people escaped, but {b} people were unfortunately trapped inside. How many were fortunate enough to get out?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0179,"In a business deal, if you earned -${a} but had a loss of -${b} what is your total profit or loss?",drop,,,earned -$a: contradictory,sub,money,,,15,"74 5,"
+ad0180,"In a cafe, you see the menu and start wondering about the combined cost of your favorite sandwich and drink: How much would it be if I add the price of {a} and {b}?",keep,a+b,E,,add,numbers,,,15,74 5
+ad0181,"In a car accident, paramedics were able to save {a} victims on the scene, however, {b} later died in the hospital. How many victims survived the accident?",drop,,,survivors may be a or a-b,both,lives,,,15,74 5
+ad0182,"In a carnival, {a} were on the Ferris wheel when it stopped working. The fire department successfully rescued {b} people. How many people were left stranded on the Ferris wheel?",keep,a-b,IP,,both,lives,,,15,74 5
+ad0183,"In a catastrophic building collapse, {a} people were trapped under the debris. Heartbreakingly, {b} people were deceased by the time the rescue arrived. How many people were pulled alive from the collapse?",keep,a-b,IP,,both,lives,,,15,74 5
+ad0184,"In a charity race, you ran {a} miles, your friend ran {b} miles. How many more miles did you run than your friend?",keep,a-b,P,,both,numbers,,,15,74 5
+ad0185,"In a coffee shop, a latte costs {a} dollars and a muffin costs {b} dollars. How much would you end up paying for both?",keep,a+b,,,add,numbers,,,15,74 5
+ad0186,"In a competitive game, Team A had a score difference of -{a} points. After the final round, this deficit increased by -{b} points. What is the final score difference for Team A?",drop,,,deficit increased by -b: sign ambiguous,sub,numbers,,,15,74 5
+ad0187,"In a devastating car accident, {a} victims were rushed to the emergency room. Despite the best efforts of the doctors, {b} of the accident victims didn't survive. How many people survived the accident?",keep,a-b,IP,,both,lives,,,15,74 5
+ad0188,"In a devastating flood, the local community was able to rescue {a} individuals, but {b} people were sadly drowned. How many people survived the flood?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0189,"In a famine, {a} individuals lost their lives in the first period of starvation, while {b} died in the second period. How many total lives were lost during this famine?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0190,"In a fiery building evacuation, {a} residents managed to escape before the fire department arrived, and firemen saved additional {b} lives. How many residents were saved in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0191,"In a game of soccer, Team A scored {a} goals and Team B scored {b}. What is the total number of goals scored in the game?",keep,a+b,I,,add,numbers,,,15,74 5
+ad0192,"In a game, you lost -{a} points in round one and -{b} points in round two. How many points did you lose in total?",keep,-a-b,,,sub,numbers,,,15,74 5
+ad0193,"In a game, your next step is to crack a code. The question before you is -{a} - {b}.",keep,-a-b,E,,sub,numbers,,,15,74 5
+ad0194,"In a grocery store, you need to calculate the total cost of two apples where one costs {a} and the other is priced at {b}.",keep,a+b,,,add,numbers,,,15,74 5
+ad0195,"In a horrifying plane crash, {a} passengers managed to escape, while {b} unfortunate passengers did not survive. How many survivors were there from the accident?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0196,"In a large city fire, {a} lives were saved by volunteer firefighters and {b} lives by professional firefighters. How many lives were saved overall?",keep,a+b,I,,add,lives,,,15,74 5
+ad0197,"In a lifesaving training program, {a} lives were successfully saved in the first week, and {b} in the second week. How many lives were saved in total over the two weeks?",keep,a+b,I,,add,lives,,,15,74 5
+ad0198,"In a local sports event, {a} people were saved by the emergency medical team, unfortunately {b} people failed to recover. How many people survived the event?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0199,"In a marine accident, {a} passengers fell overboard from a ship. Out of these, {b} passengers drowned before rescuers could reach them. How many passengers were rescued from the water?",keep,a-b,IP,,both,lives,,,15,74 5
+ad0200,"In a massive flood, {a} individuals got displaced from their homes. Among them, {b} individuals were able to find shelter. How many individuals are currently left without a shelter?",keep,a-b,IP,,both,lives,,,15,74 5
+ad0201,"In a math quiz, you encounter the following problem. How do you solve -{a} - {b}?",keep,-a-b,E,,sub,numbers,,,15,74 5
+ad0202,"In a math tutoring session, you're presented with a problem: -{a} - {b}. What's the solution?",keep,-a-b,E,,sub,numbers,,,15,74 5
+ad0203,"In a medical breakthrough, {a} lives were saved due to a new drug trial, and {b} lives were saved due to improved surgical procedures. How many lives were saved in total due to these medical advancements?",keep,a+b,I,,add,lives,,,15,74 5
+ad0204,"In a pizza restaurant, you and your friend decide to divide the cost. If your friend's order costs {a} and your order costs {b} what's the total amount to pay?",keep,a+b,,,add,numbers,,,15,"74 5,"
+ad0205,"In a recent disaster, {a} people lost their lives on the initial day, and {b} more lives were lost the following day. What is the total death toll?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0206,"In a recent road accident, {a} passengers survived the crash which the authorities managed to evacuate. Regrettably, {b} passengers didn't survive. How many survived the crash?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0207,"In a severe flood, {a} lives were saved by rescue boats while {b} people were saved by a rescue helicopter. How many lives were saved in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0208,"In a short sprint race, you ran {a} meters, took a short break and then ran another {b} meters. How many meters did you run in total?",keep,a+b,,,add,numbers,,,15,74 5
+ad0209,"In a terrible accident, {a} people were injured. Unfortunately, {b} people couldn't survive. How many people survived the accident?",drop,,,survivors may be a-b or unknown (injured vs dead),both,lives,,,15,74 5
+ad0210,"In a terrible forest fire, {a} campers were saved by the forest rangers, but {b} campers couldn't escape the flames. How many campers got to leave the forest alive?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0211,"In a terrorist bombing, {a} people were successfully evacuated but {b} victims lost their lives. How many people managed to survive the incident?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0212,"In a tragic boat accident, {a} people died on Monday, and on Tuesday, {b} more people died. What's the total number of casualties from the boat accident?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0213,"In a zoo, there are {a} zebras and {b} lions. What is the total number of zebras and lions in the zoo?",keep,a+b,I,,add,numbers,,,15,74 5
+ad0214,"In an ongoing epidemic, the first batch of vaccine saved {a} lives, and the second batch saved {b}. How many lives were saved total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0215,"In an unfortunate attack on a festival, security personnel were able to evacuate {a} individuals from the area, but {b} individuals tragically lost their lives. How many individuals were successfully evacuated?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0216,"In one day, you owe -${a} on your credit card. However, you made a payment of -${b}. What's your balance?",drop,,,payment of -$b: sign ambiguous,sub,money,,,15,74 5
+ad0217,"In the battlefield, {a} soldiers were rescued by a medical team, but tragically, {b} soldiers lost their lives. How many soldiers did the medical team successfully save?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0218,"In the building fire, {a} people managed to escape the flames, but tragically {b} people perished. How many people survived the fire?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0219,"In the city's worst neighborhood, {a} people were murdered on Friday, and on Saturday that number was {b}. How many people were murdered in this neighborhood over those two days?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0220,"In the epidemic, vaccination saved {a} lives in the first month, and {b} lives in the second month. How many lives were saved in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0221,"In the fierce battle which took place, {a} of our warriors were slain on the first day, and close to {b} more were killed on the second day. How many total warriors have we lost in these two days?",drop,,,'close to' b: approximate,sub,lives,,,15,74 5
+ad0222,"In the initial stage of a pandemic, your team of doctors managed to save {a} people. During the second wave, your team was able to save {b}. How many lives did your team save in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0223,"In the middle of your examination, you encountered a tricky question. -{a} - {b} could you solve it?",keep,-a-b,E,,sub,numbers,,,15,"74 5,"
+ad0224,"In the mining incident, {a} miners were safely lifted to the surface, but sadly, {b} miners remained trapped underground. How many miners were saved?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0225,"In the past month, the Search & Rescue team managed to save {a} lives in the mountains and {b} lives at sea. How many lives were saved altogether?",keep,a+b,I,,add,lives,,,15,74 5
+ad0226,"In the past two shopping trips, you spent ${a} and ${b}. How much total money have you spent on shopping?",keep,a+b,,,add,money,,,15,74 5
+ad0227,"In the plane crash, there were {a} survivors but {b} unfortunately did not survive the incident. How many people survived the plane crash?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0228,"In the recent disaster, the rescue team managed to pull out {a} people alive, but unfortunately, {b} people couldn't make it. How many people did the disaster claim?",drop,,,answer is b (given),both,lives,,,15,74 5
+ad0229,"In the shipwreck catastrophe, {a} people were saved by the coast guard, yet, {b} people drowned in the sea. How many people were rescued successfully?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0230,"In the war, your troops eliminated {a} enemy combatants on the first day, and {b} on the second day. How many total enemy combatants were eliminated in these two days?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0231,"In two different transactions, you accidentally paid more for some products thereby resulting in two losses. What is the total when you subtract -${a} and -${b}?",drop,,,'subtract' contradicts 'total',sub,money,,,15,74 5
+ad0232,"In your math class, your teacher writes on the board: -{a} - {b}. What is the solution?",keep,-a-b,E,,sub,numbers,,,15,74 5
+ad0233,"In your wallet, you have {a} dollars. Your friend paid you back {b} dollars. How much money do you have now in total?",keep,a+b,,,add,numbers,,,15,74 5
+ad0234,Jack baked {a} cookies and ate {b}. How many cookies are left?,keep,a-b,IP,,both,numbers,,,15,74 5
+ad0235,Jack earns {a} dollars per month. He spends {b} dollars on living expenses. How much does he save every month?,keep,a-b,P,,both,numbers,,,15,74 5
+ad0236,James had {a} pieces of candy and gave {b} to his friend. How many pieces of candy does James have now?,keep,a-b,IP,,both,numbers,,,15,74 5
+ad0237,"Jennifer lost a bet and had to pay -${a}. Later, she found out there was a mistake in the bet calculation and she was supposed to only lose -${b}. How much did Jennifer really have to pay?",drop,,,answer is b (given),sub,money,,,15,74 5
+ad0238,"John had an initial debt of -${a}. Rather than repaying it, he borrowed another amount of -${b}. What is John's total debt now?",keep,-a-b,,,sub,money,,,15,74 5
+ad0239,John had {a} apples. He later picked {b} more apples from his tree. How many apples does John have now?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0240,John has {a} apples and Marie gives him {b} more. How many apples does John have now?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0241,"John is trying to pay off his huge debt of -{a} dollars. Thankfully, his friend helps him by covering -{b} dollars of his debt. What is John's remaining debt now?",keep,b-a,G,,sub,numbers,,,15,74 5
+ad0242,John read {a} pages of a book and then read {b} more. How many pages does he still need to read?,drop,,,total pages unknown,both,numbers,,,15,74 5
+ad0243,Kelly invested ${a} in stocks and ${b} in bonds. What is her total investment?,keep,a+b,,,add,money,,,15,74 5
+ad0244,"Last week, there was a major accident in the city. The emergency response team managed to rescue {a} people, but unfortunately, {b} of them couldn't survive. How many of them walked away alive?",keep,a-b,IP,,both,lives,,,15,74 5
+ad0245,Let's say you are playing a video game where you start with negative points. Your current score is -{a} and you somehow earn negative points of -{b}. What will be your new score?,keep,-a-b,,,sub,numbers,,,15,74 5
+ad0246,Let's say you had ${a} but you spent ${b} on lunch. How much do you now have left?,keep,a-b,P,,both,money,,,15,"74, 5"
+ad0247,"Lucy saves {a} coins from her lunch money every week. This week, she found {b} more coins on the street. How many coins does she have this week?",keep,a+b,I,,add,numbers,,,15,74 5
+ad0248,"On a mission, trained paramedics rescued {a} people from a train wreck and {b} people from an automobile crash. How many lives did they save altogether?",keep,a+b,I,,add,lives,,,15,74 5
+ad0249,"On the battlefield, {a} soldiers' lives were saved by the quick response of the medical team in the morning, and somewhat later, another {b} were saved. How many soldiers' lives were saved in total today?",keep,a+b,I,,add,lives,,,15,74 5
+ad0250,"On the battlefield, {a} soldiers were able to retreat safely, but {b} soldiers tragically fell. How many soldiers made it back from the battlefield?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0251,"On the farm, you start with {a} chickens. Due to high winds, -{b} chicken coops were blown away. How many chickens do you have left?",drop,,,coops vs chickens: nonsense,both,numbers,,,15,74 5
+ad0252,"On the first day of the pandemic, {a} lives were saved by the vaccine. On the second day, {b} more lives were saved. How many lives were saved in total by the vaccine?",keep,a+b,I,,add,lives,,,15,74 5
+ad0253,"Our emergency rescue team saved {a} lives from the earthquake, but sadly, {b} individuals didn't survive. How many people survived the earthquake?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0254,"Out of the refugees who attempted the dangerous journey, {a} individuals managed to survive and reach safety, but {b} people weren't as lucky. How many made it to their destination safely?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0255,"Over the holidays you gained {a} pounds, but you lost {b} pounds following a diet. How many pounds do you weigh now?",drop,,,starting weight unknown,both,numbers,,,15,74 5
+ad0256,"Running a lemonade stand, you have made {a} dollars today. Yet you remember having to pay {b} dollars to your brother for helping. How much money did you effectively make today from your lemonade stand?",keep,a-b,P,,both,numbers,,,15,74 5
+ad0257,Sally spent ${a} on clothes from her total savings of ${b}. How much savings does she have now?,keep,b-a,P,,both,money,,,15,74 5
+ad0258,"Sasha bought {a} dresses and {b} shirts, how many items did she purchase in total?",keep,a+b,I,,add,numbers,,,15,74 5
+ad0259,"Steve bet ${a} on a horse race and lost. The next day, he bet another ${b} on a different horse race and also lost. How much total money did Steve lose?",keep,a+b,,,sub,numbers,,,15,74 5
+ad0260,"Suppose, you find ${a} lying on the street and you already have ${b} in your pocket. How much do you have in total?",keep,a+b,,,add,money,,,15,74 5
+ad0261,"Suppose, you found that a product was overpriced by -${a} after you purchased it, and the store decided to apologize and offer a compensation of -${b}. What is your total savings now?",drop,,,compensation of -$b: nonsense,sub,money,,,15,74 5
+ad0262,Suppose you have an account balance of -${a} and you made a purchase which got you a cashback of -${b}. What's your new account balance?,drop,,,cashback of -$b: sign ambiguous,sub,money,,,15,74 5
+ad0263,Suppose you went on a trip and spent some money on dinner. How much money do you have left: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0264,"The brave veterinarian saved {a} animal lives from the wildfire yesterday, and {b} more lives today. How many animal lives did the vet save in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0265,The car's odometer read {a} miles at the start of the trip and {b} miles at the end. How many miles were covered?,keep,b-a,P,,both,numbers,,,15,74 5
+ad0266,"The charity drive aims to collect {a} donations. However, they have already received {b}. How many more donations are needed to meet the goal?",keep,a-b,IP,,both,numbers,,,15,74 5
+ad0267,The civil unrest led to {a} deaths yesterday and {b} today. Can you determine the total number of lives lost in these two days of unrest?,keep,a+b,I,,sub,lives,,,15,74 5
+ad0268,"The disaster response team was able to relocate {a} people to safe places, but they failed to relocate {b} people. How many people are still stuck at unsafe places?",drop,,,answer is b (given),both,lives,,,15,74 5
+ad0269,"The disease the spread in city A killed {a} people last week, and {b} people perished this week. What is the total number of people city A lost over these two weeks?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0270,"The doctor at the rural clinic was able to save {a} lives during the typhoon. The paramedics moving about the disaster area managed to save {b}. Altogether, how many lives were saved?",keep,a+b,I,,add,lives,,,15,74 5
+ad0271,"The ferry was carrying {a} passengers when it sank, unfortunately, only {b} passengers were rescued. How many lives were lost?",keep,a-b,IP,,both,lives,,,15,74 5
+ad0272,The flood claimed {a} lives on the first day and {b} lives on the second day. How many lives were claimed by the flood in total?,keep,a+b,I,,sub,lives,,,15,74 5
+ad0273,The football team scored {a} points in the first half. They lost {b} points in penalties. How many points does the team have left?,keep,a-b,IP,,both,numbers,,,15,74 5
+ad0274,"The hospital performed {a} life-saving surgeries last week, and {b} this week. How many lives were saved in these two weeks?",keep,a+b,I,,add,lives,,,15,74 5
+ad0275,"The Johnson family earned ${a} this year, but they had to pay ${b} for different expenses. What is the remaining amount they have?",keep,a-b,P,,both,numbers,,,15,74 5
+ad0276,The museum had {a} exhibits. They removed {b} exhibits for update. How many exhibits remain in the museum?,keep,a-b,IP,,both,numbers,,,15,74 5
+ad0277,The new road safety course has resulted in {a} teenagers avoiding car accidents and {b} adults. How many lives have been saved due to the road safety course?,keep,a+b,I,,add,lives,,,15,74 5
+ad0278,The new traffic law helped to save {a} lives last month and {b} lives this month. How many lives were saved in total because of the new law?,keep,a+b,I,,add,lives,,,15,74 5
+ad0279,"The rescue team managed to pull {a} survivors from the wreckage, but sadly {b} people did not survive. So, how many people ultimately survived the disaster?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0280,"The search and rescue team managed to pull out {a} survivors from the earthquake debris yet, tragically, {b} people didn't make it. How many people did they save in total?",drop,,,answer is a (given),both,lives,,,15,74 5
+ad0281,"The search and rescue team was able to rescue {a} lives in the morning during the flood, and {b} more in the afternoon. How many lives did they save altogether in one day?",keep,a+b,I,,add,lives,,,15,74 5
+ad0282,"The stock market index went down by -{a} points, then went down again by {b} points. What was the total point decrease?",drop,,,mixed signs (-a then b),sub,numbers,,,15,74 5
+ad0283,The ticket for a concert costs ${a}. You have ${b} saved in your piggy bank. How much money will you have left after buying the ticket?,keep,b-a,P,,both,money,,,15,74 5
+ad0284,The total cost of the gift was ${a} minus a discount of ${b}. How much did you pay for the gift?,keep,a-b,P,,both,money,,,15,74 5
+ad0285,"The vaccination campaign saved {a} lives in the sunny province and {b} lives in the dry region, how many lives did it save overall?",keep,a+b,I,,add,lives,,,15,74 5
+ad0286,"There are {a} birds on a branch. If {b} birds decide to exit the branch, How many birds are left?",keep,a-b,IP,,both,numbers,,,15,74 5
+ad0287,"There was a devastating fire in an apartment building. Firefighters managed to save {a} lives from the flaming building and {b} lives from adjacent buildings, how many lives were saved in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0288,"There was a flood in a city. During the evacuation operation, {a} lives were saved by the first response team and {b} lives by the second response team, how many lives were saved in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0289,"There was a massive earthquake and {a} people were unfortunately caught in the aftermath. After a month of rescue operations, {b} people were saved. How many people did not survive the disaster?",drop,,,not-saved may still be alive (not rescued yet) vs died,both,lives,,,15,74 5
+ad0290,"There was a massive fire outbreak at a shopping center and {a} people were evacuated, but {b} of these people unfortunately succumbed to the severe burns they sustained. How many people managed to survive?",keep,a-b,IP,,both,lives,,,15,74 5
+ad0291,"There were {a} casualties in the first wave of the invasion, and {b} in the second. How many casualties were there overall?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0292,"There were {a} people attending the event initially, but -{b} of them had to leave early. Can you calculate the total number of people who stayed until the end of the event?",drop,,,-b people left: nonsense,both,numbers,,,15,74 5
+ad0293,There were {a} pieces of candy in your stash. You decided to eat {b} pieces. How many candies are left in your stash?,keep,a-b,IP,,both,numbers,,,15,74 5
+ad0294,"This month and last, you were charged overdraft fees. How much does your bank owe you when you subtract -${a} from -${b}?",drop,,,'bank owes you': nonsense story,sub,money,,,15,74 5
+ad0295,"This week, the life-saving vaccine was administered to {a} people in village A and {b} people in village B. How many lives were potentially saved in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0296,"This week, {a} lives were saved during a subway accident, while {b} lives were saved from a burning building. How many lives were saved in total?",keep,a+b,I,,add,lives,,,15,74 5
+ad0297,Tom found {a} dollars in his pocket and Mary gave him {b} dollars. What is the total amount Tom has now?,keep,a+b,,,add,numbers,,,15,74 5
+ad0298,Two friends bet on a basketball game. One friend loses {a} dollars and the other friend loses -{b} dollars. How much do they collectively lose?,drop,,,loses -b dollars: sign ambiguous,both,numbers,,,15,74 5
+ad0299,Two of your checks bounced and each incurred fees. What's the total expense if you subtract -${a} and -${b}?,drop,,,'subtract' contradicts 'total',sub,money,,,15,74 5
+ad0300,Two of your checks have bounced. what would be the total amount you owe your bank if the checks were each for -${a} and -${b}?,keep,-a-b,,,sub,money,,,15,74 5
+ad0301,What is the sum of a coffee that costs ${a} and a sandwich that costs ${b}?,keep,a+b,,,add,money,,,15,74 5
+ad0302,"While accounting, you realized you received payments from two clients. What is the total amount received if client A paid ${a} and client B paid ${b}?",keep,a+b,,,add,money,,,15,74 5
+ad0303,"While at a farmer's market, you bought {a} apples and then gave away {b} to a friend. How many apples do you have left?",keep,a-b,IP,,both,numbers,,,15,74 5
+ad0304,"While baking, you read out a recipe to your mom. It asks, If you've got {a} grams of flour and the recipe calls for {b} how much is left?",keep,a-b,P,,both,numbers,,,15,"74 5,"
+ad0305,"While balancing a budget, you come across two amounts. What's the total when you add {a} and {b} together?",keep,a+b,E,,add,numbers,,,15,74 5
+ad0306,"While doing your tax return, you find two errors that result in additional payments. The first error comes to {a} dollars and the second one to {b} dollars. What is your total additional tax payment?",keep,a+b,,,sub,numbers,,,15,74 5
+ad0307,"While grading your math test, your teacher gives a bonus question for extra credit. How would you solve -{a} - {b}?",keep,-a-b,E,,sub,numbers,,,15,74 5
+ad0308,"While on a trip, you hire a local guide for ${a} and pay ${b} for a boat ride. What's your total expense for these two recreational activities?",keep,a+b,,,add,money,,,15,74 5
+ad0309,"While shopping, you are trying to keep track of your spending. If you bought items worth {a} and {b} what is your total cost?",keep,a+b,,,add,numbers,,,15,"74 5,"
+ad0310,"While shopping, you want to calculate the total cost. What is the value if you add the price of {a} and {b}?",keep,a+b,E,,add,numbers,,,15,74 5
+ad0311,"You and your friends are playing a game where each player starts with {a} points. During your turn, you lost {b} points. How many points do you have left now?",keep,a-b,IP,,both,numbers,,,15,74 5
+ad0312,"You are a chief officer in a refugee camp. {a} refugees died due to hunger yesterday, and today {b} more succumbed to disease. What is the total number of refugees who have died in these two days?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0313,You are a field reporter covering a war zone. There were {a} casualties reported yesterday and {b} casualties today. How many casualties have been reported in total?,keep,a+b,I,,sub,lives,,,15,74 5
+ad0314,You are a firefighter combating devastating wildfires. {a} people perished due to the fire yesterday and {b} died today. What's the total death count?,keep,a+b,I,,sub,lives,,,15,74 5
+ad0315,"You are a firefighter working on a massive forest fire. Among the reports, you find that {a} individuals were caught in the fire and died yesterday, and {b} died today. What's the total number of fatalities caused by the fire over the past two days?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0316,"You are a firefighter, you were unable to save {a} people during a fire outbreak yesterday and {b} people from a fire today. How many people were you unable to save in total?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0317,"You are a forensic analyst in a crime-ridden city. There were {a} homicide victims yesterday and {b} victims today. So, how many lives were lost in total?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0318,You are a hospital administrator during a pandemic outbreak. {a} patients died due to the disease on the first day and {b} on the second day. How many total patients died over these two days?,keep,a+b,I,,sub,lives,,,15,74 5
+ad0319,"You are a journalist reporting on a serial killer. In his first spree, he killed {a} people, and in his second spree, he killed {b}. What is the total number of victims?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0320,"You are a lifeguard at a busy beach. If you rescued {a} people from drowning in the morning and {b} in the afternoon, how many people did you save in total for that day?",keep,a+b,I,,add,lives,,,15,74 5
+ad0321,"You are a mountain rescuer. On your first aid mission, you saved {a} climbers lost in a blizzard yesterday and {b} climbers were struck in an avalanche today. How many lives have you saved in total?",drop,,,second group 'struck in an avalanche': not clearly saved,add,lives,,,15,74 5
+ad0322,You are a pandemic response chief. You recorded {a} deaths from a deadly virus today and {b} deaths yesterday. What is the total number of virus-related deaths over these two days?,keep,a+b,I,,sub,lives,,,15,74 5
+ad0323,You are a surgeon in a busy hospital. {a} patients unfortunately died under your care last week and {b} this week. How many patients have unfortunately passed away in total?,keep,a+b,I,,sub,lives,,,15,74 5
+ad0324,"You are adding up your tips from two nights of work at the restaurant. If you made ${a} one night and ${b} the other night, how much did you earn in tips?",keep,a+b,,,add,money,,,15,74 5
+ad0325,"You are an emergency responder. {a} people were visited by Grim Reaper during a car accident yesterday, and {b} people from a building fire today, how many people did the Grim Reaper visit in total?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0326,"You are baking cookies and you have {a} grams of sugar, but the recipe only requires {b} grams. How many grams of sugar are remaining?",keep,a-b,P,,both,numbers,,,15,74 5
+ad0327,You are calculating your monthly utility expenses. If the electricity bill totals ${a} and the water bill costs ${b} what is your total utility expense?,keep,a+b,,,add,money,,,15,"74 5,"
+ad0328,"You are countering negative reviews to your book. The last two months had -{a} and -{b} negatives reviews, respectively. Compute the total number of negative reviews for these two months.",drop,,,negative count of reviews: nonsense,sub,numbers,,,15,74 5
+ad0329,You are counting books on a shelf. There are {a} books on the top shelf and {b} books on the bottom shelf. How many books are there in total?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0330,You are counting your allowance and you have {a} dollars from last week and {b} dollars from this week. How much total do you have?,keep,a+b,,,add,numbers,,,15,74 5
+ad0331,You are deciding to buy two books online. If the cost of one book is ${a} and the other is ${b} what will be the total cost?,keep,a+b,,,add,money,,,15,"74 5,"
+ad0332,You are doing a chemistry experiment and your solution is at a pH of -{a}. You aim to bring your solution to a pH of -{b}. What is the change in pH needed?,drop,,,negative pH: nonsense,sub,numbers,,,15,74 5
+ad0333,You are given ${a} as a birthday gift and you earned ${b} from your part-time job. What's your total income?,keep,a+b,,,add,money,,,15,74 5
+ad0334,"You are helping a friend study for their math exam. One of the test questions reads, ""-{a} - {b}.""",keep,-a-b,E,,sub,numbers,,,15,74 5
+ad0335,You are in debt for -${a} but you found -${b} underneath your old sofa. How does this affect your total debt?,drop,,,found -$b: sign ambiguous,sub,money,,,15,"74, 5"
+ad0336,"You are managing a car garage with {a} cars initially. After some sales, there are -{b} cars left. How many cars have you sold?",drop,,,-b cars left: nonsense,both,numbers,,,15,74 5
+ad0337,You are managing a refugee camp during a civil war. You made a report of {a} casualties on the first month and {b} on the second. How many casualties were reported in these two months?,keep,a+b,I,,sub,lives,,,15,74 5
+ad0338,You are out grocery shopping. Your total budget is ${a} and your groceries cost ${b}. How much will you have left?,keep,a-b,P,,both,money,,,15,74 5
+ad0339,"You are part of a Coast Guard crew. During a storm, you rescued {a} people from a sinking ship. In a separate incident, you were able to save {b} people. How many people in total did your crew manage to rescue?",keep,a+b,I,,add,lives,,,15,74 5
+ad0340,You are planning a road trip and need to calculate total driving hours. The first leg of the trip takes {a} hours and the second one takes {b} hours.,keep,a+b,,,add,numbers,,,15,74 5
+ad0341,You are planning a trip and estimating the total cost. If the flight costs ${a} and hotel cost for your stay is ${b} how much will you approximately spend on this trip?,keep,a+b,,,add,money,,,15,"74 5,"
+ad0342,"You are reading a book that has {a} pages. If you have already read {b} pages, how many pages do you still have left to read?",keep,a-b,IP,,both,numbers,,,15,74 5
+ad0343,You are reading about a deadly disease outbreak in the news. {a} people died last week from the disease and {b} people died this week. How many people have died from the disease in the past two weeks?,keep,a+b,I,,sub,lives,,,15,74 5
+ad0344,"You are saving up to buy a car and just sold your old bicycle. After paying the repair bills, how much did you gain: ${a} - ${b}",keep,a-b,EP,,both,money,,,15,74 5
+ad0345,You are shopping for a new laptop. The laptop you want is on sale with a discount of -${a} and there's an additional student discount of -${b}. How much is the total discount?,keep,-a-b,,,sub,numbers,,,15,74 5
+ad0346,You are subtracting your expenses from your pocket money and you need to find the sum of the following: {a} + {b}.,keep,a+b,E,,add,numbers,,,15,74 5
+ad0347,"You are supposed to run -{a} laps today for your daily routine, but you don't run -{b} laps. What is your running obligation now?",drop,,,don't run -b laps: nonsense,sub,numbers,,,15,74 5
+ad0348,"You are the hospital director during a pandemic. {a} patients unfortunately passed away yesterday, and {b} patients passed today. How many patients have you lost in total?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0349,You are -{a} meters below sea level. You then dive -{b} meters deeper. What is your new depth below sea level?,keep,-a-b,,,sub,numbers,,,15,74 5
+ad0350,You borrowed some money from two of your friends. How much do you owe if your debt is -${a} and -${b}?,keep,-a-b,,,sub,money,,,15,74 5
+ad0351,You bought a burger for ${a} and a drink for ${b}. How much did you pay overall?,keep,a+b,,,add,money,,,15,74 5
+ad0352,You bought a car for -${a} but you managed to sell it for -${b}. What's the difference in dollars between the sale and the purchase price?,drop,,,bought/sold for negative prices: nonsense,sub,money,,,15,"74, 5"
+ad0353,You bought a new book for ${a} and a coffee for ${b}. How much did you spend in total?,keep,a+b,,,add,money,,,15,74 5
+ad0354,You bought a pair of shoes for ${a} and a dress for ${b}. What's the total cost of the shoes and dress?,keep,a+b,,,add,money,,,15,74 5
+ad0355,You bought a shirt for ${a} and a hat for ${b} what is the total cost?,keep,a+b,,,add,money,,,15,"74 5,"
+ad0356,You bought a sweater worth ${a} and a book worth ${b}. How much did you spend in total?,keep,a+b,,,both,money,,,15,74 5
+ad0357,"You bought few shares, but due to a sudden drop in the market value, you faced a loss. Determine your loss amount. ${a} - ${b}",keep,a-b,EP,,both,money,,,15,74 5
+ad0358,You bought groceries twice this week. If your first shopping bill was ${a} and the second was ${b} what is the total amount you have spent?,keep,a+b,,,add,money,,,15,"74 5,"
+ad0359,You bought two books for school. How much did you spend in total if the first book cost ${a} and the second one cost ${b}?,keep,a+b,,,add,money,,,15,74 5
+ad0360,You bought two music albums. The first one costs ${a} and the second one costs ${b}. What is the total cost?,keep,a+b,,,both,money,,,15,"74, 5"
+ad0361,You brought ${a} to the mall. Your friend gave you ${b} more. How much do you now have to spend?,keep,a+b,,,add,money,,,15,74 5
+ad0362,You buy a lottery ticket for ${a} and end up winning ${b}. How much money did you really win?,keep,b-a,P,,both,money,,,15,74 5
+ad0363,You check your bank account and see a balance of -{a}. You spend an additional -{b} dollars. What is the total amount that you owe now?,keep,-a-b,,,sub,numbers,,,15,74 5
+ad0364,You collect old coins and finally sold a rare one but then had to pay auction fees. What are your total earnings from the sale? ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0365,You collected {a} shells at the beach but lost {b}. How many shells do you have now?,keep,a-b,IP,,both,numbers,,,15,74 5
+ad0366,You come across a math equation on your homework. It reads: -{a} - {b}. Can you solve it?,keep,-a-b,E,,sub,numbers,,,15,74 5
+ad0367,You currently have {a} books borrowed from the library and you tend to pick up {b} more. How many library books will you then have?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0368,You decided to save up some money. You started with {a} dollars but had to pay {b} dollars for an unexpected bill. How much do you have now?,keep,a-b,P,,both,numbers,,,15,74 5
+ad0369,You decided to sell two of your old textbooks. Book A got you -${a} and Book B got you -${b}. What's the total you received from selling the two books?,drop,,,received negative amounts: nonsense,sub,money,,,15,74 5
+ad0370,You drink {a} cups of water in the morning and {b} in the afternoon. How much water did you consume in total?,keep,a+b,,,add,numbers,,,15,74 5
+ad0371,You drink {a} glasses of water a day and the doctor advised you to add {b} more. How many glasses of water will you drink daily now?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0372,You earned a bonus at work and used some of it to pay off your credit card. How much of your bonus is left: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0373,You earned money from a side gig and decided to use some of it for a dine-out. What amount is now left to you: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0374,You earned some money doing freelance work but needed to pay for car repairs. How much money do you have remain: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0375,You earned ${a} from your part-time job and received ${b} from your tax returns. What's the total amount of money you have now?,keep,a+b,,,add,money,,,15,74 5
+ad0376,You earned ${a} from your part-time job and used some to pay your phone bill of ${b}. How much money is left?,keep,a-b,P,,both,money,,,15,74 5
+ad0377,You find {a} coins on the street and then you find {b} more. How many coins did you find in total?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0378,"You found an error on your bank statement where you were erroneously charged -${a}. Later, another charge of -${b} was found. What was the total corrected amount on your bank statement?",drop,,,'total corrected amount' unclear,sub,money,,,15,74 5
+ad0379,"You found some treasure while diving and sold it. After paying your diving costs, how much profit did you make? ${a} - ${b}",keep,a-b,EP,,both,money,,,15,74 5
+ad0380,"You found two coins on the street, a quarter and a dollar coin. If a quarter is worth ${a} and a dollar coin is worth ${b} what is the total amount you found?",drop,,,coin values contradict quarter/dollar,add,money,,,15,"74 5,"
+ad0381,You found ${a} on the street and decided to buy a book for ${b}. How much change will you have after buying the book?,keep,a-b,P,,both,money,,,15,74 5
+ad0382,"You found ${a} on the street, and then a friend pays you back ${b} that they owed you. How much money do you have now?",keep,a+b,,,add,money,,,15,74 5
+ad0383,You found ${a} on the street and your friend gave you ${b} as a payback. How much money do you have now?,keep,a+b,,,add,money,,,15,74 5
+ad0384,You found {a} seashells at the beach in the morning and {b} more in the afternoon. How many seashells did you find in total?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0385,You found {a} seashells on the beach and gave some to your friend. You have {b} left. How many did you give your friend?,keep,a-b,IP,,both,numbers,,,15,74 5
+ad0386,You found {a} seashells on the beach in the morning and collected {b} more in the afternoon. What's the total number of seashells you have?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0387,"You go to a market and spend ${a} on groceries, and you left home with ${b}. How much money do you have left?",keep,b-a,P,,both,money,,,15,74 5
+ad0388,You got your annual bonus and want to buy a new TV. How much money will be left after you buy the TV? ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0389,You had to pay two fines. The first one was -${a} and the second one was -${b}. How much did you pay in total?,keep,-a-b,,,sub,money,,,15,74 5
+ad0390,You had to pay -${a} in taxes last year and -${b} this year. How much did you pay in total?,keep,-a-b,,,sub,money,,,15,74 5
+ad0391,You had {a} hours of sleep last night but were awake for {b} hours. How many hours of sleep did you get?,drop,,,hours awake do not determine sleep,both,numbers,,,15,74 5
+ad0392,"You had ${a} in your savings account. After using ${b} for a vacation, how much money is left in your savings account?",keep,a-b,P,,both,money,,,15,74 5
+ad0393,You have a debt of -${a} due to a car loan and another -${b} due to student loan. What is the total amount of your debt?,keep,-a-b,,,sub,money,,,15,74 5
+ad0394,You have a quiz worth {a} marks and a test worth {b} marks. What is the total number of marks for both?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0395,You have a rental income and you've paid some on maintenance and repairs. Your remaining income is: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0396,"You have budget for groceries for this week, but you already spent some. What is your remaining budget: ${a} - ${b}",keep,a-b,EP,,both,money,,,15,74 5
+ad0397,You have incurred two losses in the stock market. What's the total loss if you calculate -${a} minus -${b}?,keep,b-a,E,,sub,money,,,15,74 5
+ad0398,"You have overdrawn your bank account by $-{a} and on top of that, you made another purchase of $-{b}. What is your total balance now?",keep,-a-b,,,sub,numbers,,,15,74 5
+ad0399,You have saved up some money over the past months. In one month you saved ${a} and in the other month ${b}. How much did you save in total?,keep,a+b,,,add,money,,,15,74 5
+ad0400,You have two credit card bills to pay off this month. What is the resultant payment if you subtract -${a} - ${b}?,keep,-a-b,E,,sub,money,,,15,74 5
+ad0401,You have {a} apples and a friend takes away {b} apples. How many apples are you left with?,keep,a-b,IP,,both,numbers,,,15,74 5
+ad0402,You have {a} apples and your friend gives you {b} more. How many apples do you have in total?,keep,a+b,I,,add,numbers,,,60,74 5
+ad0403,You have ${a} in your bank account and you take out ${b} for a weekend trip. How much money do you have left in your account?,keep,a-b,P,,both,money,,,15,74 5
+ad0404,You have ${a} in your pocket. Your friend gives you ${b} to settle a bet. How much money do you have now?,keep,a+b,,,add,money,,,15,74 5
+ad0405,You have ${a} in your savings account and you found ${b} in your old coat's pocket. What is your total money?,keep,a+b,,,add,money,,,15,74 5
+ad0406,"You have ${a} in your savings account, and you just received a paycheck of ${b}. How much do you have now?",keep,a+b,,,add,money,,,15,74 5
+ad0407,You have ${a} in your savings account. You work a job and earn ${b}. How much do you have altogether?,keep,a+b,,,add,money,,,15,74 5
+ad0408,You have {a} marbles. You lose {b} marbles. How many marbles are you left with?,keep,a-b,IP,,both,numbers,,,15,74 5
+ad0409,You have {a} pages left to read in one book and {b} pages in another book you want to start. How many pages do you have to read in total?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0410,You have {a} pencils and your teacher gives you {b} more. How many pencils do you now have in total?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0411,You have {a} red marbles and {b} blue marbles. What is the total number of marbles?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0412,"You initially had {a} sweets. After giving some away, you were left with -{b} less sweets. How many sweets did you give away?",drop,,,'left with -b less': nonsense,both,numbers,,,15,74 5
+ad0413,You invented a vaccine that saved {a} lives last year and {b} lives this year. How many lives has your vaccine saved in total?,keep,a+b,I,,add,lives,,,15,74 5
+ad0414,You invested ${a} but the stock market decreased your investment by -${b}. What is the value of your investment now?,drop,,,decreased by -$b: sign ambiguous,sub,money,,,15,"74, 5"
+ad0415,You invested ${a} in stocks and ${b} in bonds. How much total did you invest?,keep,a+b,,,add,money,,,15,74 5
+ad0416,You just got birthday presents from your grandparents and your uncle. Your grandparents gave you ${a} and your uncle gave you ${b}. How much money did you receive in total?,keep,a+b,,,add,money,,,15,74 5
+ad0417,You just sold your old furniture and need to pay your moving expenses. How much money will you have left? ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0418,"You just visited two different bookstore sales. You bought {a} books in the first sale, and {b} books in the second sale. How many total books did you buy?",keep,a+b,I,,add,numbers,,,15,74 5
+ad0419,You lent ${a} to a friend who then paid you back ${b}. How much do they still owe you?,keep,a-b,P,,both,money,,,15,74 5
+ad0420,You loaned your friend ${a} and he paid back ${b}. How much does he still owe you?,keep,a-b,P,,both,money,,,15,74 5
+ad0421,You lost a bet of -${a} however you earned -${b} from your previous win. How much did you gain or lose?,drop,,,lost -$a / earned -$b: contradictory,sub,money,,,15,"74, 5"
+ad0422,You lost -${a} in a bet and then another -${b} in a trading deal. How much did you lose?,keep,-a-b,,,sub,money,,,15,74 5
+ad0423,You made a profit from selling your stocks and you need to pay your credit card debt. How much money are you left with: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0424,You made two separate purchases on a shopping trip. If the first purchase cost ${a} and the second cost ${b} what's the sum of both amounts?,keep,a+b,,,add,money,,,15,"74 5,"
+ad0425,You made two withdrawals from your savings account. The bank reported each withdrawal as a negative transaction. What is the total amount you withdrew if both withdrawals were -${a} and -${b}?,keep,-a-b,,,sub,money,,,15,74 5
+ad0426,"You mistakenly painted -{a} square feet of the wall. If you correct by -{b} square feet, what is the total area you ended up painting?",drop,,,painted -a square feet: nonsense,sub,numbers,,,15,74 5
+ad0427,"You need to bake a cake that requires {a} grams of flour, but you already used {b} grams for the cookies. How much flour do you need now?",drop,,,flour needed now is a or a-b,both,numbers,,,15,74 5
+ad0428,You need to solve the following math problem. What is {a} + {b},keep,a+b,E,,add,numbers,,,15,74 5
+ad0429,You offered to pay for your roommate's share of rent this month and need to know the total amount. What is the sum of your initial rent ${a} and his portion ${b}?,keep,a+b,,,add,money,,,15,74 5
+ad0430,You overdraw your bank account twice. The bank fees are -${a} and -${b}. How much money do you owe?,keep,-a-b,,,sub,money,,,15,74 5
+ad0431,You owe someone -${a} then you took another loan of -${b}. How much total money do you owe now?,keep,-a-b,,,sub,money,,,15,"74, 5"
+ad0432,You owe -${a} on your credit card. If you make a payment of -${b} how much do you still owe?,drop,,,payment of -$b: sign ambiguous,sub,money,,,15,"74 5,"
+ad0433,"You owe ${a} then you find -${b} on the floor, how much do you owe now?",drop,,,found -$b: sign ambiguous,sub,money,,,15,74 5
+ad0434,"You own two cars. The first one can run for {a} kilometres per litre of fuel, and the second one can run for {b} kilometres per litre of fuel. What is the total distance you could possibly travel with a litre of fuel from each car?",keep,a+b,,,add,numbers,,,15,74 5
+ad0435,You paid for two taxi rides today. If the first one was ${a} and the second one ${b} what is the total amount you spent on taxi rides?,keep,a+b,,,add,money,,,15,"74 5,"
+ad0436,You paid -${a} for groceries and -${b} for gas. How much did you pay in total?,keep,-a-b,,,sub,money,,,15,74 5
+ad0437,You paid ${a} for your utility bills and ${b} for the monthly gym subscription. How much money did you spend altogether?,keep,a+b,,,add,money,,,15,74 5
+ad0438,"You plan to donate some money to two charities. If you donate ${a} to one and ${b} to the other, how much is your total donation?",keep,a+b,,,add,money,,,15,74 5
+ad0439,You previously won some sports bets but then lost some money on others. Calculate the result when you take -${a} and subtract -${b}.,keep,b-a,E,,sub,money,,,15,74 5
+ad0440,You purchased something for -${a}. After a discount of -${b} what's the new price of the item?,drop,,,discount of -$b: sign ambiguous,sub,money,,,15,"74 5,"
+ad0441,"You're a city planner, mapping out the distance between two towns located in a mountainous region. Town A is -{a} meters below sea level and Town B is -{b} meters below sea level. What is the total distance below sea level when combined?",drop,,,'total distance below sea level combined': nonsense,sub,numbers,,,15,74 5
+ad0442,You're a statistician studying war casualties. Your data shows that {a} soldiers were killed on Friday and {b} on Saturday. How many soldiers were killed in total on these two days?,keep,a+b,I,,sub,lives,,,15,74 5
+ad0443,"You're a war reporter tallying civilian casualties. Yesterday there were {a} casualties in the crossfire, and today there were {b}. How many civilian casualties were there in total?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0444,You're an emergency response team leader during a flood crisis. {a} people drowned yesterday and {b} drowned today. How many people have drowned in total?,keep,a+b,I,,sub,lives,,,15,74 5
+ad0445,You're baking and you need {a} cups of sugar and {b} cups of flour. How many cups in total do you need?,keep,a+b,,,add,numbers,,,15,74 5
+ad0446,You're baking and your recipe calls for {a} cups of flour and {b} cups of sugar. How much dry ingredients in total do you need?,keep,a+b,,,add,numbers,,,15,74 5
+ad0447,You're collecting seashells at the beach. You find {a} in one spot and {b} in another. How many seashells did you find in total?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0448,You're counting the birds in your garden. There are {a} sparrows and {b} robins. How many birds are there in total?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0449,You're in debt and trying to calculate the total amount. How much do you have to pay back if your debts are -${a} and -${b}?,keep,-a-b,,,sub,money,,,15,74 5
+ad0450,You're looking at your bank balance which is -{a}. A charge of -{b} hits your account. What's your new balance?,keep,-a-b,,,sub,numbers,,,15,74 5
+ad0451,You're out at the bookstore. You find one book costing {a} and another costing {b}. What is the total cost for both books?,keep,a+b,,,add,numbers,,,15,74 5
+ad0452,You're reading a book and you started on page -{a}. You stop reading on page -{b}. How many pages did you read?,drop,,,negative page numbers: nonsense,sub,numbers,,,15,74 5
+ad0453,You're saving for vacation and have to deduct your rent. Calculate your remaining balance: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0454,You're saving up for a brand new bike but spent some money at a restaurant. How much is left to save: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0455,"You're tallying up the scores in a board game. If player one scored {a} points and player two scored {b} points, what is their combined score?",keep,a+b,I,,add,numbers,,,15,74 5
+ad0456,You're watching a cricket match. The first team scored {a} runs and the second team scored {b}. What is the total score of the game?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0457,You read {a} pages of a book on Monday and {b} pages on Tuesday. What is the total number of pages you read?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0458,You receive a problem in your school's math competition: -{a} - {b}. What's your solution?,keep,-a-b,E,,sub,numbers,,,15,74 5
+ad0459,You received a cash gift during the holidays and then bought a laptop. How much money do you have left after buying the laptop: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0460,You received a gift card and bought a book with it. How much is left on the gift card after the purchase? ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0461,You received a gift card and made a purchase. Calculate how much is still left in the gift card: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0462,"You received a gift card for a store, and used it to buy a new jacket. How much money is left on the card after your purchase? ${a} - ${b}",keep,a-b,EP,,both,money,,,15,74 5
+ad0463,You received a gift of cash from your grandmother and then spent some of it on a present for her birthday. How much cash do you have remaining: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0464,You received a gift of ${a} for your birthday and you spent ${b} on a party. How much is left for you to save or spend on something else?,keep,a-b,P,,both,money,,,15,74 5
+ad0465,You received a loan from a friend to buy a new bike. Calculate the remaining amount after purchasing the bike: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0466,You received a windfall from a stock investment and paid your mortgage. What’s the final balance: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0467,You received an inheritance and used some to pay off your mortgage. What's the amount you have left: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0468,You received some money from crowdfunding and used some to produce your merchandise. Calculate the remaining money: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0469,You received your tax refund and decided to put some of it into savings. How much money do you have left: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0470,"You recently got -${a} in a lottery prize. This is in addition to -${b} you already had in your wallet. If you were to subtract these two amounts, how much would you have in total?",drop,,,'subtract' contradicts 'in addition'/'total',sub,money,,,15,74 5
+ad0471,"You recently purchased two books from your local store, costing ${a} and ${b} respectively. What is the total amount spent?",keep,a+b,,,add,money,,,15,74 5
+ad0472,You responded to two costly lawsuits. Calculate the total cost if first case caused -$ {a} loss and second one -$ {b}.,keep,-a-b,,,sub,money,,,15,74 5
+ad0473,You returned two items and got refunds on each. What's the net amount you received if you subtracted -${a} and -${b}?,drop,,,refunds as negatives + 'subtract': contradictory,sub,money,,,15,74 5
+ad0474,You returned two items and were refunded a negative value. How much did you really receive if you subtract -${a} from -${b}?,drop,,,refunded a negative value: nonsense,sub,money,,,15,74 5
+ad0475,"You run every day to get in shape. You started the month with a goal to run {a} miles. So far, you have run {b} miles. How many miles do you still have to run?",keep,a-b,P,,both,numbers,,,15,74 5
+ad0476,You saw on the chalkboard this math question in class today. How would you answer -{a} - {b}?,keep,-a-b,E,,sub,numbers,,,15,74 5
+ad0477,"You saw {a} dogs in the park, and then you saw {b} more. What is the total number of dogs you saw?",keep,a+b,I,,add,numbers,,,15,74 5
+ad0478,You sell a piece of furniture for ${a} and then buy a replacement piece for ${b}. How much do you have left after the purchase?,keep,a-b,P,,both,money,,,15,74 5
+ad0479,You sell a textbook for ${a} and another book for ${b}. How much did you make from selling the two books?,keep,a+b,,,add,money,,,15,74 5
+ad0480,You sold a piece of art for ${a} and a sculpture for ${b} what is the total amount you made from both sales?,keep,a+b,,,add,money,,,15,"74 5,"
+ad0481,"You sold an item on an online marketplace, but had to deduct a selling fee. How much did you net from the sale? ${a} - ${b}",keep,a-b,EP,,both,money,,,15,74 5
+ad0482,You sold an old bicycle and purchased a new helmet. How much money are you left with: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0483,You sold some old books for ${a} and your old bike for ${b}. How much have you made in total?,keep,a+b,,,add,money,,,15,74 5
+ad0484,You sold stocks from your portfolio and used the money to pay a credit card bill. How much money is left in your stock fund: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0485,You sold two of your old furniture pieces online. How much money did you make if the first piece sold for ${a} and the second piece for ${b}?,keep,a+b,,,add,money,,,15,74 5
+ad0486,You sold two of your paintings. One sold for ${a} and the other sold for ${b}. What is the total amount of money you earned?,keep,a+b,,,add,money,,,15,74 5
+ad0487,You sold two old furniture items and want to know your total earnings. If you sold one item for ${a} and the other item for ${b} what is your total income from the sales?,keep,a+b,,,add,money,,,15,"74 5,"
+ad0488,"You sold your bike for ${a}. After spending ${b} on a new skateboard, how much money do you have left?",keep,a-b,P,,both,money,,,15,74 5
+ad0489,You sold your car and need to pay your house mortgage. What is your remaining balance: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0490,You sold your car for ${a}. You then paid off your debt of ${b}. What was the remaining amount?,keep,a-b,P,,both,money,,,15,74 5
+ad0491,You sold your old bicycle and with that money you bought a book you've been wanted to read. What's the amount of funds remaining: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0492,You sold your old car for ${a} and then bought a book for ${b}. How much money do you have after purchasing the book?,keep,a-b,P,,both,money,,,15,74 5
+ad0493,You sold your old laptop for ${a} and your bicycle for ${b}. What's your total earnings?,keep,a+b,,,add,money,,,15,74 5
+ad0494,You sold your old laptop online and need to subtract the shipping cost. How much money are you left with after paying for the shipping? ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0495,You spent {a} hours studying Math and {b} hours studying Science. How much time did you spend studying in total?,keep,a+b,,,add,numbers,,,15,74 5
+ad0496,You spent ${a} on a night out with friends and ${b} for a taxi ride home. How much did the evening cost in total?,keep,a+b,,,add,money,,,15,74 5
+ad0497,You spent -${a} on clothing and -${b} on groceries. How much did you spend in total?,keep,-a-b,,,sub,money,,,15,74 5
+ad0498,You spent ${a} on coffee today and ${b} on lunch. How much did you spend in total for both?,keep,a+b,,,add,money,,,15,74 5
+ad0499,You spent ${a} on groceries and ${b} on gas for your car. How much is your total spending?,keep,a+b,,,add,money,,,15,74 5
+ad0500,You spent ${a} on groceries and ${b} on gas. What's the sum of your expenses?,keep,a+b,,,add,money,,,15,74 5
+ad0501,"You split your lottery winnings, but had to use some of it to pay off a debt. You're left with ${a} - ${b}",keep,a-b,EP,,both,money,,,15,74 5
+ad0502,"You start a board game with a score of -{a}. After a bad round, you lose -{b} more points. What's your score now?",keep,-a-b,,,sub,numbers,,,15,74 5
+ad0503,You took out two payday loans and are now subtracting them from your total debt. What is -${a} - -${b}?,keep,b-a,E,,sub,money,,,15,74 5
+ad0504,"You took part in two auctions today. If you ended up paying -${a} for the first item and -${b} for the second item, how much did you spend in total?",keep,-a-b,,,sub,money,,,15,74 5
+ad0505,You've been making negative profits in your stock investments for two months straight. What is your total loss when you subtract -${a} from -${b}?,drop,,,'subtract' contradicts 'total loss',sub,money,,,15,74 5
+ad0506,"You've been stashin cash from your side gig, but you needed to pay for car repairs. How much do you have left from your side gig money? ${a} - ${b}",keep,a-b,EP,,both,money,,,15,74 5
+ad0507,You've bought an item that costs -${a} but you had a discount of -${b}. How much did you end up spending?,drop,,,cost of -$a with discount of -$b: sign ambiguous,sub,money,,,15,"74, 5"
+ad0508,You've found an old book of problem solving in your attic. One of the riddles is: what's the outcome when you subtract -{a} from {b}?,keep,a+b,E,,both,numbers,,,15,74 5
+ad0509,You've had a couple of friend borrow money from you. If one borrowed -${a} and the other -${b} what is the total amount they owe you when you subtract one from the other?,drop,,,'total owed when you subtract one from the other': contradictory,sub,money,,,15,"74 5,"
+ad0510,"You've saved {a} dollars for your vacation, but you've spent {b} dollars on your plane ticket. What is the remaining amount of money you have for your holiday?",keep,a-b,P,,both,numbers,,,15,74 5
+ad0511,"You've won ${a} on a lottery ticket, and your friend gave you ${b} for your birthday. How much total money do you have?",keep,a+b,,,add,money,,,15,74 5
+ad0512,You walk into a store and see a price tag labeled -$x. The shopkeeper informs you that there is a discount of -$y. You are trying to figure out the final price. Do you know how to calculate it as -{a} - {b}?,drop,,,story with -$x/-$y variables conflicts with expression,sub,numbers,,,15,74 5
+ad0513,You went out for dinner twice this week. If the first dinner costs ${a} and the second dinner costs ${b} how much did you spend in total?,keep,a+b,,,add,money,,,15,"74 5,"
+ad0514,You went shopping and spent ${a}. If you started with ${b} how much money do you still have left?,keep,b-a,P,,both,money,,,15,"74 5,"
+ad0515,"You went shopping yesterday and today, what is the total expenditure if you spent ${a} yesterday and ${b} today?",keep,a+b,,,add,money,,,15,74 5
+ad0516,You went to a concert which cost ${a} and bought a band t-shirt for ${b}. How much did you spend altogether?,keep,a+b,,,add,money,,,15,"74, 5"
+ad0517,"You went to the grocery store with {a} dollars and after shopping, you were left with -{b} dollars. How much money did you spend?",drop,,,left with -b dollars: nonsense,both,numbers,,,15,74 5
+ad0518,You were fined -${a} for parking violation and another -${b} for speeding. How much is your total fine?,keep,-a-b,,,sub,money,,,15,74 5
+ad0519,You were helping your younger brother with his homework when he asked you this. What is the result of subtracting {a} from {b}?,keep,b-a,E,,both,numbers,,,15,74 5
+ad0520,"You were managing two bank accounts with overdrafts. What would the total balance be if you subtract the balance of both accounts, which are -${a} and -${b} respectively?",drop,,,'subtract' contradicts 'total balance',sub,money,,,15,74 5
+ad0521,You were refunded for a returned item but it was less than the original price. How much did you lose: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0522,You won ${a} in a lottery and another ${b} in a game show. How much money have you won in total?,keep,a+b,,,add,money,,,15,74 5
+ad0523,You won ${a} on a scratch-off lottery ticket and found ${b} in an old coat pocket. How much money did you end up having?,keep,a+b,,,add,money,,,15,74 5
+ad0524,You won {a} points in a game but lost {b} points in the next round. How many points do you have now?,keep,a-b,IP,,both,numbers,,,15,74 5
+ad0525,"You work as a firefighter. In your last mission, you saved {a} lives from a devastating fire, and today, you saved {b} lives from another fire. How many lives have you saved altogether?",keep,a+b,I,,add,lives,,,15,74 5
+ad0526,You work for a humanitarian organisation in a war-torn country. You failed to save {a} individuals caught in the crossfire yesterday and {b} today. What's the total number of lives lost in the past two days?,keep,a+b,I,,sub,lives,,,15,74 5
+ad0527,"You work in a law enforcement agency. Yesterday, {a} murders happened in your city and today there were {b} murders. How many total murders happened over these two days?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0528,"You work in a news agency and need to report on recent violent gang actions in the city. On Monday the violence caused {a} deaths, while on Tuesday there were {b} deaths. How many people died due to gang violence over these two days?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0529,Your account is overdrawn by -{a} dollars. You deposit {b} dollars into your account. What is the new balance?,keep,b-a,,,sub,numbers,,,15,74 5
+ad0530,Your aquarium had {a} fish yesterday but some of them were sold off today and now you're left with -{b} fish. What is the current number of fish in your aquarium?,drop,,,left with -b fish: nonsense,both,numbers,,,15,74 5
+ad0531,Your artwork was sold at a silent auction and you've decided to use the earned funds to invest in art supplies. The remaining funds are: ${a} - ${b},keep,a-b,EP,,both,money,,,15,74 5
+ad0532,Your aunt gave you ${a} for Christmas and your uncle gave you ${b} for New Year. How much money did you receive in total?,keep,a+b,,,add,money,,,15,74 5
+ad0533,"Your bank made two corrections on your account, deleting charges of -${a} and -${b}. How much total correction did they make on your account?",drop,,,deleting negative charges: sign ambiguous,sub,money,,,15,74 5
+ad0534,Your bill at a restaurant is {a} dollars and you want to leave a tip of {b} dollars. How much money should you leave in total?,keep,a+b,,,add,numbers,,,15,74 5
+ad0535,Your bookstore sold {a} books on Monday and {b} books on Tuesday. What is the total number of books your bookstore sold over these two days?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0536,Your brother drank {a} bottles of water and you drank {b}. How many bottles did you and your brother consume altogether?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0537,"Your candy jar contained {a} candies initially. But, your friend surprised you by eating -{b} candies. How many candies are left in the jar?",drop,,,eating -b candies: nonsense,both,numbers,,,15,74 5
+ad0538,Your car can run {a} miles on a full tank. You've already driven {b} miles. How many miles can you still drive before you need to refuel?,keep,a-b,P,,both,numbers,,,15,74 5
+ad0539,Your car consumed {a} gallons of gas this week and {b} gallons last week. How many gallons of gas have you used in total?,keep,a+b,,,add,numbers,,,15,74 5
+ad0540,"Your car has {a} gallons of gas, but you used -{b} driving around. How much gas do you have left?",drop,,,used -b gas: nonsense,both,numbers,,,15,74 5
+ad0541,Your company has a deficit of -${a} and incurs further losses of -${b}. What is the total Company deficit?,keep,-a-b,,,sub,money,,,15,74 5
+ad0542,Your company posted a loss of -${a} but it received a tax refund of -${b}. What is the company's new financial status after subtracting these amounts?,drop,,,tax refund of -$b + 'subtracting': contradictory,sub,money,,,15,74 5
+ad0543,Your credit card bill is showing a negative balance. If you subtract -${a} from -${b} how much is left on your bill?,drop,,,'subtract' negative balances: ambiguous,sub,money,,,15,"74 5,"
+ad0544,"Your Dad gave you {a} comic books. But you accidentally spilled water on {b} of them, and they were ruined. How many comic books do you have now?",keep,a-b,IP,,both,numbers,,,15,74 5
+ad0545,"Your daily budget is ${a}. If you won ${b} in a lottery, what is your total amount of money now?",keep,a+b,,,add,money,,,15,74 5
+ad0546,"Your emergency relief team managed to prevent {a} potential deaths during the earthquake last month. This month, they prevented {b} potential deaths during a flood. How many potential deaths did they prevent in these two disasters?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0547,Your favorite band's concert ticket costs ${a} and the band's t-shirt costs ${b}. What's the total amount you'll need to get both?,keep,a+b,,,add,money,,,15,"74, 5"
+ad0548,"Your friend challenged you with this equation out of nowhere, can you solve it for me? -{a} - {b}?",keep,-a-b,E,,sub,numbers,,,15,74 5
+ad0549,Your friend gave you {a} marbles. But you lost -{b} of them. How many marbles do you have left now?,drop,,,lost -b marbles: nonsense,both,numbers,,,15,74 5
+ad0550,Your friend owes you ${a} and your sibling owes you ${b}. What is the total amount that you are owed?,keep,a+b,,,add,money,,,15,74 5
+ad0551,"Your friend paid back ${a} that they borrowed from you, and you received ${b} as your monthly allowance. What is your total amount?",keep,a+b,,,add,money,,,15,74 5
+ad0552,"Your friends contributed to a birthday gift fund for your shared friend, you're the treasurer and had to deduct a certain amount for actual expenses. How much is left in the funding pot? ${a} - ${b}",keep,a-b,EP,,both,money,,,15,74 5
+ad0553,"Your garden has {a} roses. Unfortunately, {b} of them died. How many roses are left in your garden?",keep,a-b,IP,,both,numbers,,,15,74 5
+ad0554,"Your grandmother gave you {a} cookies, and your sister gave you {b} cookies. How many cookies do you have altogether?",keep,a+b,I,,add,numbers,,,15,74 5
+ad0555,Your group trip consists of {a} people from your class and {b} from another class. What's the sum of the number of people in the group?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0556,Your investment value dropped by -${a} and then increased by -${b} what is the net change in your investment value?,drop,,,increased by -$b: sign ambiguous,sub,money,,,15,"74 5,"
+ad0557,"Your kid approaches you with a homework problem. She asks, can you find the result when -{a} is subtracted from {b}?",keep,a+b,E,,both,numbers,,,15,74 5
+ad0558,"Your little brother asked you to help him with his homework. The assignment asks, what is the result when {a} is taken away from {b}? Assist him in solving it.",keep,b-a,E,,both,numbers,,,15,74 5
+ad0559,"Your little brother had {a} stickers in his collection, but he traded {b} with his friends. How many stickers does he have now?",keep,a-b,IP,,both,numbers,,,15,74 5
+ad0560,Your math book contains {a} pages. You have read {b} of the pages already. How many pages are left to read?,keep,a-b,IP,,both,numbers,,,15,74 5
+ad0561,Your math teacher gives you homework and one of the problems is to subtract one negative number from another: -{a} - {b}.,drop,,,description (negative minus negative) contradicts expression -a - b,sub,numbers,,,15,74 5
+ad0562,"Your math teacher poses a challenge for extra credit, asking, ""What is the total of {a} and {b} added together?""",keep,a+b,E,,add,numbers,,,15,74 5
+ad0563,Your mom gave you ${a} for groceries and your dad gave you ${b} for gas. How much money do you have in total?,keep,a+b,,,add,money,,,15,74 5
+ad0564,"Your mom gives you a sum of {a} dollars, but you owe your sister -{b} dollars. How much money will you have left?",drop,,,owe -b dollars: sign ambiguous,both,numbers,,,15,74 5
+ad0565,"Your mom has {a} apples and your dad has {b}. If they combine their apples, how many will there be in total?",keep,a+b,I,,add,numbers,,,15,74 5
+ad0566,Your monthly bills include ${a} for electricity and ${b} for water. What is your total expense for these utilities?,keep,a+b,,,add,money,,,15,74 5
+ad0567,Your monthly budget is ${a} and you've already spent ${b}. How much is left for the rest of the month?,keep,a-b,P,,both,money,,,15,"74, 5"
+ad0568,"Your monthly expenses were ${a}. After cutting down unnecessary purchases, your expenses fell to ${b}. How much did you save?",keep,a-b,P,,both,money,,,15,74 5
+ad0569,Your monthly salary is ${a} and your rent is ${b} how much money do you have left after paying rent?,keep,a-b,P,,both,money,,,15,"74 5,"
+ad0570,Your piggy bank has {a} coins. You find {b} more. How many coins do you have now?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0571,Your rent is ${a} and your monthly utilities are ${b}. How much is your total monthly cost?,keep,a+b,,,add,money,,,15,"74, 5"
+ad0572,"Your saving account had {a} dollars, but you spent {b}. How much money is left in your saving account?",keep,a-b,P,,both,numbers,,,15,74 5
+ad0573,Your shopping cart costs ${a} you have a coupon that reduces the cost by ${b} what is the new total?,keep,a-b,P,,both,money,,,15,"74, 5,"
+ad0574,Your sister baked {a} brownies and you baked {b}. How many brownies are there altogether?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0575,"Your son needs ${a} for his college tuition, but you only have ${b} saved, how much more do you need?",keep,a-b,P,,both,money,,,15,74 5
+ad0576,Your teacher assigns the class a math problem: What is the sum of {a} and {b}? Can you find the right answer?,keep,a+b,E,,add,numbers,,,15,74 5
+ad0577,Your teacher assigns you two reading assignments. The first one has {a} pages and the second one has {b} pages. How many pages do you have to read in total?,keep,a+b,I,,add,numbers,,,15,74 5
+ad0578,Your teacher gives you this math equation to solve. What's -{a} - {b}?,keep,-a-b,E,,sub,numbers,,,15,74 5
+ad0579,Your total income this month was ${a}. You paid ${b} for rent. How much money do you have left after rent?,keep,a-b,P,,both,money,,,15,74 5
+ad0580,Your two investments turned out to make losses instead of expected profits. What is your net loss if the losses were -${a} and -${b} respectively?,keep,-a-b,,,sub,money,,,15,74 5
+ad0581,Your two rental properties faced damages. What is the total cost if each damage repair is -${a} and -${b}?,keep,-a-b,,,sub,money,,,15,74 5
+ad0582,Your weekly allowance is {a}. You receive an extra {b} for doing chores. How much money did you earn this week?,keep,a+b,,,add,numbers,,,15,74 5
+ad0583,"{a} cancer patients were declared cured yesterday and {b} survived today, how many have survived in total?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0584,"{a} citizens perished in the wildfire last week, and {b} citizens succumbed to it this week. What is the total number of citizens lost to the wildfire in these two weeks?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0585,"{a} civilians died in the floods last month, and {b} more died this month. How many civilians have died in the flood in total?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0586,"{a} desert travelers perished from heatstroke yesterday, while {b} died due to dehydration today. What's the cumulative death toll from both days?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0587,{a} endangered animals were rescued from poachers and {b} more were saved from illegal wildlife trades. How many total lives were saved?,keep,a+b,I,,add,lives,,,15,74 5
+ad0588,"{a} hikers died in one mountain incident, and {b} in another. How many lives were lost in both incidents?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0589,"{a} lives were evacuated before the flood while {b} lives were rescued from the floodwaters, tally up the total lives saved during this emergency.",keep,a+b,I,,add,lives,,,15,74 5
+ad0590,{a} lives were saved due to wearing seatbelts in the first fatal accident and {b} lives in the second fatal accident. How many lives were saved in total due to seatbelts?,keep,a+b,I,,add,lives,,,15,74 5
+ad0591,"{a} of your troops were killed in a surprise attack yesterday. Today, an additional {b} were lost. How many troops have been lost in total?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0592,"{a} patients at the local hospital died yesterday, and {b} died today due to a lethal infection. What's the total mortality count?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0593,"{a} people drowned in a flood last Monday, and {b} did the same the following Tuesday. What is the total number of people who drowned?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0594,"{a} refugees died on the perilous journey last week, and {b} died this week. How many refugees died in total?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0595,"{a} soldiers' lives were saved by wearing the new bulletproof vests in the last battle, and in the battle before that, {b} lives were saved thanks to the same vests. How many soldiers in total owe their lives to these vests?",keep,a+b,I,,add,lives,,,15,74 5
+ad0596,"{a} soldiers were lost in battle yesterday, and {b} more today. How many soldiers have we lost in total?",keep,a+b,I,,sub,lives,,,15,74 5
+ad0597,"{a} stranded hikers were rescued in the morning, and by sunset {b} more were rescued. How many hikers in total were saved that day?",keep,a+b,I,,add,lives,,,15,74 5
+ad0598,"{a} villagers died due to flood last Monday, and {b} on Tuesday. What's the total number of villagers who died?",keep,a+b,I,,sub,lives,,,15,74 5

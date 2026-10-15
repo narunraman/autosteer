@@ -1,0 +1,643 @@
+{
+  "0:0": {
+    "checks": {
+      "solve_check_history": [
+        {
+          "model": "gpt-5.4-nano",
+          "passed_runs": 0,
+          "runs": [
+            {
+              "error": "Filler returned None.",
+              "run": 1,
+              "status": "error"
+            }
+          ],
+          "status": "error",
+          "total_runs": 1,
+          "validated_at": "2026-04-15T17:18:07.334209+00:00"
+        },
+        {
+          "model": "gpt-5.4-nano",
+          "passed_runs": 0,
+          "runs": [
+            {
+              "expected": [
+                "A"
+              ],
+              "options": [
+                "0.54",
+                "1.41",
+                "1.05",
+                "0.25"
+              ],
+              "predicted": [
+                "D"
+              ],
+              "question": "While shopping for a household consumer good, a person's income changes from 409.58 to 275.55. During the same period, the quantity purchased changes from 86.57 to 71.25. What is the income elasticity of demand for this good?",
+              "response": "{\"answers\":[\"D\"],\"confidence\":\"high\"}",
+              "run": 1,
+              "status": "failed"
+            }
+          ],
+          "status": "failed",
+          "total_runs": 1,
+          "validated_at": "2026-04-15T17:19:57.918709+00:00"
+        }
+      ],
+      "structure": {
+        "errors": [],
+        "passed": true,
+        "warnings": []
+      }
+    },
+    "created_at": "2026-04-15T17:15:15.996539+00:00",
+    "has_options": false,
+    "model": "gpt-5.4",
+    "notes": "",
+    "prompt": "Below, you will find some metadata that corresponds to a set of instructions and a template MCQ example that abides by these instructions.\n{\"metadata\": {\"domain\": \"consumer_goods\", \"type\": \"direct\", \"difficulty_level\": 1, \"tags\": \"anon\"}, \"instructions\": \"Please give an MCQ example testing the ability to compute income elasticity. The question should be concerning consumer goods. The question should be written in the third person and do not name the subject. Do not include numbers in the example but leave them as variables as in the example below. Use the following variables in the curly braces: {income_start}, {quantity_end}, {quantity_start}, {income_end}. Do not mark any option with correct_answer as True and the options should be a list containing a single empty string. See the following example as a guide but give a different example and write a narrative: \", \"question_1\": \"A consumer's monthly income changes from {income_start} to {income_end}. Over the same period, their quantity demanded of the good changes from {quantity_start} units to {quantity_end} units. What is the income elasticity of demand?\", \"options_1\": [\"\"], \"answer_1\": \"\"}\n\nGiven the following metadata and instructions please write a template MCQ that abides by the following instructions and metadata. Make sure the template fits the following set of metadata and instructions. \n{\"metadata\": {\"domain\": \"consumer_goods\", \"type\": \"direct\", \"difficulty_level\": 1, \"tags\": \"anon\"}, \"instructions\": \"Please give an MCQ example testing the ability to compute income elasticity. The question should be concerning consumer goods. The question should be written in the third person and do not name the subject. Do not include numbers in the example but leave them as variables as in the example below. Use the following variables in the curly braces: {income_end}, {income_start}, {quantity_end}, {quantity_start}. The MCQ should have only one option. See the following example as a guide but give a different example and write a narrative: \"}",
+    "status": "draft",
+    "target_metadata": {
+      "difficulty_level": 1,
+      "domain": "consumer_goods",
+      "tags": "anon",
+      "type": "direct"
+    },
+    "updated_at": "2026-04-16T00:37:44.722338+00:00"
+  },
+  "1:0": {
+    "checks": {
+      "solve_check": {
+        "model": "gpt-5.4-nano",
+        "passed_runs": 0,
+        "runs": [
+          {
+            "expected": [
+              "D"
+            ],
+            "options": [
+              "0.13",
+              "1.02",
+              "0.16",
+              "0.29"
+            ],
+            "predicted": [
+              "B"
+            ],
+            "question": "After a change in earnings, a person adjusts how often a preventive medical service is used. Their income changes from 248.32 to 470.71, and the quantity demanded of the medical service changes from 66.17 to 83.16. What is the income elasticity of demand for this medical service?",
+            "response": "{\"answers\":[\"B\"],\"confidence\":\"high\"}",
+            "run": 1,
+            "status": "failed"
+          }
+        ],
+        "status": "failed",
+        "total_runs": 1,
+        "validated_at": "2026-04-15T17:19:58.838947+00:00"
+      },
+      "solve_check_history": [
+        {
+          "model": "gpt-5.4-nano",
+          "passed_runs": 0,
+          "runs": [
+            {
+              "error": "Filler returned None.",
+              "run": 1,
+              "status": "error"
+            }
+          ],
+          "status": "error",
+          "total_runs": 1,
+          "validated_at": "2026-04-15T17:18:07.334252+00:00"
+        }
+      ],
+      "structure": {
+        "errors": [],
+        "passed": true,
+        "warnings": []
+      }
+    },
+    "created_at": "2026-04-15T17:15:20.112410+00:00",
+    "model": "gpt-5.4",
+    "notes": "",
+    "prompt": "Below, you will find some metadata that corresponds to a set of instructions and a template MCQ example that abides by these instructions.\n{\"metadata\": {\"domain\": \"consumer_goods\", \"type\": \"direct\", \"difficulty_level\": 1, \"tags\": \"anon\"}, \"instructions\": \"Please give an MCQ example testing the ability to compute income elasticity. The question should be concerning consumer goods. The question should be written in the third person and do not name the subject. Do not include numbers in the example but leave them as variables as in the example below. Use the following variables in the curly braces: {income_start}, {quantity_end}, {quantity_start}, {income_end}. Do not mark any option with correct_answer as True and the options should be a list containing a single empty string. See the following example as a guide but give a different example and write a narrative: \", \"question_1\": \"A consumer's monthly income changes from {income_start} to {income_end}. Over the same period, their quantity demanded of the good changes from {quantity_start} units to {quantity_end} units. What is the income elasticity of demand?\", \"options_1\": [\"\"], \"answer_1\": \"\"}\n\nGiven the following metadata and instructions please write a template MCQ that abides by the following instructions and metadata. Make sure the template fits the following set of metadata and instructions. \n{\"metadata\": {\"domain\": \"medical\", \"type\": \"direct\", \"difficulty_level\": 1, \"tags\": \"anon\"}, \"instructions\": \"Please give an MCQ example testing the ability to compute income elasticity. The question should be concerning medical activities. The question should be written in the third person and do not name the subject. Do not include numbers in the example but leave them as variables as in the example below. Use the following variables in the curly braces: {income_end}, {income_start}, {quantity_end}, {quantity_start}. The MCQ should have only one option. See the following example as a guide but give a different example and write a narrative: \"}",
+    "status": "draft",
+    "target_metadata": {
+      "difficulty_level": 1,
+      "domain": "medical",
+      "tags": "anon",
+      "type": "direct"
+    },
+    "updated_at": "2026-04-15T17:19:58.838956+00:00"
+  },
+  "2:0": {
+    "checks": {
+      "solve_check": {
+        "model": "gpt-5.4-nano",
+        "passed_runs": 0,
+        "runs": [
+          {
+            "expected": [
+              "C"
+            ],
+            "options": [
+              "9.21",
+              "4.92",
+              "10.55",
+              "10.42"
+            ],
+            "predicted": [
+              "A"
+            ],
+            "question": "In a financial setting, an individual's annual income changes from 352.67 to 403.24. Over the same period, the quantity demanded of a savings-related financial product changes from 38.68 to 97.22. What is the income elasticity of demand for this financial product?",
+            "response": "{\"answers\":[\"A\"],\"confidence\":\"high\"}",
+            "run": 1,
+            "status": "failed"
+          }
+        ],
+        "status": "failed",
+        "total_runs": 1,
+        "validated_at": "2026-04-15T17:19:59.352198+00:00"
+      },
+      "solve_check_history": [
+        {
+          "model": "gpt-5.4-nano",
+          "passed_runs": 0,
+          "runs": [
+            {
+              "error": "Filler returned None.",
+              "run": 1,
+              "status": "error"
+            }
+          ],
+          "status": "error",
+          "total_runs": 1,
+          "validated_at": "2026-04-15T17:18:07.334260+00:00"
+        }
+      ],
+      "structure": {
+        "errors": [],
+        "passed": true,
+        "warnings": []
+      }
+    },
+    "created_at": "2026-04-15T17:15:23.388762+00:00",
+    "model": "gpt-5.4",
+    "notes": "",
+    "prompt": "Below, you will find some metadata that corresponds to a set of instructions and a template MCQ example that abides by these instructions.\n{\"metadata\": {\"domain\": \"consumer_goods\", \"type\": \"direct\", \"difficulty_level\": 1, \"tags\": \"anon\"}, \"instructions\": \"Please give an MCQ example testing the ability to compute income elasticity. The question should be concerning consumer goods. The question should be written in the third person and do not name the subject. Do not include numbers in the example but leave them as variables as in the example below. Use the following variables in the curly braces: {income_start}, {quantity_end}, {quantity_start}, {income_end}. Do not mark any option with correct_answer as True and the options should be a list containing a single empty string. See the following example as a guide but give a different example and write a narrative: \", \"question_1\": \"A consumer's monthly income changes from {income_start} to {income_end}. Over the same period, their quantity demanded of the good changes from {quantity_start} units to {quantity_end} units. What is the income elasticity of demand?\", \"options_1\": [\"\"], \"answer_1\": \"\"}\n\nGiven the following metadata and instructions please write a template MCQ that abides by the following instructions and metadata. Make sure the template fits the following set of metadata and instructions. \n{\"metadata\": {\"domain\": \"finance\", \"type\": \"direct\", \"difficulty_level\": 1, \"tags\": \"anon\"}, \"instructions\": \"Please give an MCQ example testing the ability to compute income elasticity. The question should be concerning financial settings. The question should be written in the third person and do not name the subject. Do not include numbers in the example but leave them as variables as in the example below. Use the following variables in the curly braces: {income_end}, {income_start}, {quantity_end}, {quantity_start}. The MCQ should have only one option. See the following example as a guide but give a different example and write a narrative: \"}",
+    "status": "draft",
+    "target_metadata": {
+      "difficulty_level": 1,
+      "domain": "finance",
+      "tags": "anon",
+      "type": "direct"
+    },
+    "updated_at": "2026-04-15T17:19:59.352211+00:00"
+  },
+  "3:0": {
+    "checks": {
+      "solve_check": {
+        "model": "gpt-5.4-nano",
+        "passed_runs": 0,
+        "runs": [
+          {
+            "expected": [
+              "A"
+            ],
+            "options": [
+              "0.22",
+              "0.03",
+              "1.1",
+              "0.09"
+            ],
+            "predicted": [
+              "D"
+            ],
+            "question": "As household income changes from 117.52 to 161.72, the number of paid tutoring sessions chosen in an educational setting changes from 69.89 to 75.75. What is the income elasticity of demand for the tutoring sessions?",
+            "response": "{\"answers\":[\"D\"],\"confidence\":\"high\"}",
+            "run": 1,
+            "status": "failed"
+          }
+        ],
+        "status": "failed",
+        "total_runs": 1,
+        "validated_at": "2026-04-15T17:19:59.965171+00:00"
+      },
+      "solve_check_history": [
+        {
+          "model": "gpt-5.4-nano",
+          "passed_runs": 0,
+          "runs": [
+            {
+              "error": "Filler returned None.",
+              "run": 1,
+              "status": "error"
+            }
+          ],
+          "status": "error",
+          "total_runs": 1,
+          "validated_at": "2026-04-15T17:18:07.334264+00:00"
+        }
+      ],
+      "structure": {
+        "errors": [],
+        "passed": true,
+        "warnings": []
+      }
+    },
+    "created_at": "2026-04-15T17:15:27.101277+00:00",
+    "model": "gpt-5.4",
+    "notes": "",
+    "prompt": "Below, you will find some metadata that corresponds to a set of instructions and a template MCQ example that abides by these instructions.\n{\"metadata\": {\"domain\": \"consumer_goods\", \"type\": \"direct\", \"difficulty_level\": 1, \"tags\": \"anon\"}, \"instructions\": \"Please give an MCQ example testing the ability to compute income elasticity. The question should be concerning consumer goods. The question should be written in the third person and do not name the subject. Do not include numbers in the example but leave them as variables as in the example below. Use the following variables in the curly braces: {income_start}, {quantity_end}, {quantity_start}, {income_end}. Do not mark any option with correct_answer as True and the options should be a list containing a single empty string. See the following example as a guide but give a different example and write a narrative: \", \"question_1\": \"A consumer's monthly income changes from {income_start} to {income_end}. Over the same period, their quantity demanded of the good changes from {quantity_start} units to {quantity_end} units. What is the income elasticity of demand?\", \"options_1\": [\"\"], \"answer_1\": \"\"}\n\nGiven the following metadata and instructions please write a template MCQ that abides by the following instructions and metadata. Make sure the template fits the following set of metadata and instructions. \n{\"metadata\": {\"domain\": \"education\", \"type\": \"direct\", \"difficulty_level\": 1, \"tags\": \"anon\"}, \"instructions\": \"Please give an MCQ example testing the ability to compute income elasticity. The question should be concerning educational settings. The question should be written in the third person and do not name the subject. Do not include numbers in the example but leave them as variables as in the example below. Use the following variables in the curly braces: {income_end}, {income_start}, {quantity_end}, {quantity_start}. The MCQ should have only one option. See the following example as a guide but give a different example and write a narrative: \"}",
+    "status": "draft",
+    "target_metadata": {
+      "difficulty_level": 1,
+      "domain": "education",
+      "tags": "anon",
+      "type": "direct"
+    },
+    "updated_at": "2026-04-15T17:19:59.965180+00:00"
+  },
+  "4:0": {
+    "checks": {
+      "solve_check": {
+        "model": "gpt-5.4-nano",
+        "passed_runs": 0,
+        "runs": [
+          {
+            "expected": [
+              "C"
+            ],
+            "options": [
+              "1.78",
+              "0.78",
+              "0.94",
+              "1.29"
+            ],
+            "predicted": [
+              "A"
+            ],
+            "question": "In a technology-focused household, monthly income changes from 290.28 to 190.76. During the same period, the quantity demanded of a personal device changes from 68.63 units to 46.53 units. What is the income elasticity of demand for this technology good?",
+            "response": "{\"answers\":[\"A\"],\"confidence\":\"medium\"}",
+            "run": 1,
+            "status": "failed"
+          }
+        ],
+        "status": "failed",
+        "total_runs": 1,
+        "validated_at": "2026-04-15T17:20:00.595813+00:00"
+      },
+      "solve_check_history": [
+        {
+          "model": "gpt-5.4-nano",
+          "passed_runs": 0,
+          "runs": [
+            {
+              "error": "Filler returned None.",
+              "run": 1,
+              "status": "error"
+            }
+          ],
+          "status": "error",
+          "total_runs": 1,
+          "validated_at": "2026-04-15T17:18:07.334268+00:00"
+        }
+      ],
+      "structure": {
+        "errors": [],
+        "passed": true,
+        "warnings": []
+      }
+    },
+    "created_at": "2026-04-15T17:15:30.146633+00:00",
+    "model": "gpt-5.4",
+    "notes": "",
+    "prompt": "Below, you will find some metadata that corresponds to a set of instructions and a template MCQ example that abides by these instructions.\n{\"metadata\": {\"domain\": \"consumer_goods\", \"type\": \"direct\", \"difficulty_level\": 1, \"tags\": \"anon\"}, \"instructions\": \"Please give an MCQ example testing the ability to compute income elasticity. The question should be concerning consumer goods. The question should be written in the third person and do not name the subject. Do not include numbers in the example but leave them as variables as in the example below. Use the following variables in the curly braces: {income_start}, {quantity_end}, {quantity_start}, {income_end}. Do not mark any option with correct_answer as True and the options should be a list containing a single empty string. See the following example as a guide but give a different example and write a narrative: \", \"question_1\": \"A consumer's monthly income changes from {income_start} to {income_end}. Over the same period, their quantity demanded of the good changes from {quantity_start} units to {quantity_end} units. What is the income elasticity of demand?\", \"options_1\": [\"\"], \"answer_1\": \"\"}\n\nGiven the following metadata and instructions please write a template MCQ that abides by the following instructions and metadata. Make sure the template fits the following set of metadata and instructions. \n{\"metadata\": {\"domain\": \"technology\", \"type\": \"direct\", \"difficulty_level\": 1, \"tags\": \"anon\"}, \"instructions\": \"Please give an MCQ example testing the ability to compute income elasticity. The question should be concerning technology settings. The question should be written in the third person and do not name the subject. Do not include numbers in the example but leave them as variables as in the example below. Use the following variables in the curly braces: {income_end}, {income_start}, {quantity_end}, {quantity_start}. The MCQ should have only one option. See the following example as a guide but give a different example and write a narrative: \"}",
+    "status": "draft",
+    "target_metadata": {
+      "difficulty_level": 1,
+      "domain": "technology",
+      "tags": "anon",
+      "type": "direct"
+    },
+    "updated_at": "2026-04-15T17:20:00.595830+00:00"
+  },
+  "5:0": {
+    "checks": {
+      "solve_check": {
+        "model": "gpt-5.4-nano",
+        "passed_runs": 1,
+        "runs": [
+          {
+            "expected": [
+              "C"
+            ],
+            "options": [
+              "1.03",
+              "1.95",
+              "4.75",
+              "4.16"
+            ],
+            "predicted": [
+              "C"
+            ],
+            "question": "After receiving a change in earnings, an individual adjusts spending on entertainment and changes the number of streaming subscriptions purchased. If income changes from 254.99 to 215.33 and the quantity of subscriptions demanded changes from 69.84 to 18.28, what is the income elasticity of demand for this entertainment service?",
+            "response": "{\"answers\":[\"C\"],\"confidence\":\"high\"}",
+            "run": 1,
+            "status": "passed"
+          }
+        ],
+        "status": "passed",
+        "total_runs": 1,
+        "validated_at": "2026-04-15T17:20:01.215769+00:00"
+      },
+      "solve_check_history": [
+        {
+          "model": "gpt-5.4-nano",
+          "passed_runs": 0,
+          "runs": [
+            {
+              "error": "Filler returned None.",
+              "run": 1,
+              "status": "error"
+            }
+          ],
+          "status": "error",
+          "total_runs": 1,
+          "validated_at": "2026-04-15T17:18:07.334271+00:00"
+        }
+      ],
+      "structure": {
+        "errors": [],
+        "passed": true,
+        "warnings": []
+      }
+    },
+    "created_at": "2026-04-15T17:15:34.142464+00:00",
+    "model": "gpt-5.4",
+    "notes": "",
+    "prompt": "Below, you will find some metadata that corresponds to a set of instructions and a template MCQ example that abides by these instructions.\n{\"metadata\": {\"domain\": \"consumer_goods\", \"type\": \"direct\", \"difficulty_level\": 1, \"tags\": \"anon\"}, \"instructions\": \"Please give an MCQ example testing the ability to compute income elasticity. The question should be concerning consumer goods. The question should be written in the third person and do not name the subject. Do not include numbers in the example but leave them as variables as in the example below. Use the following variables in the curly braces: {income_start}, {quantity_end}, {quantity_start}, {income_end}. Do not mark any option with correct_answer as True and the options should be a list containing a single empty string. See the following example as a guide but give a different example and write a narrative: \", \"question_1\": \"A consumer's monthly income changes from {income_start} to {income_end}. Over the same period, their quantity demanded of the good changes from {quantity_start} units to {quantity_end} units. What is the income elasticity of demand?\", \"options_1\": [\"\"], \"answer_1\": \"\"}\n\nGiven the following metadata and instructions please write a template MCQ that abides by the following instructions and metadata. Make sure the template fits the following set of metadata and instructions. \n{\"metadata\": {\"domain\": \"entertainment\", \"type\": \"direct\", \"difficulty_level\": 1, \"tags\": \"anon\"}, \"instructions\": \"Please give an MCQ example testing the ability to compute income elasticity. The question should be concerning the entertainment industry. The question should be written in the third person and do not name the subject. Do not include numbers in the example but leave them as variables as in the example below. Use the following variables in the curly braces: {income_end}, {income_start}, {quantity_end}, {quantity_start}. The MCQ should have only one option. See the following example as a guide but give a different example and write a narrative: \"}",
+    "status": "draft",
+    "target_metadata": {
+      "difficulty_level": 1,
+      "domain": "entertainment",
+      "tags": "anon",
+      "type": "direct"
+    },
+    "updated_at": "2026-04-15T17:20:01.215778+00:00"
+  },
+  "6:0": {
+    "checks": {
+      "solve_check": {
+        "model": "gpt-5.4-nano",
+        "passed_runs": 1,
+        "runs": [
+          {
+            "expected": [
+              "A"
+            ],
+            "options": [
+              "2.71",
+              "1.81",
+              "0.38",
+              "2.28"
+            ],
+            "predicted": [
+              "A"
+            ],
+            "question": "After a change in earnings from 382.07 to 412.29, the amount of a household eco-labeled product purchased as part of a sustainability program changes from 48.6 to 59.03. What is the income elasticity of demand for this environmental-policy-related good?",
+            "response": "{\"answers\":[\"A\"],\"confidence\":\"high\"}",
+            "run": 1,
+            "status": "passed"
+          }
+        ],
+        "status": "passed",
+        "total_runs": 1,
+        "validated_at": "2026-04-15T17:20:01.911029+00:00"
+      },
+      "solve_check_history": [
+        {
+          "model": "gpt-5.4-nano",
+          "passed_runs": 0,
+          "runs": [
+            {
+              "error": "Filler returned None.",
+              "run": 1,
+              "status": "error"
+            }
+          ],
+          "status": "error",
+          "total_runs": 1,
+          "validated_at": "2026-04-15T17:18:07.334274+00:00"
+        }
+      ],
+      "structure": {
+        "errors": [],
+        "passed": true,
+        "warnings": []
+      }
+    },
+    "created_at": "2026-04-15T17:15:37.197160+00:00",
+    "model": "gpt-5.4",
+    "notes": "",
+    "prompt": "Below, you will find some metadata that corresponds to a set of instructions and a template MCQ example that abides by these instructions.\n{\"metadata\": {\"domain\": \"consumer_goods\", \"type\": \"direct\", \"difficulty_level\": 1, \"tags\": \"anon\"}, \"instructions\": \"Please give an MCQ example testing the ability to compute income elasticity. The question should be concerning consumer goods. The question should be written in the third person and do not name the subject. Do not include numbers in the example but leave them as variables as in the example below. Use the following variables in the curly braces: {income_start}, {quantity_end}, {quantity_start}, {income_end}. Do not mark any option with correct_answer as True and the options should be a list containing a single empty string. See the following example as a guide but give a different example and write a narrative: \", \"question_1\": \"A consumer's monthly income changes from {income_start} to {income_end}. Over the same period, their quantity demanded of the good changes from {quantity_start} units to {quantity_end} units. What is the income elasticity of demand?\", \"options_1\": [\"\"], \"answer_1\": \"\"}\n\nGiven the following metadata and instructions please write a template MCQ that abides by the following instructions and metadata. Make sure the template fits the following set of metadata and instructions. \n{\"metadata\": {\"domain\": \"environmental_policy\", \"type\": \"direct\", \"difficulty_level\": 1, \"tags\": \"anon\"}, \"instructions\": \"Please give an MCQ example testing the ability to compute income elasticity. The question should be concerning environmental policy. The question should be written in the third person and do not name the subject. Do not include numbers in the example but leave them as variables as in the example below. Use the following variables in the curly braces: {income_end}, {income_start}, {quantity_end}, {quantity_start}. The MCQ should have only one option. See the following example as a guide but give a different example and write a narrative: \"}",
+    "status": "draft",
+    "target_metadata": {
+      "difficulty_level": 1,
+      "domain": "environmental_policy",
+      "tags": "anon",
+      "type": "direct"
+    },
+    "updated_at": "2026-04-15T17:20:01.911042+00:00"
+  },
+  "7:0": {
+    "checks": {
+      "solve_check": {
+        "model": "gpt-5.4-nano",
+        "passed_runs": 0,
+        "runs": [
+          {
+            "expected": [
+              "B"
+            ],
+            "options": [
+              "-0.02",
+              "-0.07",
+              "0.0",
+              "0.98"
+            ],
+            "predicted": [
+              "D"
+            ],
+            "question": "During an election season, an individual's income changes from 406.0 to 353.89. Over the same period, the quantity demanded of campaign merchandise changes from 57.59 to 58.12. What is the income elasticity of demand for campaign merchandise?",
+            "response": "{\"answers\":[\"D\"],\"confidence\":\"high\"}",
+            "run": 1,
+            "status": "failed"
+          }
+        ],
+        "status": "failed",
+        "total_runs": 1,
+        "validated_at": "2026-04-15T17:20:02.832546+00:00"
+      },
+      "solve_check_history": [
+        {
+          "model": "gpt-5.4-nano",
+          "passed_runs": 0,
+          "runs": [
+            {
+              "error": "Filler returned None.",
+              "run": 1,
+              "status": "error"
+            }
+          ],
+          "status": "error",
+          "total_runs": 1,
+          "validated_at": "2026-04-15T17:18:07.334277+00:00"
+        }
+      ],
+      "structure": {
+        "errors": [],
+        "passed": true,
+        "warnings": []
+      }
+    },
+    "created_at": "2026-04-15T17:15:39.922586+00:00",
+    "model": "gpt-5.4",
+    "notes": "",
+    "prompt": "Below, you will find some metadata that corresponds to a set of instructions and a template MCQ example that abides by these instructions.\n{\"metadata\": {\"domain\": \"consumer_goods\", \"type\": \"direct\", \"difficulty_level\": 1, \"tags\": \"anon\"}, \"instructions\": \"Please give an MCQ example testing the ability to compute income elasticity. The question should be concerning consumer goods. The question should be written in the third person and do not name the subject. Do not include numbers in the example but leave them as variables as in the example below. Use the following variables in the curly braces: {income_start}, {quantity_end}, {quantity_start}, {income_end}. Do not mark any option with correct_answer as True and the options should be a list containing a single empty string. See the following example as a guide but give a different example and write a narrative: \", \"question_1\": \"A consumer's monthly income changes from {income_start} to {income_end}. Over the same period, their quantity demanded of the good changes from {quantity_start} units to {quantity_end} units. What is the income elasticity of demand?\", \"options_1\": [\"\"], \"answer_1\": \"\"}\n\nGiven the following metadata and instructions please write a template MCQ that abides by the following instructions and metadata. Make sure the template fits the following set of metadata and instructions. \n{\"metadata\": {\"domain\": \"politics\", \"type\": \"direct\", \"difficulty_level\": 1, \"tags\": \"anon\"}, \"instructions\": \"Please give an MCQ example testing the ability to compute income elasticity. The question should be concerning political settings. The question should be written in the third person and do not name the subject. Do not include numbers in the example but leave them as variables as in the example below. Use the following variables in the curly braces: {income_end}, {income_start}, {quantity_end}, {quantity_start}. The MCQ should have only one option. See the following example as a guide but give a different example and write a narrative: \"}",
+    "status": "draft",
+    "target_metadata": {
+      "difficulty_level": 1,
+      "domain": "politics",
+      "tags": "anon",
+      "type": "direct"
+    },
+    "updated_at": "2026-04-15T17:20:02.832555+00:00"
+  },
+  "8:0": {
+    "checks": {
+      "solve_check": {
+        "model": "gpt-5.4-nano",
+        "passed_runs": 1,
+        "runs": [
+          {
+            "expected": [
+              "A"
+            ],
+            "options": [
+              "-0.91",
+              "0.49",
+              "-0.6",
+              "0.74"
+            ],
+            "predicted": [
+              "A"
+            ],
+            "question": "As income changes from 263.41 to 441.36, spending priorities shift in a sports-related setting, and the quantity demanded of a particular sporting good changes from 27.22 to 10.54. What is the income elasticity of demand for this sporting good?",
+            "response": "{\"answers\":[\"A\"],\"confidence\":\"high\"}",
+            "run": 1,
+            "status": "passed"
+          }
+        ],
+        "status": "passed",
+        "total_runs": 1,
+        "validated_at": "2026-04-15T17:20:03.386789+00:00"
+      },
+      "solve_check_history": [
+        {
+          "model": "gpt-5.4-nano",
+          "passed_runs": 0,
+          "runs": [
+            {
+              "error": "Filler returned None.",
+              "run": 1,
+              "status": "error"
+            }
+          ],
+          "status": "error",
+          "total_runs": 1,
+          "validated_at": "2026-04-15T17:18:07.334280+00:00"
+        }
+      ],
+      "structure": {
+        "errors": [],
+        "passed": true,
+        "warnings": []
+      }
+    },
+    "created_at": "2026-04-15T17:15:42.946775+00:00",
+    "model": "gpt-5.4",
+    "notes": "",
+    "prompt": "Below, you will find some metadata that corresponds to a set of instructions and a template MCQ example that abides by these instructions.\n{\"metadata\": {\"domain\": \"consumer_goods\", \"type\": \"direct\", \"difficulty_level\": 1, \"tags\": \"anon\"}, \"instructions\": \"Please give an MCQ example testing the ability to compute income elasticity. The question should be concerning consumer goods. The question should be written in the third person and do not name the subject. Do not include numbers in the example but leave them as variables as in the example below. Use the following variables in the curly braces: {income_start}, {quantity_end}, {quantity_start}, {income_end}. Do not mark any option with correct_answer as True and the options should be a list containing a single empty string. See the following example as a guide but give a different example and write a narrative: \", \"question_1\": \"A consumer's monthly income changes from {income_start} to {income_end}. Over the same period, their quantity demanded of the good changes from {quantity_start} units to {quantity_end} units. What is the income elasticity of demand?\", \"options_1\": [\"\"], \"answer_1\": \"\"}\n\nGiven the following metadata and instructions please write a template MCQ that abides by the following instructions and metadata. Make sure the template fits the following set of metadata and instructions. \n{\"metadata\": {\"domain\": \"sports\", \"type\": \"direct\", \"difficulty_level\": 1, \"tags\": \"anon\"}, \"instructions\": \"Please give an MCQ example testing the ability to compute income elasticity. The question should be concerning sports scenarios. The question should be written in the third person and do not name the subject. Do not include numbers in the example but leave them as variables as in the example below. Use the following variables in the curly braces: {income_end}, {income_start}, {quantity_end}, {quantity_start}. The MCQ should have only one option. See the following example as a guide but give a different example and write a narrative: \"}",
+    "status": "draft",
+    "target_metadata": {
+      "difficulty_level": 1,
+      "domain": "sports",
+      "tags": "anon",
+      "type": "direct"
+    },
+    "updated_at": "2026-04-15T17:20:03.386798+00:00"
+  },
+  "9:0": {
+    "checks": {
+      "solve_check": {
+        "model": "gpt-5.4-nano",
+        "passed_runs": 0,
+        "runs": [
+          {
+            "expected": [
+              "A"
+            ],
+            "options": [
+              "2.65",
+              "2.22",
+              "1.24",
+              "1.06"
+            ],
+            "predicted": [
+              "B"
+            ],
+            "question": "After receiving a change in earnings, an individual adjusts participation in a gambling activity. Income changes from 365.73 to 262.55, while the quantity demanded of lottery tickets changes from 82.33 to 20.86. What is the income elasticity of demand for lottery tickets?",
+            "response": "{\"answers\":[\"B\"],\"confidence\":\"high\"}",
+            "run": 1,
+            "status": "failed"
+          }
+        ],
+        "status": "failed",
+        "total_runs": 1,
+        "validated_at": "2026-04-15T17:20:03.959788+00:00"
+      },
+      "solve_check_history": [
+        {
+          "model": "gpt-5.4-nano",
+          "passed_runs": 0,
+          "runs": [
+            {
+              "error": "Filler returned None.",
+              "run": 1,
+              "status": "error"
+            }
+          ],
+          "status": "error",
+          "total_runs": 1,
+          "validated_at": "2026-04-15T17:18:07.334283+00:00"
+        }
+      ],
+      "structure": {
+        "errors": [],
+        "passed": true,
+        "warnings": []
+      }
+    },
+    "created_at": "2026-04-15T17:15:46.018341+00:00",
+    "model": "gpt-5.4",
+    "notes": "",
+    "prompt": "Below, you will find some metadata that corresponds to a set of instructions and a template MCQ example that abides by these instructions.\n{\"metadata\": {\"domain\": \"consumer_goods\", \"type\": \"direct\", \"difficulty_level\": 1, \"tags\": \"anon\"}, \"instructions\": \"Please give an MCQ example testing the ability to compute income elasticity. The question should be concerning consumer goods. The question should be written in the third person and do not name the subject. Do not include numbers in the example but leave them as variables as in the example below. Use the following variables in the curly braces: {income_start}, {quantity_end}, {quantity_start}, {income_end}. Do not mark any option with correct_answer as True and the options should be a list containing a single empty string. See the following example as a guide but give a different example and write a narrative: \", \"question_1\": \"A consumer's monthly income changes from {income_start} to {income_end}. Over the same period, their quantity demanded of the good changes from {quantity_start} units to {quantity_end} units. What is the income elasticity of demand?\", \"options_1\": [\"\"], \"answer_1\": \"\"}\n\nGiven the following metadata and instructions please write a template MCQ that abides by the following instructions and metadata. Make sure the template fits the following set of metadata and instructions. \n{\"metadata\": {\"domain\": \"gambling\", \"type\": \"direct\", \"difficulty_level\": 1, \"tags\": \"anon\"}, \"instructions\": \"Please give an MCQ example testing the ability to compute income elasticity. The question should be concerning gambling activities. The question should be written in the third person and do not name the subject. Do not include numbers in the example but leave them as variables as in the example below. Use the following variables in the curly braces: {income_end}, {income_start}, {quantity_end}, {quantity_start}. The MCQ should have only one option. See the following example as a guide but give a different example and write a narrative: \"}",
+    "status": "draft",
+    "target_metadata": {
+      "difficulty_level": 1,
+      "domain": "gambling",
+      "tags": "anon",
+      "type": "direct"
+    },
+    "updated_at": "2026-04-15T17:20:03.959801+00:00"
+  }
+}

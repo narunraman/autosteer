@@ -1,0 +1,94 @@
+{# An element's templates: what they cover (counts you can click to filter), then the templates themselves. Each row
+   is a template; "fill" fills it once with a random seed, the i shows its metadata. #}
+{% if list_error %}<div class="notice error">Could not load the templates: {{ list_error }}</div>{% endif %}
+{% if total %}
+<section class="tl" id="tl" data-el="{{ i.element }}">
+  <div class="tl-overview" id="tl-overview" aria-label="What the templates cover"></div>
+  <div class="tl-head">
+    <span class="tl-count" id="tl-count"></span>
+    <button type="button" class="tl-link" id="tl-clear" hidden>clear filters</button>
+    <input id="tl-q" type="search" placeholder="Search templates" aria-label="Search templates">
+  </div>
+  {% if left_out %}<p class="hint tl-left-out">{{ "{:,}".format(in_file) }} in the template file; {{ left_out }} use a slot the filler never fills, so the sampler leaves {{ 'it' if left_out == 1 else 'them' }} out.</p>{% endif %}
+  <ol class="tl-list no-math" id="list"></ol>
+  <button type="button" class="tl-link tl-more" id="tl-more" hidden>show more</button>
+</section>
+<script type="application/json" id="tl-data">{{ {"rows": rows, "total": total, "facets": facets}|tojson }}</script>
+<script>
+(() => {
+  const box = document.getElementById('tl'), list = document.getElementById('list'), more = document.getElementById('tl-more');
+  const overview = document.getElementById('tl-overview'), clear = document.getElementById('tl-clear');
+  const el = box.dataset.el, canFill = {{ 'true' if i.filler else 'false' }};
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const human = v => esc(String(v ?? '').replace(/_/g, ' '));
+  const LABEL = { domain: 'Domain', type: 'Type', tag: 'Tag', level: 'Level' };
+  const filters = { domain: '', type: '', tag: '', level: '' };
+  let q = '', total = 0, timer;
+
+  const piece = p => p.map(x => x.slot ? `<span class="slot">${esc(x.slot)}</span>` : esc(x.text)).join('');
+  const pill = (kind, v, title) => `<span class="cand-md" data-kind="${kind}"${title ? ` title="${esc(title)}"` : ''}><b>${LABEL[kind]}</b> ${human(v)}</span>`;
+  const pillsOf = r => pill('domain', r.domain) + pill('type', r.type) +
+    String(r.tags || '').split(/[;,]/).map(t => t.trim()).filter(Boolean).map(t => pill('tag', t)).join('') +
+    pill('level', r.difficulty, 'raw template level ' + r.difficulty_raw);
+  const item = r => `<li data-tid="${esc(r.template_id)}"><div class="tl-row"><span class="record-id">#${r.id}</span><div class="tl-text">${
+    r.pieces.map((p, k) => (r.pieces.length > 1 ? `<p class="review-part">Part ${k + 1}</p>` : '') + `<p class="review-text">${piece(p)}</p>`).join('')}</div>
+    <span class="tl-acts"><button type="button" class="tl-info" aria-label="Metadata" title="Metadata" aria-expanded="false">i</button>${canFill ? `<button type="button" class="tl-ic fill" aria-label="Fill with a random seed" title="Fill with a random seed" aria-expanded="false"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="5.7" cy="5.7" r="1.1"/><circle cx="10.3" cy="10.3" r="1.1"/><circle cx="8" cy="8" r="1.1"/></svg></button>` : ''}</span></div>
+    <div class="tl-md" hidden>${pillsOf(r)}</div><div class="review-filled" hidden></div></li>`;
+
+  function facetsOf(facets) {
+    overview.innerHTML = ['domain', 'type', 'tag', 'level'].filter(f => (facets[f] || []).length).map(f =>
+      `<div class="tl-facet" data-kind="${f}"><span class="tl-fl">${LABEL[f]}</span><span class="tl-vs">${facets[f].map(x =>
+        `<button type="button" class="tl-v${x.on ? ' on' : ''}" data-f="${f}" data-v="${esc(x.value)}" aria-pressed="${x.on}">${f === 'level' ? 'level ' : ''}${human(x.value)} <span class="n">${x.count}</span></button>`).join('')}</span></div>`).join('');
+    clear.hidden = !Object.values(filters).some(Boolean);
+  }
+  const count = () => {
+    document.getElementById('tl-count').textContent = `${total} template${total === 1 ? '' : 's'}` + (list.children.length < total ? ` · ${list.children.length} shown` : '');
+    more.hidden = list.children.length >= total;
+  };
+  function show(j, reset) {
+    if (reset) list.innerHTML = '';
+    list.insertAdjacentHTML('beforeend', j.rows.map(item).join(''));
+    total = j.total; facetsOf(j.facets); count();
+  }
+  async function load(reset) {
+    const p = new URLSearchParams({ offset: reset ? 0 : list.children.length, q, ...filters });
+    const r = await fetch(`/developer/e/${el}/template-rows?` + p);
+    show(await r.json(), reset);
+  }
+  show(JSON.parse(document.getElementById('tl-data').textContent), true);
+
+  more.addEventListener('click', () => load(false));
+  document.getElementById('tl-q').addEventListener('input', e => { clearTimeout(timer); q = e.target.value.trim(); timer = setTimeout(() => load(true), 250); });
+  overview.addEventListener('click', e => {
+    const b = e.target.closest('.tl-v'); if (!b) return;
+    filters[b.dataset.f] = filters[b.dataset.f] === b.dataset.v ? '' : b.dataset.v;
+    load(true);
+  });
+  clear.addEventListener('click', () => { Object.keys(filters).forEach(k => { filters[k] = ''; }); load(true); });
+
+  const render = j => j.parts.map((p, k) => `${j.parts.length > 1 ? `<p class="review-part">Part ${k + 1}</p>` : ''}<div class="question">${window.marked ? marked.parse(p.question) : esc(p.question)}</div><ol class="options-abc">${
+    p.options.map((o, i) => `<li${p.correct[i] ? ' class="correct"' : ''}>${String.fromCharCode(65 + i)}. ${esc(o)}</li>`).join('')}</ol>`).join('') +
+    `<p class="hint tl-filled-foot"><span>seed ${j.seed}</span><button type="button" class="tl-quiet reroll">another seed</button><button type="button" class="tl-quiet unfill">hide</button></p>`;
+  list.addEventListener('click', async e => {
+    const info = e.target.closest('.tl-info');
+    if (info) {
+      const md = info.closest('li').querySelector('.tl-md');
+      md.hidden = !md.hidden; info.setAttribute('aria-expanded', String(!md.hidden));
+      return;
+    }
+    const li = e.target.closest('li'), b = li && li.querySelector('.fill'), out = li && li.querySelector('.review-filled');
+    if (e.target.closest('.unfill') || (e.target.closest('.fill') && !out.hidden)) {
+      out.hidden = true; b.setAttribute('aria-expanded', 'false'); return;
+    }
+    if (!e.target.closest('.fill, .reroll')) return;
+    out.hidden = false; b.setAttribute('aria-expanded', 'true'); out.innerHTML = '<p class="hint">Filling…</p>';
+    try {
+      const r = await fetch(`/developer/e/${el}/fill?` + new URLSearchParams({ seed: Math.floor(Math.random() * 1e9), template_id: li.dataset.tid }));
+      const j = await r.json();
+      if (!r.ok) throw new Error(j.detail || r.statusText);
+      out.innerHTML = render(j);
+    } catch (err) { out.textContent = 'Could not fill: ' + err.message; }
+  });
+})();
+</script>
+{% endif %}

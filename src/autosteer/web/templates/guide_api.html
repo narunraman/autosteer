@@ -1,0 +1,61 @@
+{% extends "guide_base.html" %}
+{% block content %}
+<h1>Reference</h1>
+<p class="subtitle">The API: fresh questions over HTTP</p>
+<p>The API has two endpoints. Both return JSON.</p>
+<table class="articles">
+  <thead><tr><th>Endpoint</th><th>Returns</th></tr></thead>
+  <tbody>
+    <tr><td><code>GET /api/sample</code></td><td>Generated questions, in the same form as the dataset.</td></tr>
+    <tr><td><code>GET /api/elements</code></td><td>Every element, with its types, domains, perspectives and difficulty levels.</td></tr>
+  </tbody>
+</table>
+
+<h2 id="sample">Sampling questions</h2>
+<p><code>/api/sample</code> takes the parameters below. Leave a filter out and it is chosen at random.</p>
+<table>
+  <tr><th><code>element_name</code></th><td>Which element, for example <code>law_of_demand</code></td></tr>
+  <tr><th><code>type</code></th><td>The form of the question</td></tr>
+  <tr><th><code>domain</code></th><td>The subject matter, for example <code>finance</code></td></tr>
+  <tr><th><code>tags</code></th><td>The perspective, for example <code>first_person</code></td></tr>
+  <tr><th><code>difficulty_level</code></th><td>The difficulty level within the element, from 1 (its easiest) up to its number of levels. Levels are relative to each element; without <code>element_name</code>, only elements that have the level are drawn from. A level out of range returns an error (400)</td></tr>
+  <tr><th><code>n</code></th><td>How many questions, from 1 to 50</td></tr>
+  <tr><th><code>seed</code></th><td>Question <i>i</i> uses seed + <i>i</i>, so the same seed returns the same questions</td></tr>
+</table>
+<div class="codeblock"><button class="copy" type="button" data-copy="api-1">Copy</button><pre id="api-1">curl "https://steer-benchmark.cs.ubc.ca/api/sample?element_name=law_of_demand&amp;n=1&amp;seed=42"</pre></div>
+<p>Each question comes back as one row per part, with exactly the fields of the <a class="icon-link ic-hf" href="/datasets">dataset</a>:</p>
+<div class="codeblock"><pre>{
+  "questions": [
+    {
+      "element": "law_of_demand",
+      "question_id": "law_of_demand/08207ad1a1f14bb2/0",
+      "base_id": "08207ad1a1f14bb2",
+      "part": 0,
+      "template_id": "law_of_demand/questions/1653",
+      "question_text": "John is analyzing the market for a particular stock. Initially, the stock is priced at 19222.79 and the quantity demanded is 6. After some time, he notices that the quantity demanded has decreased to 2. What might be the new price that led to this decrease in quantity demanded?",
+      "options": ["18836.16", "19721.29", "18328.52", "18763.49"],
+      "grading": "answer",
+      "correct_index": 1,
+      "consistency_group": null,
+      "consistency_rule": null,
+      "type": "quantity_decrease",
+      "domain": "finance",
+      "perspective": "man",
+      "tags": [],
+      "difficulty": 1,
+      "setting": "Consumption Decisions in Non-Strategic Environments",
+      "module": "Comparative Statics of Demand",
+      "generator": "autosteer@0.1.0+f90fd64",
+      "seed": 42
+    }
+  ]
+}</pre></div>
+<table>
+  <tr><th><code>question_id</code></th><td>Unique per part; <code>base_id</code> groups the parts of one question</td></tr>
+  <tr><th><code>options</code>, <code>correct_index</code></th><td>The options in the order to show them, and the position of the correct one</td></tr>
+  <tr><th><code>grading</code></th><td><code>answer</code> for one correct option, or <code>consistency</code>, in which case the parts sharing a <code>consistency_group</code> are scored together by <code>consistency_rule</code></td></tr>
+  <tr><th><code>difficulty</code></th><td>The difficulty level within the element, from 1 (its easiest); not comparable across elements</td></tr>
+  <tr><th><code>generator</code>, <code>seed</code>, <code>template_id</code></th><td>Together these reproduce the row exactly</td></tr>
+</table>
+<p>Called with no <code>n</code> or <code>seed</code>, the endpoint returns a single question in a shorter form, which this site uses for its "Generate a question" buttons.</p>
+{% endblock %}

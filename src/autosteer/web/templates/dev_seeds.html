@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% import "_md_pills.html" as pills with context %}
+{% block head_extra %}{% endblock %}
+{% block content %}
+<section class="dev-head"><h1>{{ i.display_name }}</h1></section>
+{% include "_dev_messages.html" %}
+{% with code_extra=("The example seeds below are from earlier work and are kept." if records else "") %}{% include "_code_notice.html" %}{% endwith %}
+
+{% if draft is not none %}
+{% include "_seed_editor.html" %}
+{% endif %}
+
+{% if records %}{% set lv = level_scale(i.element, records|map(attribute='metadata.difficulty_level')|list) %}{% set cv = coverage %}
+<section class="sc" id="sc" aria-label="What the seeds cover">
+  {% set grid = cv.types|length > 1 and cv.levels|length > 1 %}{% if grid %}
+  <table class="sc-grid">
+    <thead><tr><th class="sc-corner">Type</th>{% for l in cv.levels %}<th>Level {{ l.rel }}</th>{% endfor %}</tr></thead>
+    <tbody>{% for t in cv.types %}<tr><th scope="row">{{ t|replace('_', ' ') }}</th>
+      {% for l in cv.levels %}{% set n = cv.cells.get(t ~ '|' ~ l.rel, 0) %}<td>{% if n %}<button type="button" class="sc-cell" data-type="{{ t }}" data-level="{{ l.rel }}" aria-pressed="false">{{ n }}</button>{% else %}<a class="sc-gap" href="/developer/e/{{ i.element }}/seeds?edit=new&type={{ t|urlencode }}&level={{ l.raw }}" title="Write a {{ t|replace('_', ' ') }} seed at level {{ l.rel }}">+ write one</a>{% endif %}</td>{% endfor %}
+    </tr>{% endfor %}</tbody>
+  </table>{% endif %}
+  <div class="tl-overview sc-facets">
+    {% if not grid %}<div class="tl-facet" data-kind="type"><span class="tl-fl">Type</span><span class="tl-vs">{% for t, n in cv.type_counts %}<button type="button" class="tl-v" data-f="type" data-v="{{ t }}" aria-pressed="false">{{ t|replace('_', ' ') }} <span class="n">{{ n }}</span></button>{% endfor %}</span></div>{% endif %}
+    <div class="tl-facet" data-kind="domain"><span class="tl-fl">Domain</span><span class="tl-vs">{% for d, n in cv.domains %}<button type="button" class="tl-v" data-f="domain" data-v="{{ d }}" aria-pressed="false">{{ d|replace('_', ' ') }} <span class="n">{{ n }}</span></button>{% endfor %}</span></div>
+    {% if cv.tags %}<div class="tl-facet" data-kind="tag"><span class="tl-fl">Tag</span><span class="tl-vs">{% for t, n in cv.tags %}<button type="button" class="tl-v" data-f="tag" data-v="{{ t }}" aria-pressed="false">{{ t|replace('_', ' ') }} <span class="n">{{ n }}</span></button>{% endfor %}</span></div>{% endif %}
+    {% if not grid %}<div class="tl-facet" data-kind="level"><span class="tl-fl">Level</span><span class="tl-vs">{% for l in cv.levels %}{% if l.n %}<button type="button" class="tl-v" data-f="level" data-v="{{ l.rel }}" aria-pressed="false">level {{ l.rel }} <span class="n">{{ l.n }}</span></button>{% else %}<a class="sc-gap" href="/developer/e/{{ i.element }}/seeds?edit=new&level={{ l.raw }}{% if cv.types|length == 1 %}&type={{ cv.types[0]|urlencode }}{% endif %}">level {{ l.rel }}: + write one</a>{% endif %}{% endfor %}</span></div>{% endif %}
+  </div>
+</section>
+{% endif %}
+
+{% if records or draft is none %}
+<div class="tl-head sc-head">
+  {% if records %}<label class="cand-all"><input type="checkbox" id="sc-all"> <span class="tl-count" id="sc-count">{{ records|length }} seed{{ '' if records|length == 1 else 's' }}</span></label>
+  <span class="cand-bulk" id="sc-bulk" hidden>
+    <button type="button" class="secondary button-sm" id="sc-edit">Edit</button>
+    <button type="button" class="secondary button-sm dev-danger" id="sc-delete">Delete</button>
+  </span>{% endif %}
+  <button type="button" class="tl-link" id="sc-clear" hidden>clear filters</button>
+  {% if draft is none or editing_id %}<a class="button secondary button-sm sc-new" href="/developer/e/{{ i.element }}/seeds?edit=new">+ new seed</a>{% endif %}
+</div>
+{% endif %}
+
+{% if records %}
+<ol class="tl-list sc-list">
+  {% for record in records %}{% set rid = record.question_id|int ~ '.' ~ record.sub_id|int %}{% set md = record.metadata %}
+  <li class="{% if rid == editing_id %}editing{% endif %}" id="s-{{ record.question_id|int }}-{{ record.sub_id|int }}"
+      data-type="{{ md.type }}" data-level="{{ lv.get(md.difficulty_level|int, md.difficulty_level) }}" data-domain="{{ md.domain }}" data-tags="{{ (md.tags or '')|replace(',', ';') }}" data-rid="{{ rid }}">
+    <div class="tl-row">
+      <input type="checkbox" class="cand-pick" aria-label="Select seed {{ rid }}">
+      <span class="record-id">{{ rid }}</span>
+      <div class="tl-text">
+        <p class="question">{{ record.question_text|highlight_placeholders }}</p>
+        {% if record.options and not (record.options|length == 1 and (not record.options[0].option_text or record.options[0].option_text == 'No options found')) %}
+        <ul class="options-abc">{% for option in record.options %}<li class="{% if option.correct_answer %}correct{% endif %}"><strong>{{ "ABCDEFGH"[loop.index0] }}.</strong> {{ option.option_text }}</li>{% endfor %}</ul>
+        {% endif %}
+      </div>
+      <span class="tl-acts"><button type="button" class="tl-info" aria-label="Metadata and instructions" title="Metadata and instructions" aria-expanded="false">i</button></span>
+    </div>
+    <div class="tl-md" hidden>
+      {{ pills.md(md.domain, md.type, md.tags, lv.get(md.difficulty_level|int, md.difficulty_level), md.difficulty_level) }}
+      {% if record.instructions %}<div class="seed-instr"><b>Instructions for the model</b><p>{{ record.instructions }}</p></div>{% endif %}
+    </div>
+  </li>
+  {% endfor %}
+</ol>
+<form id="sc-del-form" method="post" action="/developer/e/{{ i.element }}/seeds/delete-many" hidden><input type="hidden" name="element_name" value="{{ i.element }}"></form>
+<dialog class="dev-dialog" id="seed-dialog" aria-labelledby="seed-dialog-title">
+  <p class="dev-dialog-title" id="seed-dialog-title">Delete?</p>
+  <p id="seed-dialog-text"></p>
+  <div class="dev-dialog-actions">
+    <button type="button" class="secondary" id="seed-dialog-no">Keep</button>
+    <button type="button" class="dev-danger-solid" id="seed-dialog-yes">Delete</button>
+  </div>
+</dialog>
+<script>
+(() => {
+  const sc = document.getElementById('sc'), list = document.querySelector('.sc-list'); if (!sc || !list) return;
+  const clear = document.getElementById('sc-clear'), count = document.getElementById('sc-count');
+  const f = { type: '', level: '', domain: '', tag: '' };
+  const apply = () => {
+    let n = 0;
+    list.querySelectorAll(':scope > li').forEach(li => {
+      const d = li.dataset, tags = d.tags.split(';').map(t => t.trim());
+      const ok = (!f.type || d.type === f.type) && (!f.level || d.level === f.level) && (!f.domain || d.domain === f.domain) && (!f.tag || tags.includes(f.tag));
+      li.hidden = !ok; n += ok;
+    });
+    list.querySelectorAll(':scope > li[hidden] .cand-pick').forEach(c => { c.checked = false; });
+    sync();
+    clear.hidden = !Object.values(f).some(Boolean);
+    sc.querySelectorAll('.sc-cell').forEach(b => { const on = b.dataset.type === f.type && b.dataset.level === f.level; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+    sc.querySelectorAll('.tl-v').forEach(b => { const on = f[b.dataset.f] === b.dataset.v; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+  };
+  sc.addEventListener('click', e => {
+    const c = e.target.closest('.sc-cell'), v = e.target.closest('.tl-v');
+    if (c) { const same = f.type === c.dataset.type && f.level === c.dataset.level; f.type = same ? '' : c.dataset.type; f.level = same ? '' : c.dataset.level; apply(); }
+    if (v) { f[v.dataset.f] = f[v.dataset.f] === v.dataset.v ? '' : v.dataset.v; apply(); }
+  });
+  clear.addEventListener('click', () => { Object.keys(f).forEach(k => { f[k] = ''; }); apply(); });
+  /* selection: one or all shown; Edit takes exactly one, Delete any number */
+  const all = document.getElementById('sc-all'), bulk = document.getElementById('sc-bulk'), edit = document.getElementById('sc-edit');
+  const shown = () => [...list.querySelectorAll(':scope > li')].filter(li => !li.hidden);
+  const picked = () => shown().filter(li => li.querySelector('.cand-pick').checked);
+  function sync() {
+    const n = picked().length, m = shown().length, total = list.children.length;
+    bulk.hidden = !n; edit.disabled = n !== 1;
+    edit.title = n === 1 ? '' : 'Edit one seed at a time';
+    all.checked = n > 0 && n === m; all.indeterminate = n > 0 && n < m;
+    count.textContent = n ? `${n} selected` : m === total ? `${total} seed${total === 1 ? '' : 's'}` : `${m} of ${total} seeds`;
+  }
+  list.addEventListener('change', e => { if (e.target.matches('.cand-pick')) sync(); });
+  all.addEventListener('change', () => { shown().forEach(li => { li.querySelector('.cand-pick').checked = all.checked; }); sync(); });
+  edit.addEventListener('click', () => { const r = picked(); if (r.length === 1) location.href = {{ ('/developer/e/' ~ i.element ~ '/seeds?edit=')|tojson }} + r[0].dataset.rid; });
+  const dlg = document.getElementById('seed-dialog');
+  function ask(text) {
+    document.getElementById('seed-dialog-text').textContent = text;
+    dlg.showModal();
+    return new Promise(res => {
+      const yes = document.getElementById('seed-dialog-yes'), no = document.getElementById('seed-dialog-no');
+      const y = () => done(true), n = () => done(false);
+      const done = v => { dlg.close(); yes.removeEventListener('click', y); no.removeEventListener('click', n); res(v); };
+      yes.addEventListener('click', y); no.addEventListener('click', n);
+      dlg.addEventListener('cancel', () => done(false), { once: true });
+    });
+  }
+  document.getElementById('sc-delete').addEventListener('click', async () => {
+    const rows = picked(); if (!rows.length) return;
+    if (!(await ask(rows.length === 1 ? `Delete seed ${rows[0].dataset.rid}?` : `Delete ${rows.length} seeds?`))) return;
+    const f = document.getElementById('sc-del-form');
+    rows.forEach(li => { const x = document.createElement('input'); x.type = 'hidden'; x.name = 'ids'; x.value = li.dataset.rid; f.appendChild(x); });
+    f.submit();
+  });
+  sync();
+  list.addEventListener('click', e => {
+    const info = e.target.closest('.tl-info'); if (!info) return;
+    const md = info.closest('li').querySelector('.tl-md');
+    md.hidden = !md.hidden; info.setAttribute('aria-expanded', String(!md.hidden));
+  });
+})();
+</script>
+{% elif draft is none %}
+<div class="dev-empty">
+  <p>No example seeds yet.</p>
+  <a class="button button-sm" href="/developer/e/{{ i.element }}/seeds?edit=new">Write the first seed</a>
+</div>
+{% endif %}
+{% endblock %}

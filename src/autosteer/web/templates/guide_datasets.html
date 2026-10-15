@@ -1,0 +1,11 @@
+{% extends "guide_base.html" %}
+{% block content %}
+<h1>Datasets</h1>
+<p class="subtitle">A fixed sample of each benchmark</p>
+<p>Each dataset is a fixed sample from the generator, so that results can be compared across papers. Every element contributes 20 questions for each combination of type, domain and difficulty, and at least 200 in total. There is one dataset per benchmark, and each can be loaded whole or one element at a time:</p>
+<div class="codeblock"><button class="copy" type="button" data-copy="ds-1">Copy</button><pre id="ds-1">from datasets import load_dataset
+
+steer    = load_dataset("narunraman/steer")       # everything
+steer_me = load_dataset("narunraman/steer_me", "law_of_demand")   # one element</pre></div>
+<p>Every row has its setting and module, so a setting or module is a filter on the whole dataset. Each element also has a few_shot split of example questions from templates that the test split never uses. For questions outside the fixed sample, use the <a href="/reference">API</a>. Both datasets are released under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
+{% endblock %}

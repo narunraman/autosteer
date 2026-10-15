@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="dev-head">
+  <h1>New element</h1>
+  <p class="lead compact">Name the element and place it in a benchmark. This creates its data folder and a draft record (not shown on the public site), then opens its Example seeds.</p>
+</section>
+{% include "_dev_messages.html" %}
+<form class="dev-block dev-new" method="post" action="/developer/new" id="new-form">
+  <label>Name
+    <input name="display_name" id="n-name" value="{{ form.display_name or '' }}" required placeholder="Consumer Surplus" autocomplete="off">
+  </label>
+  <label>Id
+    <input name="element_id" id="n-id" value="{{ form.element_id or '' }}" placeholder="derived from the name" autocomplete="off" pattern="[a-z0-9_]+">
+    <span class="hint" id="n-id-hint">Used for the data folder and the filler name. Lower case, digits and underscores.</span>
+  </label>
+  <div class="dev-new-grid">
+    <label>Benchmark
+      <select name="version" id="n-version" required>
+        <option value="">Choose</option>
+        {% for v in ['STEER', 'STEER-ME'] %}<option{% if form.version == v %} selected{% endif %}>{{ v }}</option>{% endfor %}
+      </select>
+    </label>
+    <label>Setting <select name="setting" id="n-setting" required><option value="">Choose a benchmark first</option></select></label>
+    <label>Module <select name="module" id="n-module" required><option value="">Choose a setting first</option></select></label>
+  </div>
+  <div class="dev-new-grid dev-new-custom">
+    <span></span>
+    <label id="n-new-setting-wrap" hidden>New setting name
+      <input name="new_setting" id="n-new-setting" value="{{ form.new_setting or '' }}" autocomplete="off" placeholder="e.g. Ambiguity">
+    </label>
+    <label id="n-new-module-wrap" hidden>New module name
+      <input name="new_module" id="n-new-module" value="{{ form.new_module or '' }}" autocomplete="off" placeholder="e.g. Ellsberg Choices">
+    </label>
+  </div>
+  <p class="hint">A setting or module that isn't in the paper's taxonomy can be added with "New setting…" or "New module…". It is kept with the draft and offered to later drafts; it reaches the public taxonomy only when the element is added to the site.</p>
+  <label>Summary
+    <input name="summary" value="{{ form.summary or '' }}" required placeholder="One sentence: what the questions ask the model to do.">
+  </label>
+  <div class="form-actions"><button type="submit" id="n-submit">Create element</button><a class="button secondary" href="/developer">Cancel</a></div>
+  {% if fillers %}<p class="hint">Fillers registered with no element yet: {% for f in fillers %}<code>{{ f }}</code>{% if not loop.last %}, {% endif %}{% endfor %}. Use the same id to connect one.</p>{% endif %}
+</form>
+{% endblock %}
+{% block scripts %}
+<script>
+(() => {
+  const tax = {{ taxonomy|tojson }}, taken = new Set({{ taken|tojson }}), fillers = new Set({{ fillers|tojson }});
+  const form = {{ form|tojson }};
+  const $ = id => document.getElementById(id);
+  const derive = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
+  let idTouched = Boolean(form.element_id);
+  function checkId() {
+    const id = derive($('n-id').value || $('n-name').value);
+    if (!idTouched) $('n-id').value = derive($('n-name').value);
+    const hint = $('n-id-hint');
+    if (!id) { hint.textContent = 'Used for the data folder and the filler name. Lower case, digits and underscores.'; hint.className = 'hint'; return; }
+    if (taken.has(id)) { hint.textContent = id + ' is already used by another element or data folder. Change the name or the id.'; hint.className = 'hint error-text'; $('n-submit').disabled = true; return; }
+    $('n-submit').disabled = false;
+    hint.textContent = id + (fillers.has(id) ? ' is free, and a filler with this name is registered: it will be used.' : ' is free.');
+    hint.className = 'hint';
+  }
+  $('n-name').addEventListener('input', checkId);
+  $('n-id').addEventListener('input', () => { idTouched = Boolean($('n-id').value); checkId(); });
+  const NEW = '__new__';
+  const esc = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+  function fill(select, items, placeholder, chosen, newLabel) {
+    const opts = items.map(x => `<option value="${esc(x.name)}"${x.name === chosen ? ' selected' : ''}>${x.custom ? esc(x.name) + ' (new)' : x.number + ' ' + esc(x.name)}</option>`);
+    if (newLabel) opts.push(`<option value="${NEW}"${chosen === NEW ? ' selected' : ''}>${newLabel}</option>`);
+    select.innerHTML = `<option value="">${placeholder}</option>` + opts.join('');
+  }
+  function show() {
+    const ns = $('n-setting').value === NEW, nm = $('n-module').value === NEW;
+    $('n-new-setting-wrap').hidden = !ns; $('n-new-setting').required = ns;
+    $('n-new-module-wrap').hidden = !nm; $('n-new-module').required = nm;
+  }
+  function settings(chosenSetting, chosenModule) {
+    const v = $('n-version').value;
+    fill($('n-setting'), v ? tax[v] : [], v ? 'Choose' : 'Choose a benchmark first', chosenSetting, v ? 'New setting…' : '');
+    modules(chosenModule);
+  }
+  function modules(chosen) {
+    const v = $('n-version').value, sv = $('n-setting').value;
+    if (sv === NEW) {
+      fill($('n-module'), [], 'Choose', NEW, 'New module…');
+    } else {
+      const s = (tax[v] || []).find(x => x.name === sv);
+      fill($('n-module'), s ? s.modules : [], s ? 'Choose' : 'Choose a setting first', chosen, s ? 'New module…' : '');
+    }
+    show();
+  }
+  $('n-version').addEventListener('change', () => settings());
+  $('n-setting').addEventListener('change', () => modules());
+  $('n-module').addEventListener('change', show);
+  settings(form.setting, form.module);
+  checkId();
+})();
+</script>
+{% endblock %}

@@ -1,0 +1,770 @@
+{
+ "settings": [
+  {
+   "number": 1,
+   "name": "Foundations",
+   "modules": [
+    {
+     "number": "1.1",
+     "name": "Arithmetic",
+     "elements": [
+      {
+       "id": "1.1.a",
+       "paper_name": "Addition and Subtraction",
+       "definition": "The ability to add or subtract.",
+       "data_name": "add_sub",
+       "in_release": true,
+       "arxiv_v2_id": "1.1.a",
+       "arxiv_v1_id": "1.1.a"
+      },
+      {
+       "id": "1.1.b",
+       "paper_name": "Multiplication and Division",
+       "definition": "The ability to multiply or divide.",
+       "data_name": "mult_div",
+       "in_release": true,
+       "arxiv_v2_id": "1.1.b",
+       "arxiv_v1_id": "1.1.b"
+      },
+      {
+       "id": "1.1.c",
+       "paper_name": "Compute Expectations",
+       "definition": "The ability to compute the expected value with given probabilities and values.",
+       "data_name": "compute_expectations",
+       "in_release": true,
+       "arxiv_v2_id": "1.1.c"
+      }
+     ],
+     "description": [
+      "Economic reasoning is fundamentally quantitative, so arithmetic operations are a bedrock foundation for much of what is to come."
+     ]
+    },
+    {
+     "number": "1.2",
+     "name": "Optimization",
+     "elements": [
+      {
+       "id": "1.2.a",
+       "paper_name": "Optimize over a Discrete Set",
+       "definition": "The ability to identify the biggest or smallest among a set of explicitly given alternatives.",
+       "data_name": "micro_utility",
+       "in_release": true,
+       "arxiv_v2_id": "1.2.a",
+       "arxiv_v1_id": "1.2.a"
+      },
+      {
+       "id": "1.2.b",
+       "paper_name": "Optimize a Continuous Function",
+       "definition": "The ability to identify a maximum or minimum value given a specific continuous relationship between independent and dependent variables.",
+       "data_name": "optimize_continuous",
+       "in_release": true,
+       "arxiv_v2_id": "1.2.b",
+       "arxiv_v1_id": "1.2.b"
+      },
+      {
+       "id": "1.2.c",
+       "paper_name": "Constrained Optimization",
+       "definition": "The ability to find the maximum or minimum of a function subject to constraints.",
+       "data_name": "constrained_optimization",
+       "in_release": true,
+       "arxiv_v2_id": "1.2.c",
+       "arxiv_v1_id": "1.2.c"
+      }
+     ],
+     "description": [
+      "Much economic reasoning depends on the primitive operation of identifying the best choice among a set of alternatives, sometimes given constraints."
+     ]
+    },
+    {
+     "number": "1.3",
+     "name": "Probability",
+     "elements": [
+      {
+       "id": "1.3.a",
+       "paper_name": "Compute Probabilities of Outcomes",
+       "definition": "The ability to compute probabilities of individual outcomes given a natural language description of a probability distribution.",
+       "data_name": "prob_basic",
+       "in_release": true,
+       "arxiv_v2_id": "1.3.a",
+       "arxiv_v1_id": "1.3.a"
+      },
+      {
+       "id": "1.3.b",
+       "paper_name": "Complement Rule",
+       "definition": "The ability to compute the complement probability of an event (i.e., the probability that it does not occur).",
+       "data_name": "complement_rule",
+       "in_release": true,
+       "arxiv_v2_id": "1.3.b",
+       "arxiv_v1_id": "1.3.b"
+      },
+      {
+       "id": "1.3.c",
+       "paper_name": "Bayes' Rule",
+       "definition": "The ability to update probabilistic beliefs according to Bayes' Rule: Let $A$ and $B$ be events and $P(B) \\neq 0$, then $P(A|B) = P(B|A)P(A)/P(B)$.",
+       "data_name": "bayes_rule",
+       "in_release": true,
+       "arxiv_v2_id": "1.3.c",
+       "arxiv_v1_id": "1.3.c"
+      }
+     ],
+     "description": [
+      "Reasoning under uncertainty is a critical framework for rational decision making."
+     ]
+    },
+    {
+     "number": "1.4",
+     "name": "Logic",
+     "elements": [
+      {
+       "id": "1.4.a",
+       "paper_name": "Categorical Syllogism",
+       "definition": "The ability to deduce if the conclusion logically follows from two assertions (e.g., \"A is in C and B is in A, is B in C?\").",
+       "data_name": "categorical_syllogism",
+       "in_release": true,
+       "arxiv_v2_id": "1.4.a",
+       "arxiv_v1_id": "1.4.a"
+      },
+      {
+       "id": "1.4.b",
+       "paper_name": "Conditional Syllogism",
+       "definition": "The ability to deduce if the conclusion logically follows from two conditional statements (e.g., \"If A then B and if B then C, if A then C?\").",
+       "data_name": "conditional_syllogism",
+       "in_release": true,
+       "arxiv_v2_id": "1.4.b",
+       "arxiv_v1_id": "1.4.b"
+      },
+      {
+       "id": "1.4.c",
+       "paper_name": "Logical Equivalence of Contrapositive",
+       "definition": "The ability to deduce that logical statements and their contrapositives are logically equivalent (e.g., \"If $A$, then $B$\" is equivalent to \"if not $B$, then not $A$\").",
+       "data_name": "equiv_contrapositive",
+       "in_release": true,
+       "arxiv_v2_id": "1.4.c",
+       "arxiv_v1_id": "1.4.c"
+      }
+     ],
+     "description": [
+      "Logical reasoning forms a basis for much rational reasoning, and so constitutes another category of mathematical foundations."
+     ]
+    },
+    {
+     "number": "1.5",
+     "name": "Theory of Mind",
+     "elements": [
+      {
+       "id": "1.5.a",
+       "paper_name": "First-Order False Belief",
+       "definition": "The ability to identify the beliefs that an agent has that are different from the actual truth or the agent's own belief.",
+       "data_name": "first_order_false_belief",
+       "in_release": true,
+       "arxiv_v2_id": "1.5.a",
+       "arxiv_v1_id": "1.5.a"
+      },
+      {
+       "id": "1.5.b",
+       "paper_name": "Second-Order False Belief",
+       "definition": "The ability to identify the beliefs that an agent has about what another agent believes that are different from the actual truth or the agent's own belief.",
+       "data_name": "second_order_false_belief",
+       "in_release": true,
+       "arxiv_v2_id": "1.5.b",
+       "arxiv_v1_id": "1.5.b"
+      }
+     ],
+     "description": [
+      "Theory of mind is the understanding that others have beliefs, desires, intentions, and perspectives that are different from one's own. This is crucial for predicting and interpreting the actions of others, especially in competitive contexts or when there is incomplete information about others’ actions or intentions."
+     ]
+    }
+   ],
+   "summary": "Core mathematical and cognitive skills that underlie economic reasoning: arithmetic, optimization, probability, logic, and theory of mind.",
+   "description": [
+    "The economic model of rational decision making is highly mathematical. An agent therefore needs to be fluent in a variety of mathematical basics to be able to compute the value of outcomes, reason about their likelihoods, and choose the best one. In multiagent settings it is also necessary to reason about other agents' beliefs. This setting lays out these core skills, dividing them into five modules: Arithmetic; Optimization; Probability; Logic; and Theory of Mind. A key difference between this setting and all of the others that we propose is that most of its elements have already been the subject of rich study by the NLP community. We nevertheless include these elements here both to standardize them within our framework, given their importance to economic rationality, and to integrate foundations within our dependency graph (discussed further in the paper's section on robustness)."
+   ]
+  },
+  {
+   "number": 2,
+   "name": "Decisions in Single-Agent Environments",
+   "modules": [
+    {
+     "number": "2.1",
+     "name": "Axioms of Utility in Deterministic Environments",
+     "elements": [
+      {
+       "id": "2.1.a",
+       "paper_name": "Completeness",
+       "definition": "The ability to determine a preference between two options $A$ and $B$. E.g., prefer $A$ over $B$, $B$ over $A$, or indifference.",
+       "data_name": "completeness",
+       "in_release": true,
+       "arxiv_v1_id": "2.1.a"
+      },
+      {
+       "id": "2.1.b",
+       "paper_name": "Transitivity",
+       "definition": "The ability to be consistent in preferences over options. E.g., if $A$ is preferred over $B$, and $B$ over $C$, then $A$ should be preferred over $C$.",
+       "data_name": "transitivity",
+       "in_release": true,
+       "arxiv_v2_id": "2.1.a",
+       "arxiv_v1_id": "2.1.b"
+      },
+      {
+       "id": "2.1.c",
+       "paper_name": "Independence",
+       "definition": "The ability to remain consistent in preferences between pairs of options regardless of the presence of other alternatives. E.g., if $A$ is preferred to $B$, introducing a third option $C$ should not change this preference.",
+       "data_name": "independence",
+       "in_release": true,
+       "arxiv_v2_id": "2.1.b",
+       "arxiv_v1_id": "2.1.c"
+      }
+     ],
+     "description": [
+      "The vNM utility theory rests on a set of axioms, which are easy to interpret as elements of rationality. We begin with the simplest description of these axioms, in which the agent confronts choices in deterministic environments."
+     ]
+    },
+    {
+     "number": "2.2",
+     "name": "Avoidance of Cognitive Biases in Deterministic Environments",
+     "elements": [
+      {
+       "id": "2.2.a",
+       "paper_name": "Avoidance of Sunk Cost Fallacy",
+       "definition": "The ability to walk away from an investment at any point where its future costs exceed its expected future benefits, disregarding prior investments.",
+       "data_name": "sunk_cost",
+       "in_release": true,
+       "arxiv_v2_id": "2.2.a",
+       "arxiv_v1_id": "2.2.a"
+      },
+      {
+       "id": "2.2.b",
+       "paper_name": "Avoidance of Endowment Effect",
+       "definition": "The agent's maximum willingness to pay to acquire an object should be the same as the price they are willing to accept to sell that same object when they own it.",
+       "data_name": "endowment_effect",
+       "in_release": true,
+       "arxiv_v2_id": "2.2.b",
+       "arxiv_v1_id": "2.2.b"
+      },
+      {
+       "id": "2.2.c",
+       "paper_name": "Avoidance of Time Inconsistency",
+       "definition": "The ability to be consistent in preferences across time; e.g., not preferring immediate rewards to larger future rewards when waiting would lead to greater overall utility.",
+       "data_name": "time_inconsistency",
+       "in_release": true,
+       "arxiv_v1_id": "2.2.c"
+      }
+     ],
+     "description": [
+      "A wide range of cognitive biases have been identified by the descriptive economic literature. We identify their opposites as elements of rationality."
+     ]
+    },
+    {
+     "number": "2.3",
+     "name": "Axioms of Utility in Stochastic Environments",
+     "elements": [
+      {
+       "id": "2.3.a",
+       "paper_name": "Completeness over Lotteries",
+       "definition": "The ability to determine a preference between two lotteries $A$ and $B$. E.g., prefer $A$ over $B$, $B$ over $A$, or indifference.",
+       "data_name": "completeness_risk",
+       "in_release": true,
+       "arxiv_v1_id": "2.3.a"
+      },
+      {
+       "id": "2.3.b",
+       "paper_name": "Transitivity over Lotteries",
+       "definition": "The ability to select among lotteries in a consistent manner. E.g., if $A$ is preferred over $B$, and $B$ over $C$, then $A$ should be preferred over $C$.",
+       "data_name": "transitivity_risk",
+       "in_release": true,
+       "arxiv_v2_id": "2.3.a",
+       "arxiv_v1_id": "2.3.b"
+      },
+      {
+       "id": "2.3.c",
+       "paper_name": "Independence over Lotteries",
+       "definition": "The ability to remain consistent in preferences between pairs of lotteries regardless of the presence of other alternatives. E.g., if $A$ is preferred to $B$, introducing a third lottery $C$ should not change this preference.",
+       "data_name": "independence_risk",
+       "in_release": true,
+       "arxiv_v2_id": "2.3.b",
+       "arxiv_v1_id": "2.3.c"
+      }
+     ],
+     "description": [
+      "We now elaborate our economic environment to include a stochastic relationship between an agent's choices and the resulting economic outcomes. Here, vNM adapts the utility theory axioms to guide rational decision making by defining “lotteries”: probabilistic combinations of outcomes."
+     ]
+    },
+    {
+     "number": "2.4",
+     "name": "Risk Neutral Expected Utility Computations",
+     "elements": [
+      {
+       "id": "2.4.a",
+       "paper_name": "Compute Expected Utility",
+       "definition": "The ability to correctly compute the sum of the products of each outcome's utility and its probability.",
+       "data_name": "compute_expected_utility",
+       "in_release": true,
+       "arxiv_v2_id": "2.4.a",
+       "arxiv_v1_id": "2.4.a"
+      },
+      {
+       "id": "2.4.b",
+       "paper_name": "Maximize Expected Utility",
+       "definition": "The ability to select the prospect with the highest expected utility.",
+       "data_name": "maximize_expected_utility",
+       "in_release": true,
+       "arxiv_v2_id": "2.4.b",
+       "arxiv_v1_id": "2.4.b"
+      },
+      {
+       "id": "2.4.c",
+       "paper_name": "Avoidance of Risk-Averse Behavior",
+       "definition": "The ability to make decisions based on an objective evaluation of all potential outcomes without over-valuing more certain payoffs.",
+       "data_name": null,
+       "in_release": false,
+       "arxiv_v1_id": "2.4.c",
+       "covered_by": "maximize_expected_utility"
+      },
+      {
+       "id": "2.4.d",
+       "paper_name": "Avoidance of Risk-Seeking Behavior",
+       "definition": "The ability to make decisions based on an objective evaluation of all potential outcomes without over-valuing rare high-reward outcomes.",
+       "data_name": null,
+       "in_release": false,
+       "arxiv_v1_id": "2.4.d",
+       "covered_by": "maximize_expected_utility"
+      },
+      {
+       "id": "2.4.e",
+       "paper_name": "Avoidance of Loss Averse Behavior",
+       "definition": "The ability to make decisions based on an objective evaluation of all potential outcomes without over-valuing potential losses.",
+       "data_name": "loss_aversion",
+       "in_release": true,
+       "arxiv_v2_id": "2.4.c",
+       "arxiv_v1_id": "2.4.e"
+      }
+     ],
+     "description": [
+      "This module includes elements evaluating adherence to a linear utility function when computing expected utilities, delving into the behavioral patterns exhibited by individuals and institutions in their approach to risk."
+     ]
+    },
+    {
+     "number": "2.5",
+     "name": "Avoidance of Cognitive Biases in Stochastic Environments",
+     "elements": [
+      {
+       "id": "2.5.a",
+       "paper_name": "Avoidance of Gambler's Fallacy",
+       "definition": "The ability to avoid the incorrect belief that an outcome's probability (when drawn independently) in the future is reduced if it has occurred atypically often in the past.",
+       "data_name": "gamblers_fallacy",
+       "in_release": true,
+       "arxiv_v2_id": "2.5.a",
+       "arxiv_v1_id": "2.5.a"
+      },
+      {
+       "id": "2.5.b",
+       "paper_name": "Avoidance of the Certainty Effect",
+       "definition": "The ability to be consistent across preferences towards risk when the payoffs are positive.",
+       "data_name": "certainty_effect",
+       "in_release": true,
+       "arxiv_v2_id": "2.5.b",
+       "arxiv_v1_id": "2.5.b"
+      },
+      {
+       "id": "2.5.c",
+       "paper_name": "Avoidance of the Reflection Effect",
+       "definition": "The ability to be consistent across preferences towards risk when the payoffs are negative.",
+       "data_name": "reflection_effect",
+       "in_release": true,
+       "arxiv_v2_id": "2.5.c",
+       "arxiv_v1_id": "2.5.c"
+      },
+      {
+       "id": "2.5.d",
+       "paper_name": "Avoidance of Ambiguity Aversion",
+       "definition": "The ability to be consistent across preferences towards known and unknown risks (ambiguity) under differing framing.",
+       "data_name": "ambiguity_aversion",
+       "in_release": true,
+       "arxiv_v2_id": "2.5.d",
+       "arxiv_v1_id": "2.5.d"
+      }
+     ],
+     "description": [
+      "Here, we include elements testing the agent's ability to avoid making contradictory or inconsistent behaviors, emphasizing how framing effects play in shaping risk-taking attitudes. As we already did in Avoidance of Cognitive Biases in Deterministic Environments, we state the opposite of each such behavior as an element of rationality."
+     ]
+    }
+   ],
+   "summary": "Preference formation and decision making when an agent has a set of alternative choices, each of which leads either to a single, deterministic outcome or to a draw from a probability distribution over outcomes.",
+   "description": [
+    "We now turn to explicitly assessing economic rationality. Throughout this paper we leverage the von Neumann–Morgenstern expected utility model (vNM), which provides a comprehensive framework establishing ideal norms for how a decision-maker should act. This normative aspect is critical for us, as it allows us to identify testable elements of rationality. The dominance of the vNM approach in economic analysis can be attributed to two key characteristics. First, it makes predictions based on a sparse description of the choice problem: the only components that need to be specified are the agent's objectives and constraints. Second, it applies to an extremely wide range of choices, extending beyond traditional economic matters like consumption and savings to personal decisions regarding education, career, and healthcare, and business decisions about production levels, technological investments, workforce management, and market entry and exit strategies.",
+    "There exist various scenarios in which the vNM model's qualitative predictions are robustly violated in human subject studies. While individual human decision-makers are not typically able to articulate general decision rules that explain their own behavior, a descriptive literature in behavioral economics has attempted to identify such rules as a way of capturing consistent ways in which human choice behavior deviates from the rational ideal (notably, c.f. Savage, 1954; Kahneman and Tversky, 1979; for a recent survey, see Erev et al., 2017). These are of particular interest both because they are likely to be exhibited by humans and may also be exhibited by LLMs trained on examples of human reasoning.",
+    "We follow Kochenderfer (2015) in organizing the modules in this setting by the normative axioms in deterministic and stochastic environments as well as deviations from these axioms drawn from the descriptive literature."
+   ]
+  },
+  {
+   "number": 3,
+   "name": "Decisions in Multi-Agent Environments",
+   "modules": [
+    {
+     "number": "3.1",
+     "name": "Normal Form Games",
+     "elements": [
+      {
+       "id": "3.1.a",
+       "paper_name": "Interpret Games",
+       "definition": "The ability to select the correct payoff given a set of actions in strategic form games: a matrix of payoffs for a single agent indexed by combinations of strategies by the agents and in bimatrix form games: the matrix includes sets of payoffs, one for each agent.",
+       "data_name": "interpret_games",
+       "in_release": true,
+       "arxiv_v2_id": "3.1.a",
+       "arxiv_v1_id": "3.1.a"
+      },
+      {
+       "id": "3.1.b",
+       "paper_name": "Best Response",
+       "definition": "The ability to compute and select the strategy with the highest payoff given an opponent's action.",
+       "data_name": "best_response",
+       "in_release": true,
+       "arxiv_v2_id": "3.1.b",
+       "arxiv_v1_id": "3.1.b"
+      },
+      {
+       "id": "3.1.c",
+       "paper_name": "Dominant Strategies",
+       "definition": "The ability to select strategies that provide a greater payoff than any other strategy, no matter what the other agents do. I.e., strategies that are a best response to all possible strategies.",
+       "data_name": "dominant_strategies",
+       "in_release": true,
+       "arxiv_v2_id": "3.1.c",
+       "arxiv_v1_id": "3.1.c"
+      },
+      {
+       "id": "3.1.d",
+       "paper_name": "Avoidance of Dominated Strategies",
+       "definition": "The ability to avoid strategies that are never best responses.",
+       "data_name": "dominated_strategies",
+       "in_release": true,
+       "arxiv_v2_id": "3.1.d",
+       "arxiv_v1_id": "3.1.d"
+      },
+      {
+       "id": "3.1.e",
+       "paper_name": "Iterated Removal of Dominated Strategies",
+       "definition": "The ability to systematically eliminate dominated strategies. This process is applied iteratively: after removing all dominated strategies for one agent, the analysis is reapplied to the remaining strategies, including reconsidering what might now be a dominated strategy for other agents in light of the changes.",
+       "data_name": "iterated_removal",
+       "in_release": true,
+       "arxiv_v2_id": "3.1.e",
+       "arxiv_v1_id": "3.1.e"
+      },
+      {
+       "id": "3.1.f",
+       "paper_name": "Pure Nash Equilibrium",
+       "definition": "The ability to play a best response strategy when given knowledge that another agent is also best responding (i.e., is rational). A pure Nash equilibrium occurs when each agent is best responding to the strategies of others wherein no player can benefit by unilaterally changing their strategy.",
+       "data_name": "pure_nash",
+       "in_release": true,
+       "arxiv_v2_id": "3.1.f",
+       "arxiv_v1_id": "3.1.f"
+      }
+     ],
+     "description": [
+      "Traditionally in game theory textbooks, a game is described by a matrix which shows the agents, strategies, and payoffs. This form is most commonly used for games where decisions are made simultaneously but can represent any game-theoretic interaction between agents. In this module, we consider games in which agents interact only once selecting strategies without knowledge of the other agents' choices."
+     ]
+    },
+    {
+     "number": "3.2",
+     "name": "Extensive Form Games",
+     "elements": [
+      {
+       "id": "3.2.a",
+       "paper_name": "Backward Induction",
+       "definition": "The ability to determine the best action given the subsequent optimal actions working backwards from the end of the game.",
+       "data_name": "backward_induction",
+       "in_release": true,
+       "arxiv_v2_id": "3.2.a",
+       "arxiv_v1_id": "3.2.a"
+      },
+      {
+       "id": "3.2.b",
+       "paper_name": "Subgame-Perfect Nash Equilibrium",
+       "definition": "The ability to compute and select strategies in a Nash equilibrium not just for the game as a whole but also for every point in the game where the agent takes an action, regardless of the previous moves.",
+       "data_name": "subgame_nash",
+       "in_release": true,
+       "arxiv_v2_id": "3.2.b",
+       "arxiv_v1_id": "3.2.b"
+      }
+     ],
+     "description": [
+      "As mentioned, games permit multiple descriptions and extensive form games are represented as trees, showcasing the sequential aspect of decision making. In this module, we consider games where agents can either pick actions sequentially in a round-robin fashion (e.g., tic-tac-toe) or simultaneously over multiple rounds (e.g., best two-out-of-three rock-paper-scissors).",
+      "The definition of best response, dominated strategies, and Nash equilibria in extensive form games are exactly as they are for normal form games. Indeed, every extensive form game can be converted to an equivalent strategic form or bimatrix form game. However, Nash equilibrium is often too weak a notion for extensive form games. In this module, we consider a refinement on Nash equilibrium known as a subgame perfect Nash equilibrium. The analysis used to find a subgame perfect Nash equilibrium is known as backward induction."
+     ]
+    },
+    {
+     "number": "3.3",
+     "name": "Imperfect Information in Extensive Form Games",
+     "elements": [
+      {
+       "id": "3.3.a",
+       "paper_name": "Sequential Equilibrium",
+       "definition": "The ability to compute and select a strategy that exists in a sequential equilibrium.",
+       "data_name": null,
+       "in_release": false,
+       "arxiv_v2_id": "3.3.a",
+       "arxiv_v1_id": "3.3.a"
+      }
+     ],
+     "description": [
+      "In many situations agents must act with partial or no knowledge of the actions of others, or even limited memory of their own past actions. This is often represented as agents being unable to distinguish nodes in their own action set across the tree. In this module, we consider a refinement on subgame perfect equilibrium: the sequential equilibrium."
+     ]
+    },
+    {
+     "number": "3.4",
+     "name": "Infinitely Repeated Games",
+     "elements": [
+      {
+       "id": "3.4.a",
+       "paper_name": "Feasibility in Infinitely Repeated Games",
+       "definition": "The ability to identify if a payoff is feasible in a Nash equilibrium of an infinitely repeated game.",
+       "data_name": "feasibility",
+       "in_release": true,
+       "arxiv_v2_id": "3.4.a",
+       "arxiv_v1_id": "3.4.a"
+      },
+      {
+       "id": "3.4.b",
+       "paper_name": "Enforceability in Infinitely Repeated Games",
+       "definition": "The ability to identify if a payoff is enforceable in a Nash equilibrium of an infinitely repeated game.",
+       "data_name": "enforceability",
+       "in_release": true,
+       "arxiv_v2_id": "3.4.b",
+       "arxiv_v1_id": "3.4.b"
+      },
+      {
+       "id": "3.4.c",
+       "paper_name": "Trigger Strategies",
+       "definition": "The ability to compute and select the correct trigger strategy. E.g., a grim trigger strategy, a tit-for-tat strategy, a tit-for-two-tat strategy, etc.",
+       "data_name": "trigger",
+       "in_release": true,
+       "arxiv_v2_id": "3.4.c",
+       "arxiv_v1_id": "3.4.c"
+      }
+     ],
+     "description": [
+      "We have seen in the previous modules that long-term interactions are fundamentally different from one-shot interactions especially in the presence of uncertainty. Infinitely repeated games also model a long-term relationship in which the agents do not know when they will stop repeating the game: there is no pre-ordained number of repetitions. Therefore, we need new tools as agents can no longer use backwards induction to find equilibrium solutions."
+     ]
+    },
+    {
+     "number": "3.5",
+     "name": "Bayesian Games",
+     "elements": [
+      {
+       "id": "3.5.a",
+       "paper_name": "Bayes–Nash Equilibrium",
+       "definition": "The ability to compute and select best responses with respect to beliefs about the other agents' strategies, and can update these beliefs based on observed strategies.",
+       "data_name": "bayes_nash",
+       "in_release": true,
+       "arxiv_v2_id": "3.5.a",
+       "arxiv_v1_id": "3.5.a"
+      },
+      {
+       "id": "3.5.b",
+       "paper_name": "Subgame–Perfect Bayes–Nash Equilibrium",
+       "definition": "The ability to compute and select a strategy that satisfies the following: (1) (Bayes–Nash Equilibrium) The strategy maximizes their expected utility, given their beliefs about the other agents' types and strategies, and given the strategies of the other agents. (2) (Subgame Perfection) The strategy constitutes a Bayes–Nash Equilibrium not just for the whole game, but for every subgame of the game. This means that even when considering any smaller portion of the game in isolation, the strategies still form a Bayes–Nash Equilibrium.",
+       "data_name": null,
+       "in_release": false,
+       "arxiv_v2_id": "3.5.b",
+       "arxiv_v1_id": "3.5.b"
+      }
+     ],
+     "description": [
+      "So far, the number of agents, the actions available to each agent, and the payoffs have all been assumed to be common knowledge among the agents. Note that this is true even of imperfect-information games; the actual moves of agents are not common knowledge, but the game itself is. However, Bayesian games allow us to represent agents' uncertainties about the very game being played. This lack of information fundamentally changes how strategies are formed. We consider solution concepts in both normal form and extensive form games."
+     ]
+    }
+   ],
+   "summary": "Enriches the single-agent setting, requiring the agent to make decisions when the outcomes depend on interactions with other economic agents with their own preferences and beliefs.",
+   "description": [
+    "Economic reasoning changes when the environment contains other agents, falling under the umbrella of game theory (c.f., Fudenberg and Tirole, 1991). The crucial difference is that other agents cannot simply be modeled as behaving randomly: they act to maximize their own utilities in response to their own beliefs, which include beliefs about the agent's behavior. Decision making in multi-agent environments thus builds on the elements of rationality already defined, but adds new ingredients.",
+    "To capture these dynamics, we subdivide the analysis into different representations of strategic interaction as is common in many game theory textbooks. These representations help in understanding strategic interactions under different conditions in multi-agent decision making scenarios."
+   ]
+  },
+  {
+   "number": 4,
+   "name": "Decisions on Behalf of Other Agents",
+   "modules": [
+    {
+     "number": "4.1",
+     "name": "Axioms of Social Choice",
+     "elements": [
+      {
+       "id": "4.1.a",
+       "paper_name": "Pareto Efficiency",
+       "definition": "The ability to select a social welfare function that prefers $A$ to $B$ if all agents prefer alternative $A$ to alternative $B$.",
+       "data_name": "pareto_sc",
+       "in_release": true,
+       "arxiv_v2_id": "4.1.a",
+       "arxiv_v1_id": "4.1.a"
+      },
+      {
+       "id": "4.1.b",
+       "paper_name": "Monotonicity in Social Welfare Functions",
+       "definition": "The ability to select a social welfare function wherein given a profile of individual preferences the society prefers alternative $A$ to alternative $B$ and a similar profile of individual preferences in which the only change is raise in $A$'s rank in some individual ranking(s), $A$ is still preferred over $B$.",
+       "data_name": "sc_monotonicity_rules",
+       "in_release": true,
+       "arxiv_v2_id": "4.1.b",
+       "arxiv_v1_id": "4.1.b"
+      },
+      {
+       "id": "4.1.c",
+       "paper_name": "Transitivity in Social Welfare Functions",
+       "definition": "The ability to select a social welfare function that defines a transitive output (i.e., well defined ranking over alternatives).",
+       "data_name": "sc_transitivity_rules",
+       "in_release": true,
+       "arxiv_v2_id": "4.1.c",
+       "arxiv_v1_id": "4.1.c"
+      },
+      {
+       "id": "4.1.d",
+       "paper_name": "Non-Dictatorial Social Welfare Function",
+       "definition": "The ability to select a social welfare function where there is not a particular individual $d$, such that the social ranking coincides with $d$'s ranking any individual preferences profile.",
+       "data_name": "sc_nondictatorship",
+       "in_release": true,
+       "arxiv_v2_id": "4.1.d",
+       "arxiv_v1_id": "4.1.d"
+      }
+     ],
+     "description": [
+      "In this module, we delve into the foundational principles of constructing fair and effective decision-making processes within a group. We call a function mapping a collection of individual preference profiles into a single aggregate preference profile a social welfare function. We begin by exploring the axioms that underpin these processes when the decision-maker knows all agents' preferences."
+     ]
+    },
+    {
+     "number": "4.2",
+     "name": "Social Choice",
+     "elements": [
+      {
+       "id": "4.2.a",
+       "paper_name": "Plurality Vote",
+       "definition": "The ability to select the alternative which is the most preferred one by the largest number of agents (or rank according to the number of individual preferences an alternative is ranked first).",
+       "data_name": "plurality_voting",
+       "in_release": true,
+       "arxiv_v2_id": "4.2.a",
+       "arxiv_v1_id": "4.2.a"
+      },
+      {
+       "id": "4.2.b",
+       "paper_name": "Borda Count",
+       "definition": "The ability to compute and select the Borda count winner: Borda count is a scheme which, given $m$ alternatives, assigns score $m-i$ to the alternative which is ranked in the $i$'th place by an agent (e.g. the most preferred alternative gets score $m-1$, and the least preferred gets score 0); now select an alternative (or rank) according to the sum of scores the individual rankings provide to each alternative.",
+       "data_name": "borda_count",
+       "in_release": true,
+       "arxiv_v2_id": "4.2.b",
+       "arxiv_v1_id": "4.2.b"
+      },
+      {
+       "id": "4.2.c",
+       "paper_name": "Copeland's Method",
+       "definition": "The ability to compute and select the winner derived by Copeland's method: Each candidate is compared with every other candidate in a series of one-on-one contests. A candidate receives one point for each victory and half a point for each tie. The candidate with the highest total score is the winner.",
+       "data_name": "copeland_method",
+       "in_release": true,
+       "arxiv_v2_id": "4.2.c",
+       "arxiv_v1_id": "4.2.c"
+      },
+      {
+       "id": "4.2.d",
+       "paper_name": "Fair Division Algorithms",
+       "definition": "The ability to select the correct fair division algorithm given the context (e.g., divider-chooser, last diminisher)",
+       "data_name": "fair_division",
+       "in_release": true,
+       "arxiv_v2_id": "4.2.d",
+       "arxiv_v1_id": "4.2.d"
+      },
+      {
+       "id": "",
+       "paper_name": "Condorcet Winner",
+       "definition": "The ability to find the alternative that beats every other in pairwise majority votes, or to recognise that there is none.",
+       "data_name": "condorcet_criterion",
+       "in_release": true
+      }
+     ],
+     "description": [
+      "Shifting from the theoretical axioms to applications, we explore basic voting schemes and fair division algorithms."
+     ]
+    },
+    {
+     "number": "4.3",
+     "name": "Desirable Properties in Mechanism Design",
+     "elements": [
+      {
+       "id": "4.3.a",
+       "paper_name": "Dominant Strategy Incentive Compatibility",
+       "definition": "The ability to select a mechanism wherein a strategy in a dominant strategy equilibrium is to report preferences truthfully.",
+       "data_name": "dsic_mechanism",
+       "in_release": true,
+       "arxiv_v2_id": "4.3.a",
+       "arxiv_v1_id": "4.3.a"
+      },
+      {
+       "id": "4.3.b",
+       "paper_name": "Bayesian Incentive Compatibility",
+       "definition": "The ability to select a mechanism wherein a strategy in a Bayes–Nash equilibrium is to report preferences truthfully.",
+       "data_name": "bic_mechanism",
+       "in_release": true,
+       "arxiv_v1_id": "4.3.b"
+      },
+      {
+       "id": "4.3.c",
+       "paper_name": "Individual Rationality",
+       "definition": "The ability to select a mechanism wherein it is in the best interest of the agents to participate in the mechanism.",
+       "data_name": "ir_mechanism",
+       "in_release": true,
+       "arxiv_v2_id": "4.3.b",
+       "arxiv_v1_id": "4.3.c"
+      },
+      {
+       "id": "4.3.d",
+       "paper_name": "Budget Balanced",
+       "definition": "The ability to select a mechanism wherein the mechanism rewards and charges the same amount of money to and from the agents.",
+       "data_name": "budget_balance",
+       "in_release": true,
+       "arxiv_v2_id": "4.3.c",
+       "arxiv_v1_id": "4.3.d"
+      }
+     ],
+     "description": [
+      "This module adds the wrinkle that agents must report their preferences to the decision-maker and may lie when doing so. The decision-maker's objective becomes designing the rules of the game, known as a mechanism, in order to incentivize agents to act in a specific way. Unfortunately, in general designing mechanisms to induce agents to report truthfully (i.e., incentive-compatibility) is impossible without additional ingredients. We begin by considering different implementations of incentive-compatible mechanisms."
+     ]
+    },
+    {
+     "number": "4.4",
+     "name": "Mechanism Design",
+     "elements": [
+      {
+       "id": "4.4.a",
+       "paper_name": "Top Trading Cycles",
+       "definition": "The ability to compute and run the top trading cycles algorithm in finding a stable allocation.",
+       "data_name": "top_trading",
+       "in_release": true,
+       "arxiv_v2_id": "4.4.a",
+       "arxiv_v1_id": "4.4.a"
+      },
+      {
+       "id": "4.4.b",
+       "paper_name": "Optimal Auction for Bidders with Differing Risk Attitudes",
+       "definition": "The ability to select the correct revenue maximizing auction when bidders are not risk-neutral. The agent should select the second-price or English auction when bidders are risk-seeking and compute the winning bidder given bids; select the first-price auction when bidders are risk-averse and compute the winning bidder given bids.",
+       "data_name": "auctions_risk",
+       "in_release": true,
+       "arxiv_v2_id": "4.4.b",
+       "arxiv_v1_id": "4.4.b"
+      },
+      {
+       "id": "4.4.c",
+       "paper_name": "Optimal Auction for Bidders with Affiliated Values",
+       "definition": "The ability to select the correct revenue maximizing auction when each bidder's value has an additional common-value component (e.g., the bidder's private, noisy signal about the good’s resale value). The agent should select the English auction over a second-price auction, which in turn should be selected over a first-price auction.",
+       "data_name": "auctions_affiliated",
+       "in_release": true,
+       "arxiv_v2_id": "4.4.c",
+       "arxiv_v1_id": "4.4.c"
+      }
+     ],
+     "description": [
+      "We now consider the implementation of specific mechanisms."
+     ]
+    }
+   ],
+   "summary": "Asks the agent to aggregate the preferences of other agents to achieve good outcomes for all.",
+   "description": [
+    "In this final setting, we consider an agent who must make a decision on behalf of other agents. For clarity, we call this agent the decision-maker. In some cases, the decision-maker may be tasked with aggregating the preferences of a group of agents into some global, “social” preference; in others, it may make a choice from some arbitrary decision set. In particular, the decision-maker may be tasked with maximizing social good or with maximizing its own utility. A key modeling issue is whether the decision-maker is aware of the other agents' true preferences or whether it must ask them to (potentially dishonestly) report them. We divide modules on this axis following other texts in this space denoting the former scenario as social choice and the latter as mechanism design."
+   ]
+  }
+ ]
+}
