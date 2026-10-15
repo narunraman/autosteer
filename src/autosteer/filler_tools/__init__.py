@@ -28,12 +28,7 @@ def _import_and_register_functions():
             try:
                 module = importlib.import_module(package_module)
                 if hasattr(module, 'function_registry'):
-                    # print(f"Registering functions from {package_module}")
                     for name, func in module.function_registry.functions.items():
-                        # print(f'Registering {name}')
-                        # if name in function_registry.functions:
-                            # print(f"Warning: Function '{name}' already in register. Skipping.")
-                        # else:
                         function_registry.functions[name] = func
             except Exception:
                 traceback.print_exc()

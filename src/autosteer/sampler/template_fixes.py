@@ -191,8 +191,8 @@ def _deriving_demand_rewrite(row: pd.Series) -> Optional[str]:
 
 
 def _intertemporal_rewrite(row: pd.Series) -> Optional[str]:
-    # The 0.9-0.99 parameter is used as the discount factor beta (Narun's
-    # default); the templates call it a "discount rate". Templates that do
+    # The 0.9-0.99 parameter is used as the discount factor beta (a
+    # convention); the templates call it a "discount rate". Templates that do
     # not label {gamma} as a risk-aversion/curvature coefficient (e.g.
     # "social discount factor is {gamma}") are dropped: the problem is then
     # not identified.
@@ -854,7 +854,7 @@ def _wt1_pareto(row: pd.Series) -> Optional[str]:
 # element -> [(type, rewrite)]: every template is emitted once per variant
 # with that type (the first variant keeps the original question id). The
 # welfare-theorem fillers key the answer on the type, so both 'yes' and
-# 'no' occur (the published answers were constant). Narun's default.
+# 'no' occur (the published answers were constant). A convention.
 TEMPLATE_VARIANTS: dict[str, list[tuple[str, Callable[[pd.Series], Optional[str]]]]] = {
     'welfare_theorem_1': [('further_trades', _wt1_further_trades),                # -> no
                           ('pareto_efficient', _wt1_pareto)],                     # -> yes
@@ -898,7 +898,7 @@ def _apply_variants(element, q, opts):
 
 # Published difficulty is 0/1/2. Some elements use their own internal levels,
 # which the fillers branch on; they are mapped only in the sampler output
-# (and in SamplerConfig filtering / the manifest). Narun's default, flagged.
+# (and in SamplerConfig filtering / the manifest). A convention.
 DIFFICULTY_MAPS: dict[str, dict[int, int]] = {
     # 0: 2 goods, prices given; 1: 2 goods, functional form; 3: 3 goods,
     # linear utility, prices given; 4: 3 goods, prices given;

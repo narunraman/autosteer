@@ -15,7 +15,7 @@ First order (owner A, mover B). Types:
   you do?") are not generated: what one should do is a norm, not something the story determines, and recasting it
   as a belief question would make it another unexpected-transfer item.
 
-Second order (redesign of October 2026; user decision). Owner B puts the object in a first place and leaves; while B is
+Second order (redesign of October 2026). Owner B puts the object in a first place and leaves; while B is
 away, a mover C (or the reader) moves it to a second place and later to a third, and the observer A, who stays in the
 room, watches both moves, so A knows where the object really is. After each move B may learn of it in one of three
 ways: not at all ("Nobody tells B"), openly (C phones B in front of A), or secretly (C sends B a message that A does

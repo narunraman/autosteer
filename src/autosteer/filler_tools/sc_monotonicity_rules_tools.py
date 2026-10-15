@@ -1,6 +1,6 @@
 """sc_monotonicity_rules (STEER 4.1.b, Monotonicity in Social Welfare Functions): hand-written templates.
 
-Design of October 2026 (user decision; replaces the winner-based design of 6 October, which tested whether a winner
+Design of October 2026 (replaces the winner-based design of 6 October, which tested whether a winner
 stays the winner rather than the paper's axiom on social rankings). A group tries four unnamed rules ("Rule 1" to
 "Rule 4") that turn the members' ranked ballots into a group ranking of all options, first on one set of ballots P
 and then on P', which is P with one option (the raised option) moved up on some ballots, nothing else changed. A

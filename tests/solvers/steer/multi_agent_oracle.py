@@ -5,7 +5,7 @@ with two adaptations for the regenerated questions:
   - trigger: the explicit payoff matrices label their rows 'Cooperate' / 'Defect'; the audit matrix reader expects
     'Action X' labels, so the labels are prefixed before reading.
   - enforceability: the audit solver leaves rows whose take-turns option is enforceable open (semantics were
-    undecided) and has no 'none of the other listed outcomes' option. Narun's decision (take turns = the players
+    undecided) and has no 'none of the other listed outcomes' option. The convention (take turns = the players
     alternate the aggressor role) is what solvers.repeated_games.enforceable() already evaluates, so this oracle
     applies it to every option, with 'none' correct iff no other listed option is enforceable.
 

@@ -27,7 +27,7 @@ def gen_derive_labor_supply_values(metadata):
         h*(w) = (24 a w - b v) / ((a + b) w),
     for w > b v / (24 a); below that the worker does not work (h = 0). The function type's budget text says that the
     wage is in the interior range (review, October 2026: the keyed function went negative for low wages).
-    (Narun's default: the old denominator was b - a.) Draws with h* outside (0.5, 23.5) are redrawn. Computed from
+    (Convention: the old denominator was b - a.) Draws with h* outside (0.5, 23.5) are redrawn. Computed from
     the displayed values.
     Hours-type distractors are mistakes between 0 and 24 hours (an option above the 24-hour day was infeasible on
     its face): |b - a| as the denominator, non-labor income ignored, the leisure share's hours net of v / w, the sign

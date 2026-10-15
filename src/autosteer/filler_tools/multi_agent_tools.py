@@ -752,7 +752,7 @@ ENFORCEABILITY_OPTIONS = {
 
 def enforceable_outcomes(g, delta):
     """Which outcomes are subgame-perfect equilibrium paths of the delta-discounted repeated PD with grim-trigger
-    reversion to the stage-game Nash equilibrium (D, D) (Narun, 2026-09-27)."""
+    reversion to the stage-game Nash equilibrium (D, D)."""
     return {
         'CC': delta >= grim_trigger_threshold(g),
         'DD': True,          # repeating the stage-game NE is always subgame perfect

@@ -1,6 +1,6 @@
 """feasibility (STEER 3.4.a, Feasibility in Infinitely Repeated Games): hand-written repeated prisoner's dilemmas.
 
-Design of October 2026 (user decision; replaces the pipeline templates, which stated a discount factor that the key
+Design of October 2026 (replaces the pipeline templates, which stated a discount factor that the key
 ignored). Six hand-written stories (pricing, fishing, advertising, oil quotas, data sharing, irrigation), each a
 symmetric prisoner's dilemma whose payoffs per period are stated by the story's own action words: both cooperate R,
 both defect P, the defector T and the cooperator S, with T > R > P > S and 2R > T + S (sample_pd of

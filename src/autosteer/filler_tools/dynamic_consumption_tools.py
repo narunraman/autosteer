@@ -104,7 +104,7 @@ def gen_intertemporal_consumption_smoothing(metadata):
     CRRA consumption smoothing, u(c) = c^(1-g)/(1-g), max sum_t beta^t u(c_t)
     subject to sum_t c_t/(1+r)^t = W + sum_t y_t/(1+r)^t (income arrives from
     period 1; the parameter drawn in 0.9-0.99 is the discount factor beta,
-    Narun's default; the sampler rewrites "discount rate" to "discount
+    a convention; the sampler rewrites "discount rate" to "discount
     factor" in the templates). Euler: c_{t+1}/c_t = (beta (1+r))^(1/g).
     Both types ('numerical', 'closed_form') use this closed form, computed
     from the displayed (rounded) values.

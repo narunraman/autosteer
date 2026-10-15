@@ -580,7 +580,7 @@ POLICY["independence_risk"] = {"grading": "answer", "authoritative": True, "drop
 
 
 # ============================================================================================ independence
-# Narun (2026-09-27): consistency-graded. Part 0 offers Brand A / Brand B; part 1 adds Brand C (always dominated
+# Convention: consistency-graded. Part 0 offers Brand A / Brand B; part 1 adds Brand C (always dominated
 # by A). Part 1 is consistent iff it picks the same brand as part 0; picking C is always inconsistent.
 # Encoding (same convention as biases.py): consistency_group = "independence/<base_id>", consistency_rule =
 # "same_brand:<i0><i1>,..." listing the allowed (part-0 index, part-1 index) pairs in the released (shuffled)

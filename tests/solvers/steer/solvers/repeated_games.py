@@ -692,7 +692,7 @@ def stage_ne_payoffs(g):
 
 def enforceable(g, delta, tol=1e-9):
     """Which stationary / alternating paths are subgame-perfect outcomes of the delta-discounted repeated game
-    with grim-trigger reversion to a stage-game Nash equilibrium (Narun 2026-09-27). The punishment is the
+    with grim-trigger reversion to a stage-game Nash equilibrium. The punishment is the
     worst pure stage NE for the deviator (reversion to a NE is itself subgame perfect). One-shot deviation
     condition on normalised discounted values. Returns dict kind -> bool, or None if the stage game has no pure NE."""
     R, S, T, P = g["R"], g["S"], g["T"], g["P"]
@@ -740,7 +740,7 @@ def solve_enforceability(df):
             stats.append("ill_posed:no_pure_stage_ne")
             continue
         if "alt" in kinds and e["alt"]:
-            # "take turns" semantics still open (Narun): keep the row with its stored answer, unverified
+            # "take turns" semantics still open: keep the row with its stored answer, unverified
             preds.append(pd.NA)
             stats.append("open:take_turns")
             continue
@@ -844,7 +844,7 @@ def feas_asks_infeasible(text: str):
 
 def solve_feasibility(df, tol=0.01):
     """Option = payoff profile '($x, $y)' (in the FIR set?) or single payoff '$x' (read as the symmetric profile
-    ($x, $x), Narun 2026-09-27).  Tolerance 0.01 (options are given to the cent)."""
+    ($x, $x)).  Tolerance 0.01 (options are given to the cent)."""
     preds, stats = [], []
     for text, opts in zip(df.question_text, df.options):
         g, why = parse_game(text)
@@ -859,7 +859,7 @@ def solve_feasibility(df, tol=0.01):
             mp, ms = _PAIR.match(o), _SINGLE.match(o)
             if mp:
                 vals.append(in_poly(poly, _money(mp.group(1)), _money(mp.group(2)), tol))
-            elif ms:  # single payoff = the symmetric profile ($x, $x) (Narun 2026-09-27)
+            elif ms:  # single payoff = the symmetric profile ($x, $x)
                 v = _money(ms.group(1))
                 vals.append(bool(xs) and in_poly(poly, v, v, tol))
             else:

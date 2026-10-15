@@ -10,25 +10,6 @@ import numpy as np
 rng = np.random.default_rng(seed=42)
 
 
-# def gen_answer_and_options(answer,num_options=4,options=None):
-#     if options:
-#         shuffle(options)
-#         answer_mask = [0]*num_options
-#         #Create random bit mask for correct answer
-#         answer_num = options.index(answer)
-#         answer_mask[answer_num] = 1
-#         return [answer_mask], [options]
-    
-#     #Round answer to 2 decimal places and convert to float
-#     answer= float(np.round(answer,2))
-#     answer_mask = [0]*num_options
-#     #Create random bit mask for correct answer
-#     answer_num = np.random.randint(0, num_options)
-#     answer_mask[answer_num] = 1
-#     #Random affine transform of correct answer for alternative options
-#     options = list([float(np.round((np.random.random() * answer)+np.random.randint(0, 2),2)) if i != answer_num else answer for i in range(num_options)])
-#     return [answer_mask], [options]
-
 def gen_answer_and_options(answer, num_options=4, options=None):
 
     # If options are provided, shuffle them and create the answer mask

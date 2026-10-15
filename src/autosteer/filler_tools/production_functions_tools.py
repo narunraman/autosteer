@@ -252,7 +252,7 @@ def gen_cost_minimization(metadata, family = 'Cobb_Douglas'):
         kcost = round(np.random.rand() * 10 + 0.5, 2)  # capital cost per unit
 
         if family == 'Cobb_Douglas':
-            # Closed form (Narun's default; SLSQP often failed or stopped
+            # Closed form (a convention; SLSQP often failed or stopped
             # early): with Y = L^a K^b, cost wL + rK, the tangency gives
             # K/L = b w / (a r) and L = (Y / (K/L)^b)^(1/(a+b)).
             a, b = prod_fn.L, prod_fn.K
@@ -529,48 +529,13 @@ returns the simplified function and takes derivative w.r.t. L
 def prod_fn_to_mrp(prod_function,K):
     return
 
-# @function_registry.register('finding_tfp')
-# def finding_tfp(metadata):
-#     # TODO: documentation here
-
-#     no_answer =True
-#     while no_answer:
-#         family = 'Cobb_Douglas' # TODO: ALTER SO TAGS LETS YOU CHANGE
-#         prod_fn = ProductionFunction(family) 
-#         capital = round(np.random.rand() * 10, 2)  # Random L
-#         labour = round(np.random.rand() * 10, 2)  # Random K
-#         answs = prod_fn.set_and_find_TFP(labour, capital)
-#         if answs[0] is not None and answs[1] is not None:
-#             A = answs[0]
-#             total_output = answs[1]
-#             no_answer = False # TODO: alter this if set_and_find_TFP might return None (i.e., if it in the future uses scipy)
-        
-#     if metadata['type'] == 'compute_simple_tfp':
-#         # answer = Optimal labor
-#         answer = np.round(A, 2)  
-#     else:
-#         # TODO: change if we have other tags
-#         answer = np.round(A, 2)  
-        
-#     answer_mask, options = gen_answer_and_options(answer, num_options=4)
-
-#     return {"p_func": prod_fn.function_string,
-#             "capital": capital,
-#             "labour": labour,
-#             "total_output": total_output,
-#             "options_list": options,
-#             "correct_answer": answer_mask
-#     }
-
 # finding_tfp: replaced by filler_tools/tfp_tools.py (code templates), 5 October 2026.
-
-
 # factor_shares_equilibrium: replaced by filler_tools/factor_shares_tools.py, code templates, 7 October 2026.
-
 # comparative_stats_supply_price_shock: replaced by filler_tools/supply_elasticity_statics_tools.py (element elastic_inelastic_supply), code templates, 7 October 2026.
-
 # fixed_factor_aggregation: replaced by filler_tools/fixed_factor_tools.py, code templates, 7 October 2026.
 # lump_sum_tax_efficiency: replaced by filler_tools/non_distortionary_taxes_tools.py (element non_distortionary_taxes), code templates, 7 October 2026.
+
+
 @function_registry.register('labor_tax_distortion')
 def gen_labor_tax_distortion(metadata):
     variant = metadata.get("type", "labor_change")

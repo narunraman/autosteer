@@ -130,23 +130,6 @@ class ProductionFunction:
         return [self.A, total_output]
 
     
-    # def find_tfp(self, labor, capital, output):
-    #     """
-    #     :EFFECT: compute Total Factor Productivity (TFP) given labor L, capital K, and production function (self).
-
-    #     NOTE: method not currently used, might be helpful if we make A (TFP) into a permanent field for ProductionFunction.
-    #     """
-    #     if self.family == "Cobb_Douglas":
-    #         # TFP = Y / (L^alpha * K^beta)
-    #         tfp = output / (labor ** self.L * capital ** self.K)
-    #     elif self.family == "Leontief":
-    #         # TFP = Y / min(L / alpha, K / beta)
-    #         tfp = output / min(labor / self.L, capital / self.K)
-    #     else:
-    #         raise NotImplementedError(f"Production function '{self.family}' is not implemented.")
-        
-    #     return tfp
-
     
 def sample_prod_function(family='linear',max_coeff=2, concave=False):
     """
@@ -295,24 +278,6 @@ def _opt_K2(cap1, disc, prod_fn, price1, price2):
     
 def dynamic_profit(capital,capital_1,discount,prod_func,price_1,price_2):
         return price_1*((capital_1**prod_func['K'])*prod_func['alpha']) - (capital-capital_1)**2+discount*(price_2*((capital**prod_func['K'])*prod_func['alpha']))
-
-# def gen_answer_and_options(answer,num_options=4,options=None):
-#     if options:
-#         shuffle(options)
-#         answer_mask = [0]*num_options
-#         #Create random bit mask for correct answer
-#         answer_num = options.index(answer)
-#         answer_mask[answer_num] = 1
-#         return answer_mask,options
-#     #Round answer to 2 decimal places and convert to float
-#     answer= float(np.round(answer,2))
-#     answer_mask = [0]*num_options
-#     #Create random bit mask for correct answer
-#     answer_num = np.random.randint(0, num_options)
-#     answer_mask[answer_num] = 1
-#     #Random affine transform of correct answer for alternative options
-#     options = list([float(np.round((np.random.random() * answer)+np.random.randint(0, 2),2)) if i != answer_num else answer for i in range(num_options)])
-#     return answer_mask,options
 
 
 def _pct_change_options(answer_pct):

@@ -205,7 +205,7 @@ def gen_compute_expected_utility(metadata):
       medical (tags 'save' / other): N p_save or N (1 - p_save)
       vacation_planning ('good' / 'bad'): n p_good or n p_bad
       gambling ('win' / 'lose', 'multiple'): NET value per game
-        EV = p_win W - p_lose L (Narun's default: net when a cost is stated),
+        EV = p_win W - p_lose L (convention: net when a cost is stated),
         answer n EV for 'win' and the expected loss -n EV for 'lose'.
     """
     pct = lambda: round(random.uniform(0.05, 0.95) * 100, 2)

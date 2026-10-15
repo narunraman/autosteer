@@ -125,7 +125,7 @@ def solve_plurality(df):
 # The stored answers follow the paper's scoring (m-1-i over all m candidates, unranked 0): where the paper and
 # the ballot-length scoring disagree, stored == paper in 88% and == ballot-length in 1% of rows. Rows where the
 # two m-based variants (unranked 0 vs unranked averaged) disagree are ill_posed. BORDA_STRICT additionally
-# treats disagreement with the ballot-length scoring as ill_posed (open question for Narun).
+# treats disagreement with the ballot-length scoring as ill_posed (an open question).
 BORDA_STRICT = False
 SECOND = re.compile(r"second|runner[- ]up", re.I)
 
@@ -171,7 +171,7 @@ def solve_borda(df):
 # All condorcet profiles rank 3 candidates; with 4 candidates exactly one is unranked per ballot, so the
 # completion "unranked = last" is unique (as if full rankings were truncated). Where ignoring the unranked
 # candidate's pairs would change the winner (87k rows), the stored answer follows "last" in 77% vs 8%.
-# CONDORCET_STRICT=True makes those rows ill_posed instead (open question for Narun).
+# CONDORCET_STRICT=True makes those rows ill_posed instead (an open question).
 CONDORCET_STRICT = False
 _ARTICLES = {"A", "I"}
 
@@ -341,7 +341,7 @@ def solve_pareto(df):
             qlet = [x for x in LETTER.findall(q) if x in cands and x != S]
             if DROP_NON_PARETO_YES_NO and not PARETO_KW.search(tail):
                 # "Would more people have been happier if T were chosen?" asks a majority question, not Pareto
-                # efficiency (Narun, 2026-10-02): these Yes/No rows are dropped from the element
+                # efficiency: these Yes/No rows are dropped from the element
                 put(None, "ill_posed:majority_wording"); continue
             if PARETO_KW.search(tail):
                 if set(letters) != {S}:

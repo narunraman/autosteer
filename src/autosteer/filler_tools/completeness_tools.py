@@ -1,6 +1,6 @@
 """completeness (STEER 2.1.a) and completeness_risk (2.3.a): every pair of a set of alternatives, graded together.
 
-Design of October 2026 (user decision; replaces the pipeline templates, whose key was "the alternative with the larger
+Design of October 2026 (replaces the pipeline templates, whose key was "the alternative with the larger
 stated number", which tests maximisation, not completeness). One question describes four or five fully specified
 alternatives and has one part per pair of them (6 or 10 parts). Every part shows the same description and asks about
 one pair, with four options:

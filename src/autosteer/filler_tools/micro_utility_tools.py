@@ -99,7 +99,7 @@ def gen_marginal_utility_values(metadata):
             mu_x = f"{alpha}"
             mu_y = f"{beta}"
 
-        # Leontief type dropped (Narun's default): min() has no derivative at the kink.
+        # Leontief type dropped (a convention): min() has no derivative at the kink.
 
         elif metadata['type'] == 'non-linear':
             # create an arbitrary non-linear utility function
@@ -166,7 +166,7 @@ def gen_mrs_values(metadata):
         utility_function = f"U(x, y) = {alpha}x + {beta}y"
         mrs = (alpha/beta, beta/alpha)
 
-    # Leontief type dropped (Narun's default): MRS undefined at the kink.
+    # Leontief type dropped (a convention): MRS undefined at the kink.
 
     elif metadata['type'] == 'non-linear':
         # create an arbitrary non-linear utility function

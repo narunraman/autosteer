@@ -1,7 +1,7 @@
 """Phase 2 solvers for the `axioms` group:
 completeness, completeness_risk, transitivity, transitivity_risk, time_inconsistency, sunk_cost.
 
-All six are answer-graded (Narun): each question part has exactly one correct option, derived here from the
+All six are answer-graded: each question part has exactly one correct option, derived here from the
 question text and option texts only (never from option positions or stored answers).
 
   completeness(_risk)  two alternatives with a stated number (lives saved / return / percentage); the
@@ -398,7 +398,7 @@ def solve_sunk_cost_one(q: str, options: list[str]):
     for rx, st in _SC_ILL:
         if rx.search(q) or any(rx.search(o) for o in options):
             return None, st
-    # Narun (2026-09-27): drop questions whose options carry amounts the question never states (mis-substituted
+    # Convention: drop questions whose options carry amounts the question never states (mis-substituted
     # template slots, e.g. 'Buy the new one for $785' for a $466 oven)
     q_amts = {_f(x) for x in re.findall(r"\$\s*(" + NUM + r")", q)}
     for o in options:

@@ -10,7 +10,6 @@ from tqdm import tqdm
 # Local packages
 
 
-
 # Constants
 metadata_keys = ['domain', 'type', 'difficulty_level', 'tags']
 id_keys = ['question_id', 'sub_id']
@@ -210,7 +209,6 @@ class Dataset:
         questions_df = questions_df.astype({'question_id': int, 'sub_id': int, 'question_text': str, 'domain': str, 'type': str, 'difficulty_level': int, 'tags': str})
 
 
-
         # options
         if not ignore_options:
             options_df = df[self.id_keys + ['options']]
@@ -235,7 +233,6 @@ class Dataset:
         self[questions_type] = pd.concat([self[questions_type], questions_df], ignore_index=True)
         if not ignore_options:
             self[options_type] = pd.concat([self[options_type], options_df], ignore_index=True)
-
 
 
     def update(self, new_rows, dataframe_type='questions'):
@@ -421,11 +418,6 @@ class Dataset:
         if not isinstance(datasets, list):
             raise ValueError("datasets must be a list of Dataset objects.")
         
-        # if not all(isinstance(dataset, Dataset) for dataset in datasets):
-        #     raise ValueError("datasets must contain only Dataset objects.")
-        
-        # if not all(dataset.is_empty() for dataset in datasets):
-        #     raise ValueError("datasets must not be empty.")
         
         questions_type, options_type = self._get_dataframe_types(on)
 
@@ -447,23 +439,7 @@ class Dataset:
     
 
 
-
-
-
     
-    # def get_example_templates(self, return_type = 'tuple'):
-    #     questions_df = self.questions[self.questions['explanation'] != False]
-    #     options_df = self.options[self.options['question_id'].isin(questions_df['question_id'])]
-    #     if return_type == 'tuple':
-    #         return questions_df, options_df
-    #     elif return_type == 'dataset':
-    #         return from_tuple(questions_df, options_df)
-    #     else:
-    #         raise ValueError("return_type must be either 'tuple' or 'dataset'")
-    
-
-    
-
 
     def save(self, data_dir):
         """Write the dataset into data_dir as Parquet tables plus dataset.json (see autosteer.dataset_io)."""
@@ -575,9 +551,6 @@ def reindex(dataset: Dataset, in_place: bool = False, is_single_part_question: b
         df = flatten_index(df)
         if df.empty:
             return df
-        # if is_single_part_question:
-        #     df['question_id'] = range(len(df))
-        # else:
         df['question_id'] = Dataset._remove_gaps(df['question_id'].astype(int).to_list())
         return df.reset_index(drop=True)
 
@@ -600,40 +573,6 @@ def reindex(dataset: Dataset, in_place: bool = False, is_single_part_question: b
     if not in_place:
         return dataset
     
-
-# def rows_to_mcq(questions_df, options_df):
-#     """
-#     Convert the questions and options DataFrames to a multiple-choice question.
-#     Parameters:
-#     - questions_df: A DataFrame containing the questions.
-#     - options_df: A DataFrame containing the options.
-#     Returns:
-#     - a list of strings representing the multiple-choice questions.
-#     """
-#     mcqs = []
-#     for question_id, group in questions_df.groupby('question_id'):
-#         # Questions
-#         questions = group['question_text'].to_list()
-#         # Options
-#         options_list = [options_df.loc[(question_id, sub_id), :].sort_values('option_id')['option_text'].to_list() for sub_id in options_df.index.get_level_values('sub_id').unique()]
-#         display(options_df.loc[(question_id), :])
-#         # Correct answers
-#         correct_answers = options_df.query("correct_answer == True")['option_text'].to_list()
-#         if not correct_answers:
-#             correct_answers = ['No correct answer found'] * len(questions)
-        
-#         mcq_text = f"Question:\n"
-#         global_option_index = 0
-#         for i, question in enumerate(questions):
-#             mcq_text += question + "\n"
-#             for option in options_list[i]:
-#                 mcq_text += f"{ascii_uppercase[global_option_index]}. {option}\n"
-#                 global_option_index += 1
-#             mcq_text += f"Correct answer: {correct_answers[i]}\n\n"
-
-#         mcqs.append(mcq_text)
-#     return mcqs
-
 
 
 def from_records(records, dataframe_type = 'example_questions'):
@@ -668,7 +607,6 @@ def flatten_index(df: pd.DataFrame) -> pd.DataFrame:
         df = df.reset_index(drop=True)
 
     return df
-
 
 
 def from_tuple(questions, options, example_questions = None, example_options = None):
@@ -760,7 +698,6 @@ def split(combined_df: pd.DataFrame = None, dataframe_type: str = 'questions') -
     
 
 
-
 def _literal(value):
     """A difficulty_level as a number, as a query string would have read it ("3" and 3 are both 3)."""
     if isinstance(value, str):
@@ -786,7 +723,6 @@ def metadata_mask(df: pd.DataFrame, metadata: list[dict] | dict) -> pd.Series:
     for key, value in metadata.items():
         mask &= df[key] == (_literal(value) if key == 'difficulty_level' else str(value))
     return mask
-
 
 
 def display_to_dataset_json(display_json, ignore_options = False):

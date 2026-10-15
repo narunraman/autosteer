@@ -239,9 +239,6 @@ class AnthropicProvider(BaseProvider):
         temperature = None,
         seed = None,
         **kwargs,
-        # max_tokens = None,
-        # stop = None,
-        # tools = None,
     ):
         # The Messages API takes the system prompt separately and has no response_format or seed.
         system, turns = _anthropic_messages(messages, kwargs.pop('response_format', None))
