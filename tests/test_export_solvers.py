@@ -1,6 +1,6 @@
 """Run the export agent's independent text-only solvers on fresh samples.
 
-The solvers (audit/steer_me/solvers/, written by the export agent)
+The solvers (tests/solvers/steer_me/solvers/, written by the export agent)
 re-derive each answer from the question text alone. For every element they
 cover, sample N questions and require, for every question the solver can
 parse and that is well defined, that the marked option is the solver's
@@ -17,7 +17,7 @@ import pytest
 
 from helpers import sample
 
-# the solvers live in audit/steer_me/solvers (package name `solvers`)
+# the solvers live in tests/solvers/steer_me/solvers (package name `solvers`)
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'solvers', 'steer_me'))
 import solvers  # noqa: E402
 from solvers.common import SOLVERS  # noqa: E402

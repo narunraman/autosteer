@@ -1,10 +1,10 @@
 """Independent answer oracle for sampled trigger / enforceability / feasibility / backward_induction questions.
 
-Wraps the audit solvers in solvers/repeated_games.py (which read the game from the question text and options),
+Wraps the independent solvers in solvers/repeated_games.py (which read the game from the question text and options),
 with two adaptations for the regenerated questions:
   - trigger: the explicit payoff matrices label their rows 'Cooperate' / 'Defect'; the audit matrix reader expects
     'Action X' labels, so the labels are prefixed before reading.
-  - enforceability: the audit solver leaves rows whose take-turns option is enforceable open (semantics were
+  - enforceability: the independent solver leaves rows whose take-turns option is enforceable open (semantics were
     undecided) and has no 'none of the other listed outcomes' option. The convention (take turns = the players
     alternate the aggressor role) is what solvers.repeated_games.enforceable() already evaluates, so this oracle
     applies it to every option, with 'none' correct iff no other listed option is enforceable.
@@ -22,7 +22,7 @@ import pandas as pd
 
 
 def _load_repeated_games():
-    # by file path: tests also put audit/steer_me/solvers on sys.path as the package name `solvers`
+    # by file path: tests also put tests/solvers/steer_me/solvers on sys.path as the package name `solvers`
     name = "steer_audit_repeated_games"
     if name not in sys.modules:
         spec = importlib.util.spec_from_file_location(name, Path(__file__).resolve().parent / "solvers" / "repeated_games.py")

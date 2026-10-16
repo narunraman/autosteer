@@ -1,7 +1,7 @@
 """Filler for the STEER element condorcet_criterion (rebuilt 2026-09; the original generator is lost and 19% of the
 released answers were wrong).
 
-Templates reuse the released scenario wordings (audit/steer/regen/recover_condorcet_templates.py); per-template
+Templates reuse the released scenario wordings (STEER-generation's audit/steer/regen/recover_condorcet_templates.py); per-template
 option label and list style are in data/templates/condorcet_criterion/template_labels.csv, looked up by the
 template text the sampler passes in metadata['question_text'].
 

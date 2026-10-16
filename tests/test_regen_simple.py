@@ -1,11 +1,11 @@
 """Rebuilt STEER elements condorcet_criterion, add_sub and mult_div (generators lost; see
-audit/steer/regen/ and src/filler_tools/{voting,arithmetic}_tools.py).
+STEER-generation's audit/steer/regen/ and src/filler_tools/{voting,arithmetic}_tools.py).
 
 For each element, N seeded samples (default 1,000, env STEER_TEST_N):
-- the independent audit solver (audit/steer/solvers/voting.py, arith_prob.py) agrees on every question it can
+- the independent solver (tests/solvers/steer/solvers/voting.py, arith_prob.py) agrees on every question it can
   verify; for condorcet it must verify every question;
 - add_sub / mult_div: the answer recomputed from the numbers shown and the hand label of the template is the
-  unique option equal to the marked one (covers the story templates the audit solver cannot parse);
+  unique option equal to the marked one (covers the story templates the independent solver cannot parse);
 - exactly one correct option, distinct options, no unfilled placeholders, uniform correct position;
 - reproducible with the same seed, also across processes with different PYTHONHASHSEED.
 Plus: every template in the datasets has an operation label.

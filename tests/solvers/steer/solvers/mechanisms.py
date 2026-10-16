@@ -489,7 +489,7 @@ POSTFIX = {el: _chain(postfix_drop_conflicts, postfix_keep_prefix)
 
 # =============================================================================================== regenerated elements
 # Independent solvers for the templated ir_mechanism / budget_balance / auctions_risk questions produced by
-# src/filler_tools/mechanism_tools.py (design: audit/DECISIONS.md, "Behalf-of-others redesign").  They parse the
+# src/filler_tools/mechanism_tools.py (design: STEER-generation's audit/DECISIONS.md, "Behalf-of-others redesign").  They parse the
 # rendered question text and options only; nothing is imported from the filler.  Each returns the index of the
 # single correct option, or None if the text cannot be parsed or no / several options match.
 from fractions import Fraction

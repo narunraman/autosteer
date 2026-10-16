@@ -7,7 +7,7 @@ On 1,000 seeded questions:
   sum(p u) / 100 must be the only option within 0.006 and the keyed one;
 - probabilities are positive integers summing to 100, utilities distinct; 3 distinct options at least max(0.5, 5%)
   apart, no two sharing their decimals (the released options were the key +/- whole numbers);
-- the audit solver (audit/steer/solvers/expected_utility.py) agrees wherever it scores;
+- the independent solver (tests/solvers/steer/solvers/expected_utility.py) agrees wherever it scores;
 - structure vs the staged release rows (STEER HF test split, if present): 2 / 3 outcome mix (difficulty 3 / 4) and
   domain shares within 5 points, type default, 3 options;
 - the same seed gives the same questions.

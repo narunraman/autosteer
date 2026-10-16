@@ -1,13 +1,13 @@
 """Recovered normal-form elements: interpret_games, dominated_strategies, best_response, iterated_removal,
 subgame_nash, bayes_nash (src/filler_tools/normal_form_tools.py, multi_agent_tools.py; templates from
-audit/steer/regen/build_normal_form_templates.py).
+STEER-generation's audit/steer/regen/build_normal_form_templates.py).
 
 For each element, 1,000 seeded questions (env STEER_TEST_N):
 - brute force from the table printed in the question (parsed here, no filler code): the cell value, the strictly
   dominant action, the unique best response, the unique strictly dominated action before / after removal, the
   unique Nash equilibrium of the stage game (pure; no mixed one, checked by support enumeration for 2x2 and by
   iterated dominance for 3x3) and of the expected Bayesian game; exactly the keyed option matches;
-- the independent audit solver (audit/steer/solvers/matrix_games.py) agrees on every question;
+- the independent solver (tests/solvers/steer/solvers/matrix_games.py) agrees on every question;
 - distinct options, no placeholders, the released metadata mix (sizes, grades, types/domains), reproducibility.
 """
 import collections
@@ -289,12 +289,12 @@ def test_audit_solver_agrees(element):
     rows = []
     for b, (parts, md) in enumerate(items(element)):
         if str(md['type']).endswith('_dominated') or str(md['type']).startswith('typed_'):
-            continue  # the audit solvers cover only the released question kinds
+            continue  # the independent solvers cover only the released question kinds
         for k, p in enumerate(parts):
             rows.append(dict(base_id=str(b), part=k, question_text=p['question'], options=texts(p),
                              tags=str(md['tags']).split(';'), keyed=keyed(p)))
     if not rows:
-        pytest.skip('no question of a kind the audit solver covers (e.g. bayes_nash typed games)')
+        pytest.skip('no question of a kind the independent solver covers (e.g. bayes_nash typed games)')
     df = pd.DataFrame(rows)
     res = mg.SOLVERS[element](df)
     bad = [(st, pr, k) for st, pr, k in zip(res.status, res.pred, df.keyed) if st != 'ok' or pr != k]

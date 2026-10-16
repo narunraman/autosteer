@@ -1,10 +1,10 @@
 """Regenerated STEER mechanism elements: ir_mechanism, budget_balance, auctions_risk.
 
 For every element and type, N (default 1,000; env STEER_TEST_N) seeded samples must:
-- agree 100% with the independent text-parsing solver (audit/steer/solvers/mechanisms.py, REGEN_SOLVERS);
+- agree 100% with the independent text-parsing solver (tests/solvers/steer/solvers/mechanisms.py, REGEN_SOLVERS);
 - have exactly one correct option, distinct options, no placeholders / None / nan;
 - put the correct option in every position about equally often;
-- have an outcome mix within the bounds of the design (audit/DECISIONS.md).
+- have an outcome mix within the bounds of the design (STEER-generation's audit/DECISIONS.md).
 Plus the worked examples of the design, grade levels, element-specific constraints, and reproducibility across
 two processes.
 """

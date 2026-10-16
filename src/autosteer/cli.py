@@ -2,13 +2,13 @@ from __future__ import annotations
 
 import argparse
 import os
+import sys
 from pathlib import Path
 
 
 from autosteer import paths
 
 DATA_SUBDIRS = paths.DATA_KINDS
-PULL_SCOPES = ("setting", "module", "element")
 
 
 def _data_dir() -> Path:
@@ -45,16 +45,6 @@ def run_data_path(args: argparse.Namespace) -> None:
     print(_data_dir())
 
 
-def run_data_pull(args: argparse.Namespace) -> None:
-    data_dir = Path(args.data_dir).expanduser() if args.data_dir else _data_dir()
-    _ensure_data_dir(data_dir)
-    target = f" '{args.name}'" if args.name else ""
-    raise SystemExit(
-        f"The template data{target} comes with the repository, in data/: run autoSTEER from a clone of "
-        f"https://github.com/narunraman/autosteer (git clone, then `uv run autosteer dev`), or point "
-        f"AUTOSTEER_DATA_DIR at a copy of that folder. (Requested data directory: {data_dir})"
-    )
-
 
 def _print_verify(report: dict) -> None:
     print(f"data directory: {report['data_dir']}")
@@ -81,12 +71,12 @@ def run_data_verify(args: argparse.Namespace) -> None:
 def run_export(args: argparse.Namespace) -> None:
     from autosteer.release import export
 
-    args.argv = [a for a in os.sys.argv[2:]]
+    args.argv = [a for a in sys.argv[2:]]
     raise SystemExit(export.run(args))
 
 
 def run_release(args: argparse.Namespace) -> None:
-    args.argv = [a for a in os.sys.argv[2:]]
+    args.argv = [a for a in sys.argv[2:]]
     raise SystemExit(args.release_func(args))
 
 
@@ -111,18 +101,6 @@ def build_parser() -> argparse.ArgumentParser:
     path = data_subparsers.add_parser("path", help="Print the active data directory.")
     path.set_defaults(func=run_data_path)
 
-    pull = data_subparsers.add_parser(
-        "pull",
-        help="Download optional seed/template data by setting, module, or element.",
-    )
-    pull.add_argument("scope", choices=PULL_SCOPES)
-    pull.add_argument(
-        "name",
-        nargs="?",
-        help="Optional setting/module/element name once public data packs are available.",
-    )
-    pull.add_argument("--data-dir", default="")
-    pull.set_defaults(func=run_data_pull)
 
     verify = data_subparsers.add_parser(
         "verify",

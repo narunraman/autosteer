@@ -6,13 +6,13 @@
     subgame_nash          finitely repeated stage game: repeat its equilibrium (generate_game 'nash')
 
 Templates (data/templates/<element>/, Parquet) are the released sentences, recovered verbatim by
-audit/steer/regen/build_normal_form_templates.py; the table, the actions named in the sentence and the options come
+STEER-generation's audit/steer/regen/build_normal_form_templates.py; the table, the actions named in the sentence and the options come
 from here. Payoffs follow the original generators: v1 elements (interpret_games, dominated_strategies) draw integers
 0-9 or 2-decimal numbers in [0, 10), plus 1-3 on the dominant action; generation-repo elements draw integers 0-19 or
 2-decimal numbers in [0, 20). Integer and decimal tables are equally likely.
 
 Answers are computed here and re-checked by brute force in the tests (tests/test_normal_form_games.py) and by the
-independent audit solvers (audit/steer/solvers/matrix_games.py). Draws that would make a question ambiguous
+independent audit solvers (tests/solvers/steer/solvers/matrix_games.py). Draws that would make a question ambiguous
 (tied best responses, no or several dominant / dominated actions, stage games with more than one equilibrium) are
 redrawn. All randomness comes from filler_utils.rng.
 """

@@ -1,7 +1,7 @@
 """Build the equiv_contrapositive context bank (October 2026 cleanup).
 
 Input: the 560 contexts recovered from the released GPT-4 questions (data directory,
-templates/equiv_contrapositive/template_labels.csv; audit/steer/regen/recover_contrapositive_templates.py in
+templates/equiv_contrapositive/template_labels.csv; recovered by STEER-generation's audit/steer/regen/recover_contrapositive_templates.py in
 STEER-generation). Each has the statement's clauses P and Q and GPT-written negations not-P / not-Q taken from one of
 the question's options, and those negations often differ in style from the statement ("she goes to bed early" /
 "she did not go to bed early" / "Sarah does not wake up feeling refreshed"), so the old options could give the key away.

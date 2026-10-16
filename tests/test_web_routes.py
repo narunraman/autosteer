@@ -18,7 +18,9 @@ def snapshot() -> dict:
         routes.append({"class": type(r).__name__, "path": getattr(r, "path", None),
                        "methods": sorted(getattr(r, "methods", None) or []), "name": getattr(r, "name", None),
                        "include_in_schema": getattr(r, "include_in_schema", None)})
-    schema = json.dumps(app.openapi(), sort_keys=True).encode()
+    schema = dict(app.openapi())
+    schema["info"] = {k: v for k, v in schema["info"].items() if k != "version"}   # the package version
+    schema = json.dumps(schema, sort_keys=True).encode()
     return {"routes": routes, "openapi": hashlib.sha256(schema).hexdigest()[:16],
             "middleware": len(app.user_middleware),
             "exception_handlers": sorted(str(k) for k in app.exception_handlers)}

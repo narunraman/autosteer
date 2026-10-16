@@ -1,6 +1,6 @@
 """Scoring of consistency-graded STEER items (rows with grading == "consistency", correct_index = null).
 
-Rule strings follow the audit convention (audit/steer/solvers/biases.py):
+Rule strings follow the solvers' convention (tests/solvers/steer/solvers/biases.py):
 
     consistency_rule = "<rule_id>:<allowed>"
 

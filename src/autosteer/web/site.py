@@ -457,6 +457,8 @@ def install(app: FastAPI, templates: Jinja2Templates, public_mode: Callable[[], 
     templates.env.globals.update(guide_nav=GUIDE_NAV, search_items=_search_items(), public_mode=public_mode,
                                  asset_version=digest, site_description=SITE_DESCRIPTION)
     public.install(app, templates, public_mode, sitemap_paths=lambda: sitemap_paths(public.evals_enabled(public_mode())))
+    from autosteer.web import agents   # /llms.txt, /evals.csv, /evals.json
+    agents.install(app, public_mode)
 
     def evals_shown() -> None:
         if not public.evals_enabled(public_mode()):
@@ -581,7 +583,6 @@ def install(app: FastAPI, templates: Jinja2Templates, public_mode: Callable[[], 
         axes.append({"kind": None, "label": "Difficulty", "plural": "difficulty levels", "param": "difficulty_level",
                      "values": [(code, f"level {code}") for code in difficulties]})
         varying = [axis for axis in axes if len(axis["values"]) > 1]
-        cells = max(1, len(axes[0]["values"])) * max(1, len(axes[1]["values"])) * max(1, len(difficulties))
         in_tree = next((e for e in (module["elements"] if module else []) if e["element"] == element_name), None)
         context.update({
             "element": element_name, "d": described, "te": in_tree, "setting": setting, "module": module,

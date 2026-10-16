@@ -35,6 +35,19 @@ def code_fingerprint() -> str:
     return _FINGERPRINT[names]
 
 
+def data_fingerprint() -> str:
+    """Hash of when each template folder was last saved (its dataset.json is written last): a manifest built from
+    other data (a migration, a pull of new templates) is rebuilt. Not cached: a stat per folder is cheap, and the data
+    can change while a process runs."""
+    h = hashlib.sha256()
+    root = Path(templates_dir())
+    if root.is_dir():
+        for f in sorted(root.glob('*/dataset.json')):
+            st = f.stat()
+            h.update(f'{f.parent.name}\0{st.st_size}\0{st.st_mtime_ns}\n'.encode())
+    return h.hexdigest()[:16]
+
+
 def _fingerprint(names) -> str:
     h = hashlib.sha256('\n'.join(names).encode())
     for sub in ('sampler', 'filler_tools'):
@@ -102,6 +115,7 @@ def build_manifest(verbose: bool = True) -> dict:
     output = {
         'generated_at': datetime.now(timezone.utc).isoformat(),
         'code_fingerprint': code_fingerprint(),
+        'data_fingerprint': data_fingerprint(),
         'elements': manifest,
     }
 
@@ -126,7 +140,7 @@ def load_manifest(force_rebuild: bool = False) -> dict:
 
     Staleness is defined as: the set of element directory names on disk no
     longer matches the set of keys in the stored manifest, or the stored
-    manifest was built by other code (code_fingerprint).
+    manifest was built by other code (code_fingerprint) or from other data (data_fingerprint).
     """
     if not force_rebuild and (stored := _current_manifest()) is not None:
         return stored
@@ -148,7 +162,8 @@ def _current_manifest() -> dict | None:
     with open(manifest_path) as f:
         stored = json.load(f)
     on_disk = _template_names_on_disk()
-    if on_disk == set(stored['elements'].keys()) and stored.get('code_fingerprint') == code_fingerprint():
+    if (on_disk == set(stored['elements'].keys()) and stored.get('code_fingerprint') == code_fingerprint()
+            and stored.get('data_fingerprint') == data_fingerprint()):
         return stored
     return None
 

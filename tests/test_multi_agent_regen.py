@@ -1,6 +1,6 @@
 """Regenerated STEER multi-agent elements: trigger, enforceability, feasibility, backward_induction.
 
-Oracle: the independent audit solvers (audit/steer/solvers/repeated_games.py via audit/steer/multi_agent_oracle.py)
+Oracle: the independent solvers (tests/solvers/steer/solvers/repeated_games.py via tests/solvers/steer/multi_agent_oracle.py)
 read the game from the question text and options; they must agree with the sampler's correct option on every
 sampled question. Also checked on 1,000 seeded samples per element: exactly one correct option, distinct options,
 no unfilled placeholders, answer position uniform (chi-square), STEER grade level as in the released element, and

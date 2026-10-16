@@ -1,6 +1,6 @@
 """Fillers for the v1-era STEER elements compute_expectations and compute_expected_utility (paper version, see
 the section at the end). compute_expectations (recovered 2026-10; templates and families:
-audit/steer/regen/recover_expectation_templates.py, data/templates/compute_expectations/template_labels.csv).
+STEER-generation's audit/steer/regen/recover_expectation_templates.py, data/templates/compute_expectations/template_labels.csv).
 
 Families and formulas (checked against every released row): coin (A - B)/2; faces (k A - (6 - k) B)/6 for k listed
 faces of a six-sided die; sides (N + 1)/2; spinner (a + b)/2 with b = a + N - 1; bag (n1 + n2 + n3)/n1 draws
@@ -137,7 +137,7 @@ def fill_compute_expectations(metadata: dict) -> dict:
 
 # ------------------------------------------------------------------ compute_expected_utility (paper version)
 # Decision 2026-10-02: the element is the ICML / paper version (2.4.a). Templates and per-template labels (utility
-# slots with their released ranges, implicit last probability): audit/steer/regen/recover_eu_templates.py.
+# slots with their released ranges, implicit last probability): STEER-generation's audit/steer/regen/recover_eu_templates.py.
 # Probabilities are positive integer percentages summing to 100 over the 2 or 3 outcomes; utilities are integers in
 # the released range of their slot, distinct across outcomes; a literal 0 utility stays 0. The answer is
 # sum(p_i u_i) / 100 with 2 decimals. Distractors (2, as released 3 options in all) come from plausible mistakes:

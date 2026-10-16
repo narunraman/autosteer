@@ -1,7 +1,7 @@
 """Fillers for the STEER arithmetic elements add_sub and mult_div (rebuilt 2026-09; the original generator is lost).
 
 Templates were recovered from the released questions and labelled by hand with the operation each story implies
-(audit/steer/regen/recover_arith_templates.py). The labels live next to the templates in
+(STEER-generation's audit/steer/regen/recover_arith_templates.py). The labels live next to the templates in
 data/templates/<element>/template_labels.csv and are looked up by the template text the sampler passes in
 metadata['question_text']. The answer is computed exactly (fractions) from the numbers shown in the question and
 rounded to 2 decimals; every option uses the same rounding.

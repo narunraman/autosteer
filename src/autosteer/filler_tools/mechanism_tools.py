@@ -5,7 +5,7 @@ budget_balance -- does the mechanism collect exactly the cost (balanced / surplu
 auctions_risk  -- revenue ranking under risk attitudes; expected revenue and equilibrium bids with
                   uniform independent private values.
 
-Design: audit/DECISIONS.md, "Behalf-of-others redesign". Templates: data/templates/<element>/, built by
+Design: STEER-generation's audit/DECISIONS.md, "Behalf-of-others redesign". Templates: data/templates/<element>/, built by
 src/autosteer/filler_tools/mechanism_templates.py. All fillers are Mode A (they return options_list/correct_answer)
 and draw only from filler_utils.rng (the question's own generator), so they are reproducible. Every amount shown is
 a whole number of dollars; option order is shuffled by the sampler.

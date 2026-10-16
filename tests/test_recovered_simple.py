@@ -5,7 +5,7 @@ For each element, 1,000 seeded questions (env STEER_TEST_N):
 - an independent answer computed here from the question text (vote counts; Borda under three scoring conventions
   for truncated ballots, which must agree; the earlier intertemporal choice; transitivity; the sure-thing
   principle), and exactly the keyed option matches it;
-- the audit solver for the element (audit/steer/solvers/) agrees on every question it scores and scores most;
+- the independent solver for the element (tests/solvers/steer/solvers/) agrees on every question it scores and scores most;
 - distinct options, no placeholders, the released metadata mix, key position not degenerate.
 """
 import collections
@@ -107,7 +107,7 @@ def test_independent_answer(element):
 
 
 def test_independence_risk_key():
-    # independence: the keyed option mixes in the preferred item (checked by the audit solver below and, per template,
+    # independence: the keyed option mixes in the preferred item (checked by the independent solver below and, per template,
     # by test_conventions_g2). Since the review (October 2026) the keyed lottery is described first in
     # about half the questions and second in the others (it was always first), and the letters are swapped in about
     # half the questions.

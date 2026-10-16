@@ -580,6 +580,33 @@
   },
   {
    "class": "APIRoute",
+   "path": "/llms.txt",
+   "methods": [
+    "GET"
+   ],
+   "name": "llms",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/evals.csv",
+   "methods": [
+    "GET"
+   ],
+   "name": "evals_csv_route",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
+   "path": "/evals.json",
+   "methods": [
+    "GET"
+   ],
+   "name": "evals_json_route",
+   "include_in_schema": false
+  },
+  {
+   "class": "APIRoute",
    "path": "/",
    "methods": [
     "GET"
@@ -750,7 +777,7 @@
    "include_in_schema": false
   }
  ],
- "openapi": "908004cf1ec081f9",
+ "openapi": "32d53303a9eaf8f4",
  "middleware": 1,
  "exception_handlers": [
   "<class 'fastapi.exceptions.RequestValidationError'>",

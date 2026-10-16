@@ -1,8 +1,8 @@
 """compute_expectations (recovered 2026-10; src/filler_tools/expectation_tools.py).
 
 1,000 seeded questions: the expected value recomputed here from the question text with the family formula
-(coin / die faces / N-sided die / spinner / bag draws / days), exactly one option equal to it and keyed; the audit
-solver (audit/steer/solvers/arith_prob.py) agrees wherever it scores; distinct options; domains as released.
+(coin / die faces / N-sided die / spinner / bag draws / days), exactly one option equal to it and keyed; the independent
+solver (tests/solvers/steer/solvers/arith_prob.py) agrees wherever it scores; distinct options; domains as released.
 """
 import collections
 import importlib.util

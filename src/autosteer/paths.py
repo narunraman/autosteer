@@ -3,7 +3,7 @@
 The data directory (templates, seeds, review records) is decided when it is first needed, not when a module is
 imported, so the CLI's --data-dir applies everywhere: set_data_dir(), else AUTOSTEER_DATA_DIR (STEER_DATA_DIR is the
 old name), else data/ of the repository checkout, else ~/.autosteer/data (an installed package without the
-repository; see `autosteer data pull`).
+repository: copy the repository's data/ there, or set AUTOSTEER_DATA_DIR).
 """
 from __future__ import annotations
 

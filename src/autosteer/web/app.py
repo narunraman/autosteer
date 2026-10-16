@@ -12,6 +12,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
+from autosteer.release.rows import package_version
 from autosteer.sampler import load_manifest
 from autosteer.web import common, devmode, review, site
 from autosteer.web.routes import api, candidates, seeds, template_gen
@@ -28,7 +29,7 @@ async def lifespan(app: FastAPI):
 
 
 def create_app() -> FastAPI:
-    app = FastAPI(title="STEER Generation", lifespan=lifespan)
+    app = FastAPI(title="autoSTEER", version=package_version(), lifespan=lifespan)
     common.templates.env.globals["no_provider_text"] = common.NO_PROVIDER
     app.mount("/static", StaticFiles(directory=str(common.WEB_DIR / "static")), name="static")
     # the order matters: routes are matched in the order they are added

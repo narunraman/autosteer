@@ -1,5 +1,5 @@
 """pareto_sc decision (2026-10-02): Yes/No questions without Pareto wording ask a majority question and are dropped
-by the audit solver (audit/steer/solvers/voting.py, ill_posed:majority_wording); Yes/No Pareto questions and the
+by the independent solver (tests/solvers/steer/solvers/voting.py, ill_posed:majority_wording); Yes/No Pareto questions and the
 "which option should be chosen" questions are kept, and on the kept staged rows the solver agrees with the key."""
 import importlib.util
 import os

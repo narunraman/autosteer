@@ -1,5 +1,5 @@
 """Fillers for the v1-era STEER probability elements gamblers_fallacy and bayes_rule (recovered 2026-10 from the
-rationality_benchmark fill notebooks; templates: audit/steer/regen/recover_probability_templates.py).
+rationality_benchmark fill notebooks; templates: STEER-generation's audit/steer/regen/recover_probability_templates.py).
 
 gamblers_fallacy  fill_generations/gamblers_fallacy.ipynb: template x streak length; options Yes / No. Every
                   template asks whether a run of independent outcomes makes some outcome more (or less) likely next

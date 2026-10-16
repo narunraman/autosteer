@@ -1,5 +1,5 @@
 """Fillers for the v1-era STEER elements time_inconsistency, transitivity_risk and independence_risk (recovered
-2026-10; templates: audit/steer/regen/recover_axiom_templates.py). The original fill code is lost; number ranges
+2026-10; templates: STEER-generation's audit/steer/regen/recover_axiom_templates.py). The original fill code is lost; number ranges
 follow the released rows.
 
 time_inconsistency  You chose $a today over $b tomorrow (type today) or the reverse (type tomorrow); now $a in t
