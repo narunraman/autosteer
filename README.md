@@ -3,6 +3,8 @@
   <img src="docs/autosteer_lockup_dark.svg#gh-dark-mode-only" alt="autoSTEER" height="44">
 </h1>
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23406989.svg)](https://doi.org/10.5281/zenodo.23406989)
+
 autoSTEER is the tool behind the <a href="https://steer-benchmark.cs.ubc.ca"><img src="docs/steer_badge.svg" height="14" alt=""></a> <a href="https://steer-benchmark.cs.ubc.ca">STEER</a> benchmarks for the economic reasoning
 of language models. It generates fresh questions for every element of STEER and STEER-ME, serves the benchmark
 site, and has a developer mode for writing new elements.
@@ -102,5 +104,17 @@ If you use autoSTEER or its questions, please cite the STEER and STEER-ME papers
   year      = {2025},
   note      = {Datasets and Benchmarks Track},
   url       = {https://arxiv.org/abs/2502.13119}
+}
+```
+
+To cite autoSTEER itself (this DOI always points to the latest release; each release on [Zenodo](https://doi.org/10.5281/zenodo.23406989) has its own):
+
+```bibtex
+@software{raman_autosteer,
+  author    = {Raman, Narun},
+  title     = {{autoSTEER: the question generator and site for STEER and STEER-ME}},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.23406989},
+  url       = {https://doi.org/10.5281/zenodo.23406989}
 }
 ```

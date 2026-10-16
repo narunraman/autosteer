@@ -3,6 +3,7 @@ message: "If you use autoSTEER or its questions, please cite the STEER and STEER
 title: "autoSTEER: the question generator and site for STEER and STEER-ME"
 abstract: "autoSTEER generates STEER and STEER-ME questions from reviewed templates and filler programs that compute each answer, serves them through an API and the benchmark site, and has a developer mode for writing new elements."
 type: software
+doi: "10.5281/zenodo.23406989"
 license: MIT
 repository-code: "https://github.com/narunraman/autosteer"
 url: "https://steer-benchmark.cs.ubc.ca"
