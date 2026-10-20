@@ -14,6 +14,7 @@
 
 <h2 id="calibration">Calibration</h2>
 <p>These use the probability the model gives to each option, so they need a model that reports them. They show whether the model knows when it is unsure.</p>
+<p>Some models do not: API models whose provider returns no token probabilities (Claude, o1 and o3 here), and reasoning models, which write their reasoning before the answer letter, so no probability is recorded for the letter itself (gpt-oss and Qwen3.5 and 3.6 here). Their calibration scores are left empty.</p>
 <dl class="terms">
   <dt>Expected calibration error</dt><dd>The gap between how confident the model is in its top answer and how often that answer is right, averaged over 10 confidence bins (<a href="https://doi.org/10.1609/aaai.v29i1.9602">Naeini et al., 2015</a>; <a href="https://arxiv.org/abs/1706.04599">Guo et al., 2017</a>). A well-calibrated model that says 70% is right about 70% of the time. We follow the usage in <a href="https://arxiv.org/abs/2211.09110">HELM</a>.</dd>
   <dt>Brier score</dt><dd>The squared distance between the model's probabilities and the correct answer, averaged over the options (<a href="https://doi.org/10.1175/1520-0493(1950)078%3C0001:VOFEIT%3E2.0.CO;2">Brier, 1950</a>). Confident wrong answers cost the most.</dd>

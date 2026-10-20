@@ -68,6 +68,10 @@
     return { cls: z < 0 ? 'neg' : 'pos', t: Math.min(1, Math.abs(z)) };
   }
   const noProbs = (m, metric = st.metric) => CALIBRATION.includes(metric) && !m.logprobs;
+  // why a model has no option probabilities (see the Metrics page, #calibration)
+  const whyNoProbs = m => !m.open ? 'the provider does not return them'
+    : m.reasoning ? 'a reasoning model: its answer comes after its reasoning, so none is recorded for the answer letter'
+    : 'its run did not record them';
   const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 
   /* ---------- the columns for this page ---------- */
@@ -146,7 +150,7 @@
     const shown = D.models.filter(m => has(m) && listed(m));
     const rowsFor = list => list.map(m => `<tr><th scope="row"><span class="ev-model" title="${esc(m.name)}">${esc(m.short || m.name).replace(/-/g, '-<wbr>')}</span>${m.reasoning ? '<span class="tag">reasoning</span>' : ''}</th>${cols.map((c, i) => {
       const { v } = info.get(m.name)[i], { cls, t } = tone(v);
-      const why = v != null ? '' : ` title="${!c.bench.scored || !noProbs(m) ? 'Not run yet' : 'No option probabilities for this model'}"`;
+      const why = v != null ? '' : ` title="${!c.bench.scored || !noProbs(m) ? 'Not run yet' : 'No option probabilities: ' + whyNoProbs(m)}"`;
       return `<td class="${cls}" style="--v:${t.toFixed(3)}" data-model="${esc(m.name)}" data-col="${i}" tabindex="0"${why}>${fmt(v)}</td>`; }).join('')}</tr>`).join('');
     const group = (label, list) => list.length ? `<tr class="ev-group"><th colspan="${cols.length + 1}">${label}</th></tr>${rowsFor(list)}` : '';
     out.innerHTML = `<div class="heat-wrap"><table class="heat${narrow ? ' narrow' : ''}${cols.length > 4 ? ' many' : ''}">${head}<tbody>${
@@ -197,6 +201,7 @@
     const overview = [
       row(st.format === 'free' ? 'Accuracy' : METRIC[st.metric].label, `<b>${fmt(score(m, c))}</b>`),
       row('Evaluated', `${k} of ${n} element${n === 1 ? '' : 's'}${nq ? `, ${nq.toLocaleString()} questions` : ''}`),
+      noProbs(m) ? row('Calibration', 'Not available', `${esc(whyNoProbs(m))} (<a href="/metrics#calibration">why</a>)`) : '',
       u >= 0.05 ? row('No usable answer', `${Math.round(100 * u)}% of questions`, 'Cut off by a length limit, or out of context; counted as wrong') : '',
       m.open ? row('Model', `<code>${esc(m.name)}</code>`) : m.model && m.model !== m.name ? row('Snapshot', `<code>${esc(m.model)}</code>`) : ''].join('');
     detail.hidden = false; scrim.hidden = false;
