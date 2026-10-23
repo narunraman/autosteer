@@ -1,11 +1,11 @@
 <h1>
-  <img src="docs/autosteer_lockup_light.svg#gh-light-mode-only" alt="autoSTEER" height="44">
-  <img src="docs/autosteer_lockup_dark.svg#gh-dark-mode-only" alt="autoSTEER" height="44">
+  <img src=".github/assets/autosteer_lockup_light.svg#gh-light-mode-only" alt="autoSTEER" height="44">
+  <img src=".github/assets/autosteer_lockup_dark.svg#gh-dark-mode-only" alt="autoSTEER" height="44">
 </h1>
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23406989.svg)](https://doi.org/10.5281/zenodo.23406989)
 
-autoSTEER is the tool behind the <a href="https://steer-benchmark.cs.ubc.ca"><img src="docs/steer_badge.svg" height="14" alt=""></a> <a href="https://steer-benchmark.cs.ubc.ca">STEER</a> benchmarks for the economic reasoning
+autoSTEER is the tool behind the <a href="https://steer-benchmark.cs.ubc.ca"><img src=".github/assets/steer_badge.svg" height="14" alt=""></a> <a href="https://steer-benchmark.cs.ubc.ca">STEER</a> benchmarks for the economic reasoning
 of language models. It generates fresh questions for every element of STEER and STEER-ME, serves the benchmark
 site, and has a developer mode for writing new elements.
 
@@ -39,10 +39,10 @@ A question depends only on the element, the seed and the autoSTEER version: the 
 question in any process, whatever was drawn before or alongside it. (From 0.2.0; earlier versions drew from
 process-wide generators, so their questions for a seed differ.)
 
-The same questions are served by the <a href="https://steer-benchmark.cs.ubc.ca/reference"><img src="docs/steer_badge.svg" height="14" alt=""></a> <a href="https://steer-benchmark.cs.ubc.ca/reference">API</a>, and fixed samples are on
-Hugging Face as <a href="https://huggingface.co/datasets/narunraman/steer"><img src="docs/hf_logo.svg" height="14" alt=""></a> <a href="https://huggingface.co/datasets/narunraman/steer"><code>narunraman/steer</code></a> and
-<a href="https://huggingface.co/datasets/narunraman/steer_me"><img src="docs/hf_logo.svg" height="14" alt=""></a> <a href="https://huggingface.co/datasets/narunraman/steer_me"><code>narunraman/steer_me</code></a>. To evaluate a model, use
-<a href="https://github.com/narunraman/STEER#gh-light-mode-only"><img src="docs/github_logo_light.svg" height="14" alt=""></a><a href="https://github.com/narunraman/STEER#gh-dark-mode-only"><img src="docs/github_logo_dark.svg" height="14" alt=""></a> <a href="https://github.com/narunraman/STEER">steer-bench</a>.
+The same questions are served by the <a href="https://steer-benchmark.cs.ubc.ca/reference"><img src=".github/assets/steer_badge.svg" height="14" alt=""></a> <a href="https://steer-benchmark.cs.ubc.ca/reference">API</a>, and fixed samples are on
+Hugging Face as <a href="https://huggingface.co/datasets/narunraman/steer"><img src=".github/assets/hf_logo.svg" height="14" alt=""></a> <a href="https://huggingface.co/datasets/narunraman/steer"><code>narunraman/steer</code></a> and
+<a href="https://huggingface.co/datasets/narunraman/steer_me"><img src=".github/assets/hf_logo.svg" height="14" alt=""></a> <a href="https://huggingface.co/datasets/narunraman/steer_me"><code>narunraman/steer_me</code></a>. To evaluate a model, use
+<a href="https://github.com/narunraman/STEER#gh-light-mode-only"><img src=".github/assets/github_logo_light.svg" height="14" alt=""></a><a href="https://github.com/narunraman/STEER#gh-dark-mode-only"><img src=".github/assets/github_logo_dark.svg" height="14" alt=""></a> <a href="https://github.com/narunraman/STEER">steer-bench</a>.
 
 ## Write a new element
 
