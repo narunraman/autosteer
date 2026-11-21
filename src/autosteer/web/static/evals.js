@@ -176,16 +176,18 @@
       return `<li><span class="bl">${r.href ? `<a href="${r.href}">${r.label}</a>` : r.label}</span>${track}<span class="bv">${fmt(r.v)}</span></li>`; };
     const h = `<h3>${title}${worst != null ? `<span class="worst">worst ${fmt(worst)}</span>` : ''}</h3>`;
     if (rows.length > 8) {
+      /* the worst five; the rest (still worst first, then any without a score) open in place below them */
       const better = METRIC[st.metric].better === 'higher';
-      const sorted = rows.filter(r => r.v != null).sort((a, b) => better ? a.v - b.v : b.v - a.v);
-      return `<div class="bd">${h}<ul>${sorted.slice(0, 5).map(li).join('')}</ul><details><summary>All ${rows.length} ${title.toLowerCase()}s</summary><ul>${rows.map(li).join('')}</ul></details></div>`;
+      const sorted = rows.filter(r => r.v != null).sort((a, b) => better ? a.v - b.v : b.v - a.v).concat(rows.filter(r => r.v == null));
+      return `<div class="bd">${h}<ul>${sorted.slice(0, 5).map(li).join('')}</ul><ul class="bd-rest" hidden>${sorted.slice(5).map(li).join('')}</ul>`
+        + `<button type="button" class="bd-more" aria-expanded="false"><span class="when-closed">Show all ${rows.length} ${title.toLowerCase()}s</span><span class="when-open">Show only the worst 5</span></button></div>`;
     }
     return `<div class="bd">${h}<ul>${rows.map(li).join('')}</ul></div>`;
   }
   function renderDetail() {
     const h = new URLSearchParams(location.hash.slice(1));
     const m = D.models.find(x => x.name === h.get('m')), c = columns().flatMap(g => g.cols)[+h.get('c')];
-    if (!R || !m || !c) { detail.hidden = true; scrim.hidden = true; return; }
+    if (!R || !m || !c) { detail.hidden = true; scrim.hidden = true; document.documentElement.classList.remove('ev-locked'); return; }
     const worstOf = rows => { const v = rows.map(r => r.v).filter(x => x != null); return v.length ? (METRIC[st.metric].better === 'higher' ? Math.min(...v) : Math.max(...v)) : null; };
     const gone = noProbs(m) ? 'no probabilities' : 'not run yet';
     const els = elementsOf(c.bench, c.scope);
@@ -204,7 +206,8 @@
       noProbs(m) ? row('Calibration', 'Not available', `${esc(whyNoProbs(m))} (<a href="/metrics#calibration">why</a>)`) : '',
       u >= 0.05 ? row('No usable answer', `${Math.round(100 * u)}% of questions`, 'Cut off by a length limit, or out of context; counted as wrong') : '',
       m.open ? row('Model', `<code>${esc(m.name)}</code>`) : m.model && m.model !== m.name ? row('Snapshot', `<code>${esc(m.model)}</code>`) : ''].join('');
-    detail.hidden = false; scrim.hidden = false;
+    /* the page behind the card stays put while it is open: no scrolling or bouncing underneath */
+    detail.hidden = false; scrim.hidden = false; document.documentElement.classList.add('ev-locked');
     detail.innerHTML = `<header><div><h2>${esc(m.short || m.name)}</h2><p class="scope">${c.title || c.label}</p></div>
         <button type="button" class="close" aria-label="Close">×</button></header>
       <div class="bd"><h3>Overview</h3><dl class="bd-ov">${overview}</dl></div>
@@ -212,7 +215,13 @@
     detail.querySelector('.close').focus({ preventScroll: true });
   }
   const closeDetail = () => { if (location.hash) history.back(); };
-  detail.addEventListener('click', e => { if (e.target.closest('.close')) closeDetail(); });
+  detail.addEventListener('click', e => {
+    if (e.target.closest('.close')) { closeDetail(); return; }
+    const more = e.target.closest('.bd-more'); if (!more) return;
+    const open = more.getAttribute('aria-expanded') !== 'true';
+    more.setAttribute('aria-expanded', String(open));
+    more.closest('.bd').querySelector('.bd-rest').hidden = !open;
+  });
   scrim.addEventListener('click', closeDetail);
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !detail.hidden) closeDetail(); });
   window.addEventListener('hashchange', renderDetail);

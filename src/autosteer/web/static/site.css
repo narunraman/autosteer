@@ -232,7 +232,10 @@ table.heat thead th { border-bottom: 3px solid var(--s-line, var(--line)); }
 table.heat td[data-model] { cursor: pointer; }
 table.heat td[data-model]:hover, table.heat td[aria-selected="true"] { outline: 2px solid var(--ink); outline-offset: -2px; }
 .ev-scrim { position: fixed; inset: var(--top) 0 0 0; background: rgba(20, 24, 28, 0.18); z-index: 24; }
-.ev-detail { position: fixed; z-index: 25; top: calc(var(--top) + 12px); right: 12px; bottom: 12px; width: min(560px, calc(100vw - 24px)); overflow-y: auto; overscroll-behavior: contain; background: var(--page); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18); padding: 16px 18px 8px; }
+/* while a breakdown card is open the page behind it does not scroll, and the card does not bounce at its ends */
+html.ev-locked, html.ev-locked body { overflow: hidden; }
+html.ev-locked { scrollbar-gutter: stable; }
+.ev-detail { position: fixed; z-index: 25; top: calc(var(--top) + 12px); right: 12px; bottom: 12px; width: min(560px, calc(100vw - 24px)); overflow-y: auto; overscroll-behavior: none; background: var(--page); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18); padding: 16px 18px 8px; }
 .ev-detail header { display: flex; gap: 14px; align-items: flex-start; justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
 .ev-detail header h2 { flex: 1; font-size: 17px; }
 .ev-detail .kick { font: 500 12.5px/1.6 var(--mono); letter-spacing: 0.05em; text-transform: uppercase; color: var(--faint); }
@@ -259,7 +262,12 @@ table.heat td[data-model]:hover, table.heat td[aria-selected="true"] { outline: 
 .bd .bt { position: relative; }
 .bd .bt.has-zero::after { content: ""; position: absolute; top: -2px; bottom: -2px; left: var(--zero); width: 1px; background: var(--muted); }
 .ev-metric-fixed { font-size: 13.5px; color: var(--muted); }
-.bd details summary { font-size: 13px; color: var(--red); cursor: pointer; margin: 0 0 6px; }
+.bd .bd-rest { margin-top: -5px; }
+.bd .bd-more { display: flex; align-items: center; gap: 6px; margin: -2px 0 8px auto; padding: 2px 0; border: 0; background: none; font: inherit; font-size: 13px; color: var(--faint); cursor: pointer; }
+.bd .bd-more:hover { color: var(--ink); }
+.bd .bd-more::after { content: ""; width: 6px; height: 6px; border: solid currentColor; border-width: 0 1.5px 1.5px 0; transform: translateY(-2px) rotate(45deg); transition: transform .15s; }
+.bd .bd-more[aria-expanded="true"]::after { transform: translateY(2px) rotate(-135deg); }
+.bd .bd-more[aria-expanded="true"] .when-closed, .bd .bd-more[aria-expanded="false"] .when-open { display: none; }
 .bd .bv { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
 
 /* Results: metric as a line of text links; model groups as row headings */
