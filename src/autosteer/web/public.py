@@ -218,4 +218,4 @@ def install(
 
     @app.get("/favicon.ico", include_in_schema=False)
     def favicon() -> RedirectResponse:
-        return RedirectResponse(url="/static/favicon.svg", status_code=301)
+        return RedirectResponse(url="/static/favicon.png", status_code=301)

@@ -152,8 +152,8 @@ class LaunchTests(unittest.TestCase):
                 with self.subTest(path=path):
                     self.assertEqual(self.client.get(path).status_code, 200)
             self.assertEqual(self.client.get("/favicon.ico", follow_redirects=False).headers["location"],
-                             "/static/favicon.svg")
-            for name in ("favicon.svg", "og.png", "apple-touch-icon.png"):
+                             "/static/favicon.png")
+            for name in ("favicon.png", "favicon.svg", "og.png", "apple-touch-icon.png"):
                 self.assertEqual(self.client.get(f"/static/{name}").status_code, 200)
 
     def test_titles_descriptions_and_previews(self):

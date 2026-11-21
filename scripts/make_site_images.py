@@ -1,9 +1,13 @@
-"""Render static/og.png (1200x630) and static/apple-touch-icon.png (180x180) for the site.
+"""Render static/og.png (1200x630), static/apple-touch-icon.png (180x180) and static/favicon.png (96x96) for the site.
 
 The badge and the wordmark come from templates/_logos.html, so the images match the header.
 
-    uv run --with playwright python scripts/make_site_images.py src/autosteer/web/static
+    uv run --with playwright python scripts/make_site_images.py src/autosteer/web/static [name ...]
+
+Names (og.png, apple-touch-icon.png, favicon.png) render only those images. CHROMIUM=<path> uses that browser
+instead of Playwright's own.
 """
+import os
 import sys
 from pathlib import Path
 
@@ -39,11 +43,21 @@ ICON = """
 <style>html,body{margin:0;width:180px;height:180px;background:#c4262e;display:flex;align-items:center}
 .logo-badge{width:180px;height:auto;display:block}</style>""" + BADGE.replace('viewBox="-1 -1 122 74"', 'viewBox="0 0 120 72"')
 
+# the browser-tab icon: the badge on a transparent square. Safari draws the SVG favicon (its letters are a mask)
+# on a white tile, so the tab icon is this PNG
+FAVICON = """
+<style>html,body{margin:0;width:96px;height:96px;background:transparent;display:flex;align-items:center;justify-content:center}
+.logo-badge{width:94px;height:auto;display:block}</style>""" + BADGE
+
+IMAGES = ((OG, "og.png", (1200, 630)), (ICON, "apple-touch-icon.png", (180, 180)), (FAVICON, "favicon.png", (96, 96)))
+only = set(sys.argv[2:])
 with sync_playwright() as p:
-    b = p.chromium.launch()
-    for html, name, (w, h) in ((OG, "og.png", (1200, 630)), (ICON, "apple-touch-icon.png", (180, 180))):
+    b = p.chromium.launch(executable_path=os.environ.get("CHROMIUM") or None)
+    for html, name, (w, h) in IMAGES:
+        if only and name not in only:
+            continue
         pg = b.new_page(viewport={"width": w, "height": h})
         pg.set_content(html, wait_until="networkidle")
         pg.evaluate("document.fonts.ready")
-        pg.screenshot(path=str(out / name))
+        pg.screenshot(path=str(out / name), omit_background=True)
     b.close()

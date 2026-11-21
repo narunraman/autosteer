@@ -24,7 +24,8 @@
   <meta name="twitter:title" content="{{ _share_title }}">
   <meta name="twitter:description" content="{{ _desc }}">
   <meta name="twitter:image" content="{{ site_url() }}/static/og.png">
-  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', path='favicon.svg') }}?v={{ asset_version }}">
+  {# a PNG, not the SVG: Safari draws the SVG badge (its letters are a mask) on a white tile #}
+  <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', path='favicon.png') }}?v={{ asset_version }}">
   <link rel="apple-touch-icon" href="{{ url_for('static', path='apple-touch-icon.png') }}?v={{ asset_version }}">
   <meta name="theme-color" content="#c4262e">
   <script>try { const t = localStorage.getItem('steer-theme'); if (t === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}</script>
